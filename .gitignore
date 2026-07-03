@@ -1,0 +1,85 @@
+# dependencies
+node_modules/
+**/node_modules/
+
+# build output
+dist/
+
+# logs
+*.log
+plm_captures/*.log
+plm_captures/*.err
+
+# debug screenshots
+debug-*.png
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/
+
+# temp
+_resize_*.py
+scratch_*.json
+
+.tmp/
+_screenshots/
+
+# ============================================================
+# AI 에이전트 개인 파일·로컬 도구 설정 — 커밋 금지
+# ============================================================
+AGENTS.md
+BOOTSTRAP.md
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+TOOLS.md
+USER.md
+.claude/
+.mcp.json
+.openclaw/
+.openclaw-run/
+.kombai/
+antigravity_config.json
+.antigravitycli/
+
+# 작업 부산물
+*.bak-*
+development_report.md.resolved
+pdf_extract.txt
+update_logo.py
+게이토스농구팀
+sample동영상_remotion_V1.mp4
+움직이는_차트_비디오_생성.mp4
+
+# ============================================================
+# 참고/내부 자료 — 배포와 무관. 내부 제안서·고객 문서 포함: 커밋 금지
+# ============================================================
+회사자료_홈페이지참고자료/
+_source_pdfs/
+backups/
+CLIP PDM/
+CLIP PMS/
+CLIP MMS/
+plm_captures/
+remotion/
+scripts/shots/
+안티그레비티홈페잊＿참고자료.gif
+homepage_샘플.gif
+clip_PMS_목업_V01.png
+팹스넷PLM영상.mp4
+AI_CADWin_설계_혁신.pdf
+
+# videos — QA 프레임(jpg)·미사용 원본 제외, 사이트에서 쓰는 파일만 포함
+videos/*
+!videos/hero-cadwin.mp4
+!videos/v3-overview.mp4
+!videos/v3-phasegate.mp4
+!videos/v3-wbs.mp4
+!videos/poster-cadwin-clean.png
+!videos/v3-overview-preview.jpg
+!videos/v3-phasegate-preview.jpg
+!videos/v3-wbs-preview1.jpg

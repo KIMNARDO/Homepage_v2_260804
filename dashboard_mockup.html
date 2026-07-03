@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>PAPSNET PLM Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Segoe UI', -apple-system, sans-serif;
+  background: #0f1117;
+  color: #e4e4e7;
+  width: 1440px;
+  height: 900px;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed; left: 0; top: 0; bottom: 0;
+  width: 220px;
+  background: #16171d;
+  border-right: 1px solid #2a2b33;
+  padding: 20px 0;
+  display: flex; flex-direction: column;
+}
+.logo {
+  padding: 0 20px 24px;
+  border-bottom: 1px solid #2a2b33;
+  margin-bottom: 16px;
+}
+.logo h1 { font-size: 20px; font-weight: 800; letter-spacing: 1px; color: #fff; }
+.logo h1 span { color: #71717a; font-weight: 600; margin-left: 4px; }
+.nav-section { padding: 0 12px; margin-bottom: 8px; }
+.nav-label { font-size: 11px; color: #52525b; text-transform: uppercase; letter-spacing: 1px; padding: 8px; margin-bottom: 4px; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 8px; font-size: 13px; color: #a1a1aa; cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-item:hover { background: #1f2028; color: #e4e4e7; }
+.nav-item.active { background: linear-gradient(135deg, #ea580c22, #ea580c11); color: #fb923c; }
+.nav-item .icon { font-size: 18px; width: 22px; text-align: center; }
+.nav-item .badge { margin-left: auto; background: #ea580c; color: #fff; font-size: 10px; padding: 2px 7px; border-radius: 10px; }
+
+/* Main */
+.main {
+  margin-left: 220px;
+  padding: 24px 28px;
+  height: 900px;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 24px;
+}
+.header h2 { font-size: 22px; font-weight: 700; }
+.header h2 span { color: #71717a; font-weight: 400; font-size: 14px; margin-left: 8px; }
+.header-actions { display: flex; gap: 12px; align-items: center; }
+.btn {
+  padding: 8px 16px; border-radius: 8px; border: none; font-size: 13px; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-primary { background: #ea580c; color: #fff; }
+.btn-outline { background: transparent; border: 1px solid #3f3f46; color: #a1a1aa; }
+.user-info { display: flex; align-items: center; gap: 8px; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #ea580c, #f97316); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; }
+
+/* Summary Cards */
+.summary-cards {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px;
+  margin-bottom: 24px;
+}
+.summary-card {
+  background: #1a1b23;
+  border: 1px solid #2a2b33;
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.summary-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: 12px 12px 0 0;
+}
+.summary-card:nth-child(1)::before { background: #3b82f6; }
+.summary-card:nth-child(2)::before { background: #8b5cf6; }
+.summary-card:nth-child(3)::before { background: #06b6d4; }
+.summary-card:nth-child(4)::before { background: #f59e0b; }
+.summary-card:nth-child(5)::before { background: #10b981; }
+.summary-card:nth-child(6)::before { background: #ef4444; }
+.card-label { font-size: 11px; color: #71717a; margin-bottom: 8px; }
+.card-value { font-size: 28px; font-weight: 800; }
+.card-sub { font-size: 11px; color: #52525b; margin-top: 4px; }
+.card-change { font-size: 11px; margin-top: 4px; }
+.card-change.up { color: #10b981; }
+.card-change.down { color: #ef4444; }
+
+/* Charts Row */
+.charts-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+  margin-bottom: 20px;
+}
+.chart-card {
+  background: #1a1b23;
+  border: 1px solid #2a2b33;
+  border-radius: 12px;
+  padding: 18px;
+}
+.chart-title {
+  font-size: 14px; font-weight: 600; margin-bottom: 14px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.chart-title .more { color: #52525b; font-size: 12px; cursor: pointer; }
+.chart-body { height: 200px; position: relative; }
+
+/* Bottom Row */
+.bottom-row {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 16px;
+}
+.table-card {
+  background: #1a1b23;
+  border: 1px solid #2a2b33;
+  border-radius: 12px;
+  padding: 18px;
+}
+.table-title { font-size: 14px; font-weight: 600; margin-bottom: 14px; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-size: 11px; color: #71717a; padding: 8px 12px; border-bottom: 1px solid #2a2b33; font-weight: 500; }
+td { font-size: 12px; padding: 10px 12px; border-bottom: 1px solid #1f2028; }
+.status-badge {
+  padding: 3px 10px; border-radius: 12px; font-size: 10px; font-weight: 600;
+}
+.status-progress { background: #ea580c22; color: #fb923c; }
+.status-complete { background: #10b98122; color: #34d399; }
+.status-review { background: #3b82f622; color: #60a5fa; }
+.status-delay { background: #ef444422; color: #f87171; }
+
+/* Gate Review Arrows */
+.gate-arrows { display: flex; gap: 2px; }
+.gate {
+  padding: 3px 8px; font-size: 10px; font-weight: 700; color: #fff;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 50%, calc(100% - 6px) 100%, 0 100%, 6px 50%);
+}
+.gate:first-child { clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 50%, calc(100% - 6px) 100%, 0 100%); border-radius: 3px 0 0 3px; }
+.gate.done { background: #f59e0b; }
+.gate.active { background: #ef4444; }
+.gate.pending { background: #3f3f46; }
+
+/* Activity */
+.activity-item {
+  display: flex; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid #1f2028;
+}
+.activity-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+.activity-text { font-size: 12px; color: #a1a1aa; }
+.activity-text strong { color: #e4e4e7; }
+.activity-time { font-size: 10px; color: #52525b; margin-top: 2px; }
+
+/* Footer */
+.footer {
+  position: fixed; bottom: 0; left: 220px; right: 0;
+  padding: 8px 28px;
+  background: #16171d;
+  border-top: 1px solid #2a2b33;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: #52525b;
+}
+.footer .live { color: #10b981; display: flex; align-items: center; gap: 6px; }
+.footer .live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="logo">
+    <h1>PAPSNET <span>PLM</span></h1>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">메인 메뉴</div>
+    <div class="nav-item active">
+      <span class="icon">📊</span> 대시보드
+    </div>
+    <div class="nav-item">
+      <span class="icon">📁</span> 프로젝트 관리
+      <span class="badge">223</span>
+    </div>
+    <div class="nav-item">
+      <span class="icon">📈</span> 성과 분석
+    </div>
+    <div class="nav-item">
+      <span class="icon">📅</span> 일정표
+    </div>
+    <div class="nav-item">
+      <span class="icon">👥</span> 팀원 관리
+    </div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">시스템</div>
+    <div class="nav-item">
+      <span class="icon">⚙️</span> 설정
+    </div>
+    <div class="nav-item">
+      <span class="icon">❓</span> 도움말
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+  <div class="header">
+    <h2>팀장 대시보드 <span>2025년 4월</span></h2>
+    <div class="header-actions">
+      <button class="btn btn-outline">📥 보고서</button>
+      <button class="btn btn-primary">+ 새 프로젝트</button>
+      <div class="user-info">
+        <span style="font-size:13px;color:#a1a1aa">김철수</span>
+        <div class="avatar">JD</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards">
+    <div class="summary-card">
+      <div class="card-label">전체 프로젝트</div>
+      <div class="card-value">45</div>
+      <div class="card-change up">▲ 3 신규</div>
+    </div>
+    <div class="summary-card">
+      <div class="card-label">PTC Heater</div>
+      <div class="card-value">13</div>
+      <div class="card-sub">28.9%</div>
+    </div>
+    <div class="summary-card">
+      <div class="card-label">Actuator</div>
+      <div class="card-value">8</div>
+      <div class="card-sub">17.8%</div>
+    </div>
+    <div class="summary-card">
+      <div class="card-label">Control</div>
+      <div class="card-value">22</div>
+      <div class="card-sub">48.9%</div>
+    </div>
+    <div class="summary-card">
+      <div class="card-label">완료율</div>
+      <div class="card-value" style="color:#10b981">73%</div>
+      <div class="card-change up">▲ 5%</div>
+    </div>
+    <div class="summary-card">
+      <div class="card-label">지연 이슈</div>
+      <div class="card-value" style="color:#ef4444">4</div>
+      <div class="card-change down">▼ 2 감소</div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-title">제품군별 현황 <span class="more">···</span></div>
+      <div class="chart-body"><canvas id="donutChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">월별 진행 현황 <span class="more">···</span></div>
+      <div class="chart-body"><canvas id="barChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Gate Review 현황 <span class="more">···</span></div>
+      <div class="chart-body"><canvas id="gateChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Bottom Row -->
+  <div class="bottom-row">
+    <div class="table-card">
+      <div class="table-title">주요 프로젝트 현황</div>
+      <table>
+        <thead>
+          <tr><th>프로젝트명</th><th>OEM</th><th>등급</th><th>G/Review</th><th>원가(%)</th><th>상태</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MARUTI SUZUKI PTC HEATER Y2V</td><td>SUZUKI</td><td>A</td>
+            <td>
+              <div class="gate-arrows">
+                <div class="gate done">G1</div><div class="gate done">G2</div><div class="gate active">G3</div><div class="gate pending">G4</div><div class="gate pending">G5</div><div class="gate pending">G6</div>
+              </div>
+            </td>
+            <td>65.2</td><td><span class="status-badge status-progress">진행</span></td>
+          </tr>
+          <tr>
+            <td>EP33 PTC HEATER HV 5.5kW</td><td>SAIC</td><td>A</td>
+            <td>
+              <div class="gate-arrows">
+                <div class="gate done">G1</div><div class="gate done">G2</div><div class="gate done">G3</div><div class="gate done">G4</div><div class="gate done">G5</div><div class="gate done">G6</div>
+              </div>
+            </td>
+            <td>73.4</td><td><span class="status-badge status-complete">완료</span></td>
+          </tr>
+          <tr>
+            <td>MMA PTC HEATER LV 1.2KW</td><td>DAIMLER</td><td>B</td>
+            <td>
+              <div class="gate-arrows">
+                <div class="gate done">G1</div><div class="gate done">G2</div><div class="gate done">G3</div><div class="gate active">G4</div><div class="gate pending">G5</div><div class="gate pending">G6</div>
+              </div>
+            </td>
+            <td>59.3</td><td><span class="status-badge status-review">검토</span></td>
+          </tr>
+          <tr>
+            <td>SX3 PTC HEATER HV</td><td>HYUNDAI</td><td>A</td>
+            <td>
+              <div class="gate-arrows">
+                <div class="gate done">G1</div><div class="gate active">G2</div><div class="gate pending">G3</div><div class="gate pending">G4</div><div class="gate pending">G5</div><div class="gate pending">G6</div>
+              </div>
+            </td>
+            <td>90.8</td><td><span class="status-badge status-delay">지연</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">최근 활동</div>
+      <div class="activity-item">
+        <div class="activity-dot" style="background:#10b981"></div>
+        <div>
+          <div class="activity-text"><strong>EP33 PTC HEATER</strong> G6 완료</div>
+          <div class="activity-time">10분 전</div>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-dot" style="background:#f59e0b"></div>
+        <div>
+          <div class="activity-text"><strong>MARUTI SUZUKI</strong> 설계 검증 완료</div>
+          <div class="activity-time">32분 전</div>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-dot" style="background:#ef4444"></div>
+        <div>
+          <div class="activity-text"><strong>SX3 HEATER</strong> 일정 지연 알림</div>
+          <div class="activity-time">1시간 전</div>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-dot" style="background:#3b82f6"></div>
+        <div>
+          <div class="activity-text"><strong>MMA PTC</strong> ECO 등록됨</div>
+          <div class="activity-time">2시간 전</div>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-dot" style="background:#8b5cf6"></div>
+        <div>
+          <div class="activity-text"><strong>CDPO PTC HEATER</strong> BOM 승인</div>
+          <div class="activity-time">3시간 전</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="live">실시간 동기화 중 · 서버 응답: 42ms</div>
+  <div>ADMIN VIEW · 2025-04-26 17:30:01</div>
+</div>
+
+<script>
+Chart.defaults.color = '#71717a';
+Chart.defaults.borderColor = '#2a2b33';
+
+// Donut Chart
+new Chart(document.getElementById('donutChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['PTC', 'Actuator', 'Control', 'Sensor', 'Valve', '기타'],
+    datasets: [{
+      data: [13, 8, 22, 0, 1, 1],
+      backgroundColor: ['#3b82f6', '#8b5cf6', '#06b6d4', '#f59e0b', '#10b981', '#6b7280'],
+      borderWidth: 0,
+      hoverOffset: 8
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: { position: 'right', labels: { padding: 12, usePointStyle: true, pointStyle: 'circle', font: { size: 11 } } }
+    }
+  }
+});
+
+// Bar Chart
+new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: ['1월', '2월', '3월', '4월'],
+    datasets: [
+      { label: '완료', data: [5, 8, 6, 9], backgroundColor: '#10b981', borderRadius: 4 },
+      { label: '진행', data: [12, 10, 14, 11], backgroundColor: '#3b82f6', borderRadius: 4 },
+      { label: '지연', data: [2, 3, 1, 4], backgroundColor: '#ef4444', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', font: { size: 10 }, padding: 10 } } },
+    scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: '#1f2028' } } }
+  }
+});
+
+// Gate Review Horizontal Bar
+new Chart(document.getElementById('gateChart'), {
+  type: 'bar',
+  data: {
+    labels: ['GR#1', 'GR#2', 'GR#3', 'GR#4', 'GR#5', 'GR#6'],
+    datasets: [
+      { label: '통과', data: [38, 32, 25, 18, 12, 8], backgroundColor: '#10b981', borderRadius: 4 },
+      { label: '진행', data: [4, 5, 8, 6, 3, 2], backgroundColor: '#f59e0b', borderRadius: 4 },
+      { label: '미진행', data: [3, 8, 12, 21, 30, 35], backgroundColor: '#3f3f46', borderRadius: 4 }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', font: { size: 10 }, padding: 10 } } },
+    scales: { x: { stacked: true, grid: { color: '#1f2028' } }, y: { stacked: true, grid: { display: false } } }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>팹스넷 | AI 도면 검색·PLM·BOM 관리 솔루션 — 도면에서 원가까지</title>
+  <meta name="description"
+    content="팹스넷은 제조업 R&D를 위한 PLM 솔루션 기업입니다. AI 도면 검색(AI CADWin), PDM, 프로젝트 관리, Multi-BOM 관리, 원가관리를 하나의 제품개발 흐름으로 연결해 설계 변경의 영향을 도면·BOM·일정·원가까지 한 화면에서 확인하도록 지원합니다.">
+  <link rel="canonical" href="https://www.papsnet.net/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="팹스넷 | AI 도면 검색·PLM·BOM 관리 솔루션 — 도면에서 원가까지">
+  <meta property="og:description" content="팹스넷은 제조업 R&D를 위한 PLM 솔루션 기업입니다. AI 도면 검색(AI CADWin), PDM, 프로젝트 관리, Multi-BOM 관리, 원가관리를 하나의 제품개발 흐름으로 연결해 설계 변경의 영향을 도면·BOM·일정·원가까지 한 화면에서 확인하도록 지원합니다.">
+  <meta property="og:url" content="https://www.papsnet.net/">
+  <meta property="og:image" content="https://www.papsnet.net/PLM_Dashboard_01.png">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="팹스넷">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="팹스넷 | AI 도면 검색·PLM·BOM 관리 솔루션 — 도면에서 원가까지">
+  <meta name="twitter:description" content="팹스넷은 제조업 R&D를 위한 PLM 솔루션 기업입니다. AI 도면 검색(AI CADWin), PDM, 프로젝트 관리, Multi-BOM 관리, 원가관리를 하나의 제품개발 흐름으로 연결해 설계 변경의 영향을 도면·BOM·일정·원가까지 한 화면에서 확인하도록 지원합니다.">
+  <meta name="twitter:image" content="https://www.papsnet.net/PLM_Dashboard_01.png">
+  <link rel="icon" href="papsnet_logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "(주)팹스넷",
+        "alternateName": "PapsNet Co., Ltd.",
+        "url": "https://www.papsnet.net",
+        "logo": "https://www.papsnet.net/papsnet_logo.jpg",
+        "email": "kimnardo@papsnet.net",
+        "telephone": "+82-70-500-1144",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "범안로 1142, 하우스디 더 스카이밸리 2차 714~715호",
+          "addressLocality": "금천구",
+          "addressRegion": "서울",
+          "addressCountry": "KR"
+        },
+        "foundingDate": "2021-06-01",
+        "description": "제조업 R&D 디지털 전환을 위한 한국형 PLM 솔루션과 AI 도면 검색(AI CADWin) 개발·공급사"
+      },
+      {
+        "@type": "WebSite",
+        "name": "팹스넷",
+        "url": "https://www.papsnet.net"
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Skip Navigation -->
+  <a href="#main" class="skip-link">본문 바로가기</a>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scrollProgress"></div>
+
+  <!-- ===== Announcement Bar ===== -->
+  <div class="announcement" id="announcement">
+    <div class="container">
+      <span class="announcement-highlight">안내</span>
+      Clip CMS — 사전·사후 원가 데이터를 함께 관리하는 제조업 원가관리시스템입니다.
+      <a href="product-clipcms.html">자세히 보기 <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <!-- ===== Navigation ===== -->
+  <nav class="nav has-announcement" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-img-wrap"><img src="papsnet_logo.jpg" alt="Papsnet"></div>
+      </a>
+
+      <div class="nav-center">
+        <a href="product-cadwin.html" class="nav-link">AI CADWin</a>
+        <a href="product-clippdm.html" class="nav-link">Clip PDM</a>
+        <a href="product-clippms.html" class="nav-link">Clip PMS</a>
+        <a href="product-multibom.html" class="nav-link">Multi-BOM</a>
+        <a href="product-clipcms.html" class="nav-link">Clip CMS</a>
+        <span class="nav-divider"></span>
+        <a href="#customers" class="nav-link">고객 사례</a>
+        <a href="brochure.html" class="nav-link">브로슈어</a>
+      </div>
+
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">
+          <span class="material-symbols-rounded">dark_mode</span>
+        </button>
+        <a href="#" class="btn btn-secondary" data-demo-open aria-haspopup="dialog">문의하기</a>
+        <a href="#" class="btn btn-primary" data-demo-open aria-haspopup="dialog">도입 문의</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-header">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-img-wrap"><img src="papsnet_logo.jpg" alt="Papsnet"></div>
+        </a>
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="메뉴 닫기">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+      <nav class="mobile-nav">
+        <a href="product-cadwin.html" class="mobile-nav-link">AI CADWin</a>
+        <a href="product-clippdm.html" class="mobile-nav-link">Clip PDM</a>
+        <a href="product-clippms.html" class="mobile-nav-link">Clip PMS</a>
+        <a href="product-multibom.html" class="mobile-nav-link">Multi-BOM</a>
+        <a href="product-clipcms.html" class="mobile-nav-link">Clip CMS</a>
+        <a href="#customers" class="mobile-nav-link">고객 사례</a>
+        <a href="brochure.html" class="mobile-nav-link">브로슈어</a>
+        <a href="#contact" class="mobile-nav-link">문의</a>
+      </nav>
+      <div class="mobile-menu-cta">
+        <a href="#" class="btn btn-primary" data-demo-open aria-haspopup="dialog">도입 문의하기</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+  <!-- ============================================================
+       SECTION 1: HERO
+       ============================================================ -->
+  <section class="hero with-announcement" id="hero" aria-label="메인 히어로">
+    <!-- Dot Pattern Background -->
+    <div class="dot-pattern"></div>
+
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="hero-badge blur-fade" data-delay="0">
+          <span class="hero-badge-dot"></span>
+          한국형 제조업 PLM · AI 도면 인식
+        </div>
+
+        <h1 class="hero-title blur-fade" data-delay="1">
+          설계 도면, BOM, 프로젝트, 원가를<br>
+          하나의 PLM에서 관리합니다.
+        </h1>
+
+        <p class="hero-subtitle blur-fade" data-delay="2">
+          AI CADWin이 CAD 도면의 표제란과 부품 정보를 인식해 E-BOM으로 만들고,
+          Clip PDM·PMS·Multi-BOM·CMS가 설계변경부터 일정·원가까지 같은 데이터로 이어 관리합니다.
+        </p>
+
+        <div class="hero-actions blur-fade" data-delay="3">
+          <a href="#" class="btn btn-primary btn-lg" data-demo-open aria-haspopup="dialog">
+            제품 도입 문의 <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="#plm-dashboards" class="btn btn-secondary btn-lg">
+            제품 화면 보기
+          </a>
+        </div>
+
+        <ul class="hero-proof-strip blur-fade" data-delay="4" aria-label="팹스넷 도입 근거">
+          <li><span class="material-symbols-rounded" aria-hidden="true">verified</span>제조 현장 28개사 구축</li>
+          <li><span class="material-symbols-rounded" aria-hidden="true">draw</span>주요 CAD 20여 종 연동</li>
+          <li><span class="material-symbols-rounded" aria-hidden="true">database</span>SAP · 영림원 ERP 연동</li>
+        </ul>
+      </div>
+
+      <div class="hero-shot blur-fade" data-delay="2" aria-label="Clip PLM 임원 대시보드 실제 화면">
+        <div class="hero-shot-frame">
+          <div class="hero-shot-chrome">
+            <span class="hero-shot-dot"></span>
+            <span class="hero-shot-dot"></span>
+            <span class="hero-shot-dot"></span>
+            <span class="hero-shot-url">plm.papsnet.net / dashboard</span>
+          </div>
+          <div class="hero-shot-body">
+            <img src="images/plm_executive_dashboard.webp"
+              alt="Clip PLM 임원 대시보드 — 전사 KPI·프로젝트 진척·원가 현황 실제 화면"
+              loading="eager" fetchpriority="high" decoding="async">
+          </div>
+        </div>
+        <div class="hero-shot-legend">
+          <span class="hero-shot-legend-dots" aria-hidden="true">
+            <i data-p="cadwin"></i><i data-p="pdm"></i><i data-p="pms"></i><i data-p="bom"></i><i data-p="cms"></i>
+          </span>
+          <small>제품 5종이 한 화면에서 연결됩니다</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Retro Grid (bottom decoration) -->
+    <div class="retro-grid"></div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 1B: LANDING FOCUS
+       ============================================================ -->
+  <section class="landing-focus-section" id="plm-flow" aria-label="팹스넷이 해결하는 업무 흐름">
+    <div class="container">
+      <div class="landing-focus-lead blur-fade" data-delay="0">
+        <span class="section-tag">설계변경 처리 단계</span>
+        <h2>설계변경이 일어나면<br>도면·BOM·일정·원가가 함께 바뀝니다</h2>
+        <p>도면이 바뀌면 E-BOM, M-BOM/ERP, 원가까지 어떤 품목이 영향을 받는지 한 시스템에서 추적합니다.</p>
+      </div>
+
+      <div class="icard-grid icard-grid-4 icard-flow" aria-label="제조 데이터 연결 흐름">
+        <article class="icard c-blue">
+          <span class="icard-ic"><img src="images/icons3d/draw-blue.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>CAD 도면</h4>
+          <p>설계 정보 인식</p>
+        </article>
+        <article class="icard c-green">
+          <span class="icard-ic"><img src="images/icons3d/account_tree-green.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>E-BOM</h4>
+          <p>품목 구조 생성</p>
+        </article>
+        <article class="icard c-purple">
+          <span class="icard-ic"><img src="images/icons3d/hub-purple.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>MBOM/ERP</h4>
+          <p>운영 데이터 연결</p>
+        </article>
+        <article class="icard c-amber">
+          <span class="icard-ic"><img src="images/icons3d/monitoring-amber.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>원가 영향</h4>
+          <p>의사결정 지원</p>
+        </article>
+      </div>
+
+      <div class="icard-grid icard-grid-3">
+        <article class="icard c-blue">
+          <span class="icard-ic"><img src="images/icons3d/manage_history-blue.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>설계 변경을 놓치지 않게</h4>
+          <p>도면과 부품 변경 이력을 기준으로 검토·승인 흐름을 정리합니다.</p>
+        </article>
+        <article class="icard c-green">
+          <span class="icard-ic"><img src="images/icons3d/account_tree-green.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>BOM 영향을 바로 보게</h4>
+          <p>EBOM, MBOM, 파생 BOM 차이를 비교해 누락과 변경 범위를 확인합니다.</p>
+        </article>
+        <article class="icard c-amber">
+          <span class="icard-ic"><img src="images/icons3d/payments-amber.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>원가 변동까지 이어지게</h4>
+          <p>견적, 단가, 원소재 가격과 연결해 변경의 비용 영향을 추적합니다.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2: PLM DASHBOARD GALLERY (역할별 데시보드 4종)
+       ============================================================ -->
+  <section class="plm-dashboard-section" id="plm-dashboards">
+    <div class="container">
+      <div class="section-header blur-fade" data-delay="0">
+        <span class="section-tag">통합 PLM</span>
+        <h2>역할별 PLM 현황을 한 화면에서 전환합니다</h2>
+        <p>긴 설명보다 실제 화면과 핵심 지표를 먼저 보여주고, 사용자는 자신의 역할에 맞는 관점만 빠르게 확인합니다</p>
+      </div>
+
+      <div class="dashboard-tabs blur-fade" data-delay="1" role="tablist" aria-label="역할별 PLM 데시보드 선택">
+        <button class="dashboard-tab active" type="button" role="tab" aria-selected="true" data-dashboard-target="executive">임원</button>
+        <button class="dashboard-tab" type="button" role="tab" aria-selected="false" data-dashboard-target="admin">관리자</button>
+        <button class="dashboard-tab" type="button" role="tab" aria-selected="false" data-dashboard-target="team">팀장</button>
+        <button class="dashboard-tab" type="button" role="tab" aria-selected="false" data-dashboard-target="personal">개인</button>
+      </div>
+
+      <div class="plm-dashboard-list dashboard-tab-panels">
+        <!-- 임원 대시보드 -->
+        <figure class="plm-dash-row dashboard-panel active blur-fade" data-dashboard-panel="executive" data-delay="1">
+          <div class="plm-dash-media">
+            <div class="plm-dashboard-tag">Executive Dashboard</div>
+            <img src="images/plm_executive_dashboard.webp" alt="PLM 임원 대시보드" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="plm-dash-text">
+            <span class="plm-dash-step">01 — 임원 KPI 관점</span>
+            <h3>데이터 기반으로<br>전사 의사결정을 지원합니다</h3>
+            <p>전사 KPI, 포트폴리오 성과, 리스크, 원가 영향을 한눈에 파악하여 전략적 의사결정을 빠르고 정확하게 지원합니다.</p>
+            <div class="icard-grid" aria-label="임원 대시보드 핵심 관점">
+              <div class="icard c-blue">
+                <span class="icard-ic"><img src="images/icons3d/speed-blue.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>KPI 현황</h4>
+                <p>전사 KPI와 핵심 지표를 실시간으로 모니터링</p>
+              </div>
+              <div class="icard c-green">
+                <span class="icard-ic"><img src="images/icons3d/trending_up-green.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>프로젝트 진척</h4>
+                <p>포트폴리오별 진행 현황을 한눈에 파악</p>
+              </div>
+              <div class="icard c-purple">
+                <span class="icard-ic"><img src="images/icons3d/shield-purple.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>리스크 관제</h4>
+                <p>리스크 현황과 주요 이슈를 선제적으로 관리</p>
+              </div>
+              <div class="icard c-amber">
+                <span class="icard-ic"><img src="images/icons3d/payments-amber.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>원가 영향</h4>
+                <p>원가 절감 효과와 비용 영향을 정량적으로 분석</p>
+              </div>
+            </div>
+          </figcaption>
+        </figure>
+
+        <!-- 관리자 대시보드 -->
+        <figure class="plm-dash-row dashboard-panel blur-fade" data-dashboard-panel="admin" data-delay="1">
+          <div class="plm-dash-media">
+            <div class="plm-dashboard-tag">Admin Dashboard</div>
+            <img src="260528_등록이미지/관리자데시보드.webp" alt="PLM 관리자 데시보드" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="plm-dash-text">
+            <span class="plm-dash-step">02 — 관리자 운영 관제</span>
+            <h3>전사 운영 현황을<br>안정적으로 관리합니다</h3>
+            <p>사용자, 데이터, 보안, 시스템 상태까지 전사 운영을 한눈에 파악하고 문제를 선제적으로 감지하여 안정적인 PLM 운영을 지원합니다.</p>
+            <div class="icard-grid" aria-label="관리자 대시보드 핵심 관점">
+              <div class="icard c-blue">
+                <span class="icard-ic"><img src="images/icons3d/group-blue.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>사용자 관리</h4>
+                <p>계정·권한·역할을 통합 관리하고 사용 현황을 모니터링</p>
+              </div>
+              <div class="icard c-green">
+                <span class="icard-ic"><img src="images/icons3d/description-green.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>도면 현황</h4>
+                <p>도면 등록·배포·사용 현황을 실시간으로 파악</p>
+              </div>
+              <div class="icard c-purple">
+                <span class="icard-ic"><img src="images/icons3d/fact_check-purple.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>결재 현황</h4>
+                <p>승인 대기·완료 현황을 확인해 프로세스 지연을 최소화</p>
+              </div>
+              <div class="icard c-red">
+                <span class="icard-ic"><img src="images/icons3d/gpp_maybe-red.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>보안 경고</h4>
+                <p>보안 이상 징후를 탐지하고 위험을 선제적으로 대응</p>
+              </div>
+            </div>
+          </figcaption>
+        </figure>
+
+        <!-- 팀장 대시보드 -->
+        <figure class="plm-dash-row dashboard-panel blur-fade" data-dashboard-panel="team" data-delay="1">
+          <div class="plm-dash-media">
+            <div class="plm-dashboard-tag">Team Lead Dashboard</div>
+            <img src="260528_등록이미지/팀장데시보드_02.webp" alt="PLM 팀장 데시보드" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="plm-dash-text">
+            <span class="plm-dash-step">03 — 팀장 협업 관제</span>
+            <h3>팀 일정과 변경 이슈를<br>빠르게 통제합니다</h3>
+            <p>일정, 업무, 변경, 이슈를 한눈에 파악해 지연과 리스크를 사전에 차단하고 팀 성과를 높입니다.</p>
+            <div class="icard-grid" aria-label="팀장 대시보드 핵심 관점">
+              <div class="icard c-blue">
+                <span class="icard-ic"><img src="images/icons3d/calendar_month-blue.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>일정 관리</h4>
+                <p>WBS·마일스톤 진행률을 실시간 추적해 일정 지연을 예방</p>
+              </div>
+              <div class="icard c-green">
+                <span class="icard-ic"><img src="images/icons3d/groups-green.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>업무 분배</h4>
+                <p>업무 현황과 부하율을 기반으로 적절히 분배해 효율 극대화</p>
+              </div>
+              <div class="icard c-purple">
+                <span class="icard-ic"><img src="images/icons3d/article-purple.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>변경 이슈</h4>
+                <p>변경 요청·이슈를 통합 관리해 영향도 분석과 결정을 신속 지원</p>
+              </div>
+              <div class="icard c-orange">
+                <span class="icard-ic"><img src="images/icons3d/forum-orange.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>협업 상태</h4>
+                <p>검토·승인 대기와 협업 지표를 모니터링해 원활한 소통 보장</p>
+              </div>
+            </div>
+          </figcaption>
+        </figure>
+
+        <!-- 개인 대시보드 -->
+        <figure class="plm-dash-row dashboard-panel blur-fade" data-dashboard-panel="personal" data-delay="1">
+          <div class="plm-dash-media">
+            <div class="plm-dashboard-tag">Personal Dashboard</div>
+            <img src="260528_등록이미지/개인데시보드_01.webp" alt="PLM 개인 데시보드" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="plm-dash-text">
+            <span class="plm-dash-step">04 — 개인 업무 관점</span>
+            <h3>내 업무와 우선순위를<br>한눈에 정리합니다</h3>
+            <p>개인에게 필요한 할 일, 결재, 변경 요청, 알림을 통합하여 업무의 흐름과 우선순위를 놓치지 않도록 지원합니다.</p>
+            <div class="icard-grid" aria-label="개인 대시보드 핵심 관점">
+              <div class="icard c-blue">
+                <span class="icard-ic"><img src="images/icons3d/task_alt-blue.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>내 할 일</h4>
+                <p>나에게 할당된 업무와 기한 임박 항목을 우선 확인</p>
+              </div>
+              <div class="icard c-green">
+                <span class="icard-ic"><img src="images/icons3d/fact_check-green.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>결재 요청</h4>
+                <p>내가 요청한 결재의 진행 상태를 실시간으로 추적</p>
+              </div>
+              <div class="icard c-purple">
+                <span class="icard-ic"><img src="images/icons3d/published_with_changes-purple.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>변경 요청</h4>
+                <p>내가 등록·참여한 변경 요청의 진행 상황을 한눈에 확인</p>
+              </div>
+              <div class="icard c-orange">
+                <span class="icard-ic"><img src="images/icons3d/notifications-orange.webp" alt="" loading="lazy" decoding="async"></span>
+                <h4>알림 현황</h4>
+                <p>중요 알림과 코멘트 등 업무 관련 소식을 빠르게 확인</p>
+              </div>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4: PRODUCTS GRID (5 products with Magic Card)
+       ============================================================ -->
+  <section class="products-overview-section" id="products">
+    <div class="container">
+      <div class="solmap" aria-label="팹스넷 솔루션 맵">
+
+        <!-- 좌측 · 다크 쇼케이스 -->
+        <div class="solmap-stage">
+          <div class="solmap-stage-top">
+            <div class="solmap-stage-head">
+              <span class="section-tag">솔루션 구성</span>
+              <h2>도면에서 원가까지,<br>하나의 제품개발 흐름으로</h2>
+              <p>기능을 나열하기보다 설계 변경이 현장에서 처리되는 순서대로 연결합니다. 각 카드는 담당 부서가 실제로 보는 업무 흐름입니다.</p>
+            </div>
+
+            <div class="solmap-mock" aria-hidden="true">
+              <div class="solmap-mock-bar">
+                <span class="solmap-mock-dot"></span>
+                <span class="solmap-mock-dot"></span>
+                <span class="solmap-mock-dot"></span>
+              </div>
+              <div class="solmap-mock-grid">
+                <nav class="solmap-mock-nav">
+                  <span class="is-active"><span class="material-symbols-rounded">dashboard</span>대시보드</span>
+                  <span><span class="material-symbols-rounded">draft</span>도면</span>
+                  <span><span class="material-symbols-rounded">account_tree</span>BOM</span>
+                  <span><span class="material-symbols-rounded">edit_note</span>변경 관리</span>
+                  <span><span class="material-symbols-rounded">folder_shared</span>협업 문서</span>
+                  <span><span class="material-symbols-rounded">summarize</span>보고서</span>
+                </nav>
+                <div class="solmap-mock-main">
+                  <div class="solmap-mock-h">BOM 구조</div>
+                  <div class="solmap-mock-content">
+                    <div class="solmap-mock-draw">
+                      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="46" stroke="currentColor" stroke-width="1.4"/>
+                        <circle cx="60" cy="60" r="31" stroke="currentColor" stroke-width="1.4"/>
+                        <circle cx="60" cy="60" r="11" stroke="currentColor" stroke-width="1.4"/>
+                        <circle cx="98" cy="60" r="4.2" stroke="currentColor" stroke-width="1.2"/>
+                        <circle cx="79" cy="27.1" r="4.2" stroke="currentColor" stroke-width="1.2"/>
+                        <circle cx="41" cy="27.1" r="4.2" stroke="currentColor" stroke-width="1.2"/>
+                        <circle cx="22" cy="60" r="4.2" stroke="currentColor" stroke-width="1.2"/>
+                        <circle cx="41" cy="92.9" r="4.2" stroke="currentColor" stroke-width="1.2"/>
+                        <circle cx="79" cy="92.9" r="4.2" stroke="currentColor" stroke-width="1.2"/>
+                        <line x1="60" y1="4" x2="60" y2="116" stroke="currentColor" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.45"/>
+                        <line x1="4" y1="60" x2="116" y2="60" stroke="currentColor" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.45"/>
+                      </svg>
+                      <span class="solmap-mock-draw-cap">도면 : ASM-1000</span>
+                    </div>
+                    <div class="solmap-mock-tree">
+                      <div class="solmap-mock-tree-h">BOM-구조 <span>&times;</span></div>
+                      <ul>
+                        <li><span>ASM-1000</span></li>
+                        <li class="lv2"><span>P-0001</span><b>1</b></li>
+                        <li class="lv2"><span>P-0002</span><b>2</b></li>
+                        <li class="lv2"><span>P-0003</span><b>2</b></li>
+                        <li class="lv2"><span>P-0004</span><b>1</b></li>
+                      </ul>
+                      <div class="solmap-mock-tree-f">Rev. B | 2024-05-14</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="solmap-cards">
+            <div class="solmap-card">
+              <div class="solmap-card-top">
+                <span class="solmap-card-label">변경 요청</span>
+                <span class="solmap-badge">진행 중</span>
+              </div>
+              <div class="solmap-card-id">CR-2024-0198</div>
+              <dl class="solmap-kv">
+                <div><dt>요청자</dt><dd>김민수</dd></div>
+                <div><dt>부서</dt><dd>설계팀</dd></div>
+                <div><dt>요청일</dt><dd>2024-05-14</dd></div>
+              </dl>
+            </div>
+            <div class="solmap-card">
+              <span class="solmap-card-label">원가 영향 (예상)</span>
+              <div class="solmap-cost">+1.24%</div>
+              <div class="solmap-cost-sub">+ 12,480 KRW</div>
+              <svg class="solmap-spark" viewBox="0 0 132 40" fill="none" aria-hidden="true">
+                <polygon points="2,34 23,28 44,30 65,20 87,16 109,9 130,4 130,40 2,40" fill="rgba(37,99,235,0.1)"/>
+                <polyline points="2,34 23,28 44,30 65,20 87,16 109,9 130,4" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="130" cy="4" r="2.6" fill="#2563eb"/>
+              </svg>
+            </div>
+            <div class="solmap-card">
+              <span class="solmap-card-label">최근 활동</span>
+              <ul class="solmap-feed">
+                <li><i></i><span>BOM 업데이트</span><time>10:42</time></li>
+                <li><i></i><span>견적 재계산 완료</span><time>10:35</time></li>
+                <li><i></i><span>변경 검토 요청</span><time>10:21</time></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="solmap-feats">
+            <div class="solmap-feat">
+              <span class="solmap-feat-ic" aria-hidden="true"><img src="images/icons3d/published_with_changes-blue.webp" alt="" loading="lazy" decoding="async"></span>
+              <div><strong>설계 변경 추적</strong><small>이력 관리 자동화</small></div>
+            </div>
+            <div class="solmap-feat">
+              <span class="solmap-feat-ic" aria-hidden="true"><img src="images/icons3d/account_tree-green.webp" alt="" loading="lazy" decoding="async"></span>
+              <div><strong>BOM 통합 관리</strong><small>E-BOM·M-BOM·ERP 연계</small></div>
+            </div>
+            <div class="solmap-feat">
+              <span class="solmap-feat-ic" aria-hidden="true"><img src="images/icons3d/query_stats-amber.webp" alt="" loading="lazy" decoding="async"></span>
+              <div><strong>원가 영향 분석</strong><small>실시간 비용 시뮬레이션</small></div>
+            </div>
+            <div class="solmap-feat">
+              <span class="solmap-feat-ic" aria-hidden="true"><img src="images/icons3d/shield-purple.webp" alt="" loading="lazy" decoding="async"></span>
+              <div><strong>데이터 보안</strong><small>권한 및 이력 관리</small></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 우측 · 라이트 플로우 -->
+        <div class="solmap-flow">
+          <article class="solmap-axis">
+            <div class="solmap-axis-top">
+              <span class="solmap-axis-num">01</span>
+              <span class="solmap-axis-kicker">CAD DATA</span>
+            </div>
+            <div class="solmap-axis-mock" aria-hidden="true">
+              <div class="solmap-cad-h">AI 인식 결과</div>
+              <div class="solmap-cad">
+                <div class="solmap-cad-draw">
+                  <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="46" stroke="currentColor" stroke-width="1.6"/>
+                    <circle cx="60" cy="60" r="31" stroke="currentColor" stroke-width="1.6"/>
+                    <circle cx="60" cy="60" r="11" stroke="currentColor" stroke-width="1.6"/>
+                    <circle cx="98" cy="60" r="4.2" stroke="currentColor" stroke-width="1.3"/>
+                    <circle cx="79" cy="27.1" r="4.2" stroke="currentColor" stroke-width="1.3"/>
+                    <circle cx="41" cy="27.1" r="4.2" stroke="currentColor" stroke-width="1.3"/>
+                    <circle cx="22" cy="60" r="4.2" stroke="currentColor" stroke-width="1.3"/>
+                    <circle cx="41" cy="92.9" r="4.2" stroke="currentColor" stroke-width="1.3"/>
+                    <circle cx="79" cy="92.9" r="4.2" stroke="currentColor" stroke-width="1.3"/>
+                    <line x1="60" y1="6" x2="60" y2="114" stroke="currentColor" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+                    <line x1="6" y1="60" x2="114" y2="60" stroke="currentColor" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+                  </svg>
+                </div>
+                <div class="solmap-cad-read">
+                  <div class="solmap-ro"><span>부품 수</span><b>128</b></div>
+                  <div class="solmap-ro"><span>인식률</span><b>98.6%</b></div>
+                  <div class="solmap-ro"><span>E-BOM 추출</span><em>완료</em></div>
+                </div>
+              </div>
+            </div>
+            <h3>AI 도면 자동화</h3>
+            <p>CAD 도면에서 설계 정보를 읽어 BOM 데이터의 시작점을 만듭니다.</p>
+            <ul>
+              <li>도면 표제란·부품 정보 인식</li>
+              <li>인식 정보를 E-BOM으로 추출</li>
+              <li>조건·유사 도면 검색</li>
+            </ul>
+            <div class="solmap-axis-products">
+              <span class="solmap-axis-products-label">관련 제품</span>
+              <a href="product-cadwin.html" class="solmap-pill">AI CADWin<span class="material-symbols-rounded" aria-hidden="true">open_in_new</span></a>
+            </div>
+          </article>
+
+          <article class="solmap-axis">
+            <div class="solmap-axis-top">
+              <span class="solmap-axis-num">02</span>
+              <span class="solmap-axis-kicker">PLM FLOW</span>
+            </div>
+            <div class="solmap-axis-mock" aria-hidden="true">
+              <div class="solmap-steps-h">설계 변경 프로세스</div>
+              <ol class="solmap-steps">
+                <li class="is-done"><span class="solmap-step-dot"><span class="material-symbols-rounded">check</span></span><span class="solmap-step-name">작성</span><span class="solmap-step-chk material-symbols-rounded">check</span></li>
+                <li class="is-done"><span class="solmap-step-dot"><span class="material-symbols-rounded">check</span></span><span class="solmap-step-name">검토</span><span class="solmap-step-chk material-symbols-rounded">check</span></li>
+                <li class="is-cur"><span class="solmap-step-dot"></span><span class="solmap-step-name">승인</span><span class="solmap-step-chk material-symbols-rounded">expand_more</span></li>
+                <li><span class="solmap-step-dot"></span><span class="solmap-step-name">배포</span></li>
+              </ol>
+            </div>
+            <h3>제품 데이터 관리</h3>
+            <p>도면·문서의 설계변경을 관리하고 결재 흐름으로 통제합니다.</p>
+            <ul>
+              <li>파일 체크인·아웃으로 버전 관리</li>
+              <li>ECR/ECO/ECN 설계변경 이력</li>
+              <li>역할별 대시보드·결재</li>
+            </ul>
+            <div class="solmap-axis-products">
+              <span class="solmap-axis-products-label">관련 제품</span>
+              <a href="product-clippdm.html" class="solmap-pill">Clip PDM<span class="material-symbols-rounded" aria-hidden="true">open_in_new</span></a>
+            </div>
+          </article>
+
+          <article class="solmap-axis">
+            <div class="solmap-axis-top">
+              <span class="solmap-axis-num">03</span>
+              <span class="solmap-axis-kicker">OPERATION</span>
+            </div>
+            <div class="solmap-axis-mock" aria-hidden="true">
+              <div class="solmap-board-h">프로젝트 대시보드</div>
+              <div class="solmap-board-row">
+                <span>진행률</span>
+                <span class="solmap-progress"><i style="width:72%"></i></span>
+                <b>72%</b>
+              </div>
+              <div class="solmap-board-row"><span>지연 이슈</span><b class="solmap-warn">3</b></div>
+              <div class="solmap-board-row"><span>예상 원가</span><b>&#8361;125.4M</b></div>
+            </div>
+            <h3>프로젝트·BOM·원가 운영</h3>
+            <p>프로젝트 일정과 BOM·원가를 운영 데이터로 이어 관리합니다.</p>
+            <ul>
+              <li>WBS 일정·Gate Review 연계</li>
+              <li>Multi-BOM 비교·변경 영향</li>
+              <li>견적·재료비 원가 추적</li>
+            </ul>
+            <div class="solmap-axis-products">
+              <span class="solmap-axis-products-label">관련 제품</span>
+              <a href="product-clippms.html" class="solmap-pill pms">Clip PMS</a>
+              <a href="product-multibom.html" class="solmap-pill bom">Multi-BOM</a>
+              <a href="product-clipcms.html" class="solmap-pill cms">Clip CMS</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="section-header blur-fade" data-delay="0">
+        <span class="section-tag">솔루션</span>
+        <h2>팹스넷의 통합 PLM 솔루션</h2>
+        <p>필요한 기능을 제품별로 나누고, 현장 업무에서는 하나의 데이터 흐름으로 연결합니다</p>
+      </div>
+
+      <div class="product-gallery">
+        <button class="pg-arrow pg-prev" type="button" aria-label="이전 제품 보기">
+          <span class="material-symbols-rounded" aria-hidden="true">chevron_left</span>
+        </button>
+        <div class="products-grid product-gallery-track">
+        <!-- AI CADWin -->
+        <a href="product-cadwin.html" class="product-card cadwin magic-card tilt-element" data-delay="0">
+          <div class="product-card-thumb">
+            <img src="260528_등록이미지/도면검색.webp" alt="AI CADWin — 도면 검색·인식 화면" loading="lazy" decoding="async">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">AI 도면 인식</span>
+            <h3>AI CADWin</h3>
+            <div class="product-card-keys">
+              <span>표제란 인식</span>
+              <span>E-BOM 추출</span>
+              <span>유사 도면 검색</span>
+            </div>
+            <div class="product-card-link">자세히 보기 <span class="arrow" aria-hidden="true">→</span></div>
+          </div>
+        </a>
+
+        <!-- Clip PDM -->
+        <a href="product-clippdm.html" class="product-card pdm magic-card tilt-element" data-delay="1">
+          <div class="product-card-thumb">
+            <img src="260528_등록이미지/도면체크아웃.webp" alt="Clip PDM — 도면 체크아웃·리비전 관리 화면" loading="lazy" decoding="async">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">제품 데이터 관리</span>
+            <h3>Clip PDM</h3>
+            <div class="product-card-keys">
+              <span>체크인·아웃</span>
+              <span>리비전 관리</span>
+              <span>설계변경 이력</span>
+            </div>
+            <div class="product-card-link">자세히 보기 <span class="arrow" aria-hidden="true">→</span></div>
+          </div>
+        </a>
+
+        <!-- Clip PMS -->
+        <a href="product-clippms.html" class="product-card pms magic-card tilt-element" data-delay="2">
+          <div class="product-card-thumb">
+            <img src="images/pms_gantt_light.webp" alt="Clip PMS — 프로젝트 간트 차트·WBS 일정 관리 화면" loading="lazy" decoding="async">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">프로젝트 관리</span>
+            <h3>Clip PMS</h3>
+            <div class="product-card-keys">
+              <span>WBS·간트</span>
+              <span>Gate Review</span>
+              <span>진척·리스크</span>
+            </div>
+            <div class="product-card-link">자세히 보기 <span class="arrow" aria-hidden="true">→</span></div>
+          </div>
+        </a>
+
+        <!-- Multi-BOM -->
+        <a href="product-multibom.html" class="product-card bom magic-card tilt-element" data-delay="3">
+          <div class="product-card-thumb">
+            <img src="images/multibom_comparison_real.webp" alt="Multi-BOM — E-BOM·M-BOM 구조 비교 화면" loading="lazy" decoding="async">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">BOM 통합 관리</span>
+            <h3>Multi-BOM</h3>
+            <div class="product-card-keys">
+              <span>E·M·AS-BOM</span>
+              <span>사양별 BOM</span>
+              <span>변경 영향</span>
+            </div>
+            <div class="product-card-link">자세히 보기 <span class="arrow" aria-hidden="true">→</span></div>
+          </div>
+        </a>
+
+        <!-- Clip CMS -->
+        <a href="product-clipcms.html" class="product-card cms magic-card tilt-element" data-delay="4">
+          <div class="product-card-thumb">
+            <img src="260528_등록이미지/CMS관리시스템데시보드.webp" alt="Clip CMS — 원가관리 대시보드 화면" loading="lazy" decoding="async">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">사전 · 사후 원가</span>
+            <h3>Clip CMS</h3>
+            <div class="product-card-keys">
+              <span>견적 시뮬레이션</span>
+              <span>재료비 자동계산</span>
+              <span>ERP 단가 연동</span>
+            </div>
+            <div class="product-card-link">자세히 보기 <span class="arrow" aria-hidden="true">→</span></div>
+          </div>
+        </a>
+
+        <!-- 도입 상담 CTA -->
+        <a href="#contact" class="product-card product-card-cta" data-delay="5">
+          <div class="product-card-icon" aria-hidden="true">
+            <span class="material-symbols-rounded">forum</span>
+          </div>
+          <h3>어디부터 적용할지<br>함께 정리합니다</h3>
+          <p>현재 사용 중인 도면·BOM·원가·ERP 업무 흐름을 알려주시면 적합한 도입 범위와 연동 방식을 정리해 드립니다.</p>
+          <div class="product-card-link">도입 상담 <span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        </div>
+        <button class="pg-arrow pg-next" type="button" aria-label="다음 제품 보기">
+          <span class="material-symbols-rounded" aria-hidden="true">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5: FEATURE CARDS
+       ============================================================ -->
+  <section class="feature-cards-section" id="features">
+    <div class="container">
+      <div class="section-header blur-fade" data-delay="0">
+        <span class="section-tag">핵심 기능</span>
+        <h2>제조 현장에 맞춘 핵심 기능</h2>
+        <p>업무별 데이터를 연결하고 변경 이력을 남기는 PLM 기능을 제공합니다</p>
+      </div>
+
+      <!-- Scroll-driven Typewriter -->
+      <div class="scroll-typewriter-wrapper">
+        <p class="scroll-typewriter-text" data-scroll-typewriter>
+          설계 데이터가 업무 흐름과 연결될 때,<br>
+          정합성 있는 의사결정이 가능해집니다.
+        </p>
+      </div>
+
+      <!-- Feature Card 1: AI CADWin -->
+      <div class="feature-card feature-card-ai tilt-element">
+        <div class="feature-card-text">
+          <span class="feature-card-tag">AI CADWin · 핵심 차별화</span>
+          <h3>반복 도면 판독을 줄이고<br>설계 데이터를 바로 BOM으로</h3>
+          <p>도면 표제란, 부품 번호, 재질, 치수 정보를 인식해 수작업 입력을 줄이고 디지털 E-BOM 생성을 지원합니다. AI CAD 자동화는 PLM 도입 전 설계 데이터 정리 시간을 줄이는 첫 단계입니다.</p>
+          <div class="ai-impact-strip" aria-label="AI CADWin 적용 효과">
+            <span><strong>Before</strong>도면별 수기 입력</span>
+            <span><strong>After</strong>표제란·부품 정보 인식</span>
+            <span><strong>Result</strong>E-BOM 생성 지원</span>
+          </div>
+          <a href="product-cadwin.html" class="btn btn-primary">자세히 보기 <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="feature-card-media sticky-media">
+          <div class="feature-card-video-wrapper">
+            <video autoplay muted loop playsinline preload="metadata" poster="videos/poster-cadwin-clean.png"
+              aria-label="AI CADWin 도면 표제란 인식·BOM 추출 데모 영상" style="width:100%;height:100%;object-fit:cover;">
+              <source src="videos/hero-cadwin.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI CADWin 핵심 기능 — 홈 카드 시스템(.icard)으로 통일, 시안 테마 -->
+      <div class="feature-card-annex" aria-label="AI CADWin 핵심 기능">
+        <div class="icard-grid icard-grid-3">
+          <article class="icard c-cyan">
+            <span class="icard-ic"><img src="images/icons3d/smart_toy-cyan.webp" alt="" loading="lazy" decoding="async"></span>
+            <h4>AI 도면 자동 검색</h4>
+            <p>형상 인식으로 수천 장에서 유사 도면 즉시 검색.</p>
+          </article>
+          <article class="icard c-cyan">
+            <span class="icard-ic"><img src="images/icons3d/account_tree-cyan.webp" alt="" loading="lazy" decoding="async"></span>
+            <h4>BOM 자동 추출</h4>
+            <p>도면 속성·테이블에서 부품 정보 자동 수집.</p>
+          </article>
+          <article class="icard c-cyan">
+            <span class="icard-ic"><img src="images/icons3d/published_with_changes-cyan.webp" alt="" loading="lazy" decoding="async"></span>
+            <h4>PDM 자동 동기화</h4>
+            <p>Check-in/out으로 Clip PDM에 자동 동기화.</p>
+          </article>
+          <article class="icard c-cyan">
+            <span class="icard-ic"><img src="images/icons3d/draw-cyan.webp" alt="" loading="lazy" decoding="async"></span>
+            <h4>AutoCAD 리본 통합</h4>
+            <p>AutoCAD 리본에서 PDM을 바로 실행.</p>
+          </article>
+          <article class="icard c-cyan">
+            <span class="icard-ic"><img src="images/icons3d/view_in_ar-cyan.webp" alt="" loading="lazy" decoding="async"></span>
+            <h4>SolidWorks 통합</h4>
+            <p>SolidWorks Part·BOM·리비전을 원스톱 연계.</p>
+          </article>
+          <article class="icard c-cyan">
+            <span class="icard-ic"><img src="images/icons3d/file_copy-cyan.webp" alt="" loading="lazy" decoding="async"></span>
+            <h4>파생 파일 자동 생성</h4>
+            <p>DWG·PDF·STEP 등 중립 포맷 자동 변환.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Feature Card 2: Clip PDM -->
+      <div class="feature-card reverse tilt-element">
+        <div class="feature-card-text">
+          <span class="feature-card-tag">Clip PDM</span>
+          <h3>도면·부품 변경 관리</h3>
+          <p>파일 및 객체 수준 잠금체계를 갖춘 체크인/아웃으로 도면의 주/부버전을 관리합니다. 다중 CAD 연동과 ECR/ECO 프로세스 기반 도면·부품 변경 관리를 지원합니다.</p>
+          <a href="product-clippdm.html" class="btn btn-primary">자세히 보기 <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="feature-card-media">
+          <div class="feature-card-video-wrapper">
+            <div class="pdm-preview-grid" aria-label="Clip PDM 주요 화면 미리보기">
+              <img src="260528_등록이미지/관리자데시보드.webp" alt="Clip PDM 관리자 대시보드" loading="lazy" decoding="async">
+              <img src="260528_등록이미지/도면등록_01.webp" alt="Clip PDM 도면 등록 화면" loading="lazy" decoding="async">
+              <img src="260528_등록이미지/도면검색.webp" alt="Clip PDM 도면 검색 화면" loading="lazy" decoding="async">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Card 3: Clip PMS -->
+      <div class="feature-card tilt-element">
+        <div class="feature-card-text">
+          <span class="feature-card-tag">Clip PMS</span>
+          <h3>경영진을 위한 전사 통합 인사이트</h3>
+          <p>전사 프로젝트 진행 현황, KPI, 알림을 한 화면에서 확인합니다. WBS 기반 일정 관리와 EVMS 방식의 진척률 측정, Gate Review 승인 흐름이 프로젝트 데이터를 경영 관점으로 모아줍니다.</p>
+          <a href="product-clippms.html" class="btn btn-primary">자세히 보기 <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="feature-card-media">
+          <div class="feature-card-video-wrapper">
+            <video autoplay muted loop playsinline preload="metadata" poster="videos/v3-overview-preview.jpg"
+              aria-label="Clip PMS 전사 프로젝트 통합 대시보드 데모 영상" style="width:100%;height:100%;object-fit:cover;">
+              <source src="videos/v3-overview.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Card 4: Multi-BOM -->
+      <div class="feature-card reverse tilt-element">
+        <div class="feature-card-text">
+          <span class="feature-card-tag">Multi-BOM</span>
+          <h3>통합 BOM 관리 시스템</h3>
+          <p>파생 BOM 등 다수의 BOM을 통합 관리하며, 변경 시마다 정전개 및 역전개를 통해 영향 범위를 확인합니다. 임시저장 및 ERP 연동으로 BOM 관리 흐름을 지원합니다.</p>
+          <a href="product-multibom.html" class="btn btn-primary">자세히 보기 <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="feature-card-media">
+          <div class="feature-card-video-wrapper">
+            <img src="images/mbom_compare.webp" alt="Multi-BOM E-BOM vs M-BOM 비교 화면 — 추가·삭제·변경 차이를 행 단위로 표시" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 6: TARGET INDUSTRIES
+       ============================================================ -->
+  <section class="industry-section" id="industries">
+    <div class="container">
+      <div class="section-header blur-fade" data-delay="0">
+        <span class="section-tag">고객 산업군</span>
+        <h2>자동차부품·반도체·의료기기 등<br>국내 제조 현장에 구축해 왔습니다</h2>
+        <p>자동차부품 15개사, 반도체·가전 8개사, 의료장비 5개사 등 28개사 구축 경험을 바탕으로 산업별 업무 요건에 대응합니다</p>
+      </div>
+
+      <div class="icard-grid icard-grid-3">
+        <article class="icard c-blue">
+          <span class="icard-ic"><img src="images/icons3d/directions_car-blue.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>자동차 부품제조</h4>
+          <p>IATF 16949 품질경영, 복잡한 BOM 구조 관리, 협력사 데이터 연동</p>
+        </article>
+        <article class="icard c-green">
+          <span class="icard-ic"><img src="images/icons3d/memory-green.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>반도체·전자</h4>
+          <p>개발 일정 관리, 미세 공정 도면 이력, 원가 변경 추적</p>
+        </article>
+        <article class="icard c-purple">
+          <span class="icard-ic"><img src="images/icons3d/medical_services-purple.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>의료장비</h4>
+          <p>ISO 13485 규제 대응, 임상·인증 문서 관리, 설계 이력 추적</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 7: CUSTOMER MARQUEE (Infinite Scroll Logos)
+       ============================================================ -->
+  <section class="marquee-section" id="customers">
+    <div class="container">
+      <div class="section-header blur-fade" data-delay="0">
+        <span class="section-tag">고객사</span>
+        <h2>제조 현장의 업무 흐름을<br>함께 정리합니다</h2>
+        <p>전사 PLM, 도면·BOM 관리, 원가관리 구축 경험을 바탕으로 한 고객 사례</p>
+      </div>
+    </div>
+
+    <!-- First Marquee Row (Left → Right) -->
+    <div class="marquee" aria-label="고객사 로고">
+      <div class="marquee-track">
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/ams.png" alt="AMS" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/네오바이오텍.png" alt="네오바이오텍" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/디에스시.png" alt="디에스시" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/용산.png" alt="용산" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/우리산업.png" alt="우리산업" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/인지컨트롤스.png" alt="인지컨트롤스" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/파라다이스시티.png" alt="파라다이스시티" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/하나.png" alt="하나" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/하이로닉.png" alt="하이로닉" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/현대공업.png" alt="현대공업" loading="lazy" decoding="async"></div>
+        <!-- Duplicated for seamless loop -->
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/ams.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/네오바이오텍.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/디에스시.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/용산.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/우리산업.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/인지컨트롤스.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/파라다이스시티.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/하나.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/하이로닉.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/현대공업.png" alt="" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+
+    <!-- Second Marquee Row (Right → Left, slower) -->
+    <div class="marquee marquee-reverse" aria-label="고객사 로고 2">
+      <div class="marquee-track">
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/스크린샷 2025-10-30 104311.png" alt="한영테크놀로지(HYTC)" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/스크린샷 2025-10-30 104425.png" alt="AICESS" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/현대공업.png" alt="현대공업" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/하이로닉.png" alt="하이로닉" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/하나.png" alt="하나" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/인지컨트롤스.png" alt="인지컨트롤스" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/우리산업.png" alt="우리산업" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/ams.png" alt="AMS" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/네오바이오텍.png" alt="네오바이오텍" loading="lazy" decoding="async"></div>
+        <div class="marquee-item"><img src="홈페이지_고객사_이미지/디에스시.png" alt="디에스시" loading="lazy" decoding="async"></div>
+        <!-- Duplicated for seamless loop -->
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/스크린샷 2025-10-30 104311.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/스크린샷 2025-10-30 104425.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/현대공업.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/하이로닉.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/하나.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/인지컨트롤스.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/우리산업.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/ams.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/네오바이오텍.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="marquee-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/디에스시.png" alt="" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 8: INTEGRATIONS
+       ============================================================ -->
+  <section class="integrations-section" id="integrations">
+    <div class="container">
+      <div class="section-header blur-fade" data-delay="0">
+        <span class="section-tag">시스템 연동</span>
+        <h2>기존 시스템과의 연동을 고려합니다</h2>
+        <p>SAP 등 ERP와 주요 CAD 환경을 검토해 도면·BOM·원가 데이터가 끊기지 않도록 연동을 구성합니다</p>
+      </div>
+
+      <div class="icard-grid icard-grid-3">
+        <article class="icard c-blue">
+          <span class="icard-ic"><img src="images/icons3d/hub-blue.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>설계 흐름 연결</h4>
+          <p>도면, BOM, 변경 요청을 한 업무 흐름에서 확인할 수 있게 합니다.</p>
+        </article>
+        <article class="icard c-green">
+          <span class="icard-ic"><img src="images/icons3d/database-green.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>ERP 연동</h4>
+          <p>SAP 등 ERP와 품목, BOM, 원가 데이터 연동을 검토해 구축합니다.</p>
+        </article>
+        <article class="icard c-purple">
+          <span class="icard-ic"><img src="images/icons3d/draw-purple.webp" alt="" loading="lazy" decoding="async"></span>
+          <h4>CAD 호환</h4>
+          <p>SolidWorks, AutoCAD, CATIA 등 주요 CAD 환경과의 연동을 지원합니다.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 9: CTA
+       ============================================================ -->
+  <section class="cta-section" id="contact">
+    <canvas id="dotsCanvas"></canvas>
+    <div class="container">
+      <div class="cta-card magic-card blur-fade" data-delay="0">
+        <h2>귀사의 공정에 맞춰<br>구축해드립니다</h2>
+        <p class="cta-subtitle">표준 기능을 그대로 적용하기보다, 현재 사용 중인 도면·BOM·원가·ERP 흐름을 확인한 뒤 구축 범위와 연동 방식을 함께 정리합니다.</p>
+        <div class="cta-actions">
+          <a href="#" class="btn cta-btn-primary" data-demo-open aria-haspopup="dialog">구축 사례 · 시연 미팅 요청</a>
+          <a href="tel:070-50011144" class="btn cta-btn-secondary">전화 상담: 070-5001-1144</a>
+          <a href="tel:+821050502011" class="btn cta-btn-secondary">휴대폰: +82) 10-5050-2011</a>
+        </div>
+        <div class="cta-downloads" aria-label="기본 자료 다운로드">
+          <a href="brochures/팹스넷_회사소개서.pdf" download><span class="material-symbols-rounded" aria-hidden="true">download</span>회사소개서 PDF</a>
+          <a href="brochures/AI_CADWin_브로슈어.pdf" download>AI CADWin</a>
+          <a href="brochures/Clip_PDM_브로슈어.pdf" download>Clip PDM</a>
+          <a href="brochures/Clip_PMS_브로슈어.pdf" download>Clip PMS</a>
+          <a href="brochures/Multi-BOM_브로슈어.pdf" download>Multi-BOM</a>
+          <a href="brochures/Clip_CMS_브로슈어.pdf" download>Clip CMS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer-main">
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="papsnet_logo.jpg" alt="Papsnet" loading="lazy" decoding="async">
+        </a>
+        <p>제조업의 설계·생산·원가 데이터를<br>하나로 연결하는 PLM 솔루션 파트너</p>
+        <div class="footer-contact-inline">
+          <a href="tel:070-50011144"><span class="material-symbols-rounded">call</span>070-5001-1144</a>
+          <a href="tel:+821050502011"><span class="material-symbols-rounded">smartphone</span>+82) 10-5050-2011</a>
+          <a href="mailto:kimnardo@papsnet.net"><span class="material-symbols-rounded">mail</span>kimnardo@papsnet.net</a>
+        </div>
+      </div>
+
+      <!-- Products Column -->
+      <div class="footer-col">
+        <h4>제품</h4>
+        <ul>
+          <li><a href="product-cadwin.html">AI CADWin</a></li>
+          <li><a href="product-clippdm.html">Clip PDM</a></li>
+          <li><a href="product-clippms.html">Clip PMS</a></li>
+          <li><a href="product-multibom.html">Multi-BOM</a></li>
+          <li><a href="product-clipcms.html">Clip CMS</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources Column -->
+      <div class="footer-col">
+        <h4>리소스</h4>
+        <ul>
+          <li><a href="brochure.html">브로슈어</a></li>
+          <li><a href="brochures/팹스넷_회사소개서.pdf" download>회사소개서 (PDF)</a></li>
+          <li><a href="#" data-demo-open aria-haspopup="dialog">데모 시연</a></li>
+          <li><a href="#customers">고객 사례</a></li>
+          <li><a href="#features">핵심 기능</a></li>
+        </ul>
+      </div>
+
+      <!-- Company Column -->
+      <div class="footer-col">
+        <h4>회사</h4>
+        <ul>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="#" data-demo-open aria-haspopup="dialog">도입 문의</a></li>
+          <li><a href="https://www.papsnet.net" target="_blank" rel="noopener">www.papsnet.net</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div class="footer-status">
+        <span class="footer-status-dot"></span>
+        제조업 PLM 구축 상담 가능
+      </div>
+      <p class="footer-copyright">© 2025 PapsNet Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="맨 위로">
+    <span class="material-symbols-rounded">arrow_upward</span>
+  </button>
+
+  <a href="#" class="floating-demo-cta" data-demo-open aria-label="무료 데모 상담 신청" aria-haspopup="dialog">
+    <span class="material-symbols-rounded" aria-hidden="true">forum</span>
+    <strong>데모 상담</strong>
+  </a>
+
+  <!-- 데모 상담 모달 — 제출 시 신청 내용이 채워진 메일 초안이 열림 (백엔드 불필요) -->
+  <div class="demo-modal" id="demoModal" hidden>
+    <div class="demo-modal-backdrop" data-demo-close></div>
+    <div class="demo-modal-card" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
+      <button class="demo-modal-close" type="button" aria-label="닫기" data-demo-close>
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+      <span class="section-tag">데모 상담</span>
+      <h3 id="demoModalTitle">시연 미팅을 신청하세요</h3>
+      <p class="demo-modal-sub">내용을 남겨주시면 담당자가 확인 후 연락드립니다. 급하시면 아래 전화로 바로 상담 가능합니다.</p>
+      <form id="demoForm">
+        <div class="demo-field-row">
+          <label>회사명 *<input type="text" name="company" required autocomplete="organization" placeholder="예) OO정밀"></label>
+          <label>성함 *<input type="text" name="name" required autocomplete="name" placeholder="홍길동"></label>
+        </div>
+        <div class="demo-field-row">
+          <label>연락처<input type="tel" name="phone" autocomplete="tel" placeholder="010-0000-0000"></label>
+          <label>이메일<input type="email" name="email" autocomplete="email" placeholder="you@company.co.kr"></label>
+        </div>
+        <label>관심 제품
+          <select name="product">
+            <option>통합 PLM 전체</option>
+            <option>AI CADWin — AI 도면 인식</option>
+            <option>Clip PDM — 제품 데이터 관리</option>
+            <option>Clip PMS — 프로젝트 관리</option>
+            <option>Multi-BOM — 통합 BOM</option>
+            <option>Clip CMS — 원가 관리</option>
+          </select>
+        </label>
+        <label>문의 내용<textarea name="message" rows="4" placeholder="현재 사용 중인 CAD·ERP, 도입 배경 등을 적어주시면 상담이 빨라집니다."></textarea></label>
+        <button type="submit" class="btn btn-primary btn-lg demo-submit">상담 신청 보내기 <span class="arrow" aria-hidden="true">→</span></button>
+        <p class="demo-modal-note">제출하면 팹스넷 상담 메일함으로 바로 접수됩니다</p>
+      </form>
+      <div class="demo-modal-alt">
+        <a href="tel:070-50011144"><span class="material-symbols-rounded" aria-hidden="true">call</span>070-5001-1144</a>
+        <a href="tel:+821050502011"><span class="material-symbols-rounded" aria-hidden="true">smartphone</span>+82) 10-5050-2011</a>
+      </div>
+      <div class="demo-modal-downloads" aria-label="기본 자료 다운로드">
+        <span class="demo-modal-downloads-label">기본 자료 바로 받기</span>
+        <div class="demo-modal-downloads-chips">
+          <a href="brochures/팹스넷_회사소개서.pdf" download><span class="material-symbols-rounded" aria-hidden="true">download</span>회사소개서</a>
+          <a href="brochures/AI_CADWin_브로슈어.pdf" download>AI CADWin</a>
+          <a href="brochures/Clip_PDM_브로슈어.pdf" download>Clip PDM</a>
+          <a href="brochures/Clip_PMS_브로슈어.pdf" download>Clip PMS</a>
+          <a href="brochures/Multi-BOM_브로슈어.pdf" download>Multi-BOM</a>
+          <a href="brochures/Clip_CMS_브로슈어.pdf" download>Clip CMS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 접수 완료 팝업 — 폼 모달과 분리된 독립 확인창 -->
+  <div class="demo-modal" id="demoDoneModal" hidden>
+    <div class="demo-modal-backdrop" data-done-close></div>
+    <div class="demo-modal-card demo-modal-card-compact" role="alertdialog" aria-modal="true" aria-labelledby="demoDoneTitle">
+      <div class="demo-form-done" role="status">
+        <span class="material-symbols-rounded" aria-hidden="true">mark_email_read</span>
+        <h4 id="demoDoneTitle">상담 신청이 접수되었습니다</h4>
+        <p>남겨주신 연락처로 담당자가 곧 연락드리겠습니다.<br>급하신 경우 070-5001-1144로 전화 주세요.</p>
+        <button type="button" class="btn btn-primary btn-lg demo-done-confirm" data-done-close>확인</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>
