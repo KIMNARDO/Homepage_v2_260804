@@ -24,6 +24,15 @@ Thumbs.db
 # temp
 _resize_*.py
 scratch_*.json
+scripts/_*.mjs
+scripts/_git_cleanup.sh
+
+# local image-processing intermediates
+images/hero-aerospace-exploded-alpha.png
+images/hero-aerospace-exploded-chroma.png
+images/hero-ev-component-bom-alpha.png
+images/hero-ev-exploded-alpha.png
+images/papsnet-corporate-logo.jpeg
 
 .tmp/
 _screenshots/

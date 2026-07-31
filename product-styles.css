@@ -1542,9 +1542,644 @@ body.theme-pdm .outcomes-grid {
     .bento-glass .cap-bento-icon img { max-width: 82px; max-height: 82px; }
 }
 
+/* Shared dimensional capability stage for Clip product pages. */
+.product-capabilities--dimensional {
+    padding: clamp(96px, 10vw, 160px) 0 clamp(112px, 12vw, 184px);
+    background:
+        radial-gradient(circle at 14% 18%, color-mix(in srgb, var(--theme-primary), transparent 87%), transparent 27%),
+        radial-gradient(circle at 88% 72%, color-mix(in srgb, var(--theme-secondary), transparent 89%), transparent 30%),
+        #eef3f8 !important;
+    border-top-color: rgba(18, 38, 61, 0.09);
+}
+
+.product-capabilities--dimensional::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(24, 51, 78, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24, 51, 78, 0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+
+.product-capabilities--dimensional .container {
+    position: relative;
+    z-index: 1;
+}
+
+.product-capabilities--dimensional .bento-glass-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.65fr);
+    column-gap: clamp(48px, 8vw, 128px);
+    align-items: end;
+    max-width: 1180px;
+    margin-bottom: clamp(46px, 6vw, 78px);
+    text-align: left;
+}
+
+.product-capabilities--dimensional .bento-glass-header .section-tag {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-bottom: 22px;
+    padding: 8px 12px !important;
+    border: 1px solid color-mix(in srgb, var(--theme-primary), transparent 74%) !important;
+    border-radius: 5px !important;
+    background: rgba(255, 255, 255, 0.62) !important;
+    color: var(--theme-primary) !important;
+    box-shadow: 0 8px 24px rgba(24, 56, 103, 0.06) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+.product-capabilities--dimensional .bento-glass-header h2 {
+    max-width: 760px;
+    margin: 0;
+    font-size: clamp(44px, 5.2vw, 76px);
+    line-height: 0.98;
+    text-wrap: balance;
+}
+
+.product-capabilities--dimensional .bento-glass-header p {
+    max-width: 34ch;
+    margin: 0 0 4px;
+    color: #4f6072;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.7;
+    text-wrap: pretty;
+}
+
+.product-capabilities--dimensional .capabilities-bento.bento-glass {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 1180px;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    isolation: isolate;
+}
+
+.product-capabilities--dimensional .capabilities-bento.bento-glass::before,
+.product-capabilities--dimensional .capabilities-bento.bento-glass::after {
+    display: none;
+}
+
+.product-capabilities--dimensional .capabilities-bento.bento-glass > .cap-bento-card:first-child,
+.product-capabilities--dimensional .capabilities-bento.bento-glass > .cap-bento-card:nth-child(6) {
+    grid-column: span 4;
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-card,
+.product-capabilities--dimensional .bento-glass .cap-bento-card:hover {
+    --card-accent: var(--theme-primary);
+    grid-column: span 4;
+    min-height: 292px;
+    padding: 26px 28px 30px;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.86) !important;
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--card-accent), transparent 84%), transparent 42%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(248, 251, 255, 0.76)) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 22px 54px rgba(20, 49, 86, 0.12),
+        0 3px 10px rgba(20, 49, 86, 0.07) !important;
+    text-align: left;
+    backdrop-filter: blur(18px) saturate(1.1) !important;
+    transform: translateY(0) !important;
+    transition: transform 320ms cubic-bezier(.2,.8,.2,1), box-shadow 320ms ease, border-color 320ms ease;
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-card:nth-child(2),
+.product-capabilities--dimensional .bento-glass .cap-bento-card:nth-child(5) {
+    --card-accent: var(--theme-secondary);
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-card:nth-child(3),
+.product-capabilities--dimensional .bento-glass .cap-bento-card:nth-child(4) {
+    --card-accent: var(--theme-dark);
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-card:hover {
+    transform: translateY(-9px) !important;
+    border-color: color-mix(in srgb, var(--card-accent), transparent 55%) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 34px 70px color-mix(in srgb, var(--card-accent), transparent 78%),
+        0 8px 18px rgba(20, 49, 86, 0.09) !important;
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-card::before {
+    content: counter(capability, decimal-leading-zero);
+    position: absolute;
+    top: 24px;
+    left: 26px;
+    width: auto;
+    height: auto;
+    z-index: 4;
+    color: color-mix(in srgb, var(--card-accent), #122238 18%);
+    background: none;
+    font-size: 12px;
+    font-weight: 850;
+    line-height: 1;
+    opacity: 0.82;
+    transform: none;
+    transition: none;
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-card::after {
+    content: '';
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--card-accent);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--card-accent), transparent 88%);
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-icon,
+.product-capabilities--dimensional .bento-glass .cap-bento-card:hover .cap-bento-icon {
+    position: absolute;
+    top: 26px;
+    right: 28px;
+    display: grid;
+    width: 142px;
+    height: 142px;
+    margin: 0;
+    place-items: center;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    pointer-events: none;
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-icon::before {
+    display: none;
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-icon::after {
+    content: '';
+    position: absolute;
+    inset: 24px 18px 12px;
+    z-index: -1;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--card-accent), transparent 76%);
+    filter: blur(18px);
+    transform: scaleX(0.84);
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-icon img,
+.product-capabilities--dimensional .bento-glass .cap-bento-card:hover .cap-bento-icon img {
+    display: block;
+    width: 118px;
+    height: 118px;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    animation: capabilityFloat 5.2s ease-in-out infinite;
+    filter: drop-shadow(0 18px 18px rgba(34, 66, 114, 0.22));
+    transition: transform 320ms cubic-bezier(.2,.8,.2,1), filter 320ms ease;
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-card:hover .cap-bento-icon img {
+    animation-play-state: paused;
+    transform: translateY(-7px) rotate(3deg) scale(1.06);
+    filter: drop-shadow(0 26px 22px rgba(34, 66, 114, 0.26));
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-card h3 {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    margin: 0;
+    color: #122238;
+    font-size: clamp(20px, 1.9vw, 25px);
+    line-height: 1.25;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.product-capabilities--dimensional .bento-glass .cap-bento-card p {
+    position: relative;
+    z-index: 2;
+    max-width: 29ch;
+    margin: 0;
+    color: #617084;
+    font-size: 15px;
+    line-height: 1.65;
+    text-wrap: pretty;
+}
+
+@keyframes capabilityFloat {
+    0%, 100% { transform: translateY(4px) rotate(-2deg); }
+    50% { transform: translateY(-7px) rotate(2deg); }
+}
+
+[data-theme="dark"] .product-capabilities--dimensional {
+    background:
+        radial-gradient(circle at 14% 18%, color-mix(in srgb, var(--theme-primary), transparent 82%), transparent 28%),
+        radial-gradient(circle at 88% 72%, color-mix(in srgb, var(--theme-secondary), transparent 88%), transparent 30%),
+        #0d131a !important;
+}
+
+[data-theme="dark"] .product-capabilities--dimensional .bento-glass .cap-bento-card,
+[data-theme="dark"] .product-capabilities--dimensional .bento-glass .cap-bento-card:hover {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    background:
+        radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--card-accent), transparent 76%), transparent 42%),
+        rgba(21, 29, 38, 0.9) !important;
+}
+
+[data-theme="dark"] .product-capabilities--dimensional .bento-glass .cap-bento-card h3 { color: #f5f7fa; }
+[data-theme="dark"] .product-capabilities--dimensional .bento-glass .cap-bento-card p,
+[data-theme="dark"] .product-capabilities--dimensional .bento-glass-header p { color: #aab5c2; }
+
+@media (max-width: 900px) {
+    .product-capabilities--dimensional .bento-glass-header {
+        grid-template-columns: 1fr;
+        row-gap: 22px;
+    }
+
+    .product-capabilities--dimensional .capabilities-bento.bento-glass {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-capabilities--dimensional .bento-glass .cap-bento-card,
+    .product-capabilities--dimensional .bento-glass .cap-bento-card:hover {
+        grid-column: auto;
+    }
+
+    .product-capabilities--dimensional .capabilities-bento.bento-glass > .cap-bento-card:first-child,
+    .product-capabilities--dimensional .capabilities-bento.bento-glass > .cap-bento-card:nth-child(6) {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .product-capabilities--dimensional {
+        padding: 82px 0 104px;
+    }
+
+    .product-capabilities--dimensional .bento-glass-header h2 {
+        font-size: clamp(39px, 12.5vw, 54px);
+    }
+
+    .product-capabilities--dimensional .capabilities-bento.bento-glass {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .product-capabilities--dimensional .bento-glass .cap-bento-card,
+    .product-capabilities--dimensional .bento-glass .cap-bento-card:hover {
+        min-height: 254px;
+        padding: 24px;
+    }
+
+    .product-capabilities--dimensional .bento-glass .cap-bento-card h3 {
+        white-space: normal;
+        text-wrap: balance;
+    }
+
+    .product-capabilities--dimensional .bento-glass .cap-bento-icon,
+    .product-capabilities--dimensional .bento-glass .cap-bento-card:hover .cap-bento-icon {
+        top: 22px;
+        right: 20px;
+        width: 116px;
+        height: 116px;
+    }
+
+    .product-capabilities--dimensional .bento-glass .cap-bento-icon img,
+    .product-capabilities--dimensional .bento-glass .cap-bento-card:hover .cap-bento-icon img {
+        width: 96px;
+        height: 96px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .product-capabilities--dimensional .bento-glass .cap-bento-icon img,
+    .product-capabilities--dimensional .bento-glass .cap-bento-card:hover .cap-bento-icon img {
+        animation: none;
+    }
+}
+
 /* 모션 최소화 */
 @media (prefers-reduced-motion: reduce) {
     .bento-glass .cap-bento-icon img { animation: none; }
     .bento-glass > .cap-bento-card,
     .bento-glass > .cap-bento-card::before { transition: none; }
+}
+
+/* =============================================
+   2026 Product Page Visual System
+   Fact-first technical layout shared by all Clip product pages.
+   ============================================= */
+body.theme-pdm,
+body:not([class*="theme-"]) {
+    --theme-primary: #2457d6;
+    --theme-secondary: #6d8df2;
+    --theme-dark: #173c9b;
+    --theme-accent: #2457d6;
+}
+
+body.theme-cadwin {
+    --theme-primary: #087d89;
+    --theme-secondary: #39a9ae;
+    --theme-dark: #075c67;
+    --theme-accent: #087d89;
+}
+
+body.theme-pms {
+    --theme-primary: #c9485a;
+    --theme-secondary: #e1747f;
+    --theme-dark: #922f40;
+    --theme-accent: #c9485a;
+}
+
+body.theme-cms {
+    --theme-primary: #a23e66;
+    --theme-secondary: #c46c8e;
+    --theme-dark: #732743;
+    --theme-accent: #a23e66;
+}
+
+body.theme-multibom {
+    --theme-primary: #16815d;
+    --theme-secondary: #47a886;
+    --theme-dark: #0f5d43;
+    --theme-accent: #16815d;
+}
+
+.product-hero,
+.product-capabilities:has(.bento-glass) {
+    background: #f3f5f7;
+}
+
+.product-hero::before,
+.bento-glass::before,
+.bento-glass::after,
+.bento-glass > .cap-bento-card::before {
+    display: none !important;
+}
+
+.product-hero-text h1,
+.section-header h2,
+.feature-text h3,
+.product-cta h2 {
+    letter-spacing: 0;
+    word-break: keep-all;
+}
+
+.product-hero-visual img,
+.product-hero-visual video {
+    border-radius: 12px;
+    border-color: rgba(16, 24, 32, 0.14);
+    box-shadow: 0 20px 54px rgba(16, 24, 32, 0.13);
+}
+
+.product-trust {
+    padding: 0;
+    border: 0;
+    background: #111820;
+}
+
+.product-trust .container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+}
+
+.product-trust .trust-stat {
+    min-width: 0;
+    padding: 30px 24px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: left;
+}
+
+.product-trust .trust-stat:last-child {
+    border-right: 0;
+}
+
+.trust-stat .trust-number {
+    color: #ffffff;
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 750;
+    letter-spacing: 0;
+}
+
+.trust-stat .trust-label {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.bento-glass-header {
+    max-width: 900px;
+    margin-inline: auto;
+}
+
+.bento-glass-header .section-tag.glass-pill {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    color: var(--theme-primary);
+    letter-spacing: 0;
+}
+
+.bento-glass-header .bento-grad,
+.bento-grad {
+    background: none !important;
+    color: var(--theme-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+.capabilities-bento.bento-glass {
+    counter-reset: capability;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    max-width: 1080px;
+    margin-inline: auto;
+    border: 1px solid rgba(16, 24, 32, 0.14);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(16, 24, 32, 0.14);
+}
+
+.bento-glass > .cap-bento-card,
+.bento-glass > .cap-bento-card:hover {
+    counter-increment: capability;
+    min-height: 228px;
+    padding: 28px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 16px;
+    border: 0 !important;
+    border-radius: 0;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    text-align: left;
+    transform: none !important;
+    backdrop-filter: none !important;
+}
+
+.bento-glass .cap-bento-icon,
+.bento-glass > .cap-bento-card:hover .cap-bento-icon {
+    display: grid;
+    width: 48px;
+    height: 40px;
+    margin: 0;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--theme-primary), transparent 68%);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--theme-primary), transparent 94%);
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.bento-glass .cap-bento-icon::before {
+    content: counter(capability, decimal-leading-zero);
+    color: var(--theme-primary);
+    font-size: 12px;
+    font-weight: 850;
+    font-variant-numeric: tabular-nums;
+}
+
+.bento-glass .cap-bento-icon img,
+.bento-glass > .cap-bento-card:hover .cap-bento-icon img {
+    display: none;
+    animation: none;
+}
+
+.bento-glass > .cap-bento-card h3 {
+    margin-top: 10px;
+    color: #101820;
+    font-size: 20px;
+    letter-spacing: 0;
+}
+
+.bento-glass > .cap-bento-card p {
+    max-width: 28ch;
+    color: #5d6875;
+    text-wrap: pretty;
+}
+
+.specs-grid,
+.outcomes-grid {
+    counter-reset: technical-card;
+}
+
+.spec-card,
+.outcome-card {
+    counter-increment: technical-card;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+.spec-card-icon,
+.outcome-icon {
+    display: grid;
+    width: 42px;
+    height: 36px;
+    flex: 0 0 42px;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--theme-primary), transparent 68%);
+    border-radius: 6px;
+    background: transparent;
+    box-shadow: none;
+}
+
+.spec-card-icon::before,
+.outcome-icon::before {
+    content: counter(technical-card, decimal-leading-zero);
+    color: var(--theme-primary);
+    font-size: 11px;
+    font-weight: 850;
+}
+
+.spec-card-icon img,
+.outcome-icon img {
+    display: none;
+}
+
+[data-theme="dark"] .product-hero,
+[data-theme="dark"] .product-capabilities:has(.bento-glass) {
+    background: #0d131a;
+}
+
+[data-theme="dark"] .capabilities-bento.bento-glass {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+[data-theme="dark"] .bento-glass > .cap-bento-card,
+[data-theme="dark"] .bento-glass > .cap-bento-card:hover {
+    border: 0 !important;
+    background: #151d26 !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+[data-theme="dark"] .bento-glass > .cap-bento-card h3 {
+    color: #f5f7fa;
+}
+
+[data-theme="dark"] .bento-glass > .cap-bento-card p {
+    color: #aab4bf;
+}
+
+[data-theme="dark"] .bento-glass .cap-bento-icon,
+[data-theme="dark"] .bento-glass > .cap-bento-card:hover .cap-bento-icon {
+    border-color: color-mix(in srgb, var(--theme-primary), transparent 54%);
+    background: color-mix(in srgb, var(--theme-primary), transparent 88%);
+    box-shadow: none;
+}
+
+@media (max-width: 900px) {
+    .product-trust .container,
+    .capabilities-bento.bento-glass {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-trust .trust-stat:nth-child(2) {
+        border-right: 0;
+    }
+
+    .product-trust .trust-stat:nth-child(-n + 2) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+}
+
+@media (max-width: 640px) {
+    .product-trust .container,
+    .capabilities-bento.bento-glass {
+        grid-template-columns: 1fr;
+    }
+
+    .product-trust .trust-stat {
+        padding: 22px 20px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .product-trust .trust-stat:last-child {
+        border-bottom: 0;
+    }
+
+    .bento-glass > .cap-bento-card,
+    .bento-glass > .cap-bento-card:hover {
+        min-height: 0;
+        padding: 24px;
+    }
 }
