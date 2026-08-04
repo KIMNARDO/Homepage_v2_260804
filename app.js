@@ -453,6 +453,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let tourTimer = null;
     let tourInView = false;
     let tourPaused = false;
+    let tourRailProgrammatic = false;
+    let tourRailScrollTimer = null;
 
     const tourData = {
       dashboard: {
@@ -515,10 +517,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const rail = productTour.querySelector('.am-tour-rail');
         const activeTab = tourTabs[tourIndex];
         window.requestAnimationFrame(() => {
+          tourRailProgrammatic = true;
           rail?.scrollTo({
             left: activeTab.offsetLeft - ((rail.clientWidth - activeTab.offsetWidth) / 2),
             behavior: reduceTourMotion ? 'auto' : 'smooth',
           });
+          window.clearTimeout(tourRailScrollTimer);
+          tourRailScrollTimer = window.setTimeout(() => {
+            tourRailProgrammatic = false;
+          }, reduceTourMotion ? 40 : 420);
         });
       }
       tourPanels.forEach(panel => {
@@ -557,6 +564,23 @@ document.addEventListener('DOMContentLoaded', () => {
         setTourStep(nextIndex);
       });
     });
+
+    const tourRail = productTour.querySelector('.am-tour-rail');
+    tourRail?.addEventListener('scroll', () => {
+      if (window.innerWidth > 720 || tourRailProgrammatic) return;
+      window.clearTimeout(tourRailScrollTimer);
+      tourRailScrollTimer = window.setTimeout(() => {
+        const railCenter = tourRail.scrollLeft + (tourRail.clientWidth / 2);
+        const closestIndex = tourTabs.reduce((bestIndex, tab, index) => {
+          const tabCenter = tab.offsetLeft + (tab.offsetWidth / 2);
+          const bestTab = tourTabs[bestIndex];
+          const bestCenter = bestTab.offsetLeft + (bestTab.offsetWidth / 2);
+          return Math.abs(tabCenter - railCenter) < Math.abs(bestCenter - railCenter) ? index : bestIndex;
+        }, 0);
+
+        if (closestIndex !== tourIndex) setTourStep(closestIndex);
+      }, 120);
+    }, { passive: true });
 
     tourJumpLinks.forEach(link => {
       link.addEventListener('click', event => {
@@ -703,7 +727,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const textRevealTargets = document.querySelectorAll(
     '.plm-home-v2 .am-hero:not(.am-hero-editorial) h1, ' +
     '.plm-home-v2 .am-section-head h2, ' +
-    '.plm-home-v2 .am-section-head p, ' +
     '.plm-home-v2 .am-technology-head h2, ' +
     '.plm-home-v2 .am-tour-heading h2, ' +
     '.plm-home-v2 .am-proof-card h2, ' +
