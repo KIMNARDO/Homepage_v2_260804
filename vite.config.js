@@ -1,7 +1,61 @@
 const { defineConfig } = require('vite');
 const { resolve } = require('path');
+const { copyFileSync, mkdirSync, readdirSync, statSync } = require('fs');
+
+const runtimeAssets = [
+  ['images/hero-ev-parts', 'images/hero-ev-parts'],
+  ['images/hero-aerospace-parts', 'images/hero-aerospace-parts'],
+  ['images/icons3d', 'images/icons3d'],
+  ['images/product-tour', 'images/product-tour'],
+  ['images/hero-equipment-digital-twin.png', 'images/hero-equipment-digital-twin.png'],
+  ['images/clip-2d-viewer.png', 'images/clip-2d-viewer.png'],
+  ['images/clip-3d-viewer.png', 'images/clip-3d-viewer.png'],
+  ['images/cadwin_drawing_inspection.png', 'images/cadwin_drawing_inspection.png'],
+  ['images/plm_project_dashboard.png', 'images/plm_project_dashboard.png'],
+  ['images/pms_project_overview.png', 'images/pms_project_overview.png'],
+  ['images/multibom_dashboard_real.webp', 'images/multibom_dashboard_real.webp'],
+  ['images/cms_cost_dashboard.png', 'images/cms_cost_dashboard.png'],
+];
+
+function copyRuntimeAssets() {
+  const copyAsset = (source, destination) => {
+    const entries = readdirSync(source, { withFileTypes: true });
+
+    mkdirSync(destination, { recursive: true });
+
+    for (const entry of entries) {
+      const sourcePath = resolve(source, entry.name);
+      const destinationPath = resolve(destination, entry.name);
+
+      if (entry.isDirectory()) {
+        copyAsset(sourcePath, destinationPath);
+      } else {
+        copyFileSync(sourcePath, destinationPath);
+      }
+    }
+  };
+
+  return {
+    name: 'copy-runtime-assets',
+    closeBundle() {
+      for (const [source, target] of runtimeAssets) {
+        const sourcePath = resolve(__dirname, source);
+        const destination = resolve(__dirname, 'dist', target);
+
+        if (statSync(sourcePath).isFile()) {
+          mkdirSync(resolve(destination, '..'), { recursive: true });
+          copyFileSync(sourcePath, destination);
+        } else {
+          copyAsset(sourcePath, destination);
+        }
+      }
+    },
+  };
+}
 
 module.exports = defineConfig({
+  base: './',
+  plugins: [copyRuntimeAssets()],
   build: {
     rollupOptions: {
       input: {
