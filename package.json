@@ -2,10 +2,15 @@
   "name": "homepage",
   "version": "1.0.0",
   "description": "Papsnet Homepage",
+  "private": true,
   "scripts": {
     "dev": "node node_modules/vite/bin/vite.js",
     "build": "node node_modules/vite/bin/vite.js build",
-    "preview": "node node_modules/vite/bin/vite.js preview"
+    "preview": "node node_modules/vite/bin/vite.js preview",
+    "start": "node server.cjs"
+  },
+  "engines": {
+    "node": "20.x || 22.x || 24.x"
   },
   "keywords": [],
   "author": "",
