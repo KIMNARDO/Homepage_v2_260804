@@ -15,6 +15,14 @@ const runtimeAssets = [
   ['images/pms_project_overview.png', 'images/pms_project_overview.png'],
   ['images/multibom_dashboard_real.webp', 'images/multibom_dashboard_real.webp'],
   ['images/cms_cost_dashboard.png', 'images/cms_cost_dashboard.png'],
+  ['images/multibom_comparison_real.webp', 'images/multibom_comparison_real.webp'],
+  ['videos/hero-cadwin.mp4', 'videos/hero-cadwin.mp4'],
+  ['videos/clip-pdm-hero.mp4', 'videos/clip-pdm-hero.mp4'],
+  ['videos/v3-overview.mp4', 'videos/v3-overview.mp4'],
+  ['videos/clip-ai-chatbot-demo.webm', 'videos/clip-ai-chatbot-demo.webm'],
+  ['videos/poster-cadwin-clean.png', 'videos/poster-cadwin-clean.png'],
+  ['videos/v3-overview-preview.jpg', 'videos/v3-overview-preview.jpg'],
+  ['clip_pdm_dashboard.png', 'clip_pdm_dashboard.png'],
 ];
 
 function copyRuntimeAssets() {
@@ -66,6 +74,7 @@ module.exports = defineConfig({
         multibom: resolve(__dirname, 'product-multibom.html'),
         clipcms: resolve(__dirname, 'product-clipcms.html'),
         brochure: resolve(__dirname, 'brochure.html'),
+        companyIntro: resolve(__dirname, 'company-intro.html'),
       },
     },
   },

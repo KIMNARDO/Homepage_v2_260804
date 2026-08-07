@@ -37,6 +37,13 @@ images/papsnet-corporate-logo.jpeg
 .tmp/
 _screenshots/
 
+# generated presentation and PDF QA artifacts (kept locally, not deployed)
+deck_build/
+output/
+tmp/
+*.inspect.ndjson
+Papsnet_AI_Clip_PLM_Company_Introduction.pptx
+
 # ============================================================
 # AI 에이전트 개인 파일·로컬 도구 설정 — 커밋 금지
 # ============================================================

@@ -1,3 +1,5 @@
+import './lead-download.js';
+
 /* =============================================
    Papsnet Homepage — AntiGravity + Magic UI
    Vanilla JS — All Interactive Effects
@@ -858,11 +860,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroMedia = heroSection?.querySelector('.am-hero-media');
   const floatingDemoCta = document.querySelector('.plm-home-v2 .floating-demo-cta');
   const heroIndustrySlides = Array.from(document.querySelectorAll('[data-hero-industry-slide]'));
-  const heroIndustryButtons = Array.from(document.querySelectorAll('[data-hero-industry]'));
+  const heroStepButtons = Array.from(document.querySelectorAll('[data-hero-step]'));
+  const heroStepStatus = document.querySelector('[data-hero-step-status]');
   let heroIndustryIndex = 0;
-  let heroIndustryTimer = 0;
   let heroPointerFrame = 0;
-  let heroScrollLocksIndustry = false;
   let heroEvParts = [];
   let heroEvPartTotal = 0;
   let heroEvManifest = null;
@@ -871,6 +872,21 @@ document.addEventListener('DOMContentLoaded', () => {
   let heroAeroManifest = null;
   let heroFacilityParts = [];
   const heroFacilityPartTotal = 7;
+  let heroSequenceStep = 0;
+  let heroSequenceFrame = 0;
+  let heroSequenceAnimating = false;
+  let heroWheelAccumulator = 0;
+  let heroWheelResetTimer = 0;
+  let heroExitLock = false;
+  let heroTouchStartY = null;
+  let heroTouchHandled = false;
+  const heroSequenceValues = { ev: 1, aero: 0, facility: 0 };
+  const heroSequenceStates = [
+    { industry: 0, ev: 1, aero: 0, facility: 0, explode: 1 },
+    { industry: 0, ev: 0, aero: 0, facility: 0, explode: 0 },
+    { industry: 2, ev: 0, aero: 1, facility: 0, explode: 1 },
+    { industry: 3, ev: 0, aero: 1, facility: 1, explode: 1 },
+  ];
 
   function smoothStep(value) {
     const clamped = Math.max(0, Math.min(1, value));
@@ -1150,7 +1166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sequenceProgress = Math.max(0, Math.min(1, progress));
     const released = updateBomPartNodes(heroEvParts, heroEvPartTotal, sequenceProgress);
     const counter = document.querySelector('[data-ev-part-counter]');
-    if (counter) counter.textContent = String(released).padStart(3, '0');
+    if (counter) counter.textContent = String(Math.max(0, heroEvPartTotal - released)).padStart(3, '0');
     heroSection?.style.setProperty('--ev-sequence-progress', sequenceProgress.toFixed(4));
     heroSection?.style.setProperty('--ev-rotate-x', '0deg');
     heroSection?.style.setProperty('--ev-rotate-y', `${(sequenceProgress * 360).toFixed(3)}deg`);
@@ -1190,95 +1206,180 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSection?.style.setProperty('--facility-rotation-scale', '1');
   }
 
-  function setHeroIndustry(nextIndex, restartTimer = true) {
+  function setHeroIndustry(nextIndustry) {
     if (!heroIndustrySlides.length) return;
-    const normalizedIndex = (nextIndex + heroIndustrySlides.length) % heroIndustrySlides.length;
 
-    heroIndustrySlides.forEach((slide, index) => {
+    heroIndustrySlides.forEach(slide => {
+      const slideIndustry = Number(slide.dataset.heroIndustrySlide || 0);
+      const isActive = slideIndustry === nextIndustry;
       const wasActive = slide.classList.contains('is-active');
-      slide.classList.toggle('is-active', index === normalizedIndex);
-      slide.classList.toggle('is-leaving', wasActive && index !== normalizedIndex);
-      slide.setAttribute('aria-hidden', index === normalizedIndex ? 'false' : 'true');
+      slide.classList.toggle('is-active', isActive);
+      slide.classList.toggle('is-leaving', wasActive && !isActive);
+      slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
     });
 
-    heroIndustryButtons.forEach((button, index) => {
-      const isActive = index === normalizedIndex;
+    const selectedStep = Math.max(1, heroSequenceStep);
+    heroStepButtons.forEach(button => {
+      const isActive = Number(button.dataset.heroStep || 1) === selectedStep;
       button.classList.toggle('is-active', isActive);
       button.setAttribute('aria-selected', isActive ? 'true' : 'false');
       button.tabIndex = isActive ? 0 : -1;
     });
 
-    heroIndustryIndex = normalizedIndex;
+    heroIndustryIndex = nextIndustry;
 
     window.setTimeout(() => {
-      heroIndustrySlides.forEach((slide, index) => {
-        if (index !== heroIndustryIndex) slide.classList.remove('is-leaving');
+      heroIndustrySlides.forEach(slide => {
+        if (Number(slide.dataset.heroIndustrySlide || 0) !== heroIndustryIndex) {
+          slide.classList.remove('is-leaving');
+        }
       });
     }, 940);
-
-    if (restartTimer) startHeroIndustryRotation();
   }
 
-  function startHeroIndustryRotation() {
-    window.clearInterval(heroIndustryTimer);
-    if (motionQuery.matches || heroIndustrySlides.length < 2) return;
-    heroIndustryTimer = window.setInterval(() => {
-      setHeroIndustry(heroIndustryIndex + 1, false);
-    }, 5200);
+  function renderHeroSequence() {
+    if (!heroSection) return;
+    const state = heroSequenceStates[heroSequenceStep];
+    const activeProgress = state.industry === 0
+      ? heroSequenceValues.ev
+      : state.industry === 2
+        ? heroSequenceValues.aero
+        : heroSequenceValues.facility;
+
+    heroSection.dataset.heroStep = String(heroSequenceStep);
+    heroSection.style.setProperty('--hero-scroll', (heroSequenceStep / 3).toFixed(4));
+    heroSection.style.setProperty('--hero-explode', activeProgress.toFixed(4));
+    heroSection.style.setProperty('--hero-assemble', (1 - activeProgress).toFixed(4));
+    updateEvPartSequence(heroSequenceValues.ev);
+    updateAeroPartSequence(heroSequenceValues.aero);
+    updateFacilityPartSequence(heroSequenceValues.facility);
+
+    if (heroStepStatus) {
+      heroStepStatus.textContent = heroSequenceStep === 0
+        ? 'SCROLL · ASSEMBLE'
+        : `SCROLL · ${String(heroSequenceStep).padStart(2, '0')} / 03`;
+    }
   }
 
-  heroIndustryButtons.forEach(button => {
+  function setHeroSequenceStep(nextStep, immediate = false) {
+    const targetStep = Math.max(0, Math.min(heroSequenceStates.length - 1, nextStep));
+    if (targetStep === heroSequenceStep && !immediate) return;
+
+    const targetState = heroSequenceStates[targetStep];
+    const startValues = { ...heroSequenceValues };
+    const startTime = performance.now();
+    const duration = immediate || motionQuery.matches ? 0 : 980;
+
+    window.cancelAnimationFrame(heroSequenceFrame);
+    heroSequenceStep = targetStep;
+    setHeroIndustry(targetState.industry);
+    heroSequenceAnimating = duration > 0;
+    heroSection?.classList.toggle('is-sequence-moving', heroSequenceAnimating);
+
+    const animate = now => {
+      const linear = duration ? Math.min(1, (now - startTime) / duration) : 1;
+      const eased = 1 - Math.pow(1 - linear, 4);
+      heroSequenceValues.ev = startValues.ev + ((targetState.ev - startValues.ev) * eased);
+      heroSequenceValues.aero = startValues.aero + ((targetState.aero - startValues.aero) * eased);
+      heroSequenceValues.facility = startValues.facility + ((targetState.facility - startValues.facility) * eased);
+      renderHeroSequence();
+
+      if (linear < 1) {
+        heroSequenceFrame = window.requestAnimationFrame(animate);
+      } else {
+        heroSequenceAnimating = false;
+        heroSection?.classList.remove('is-sequence-moving');
+      }
+    };
+
+    heroSequenceFrame = window.requestAnimationFrame(animate);
+  }
+
+  heroStepButtons.forEach(button => {
     button.addEventListener('click', () => {
-      setHeroIndustry(Number(button.dataset.heroIndustry || 0));
+      setHeroSequenceStep(Number(button.dataset.heroStep || 1));
     });
   });
 
-  const heroIndustryIndexControl = document.querySelector('.am-editorial-index');
-  heroIndustryIndexControl?.addEventListener('pointerenter', () => window.clearInterval(heroIndustryTimer));
-  heroIndustryIndexControl?.addEventListener('pointerleave', startHeroIndustryRotation);
-  heroIndustryIndexControl?.addEventListener('focusin', () => window.clearInterval(heroIndustryTimer));
-  heroIndustryIndexControl?.addEventListener('focusout', startHeroIndustryRotation);
+  function heroIsInControlRange() {
+    if (!heroSection) return false;
+    const rect = heroSection.getBoundingClientRect();
+    return rect.top < window.innerHeight * 0.28 && rect.bottom > window.innerHeight * 0.68;
+  }
+
+  function exitHeroSequence() {
+    const nextSection = document.querySelector('#platform');
+    if (!nextSection || heroExitLock) return;
+    heroExitLock = true;
+    nextSection.scrollIntoView({ behavior: motionQuery.matches ? 'auto' : 'smooth', block: 'start' });
+    window.setTimeout(() => { heroExitLock = false; }, 900);
+  }
+
+  function handleHeroDirection(direction) {
+    if (heroSequenceAnimating || heroExitLock) return;
+    if (direction > 0) {
+      if (heroSequenceStep < heroSequenceStates.length - 1) {
+        setHeroSequenceStep(heroSequenceStep + 1);
+      } else {
+        exitHeroSequence();
+      }
+    } else if (heroSequenceStep > 0) {
+      setHeroSequenceStep(heroSequenceStep - 1);
+    }
+  }
+
+  function handleHeroWheel(event) {
+    if (!heroIsInControlRange() || Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
+    const direction = Math.sign(event.deltaY);
+    if (!direction || (direction < 0 && heroSequenceStep === 0)) return;
+
+    event.preventDefault();
+    if (heroSequenceAnimating || heroExitLock) return;
+
+    heroWheelAccumulator += event.deltaY;
+    window.clearTimeout(heroWheelResetTimer);
+    heroWheelResetTimer = window.setTimeout(() => { heroWheelAccumulator = 0; }, 140);
+    if (Math.abs(heroWheelAccumulator) < 18) return;
+
+    const accumulatedDirection = Math.sign(heroWheelAccumulator);
+    heroWheelAccumulator = 0;
+    handleHeroDirection(accumulatedDirection);
+  }
+
+  function handleHeroKeydown(event) {
+    if (!heroIsInControlRange()) return;
+    const downKeys = ['ArrowDown', 'PageDown', ' '];
+    const upKeys = ['ArrowUp', 'PageUp'];
+    if (!downKeys.includes(event.key) && !upKeys.includes(event.key)) return;
+    if (upKeys.includes(event.key) && heroSequenceStep === 0) return;
+    event.preventDefault();
+    handleHeroDirection(downKeys.includes(event.key) ? 1 : -1);
+  }
+
+  heroSection?.addEventListener('touchstart', event => {
+    heroTouchStartY = event.touches[0]?.clientY ?? null;
+    heroTouchHandled = false;
+  }, { passive: true });
+
+  heroSection?.addEventListener('touchmove', event => {
+    if (heroTouchHandled || heroTouchStartY === null || !heroIsInControlRange()) return;
+    const currentY = event.touches[0]?.clientY ?? heroTouchStartY;
+    const delta = heroTouchStartY - currentY;
+    if (Math.abs(delta) < 46) return;
+    if (delta < 0 && heroSequenceStep === 0) return;
+    event.preventDefault();
+    heroTouchHandled = true;
+    handleHeroDirection(Math.sign(delta));
+  }, { passive: false });
+
+  window.addEventListener('wheel', handleHeroWheel, { passive: false });
+  window.addEventListener('keydown', handleHeroKeydown);
   setHeroIndustry(0);
+  setHeroSequenceStep(0, true);
 
   function updateHeroScrollMotion() {
-    if (!heroSection || motionQuery.matches) return;
-    const rect = heroSection.getBoundingClientRect();
-    const travel = Math.max(heroSection.offsetHeight - window.innerHeight, 1);
-    const progress = Math.max(0, Math.min(1, -rect.top / travel));
-    const value = progress.toFixed(4);
-    const evProgress = Math.max(0, Math.min(1, (progress - 0.01) / 0.30));
-    const aeroProgress = Math.max(0, Math.min(1, (progress - 0.35) / 0.30));
-    const facilityProgress = Math.max(0, Math.min(1, (progress - 0.69) / 0.29));
-    const activeSequenceIndex = progress < 0.33 ? 0 : progress < 0.67 ? 2 : 3;
-    const explodeValue = activeSequenceIndex === 0
-      ? evProgress
-      : activeSequenceIndex === 2
-        ? aeroProgress
-        : facilityProgress;
-    const explode = explodeValue.toFixed(4);
-    const assemble = (1 - explodeValue).toFixed(4);
-
-    // Scroll owns the scene while vehicle, aircraft and building systems unfold.
-    const shouldLockIndustry = progress > 0.01 && progress < 0.999;
-    if (shouldLockIndustry && !heroScrollLocksIndustry) {
-      heroScrollLocksIndustry = true;
-      window.clearInterval(heroIndustryTimer);
-      if (heroIndustryIndex !== activeSequenceIndex) setHeroIndustry(activeSequenceIndex, false);
-    } else if (shouldLockIndustry && heroIndustryIndex !== activeSequenceIndex) {
-      setHeroIndustry(activeSequenceIndex, false);
-    } else if (!shouldLockIndustry && heroScrollLocksIndustry) {
-      heroScrollLocksIndustry = false;
-      startHeroIndustryRotation();
-    }
-
-    heroSection.style.setProperty('--hero-scroll', value);
-    heroSection.style.setProperty('--hero-explode', explode);
-    heroSection.style.setProperty('--hero-assemble', assemble);
-    heroCopy?.style.setProperty('--hero-scroll', value);
-    heroMedia?.style.setProperty('--hero-scroll', value);
-    updateEvPartSequence(evProgress);
-    updateAeroPartSequence(aeroProgress);
-    updateFacilityPartSequence(facilityProgress);
+    if (!heroSection || heroSequenceAnimating) return;
+    renderHeroSequence();
   }
 
   function updateFloatingDemoVisibility() {
