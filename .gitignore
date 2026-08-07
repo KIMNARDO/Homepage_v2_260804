@@ -92,6 +92,8 @@ AI_CADWin_설계_혁신.pdf
 # videos — QA 프레임(jpg)·미사용 원본 제외, 사이트에서 쓰는 파일만 포함
 videos/*
 !videos/hero-cadwin.mp4
+!videos/clip-pdm-hero.mp4
+!videos/clip-ai-chatbot-demo.webm
 !videos/v3-overview.mp4
 !videos/v3-phasegate.mp4
 !videos/v3-wbs.mp4
