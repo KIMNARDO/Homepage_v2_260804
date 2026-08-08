@@ -1676,8 +1676,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // =============================
   // DEMO CONSULT MODAL (데모 상담)
-  // 폼 릴레이(FormSubmit AJAX)로 사이트에서 직접 접수 — 방문자 메일 앱 불필요.
-  // 전송 실패 시에만 mailto 초안 폴백.
+  // 서버 검증 API를 통과한 상담만 영업 알림으로 전달하고 접수번호를 발급한다.
+  // 전송 실패 시 입력값을 유지해 사용자가 다시 시도할 수 있도록 한다.
   // =============================
   const demoModal = document.getElementById('demoModal');
   if (demoModal) {
@@ -1702,7 +1702,8 @@ document.addEventListener('DOMContentLoaded', () => {
       step: 1,
       sourceProduct: '통합 PLM 전체',
       messageEdited: false,
-      submitting: false
+      submitting: false,
+      startedAt: Date.now()
     };
 
     const productDefaultMap = {
@@ -1773,6 +1774,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showDemo(trigger) {
       lastFocus = document.activeElement;
+      demoForm?.reset();
+      leadFormState.messageEdited = false;
+      leadFormState.startedAt = Date.now();
+      const status = demoForm?.querySelector('[data-demo-status]');
+      if (status) {
+        status.textContent = '';
+        status.removeAttribute('data-state');
+      }
       demoModal.hidden = false;
       setLeadStep(1);
       applySmartDefaults(
@@ -1886,8 +1895,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 접수 완료 팝업 (폼 모달과 분리)
     const doneModal = document.getElementById('demoDoneModal');
 
-    function openDone() {
+    function openDone(receiptId) {
       if (!doneModal) return;
+      const receipt = doneModal.querySelector('[data-demo-receipt]');
+      if (receipt) receipt.textContent = receiptId || '메일 접수 완료';
       doneModal.hidden = false;
       requestAnimationFrame(() => doneModal.classList.add('is-open'));
       document.body.style.overflow = 'hidden';
@@ -1915,11 +1926,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (demoForm) {
-      const CONTACT_EMAIL = 'kimnardo@papsnet.net';
       const messageField = demoForm.elements.message;
+      const statusField = demoForm.querySelector('[data-demo-status]');
+
+      function setDemoStatus(message, state = 'error') {
+        if (!statusField) return;
+        statusField.textContent = message;
+        statusField.dataset.state = state;
+      }
+
+      function validateDemoFields() {
+        const company = demoForm.elements.company;
+        const name = demoForm.elements.name;
+        const phone = demoForm.elements.phone;
+        const email = demoForm.elements.email;
+        const message = demoForm.elements.message;
+
+        [company, name, phone, email, message].forEach(field => field.setCustomValidity(''));
+
+        if (!/[A-Za-z가-힣]/.test(company.value) || company.value.trim().length < 2) {
+          company.setCustomValidity('실제 회사명을 2자 이상 입력해 주세요.');
+        }
+        if (!/^[A-Za-z가-힣 .'-]{2,40}$/.test(name.value.trim())) {
+          name.setCustomValidity('담당자명을 한글 또는 영문으로 입력해 주세요.');
+        }
+        const phoneDigits = phone.value.replace(/\D/g, '');
+        if (phoneDigits.length < 9 || phoneDigits.length > 15) {
+          phone.setCustomValidity('연락 가능한 전화번호를 입력해 주세요.');
+        }
+        if (!email.validity.valid || !email.value.trim()) {
+          email.setCustomValidity('회신 가능한 이메일 주소를 입력해 주세요.');
+        }
+        if (message.value.trim().length < 10) {
+          message.setCustomValidity('상담이 필요한 내용을 10자 이상 입력해 주세요.');
+        }
+
+        return demoForm.checkValidity();
+      }
 
       demoForm.addEventListener('input', (event) => {
+        event.target?.setCustomValidity?.('');
         if (event.target === messageField) leadFormState.messageEdited = true;
+        if (statusField?.textContent) setDemoStatus('', '');
         syncLeadProgress();
       });
 
@@ -1942,56 +1990,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
       demoForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (!demoForm.checkValidity()) {
+        if (!validateDemoFields()) {
           demoForm.reportValidity();
           return;
         }
         const f = new FormData(demoForm);
-        const subject = `[데모 상담] ${f.get('company') || ''} ${f.get('name') || ''}`.trim();
         const submitBtn = demoForm.querySelector('.demo-submit');
         const btnHtml = submitBtn.innerHTML;
         leadFormState.submitting = true;
         syncLeadProgress(true);
+        setDemoStatus('입력 내용을 안전하게 접수하고 있습니다.', 'sending');
         submitBtn.disabled = true;
         submitBtn.textContent = '전송 중…';
 
         try {
-          // 사이트에서 직접 접수 — 릴레이 서버가 상담 메일함으로 전달
-          const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+          // 서버 검증을 통과한 리드만 상담 메일로 전달하고 접수번호를 발급한다.
+          const res = await fetch('/api/contact-leads', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
-              _subject: subject,
-              _template: 'table',
-              _replyto: f.get('email') || '',
-              '회사명': f.get('company') || '-',
-              '성함': f.get('name') || '-',
-              '연락처': f.get('phone') || '-',
-              '이메일': f.get('email') || '-',
-              '관심 제품': f.get('product') || '-',
-              '연락 가능 시간': f.get('contactTime') || '-',
-              '문의 내용': f.get('message') || '-'
+              company: f.get('company'),
+              name: f.get('name'),
+              phone: f.get('phone'),
+              email: f.get('email'),
+              product: f.get('product'),
+              contactTime: f.get('contactTime'),
+              message: f.get('message'),
+              consent: f.get('consent') === 'on',
+              website: f.get('website'),
+              startedAt: leadFormState.startedAt,
+              sourcePage: window.location.href
             })
           });
-          if (!res.ok) throw new Error('relay failed: ' + res.status);
+          const result = await res.json().catch(() => ({}));
+          if (!res.ok || !result.ok) {
+            throw new Error(result.message || '상담 요청을 접수하지 못했습니다.');
+          }
           demoForm.reset();
           closeDemo();
-          setTimeout(openDone, 220); // 폼 모달 닫힘 애니메이션 후 완료 팝업
+          setTimeout(() => openDone(result.leadId), 220);
 
         } catch (err) {
-          // 릴레이 실패 시 메일 초안 폴백
-          const body = [
-            `회사명: ${f.get('company') || '-'}`,
-            `성함: ${f.get('name') || '-'}`,
-            `연락처: ${f.get('phone') || '-'}`,
-            `이메일: ${f.get('email') || '-'}`,
-            `관심 제품: ${f.get('product') || '-'}`,
-            `연락 가능 시간: ${f.get('contactTime') || '-'}`,
-            '',
-            '문의 내용:',
-            f.get('message') || '-'
-          ].join('\n');
-          window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          const message = err instanceof TypeError
+            ? '네트워크 연결을 확인한 뒤 다시 시도해 주세요.'
+            : (err.message || '상담 요청을 접수하지 못했습니다.');
+          setDemoStatus(`${message} 입력 내용은 유지됩니다. 또는 070-5001-1144로 연락해 주세요.`);
+          syncLeadProgress();
         } finally {
           leadFormState.submitting = false;
           submitBtn.disabled = false;
