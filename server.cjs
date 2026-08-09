@@ -182,6 +182,11 @@ function createContactLeadId() {
   return `PLM-${date}-${randomBytes(3).toString('hex').toUpperCase()}`;
 }
 
+function createBrochureLeadId() {
+  const date = new Date().toISOString().slice(0, 10).replaceAll('-', '');
+  return `DL-${date}-${randomBytes(3).toString('hex').toUpperCase()}`;
+}
+
 function hasRepeatedJunk(value) {
   const tokens = String(value).toLowerCase().match(/[a-z가-힣0-9]+/g) || [];
   if (/(.)\1{5,}/i.test(value)) return true;
@@ -243,73 +248,107 @@ function isValidDownloadToken(resource, expires, token) {
   return expected.length === provided.length && timingSafeEqual(expected, provided);
 }
 
+async function deliverBrochureViaResend(lead, rows, htmlRows) {
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: process.env.LEAD_FROM_EMAIL,
+      to: [leadNotificationEmail],
+      reply_to: lead.email,
+      subject: `[Clip PLM 자료 다운로드 ${lead.leadId}] ${lead.company} · ${lead.name}`,
+      text: rows.map(([label, value]) => `${label}: ${value}`).join('\n'),
+      html: `<h2 style="font-family:Arial,sans-serif">새 Clip PLM 자료 다운로드</h2><table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">${htmlRows}</table>`,
+    }),
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!response.ok) throw new Error(`Resend brochure notification failed: ${response.status}`);
+  return 'resend';
+}
+
+async function deliverBrochureViaFormSubmit(lead) {
+  const endpoint = process.env.BROCHURE_FORM_ENDPOINT
+    || process.env.CONTACT_FORM_ENDPOINT
+    || `https://formsubmit.co/ajax/${leadNotificationEmail}`;
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      _subject: `[Clip PLM 자료 다운로드 ${lead.leadId}] ${lead.company} · ${lead.name}`,
+      _template: 'table',
+      _replyto: lead.email,
+      '접수번호': lead.leadId,
+      '회사명': lead.company,
+      '담당자명': lead.name,
+      '업무 이메일': lead.email,
+      '연락처': lead.phone || '미입력',
+      '선택 자료': lead.product,
+      '요청 파일': lead.resource,
+      '요청 시각': lead.requestedAt,
+      '유입 페이지': lead.sourcePage,
+      '접속 IP': lead.ip,
+    }),
+    signal: AbortSignal.timeout(8000),
+  });
+  const responseText = await response.text();
+  if (!response.ok) throw new Error(`FormSubmit brochure notification failed: ${response.status}`);
+  try {
+    const payload = JSON.parse(responseText);
+    if (payload.success === false) throw new Error('FormSubmit rejected brochure notification');
+  } catch (error) {
+    if (error.message === 'FormSubmit rejected brochure notification') throw error;
+  }
+  return 'formsubmit';
+}
+
 async function notifyLead(lead) {
-  const attempts = [];
-  const channels = [];
+  if (process.env.LEAD_DELIVERY_MODE === 'log') return ['server-log'];
 
+  const rows = [
+    ['접수번호', lead.leadId],
+    ['선택 자료', lead.product],
+    ['회사명', lead.company],
+    ['담당자명', lead.name],
+    ['업무 이메일', lead.email],
+    ['연락처', lead.phone || '미입력'],
+    ['요청 파일', lead.resource],
+    ['요청 시각', lead.requestedAt],
+    ['유입 페이지', lead.sourcePage],
+    ['접속 IP', lead.ip],
+  ];
+  const htmlRows = rows.map(([label, value]) => `
+    <tr><th style="padding:9px 12px;text-align:left;background:#f1f4f2;border:1px solid #dce2df">${escapeHtml(label)}</th>
+    <td style="padding:9px 12px;border:1px solid #dce2df">${escapeHtml(value)}</td></tr>`).join('');
+
+  let emailChannel;
   if (process.env.RESEND_API_KEY && process.env.LEAD_FROM_EMAIL) {
-    channels.push('email');
-    const rows = [
-      ['제품', lead.product],
-      ['회사', lead.company],
-      ['담당자', lead.name],
-      ['이메일', lead.email],
-      ['연락처', lead.phone || '미입력'],
-      ['요청 시각', lead.requestedAt],
-      ['유입 페이지', lead.sourcePage],
-      ['접속 IP', lead.ip],
-    ];
-    const htmlRows = rows.map(([label, value]) => `
-      <tr><th style="padding:9px 12px;text-align:left;background:#f1f4f2;border:1px solid #dce2df">${escapeHtml(label)}</th>
-      <td style="padding:9px 12px;border:1px solid #dce2df">${escapeHtml(value)}</td></tr>`).join('');
-
-    attempts.push(fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: process.env.LEAD_FROM_EMAIL,
-        to: [leadNotificationEmail],
-        reply_to: lead.email,
-        subject: `[팹스넷 자료 다운로드] ${lead.company} · ${lead.name} · ${lead.product}`,
-        text: rows.map(([label, value]) => `${label}: ${value}`).join('\n'),
-        html: `<h2 style="font-family:Arial,sans-serif">새 제품 자료 다운로드</h2><table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">${htmlRows}</table>`,
-      }),
-      signal: AbortSignal.timeout(8000),
-    }).then(response => {
-      if (!response.ok) throw new Error(`Resend notification failed: ${response.status}`);
-      return 'email';
-    }));
-  }
-
-  if (process.env.LEAD_WEBHOOK_URL) {
-    channels.push('webhook');
-    attempts.push(fetch(process.env.LEAD_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ event: 'brochure.downloaded', ...lead }),
-      signal: AbortSignal.timeout(8000),
-    }).then(response => {
-      if (!response.ok) throw new Error(`Lead webhook failed: ${response.status}`);
-      return 'webhook';
-    }));
-  }
-
-  if (!attempts.length) {
-    console.log('[brochure-lead]', JSON.stringify(lead));
-    if (process.env.LEAD_CAPTURE_REQUIRED === 'true') {
-      throw new Error('Lead notification is not configured');
+    try {
+      emailChannel = await deliverBrochureViaResend(lead, rows, htmlRows);
+    } catch (error) {
+      console.error('[brochure-lead-resend-error]', lead.leadId, error);
     }
-    return { configured: false, delivered: ['server-log'] };
   }
+  if (!emailChannel) emailChannel = await deliverBrochureViaFormSubmit(lead);
 
-  const results = await Promise.allSettled(attempts);
-  const delivered = results.filter(result => result.status === 'fulfilled').map(result => result.value);
-  results.filter(result => result.status === 'rejected').forEach(result => console.error(result.reason));
-  if (!delivered.length) throw new Error(`Lead notification failed for: ${channels.join(', ')}`);
-  return { configured: true, delivered };
+  const delivered = [emailChannel];
+  if (process.env.LEAD_WEBHOOK_URL) {
+    try {
+      const response = await fetch(process.env.LEAD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event: 'brochure.downloaded', ...lead }),
+        signal: AbortSignal.timeout(8000),
+      });
+      if (!response.ok) throw new Error(`Lead webhook failed: ${response.status}`);
+      delivered.push('webhook');
+    } catch (error) {
+      console.error('[brochure-lead-webhook-error]', lead.leadId, error);
+    }
+  }
+  return delivered;
 }
 
 async function deliverContactViaResend(lead, rows, htmlRows) {
@@ -496,6 +535,7 @@ async function handleLeadRequest(req, res) {
   }
 
   const lead = {
+    leadId: createBrochureLeadId(),
     company: cleanText(body.company, 100),
     name: cleanText(body.name, 40),
     email: cleanText(body.email, 160).toLowerCase(),
@@ -508,11 +548,10 @@ async function handleLeadRequest(req, res) {
     userAgent: cleanText(req.headers['user-agent'], 300),
   };
 
-  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email);
   const isPrintResource = lead.resource === 'print:solution-brochure';
   const resourcePath = isPrintResource ? null : resolveLeadResource(lead.resource);
 
-  if (body.website || !body.consent || lead.company.length < 2 || lead.name.length < 2 || !isEmail || !lead.product) {
+  if (body.website || !body.consent || !isPlausibleCompany(lead.company) || !isPlausibleName(lead.name) || !isValidEmail(lead.email) || !lead.product) {
     return sendJson(res, 400, { message: '필수 입력값을 확인해 주세요.' });
   }
   if (!isPrintResource && !resourcePath) {
@@ -520,7 +559,8 @@ async function handleLeadRequest(req, res) {
   }
 
   try {
-    const notification = await notifyLead(lead);
+    const delivered = await notifyLead(lead);
+    console.log('[brochure-lead]', JSON.stringify({ ...lead, delivered }));
     let downloadUrl = null;
     if (!isPrintResource) {
       const expires = Date.now() + (15 * 60 * 1000);
@@ -528,9 +568,9 @@ async function handleLeadRequest(req, res) {
       const params = new URLSearchParams({ resource: lead.resource, expires: String(expires), token });
       downloadUrl = `/api/download?${params.toString()}`;
     }
-    return sendJson(res, 200, { ok: true, downloadUrl, notification });
+    return sendJson(res, 200, { ok: true, leadId: lead.leadId, receivedAt: lead.requestedAt, downloadUrl });
   } catch (error) {
-    console.error('[brochure-lead-error]', error);
+    console.error('[brochure-lead-error]', lead.leadId, error);
     return sendJson(res, 502, { message: '자료 요청 알림을 접수하지 못했습니다. 잠시 후 다시 시도해 주세요.' });
   }
 }

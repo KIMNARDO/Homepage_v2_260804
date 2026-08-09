@@ -4,7 +4,7 @@
 
 1. 방문자가 회사명, 담당자명, 업무 이메일을 입력합니다.
 2. 서버가 입력값과 요청 횟수를 검증합니다.
-3. 관리자 이메일 또는 외부 웹훅으로 리드가 전달됩니다.
+3. 관리자 이메일로 리드가 전달됩니다. Resend가 설정되지 않았거나 실패하면 FormSubmit으로 재전송합니다.
 4. 15분간 유효한 서명 다운로드 링크가 발급됩니다.
 5. PDF 직접 주소 접근은 차단됩니다.
 
@@ -24,16 +24,19 @@ LEAD_FROM_EMAIL=Papsnet Website <downloads@papsnet.net>
 LEAD_NOTIFICATION_EMAIL=kimnardo@papsnet.net
 DOWNLOAD_TOKEN_SECRET=충분히 긴 무작위 문자열
 LEAD_WEBHOOK_URL=Google Sheets 또는 CRM 수신 URL (선택)
-LEAD_CAPTURE_REQUIRED=true
+BROCHURE_FORM_ENDPOINT=https://formsubmit.co/ajax/kimnardo@papsnet.net
 ```
 
 `downloads@papsnet.net` 발신을 사용하려면 Resend에서 `papsnet.net` 도메인 인증이 먼저 완료되어야 합니다.
 
-`LEAD_CAPTURE_REQUIRED=true`이면 이메일과 웹훅이 모두 설정되지 않았거나 발송에 실패했을 때 다운로드를 허용하지 않습니다. 운영 배포에서는 이 값을 사용하는 것을 권장합니다.
+다운로드는 관리자 이메일 전달이 성공한 뒤에만 허용됩니다. `RESEND_API_KEY`가 없거나 Resend가 실패하면 `BROCHURE_FORM_ENDPOINT`, `CONTACT_FORM_ENDPOINT`, 기본 FormSubmit 주소 순서로 대체 전송합니다.
+
+로컬 테스트에서 실제 메일을 보내지 않으려면 `LEAD_DELIVERY_MODE=log`를 사용합니다. 이 값은 운영 환경에 설정하지 않습니다.
 
 ## 수신 데이터
 
 - 요청 제품
+- 접수번호
 - 회사명
 - 담당자명
 - 업무 이메일

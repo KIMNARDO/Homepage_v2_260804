@@ -5,9 +5,11 @@ const { copyFileSync, mkdirSync, readdirSync, statSync } = require('fs');
 const runtimeAssets = [
   ['images/hero-ev-parts', 'images/hero-ev-parts'],
   ['images/hero-aerospace-parts', 'images/hero-aerospace-parts'],
+  ['images/hero-aerospace-blueprint.webp', 'images/hero-aerospace-blueprint.webp'],
   ['images/icons3d', 'images/icons3d'],
   ['images/product-tour', 'images/product-tour'],
   ['images/hero-equipment-digital-twin.png', 'images/hero-equipment-digital-twin.png'],
+  ['images/hero-equipment-digital-twin.webp', 'images/hero-equipment-digital-twin.webp'],
   ['images/clip-2d-viewer.png', 'images/clip-2d-viewer.png'],
   ['images/clip-3d-viewer.png', 'images/clip-3d-viewer.png'],
   ['images/cadwin_drawing_inspection.png', 'images/cadwin_drawing_inspection.png'],

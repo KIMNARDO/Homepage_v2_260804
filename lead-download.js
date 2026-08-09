@@ -176,7 +176,8 @@ function initLeadDownloads() {
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.message || '요청을 처리하지 못했습니다.');
 
-      setStatus('접수되었습니다. 자료를 여는 중입니다.', 'success');
+      const receipt = result.leadId ? ` (${result.leadId})` : '';
+      setStatus(`접수되었습니다${receipt}. 자료를 여는 중입니다.`, 'success');
 
       if (activeRequest.action === 'print') {
         window.setTimeout(() => window.print(), 250);

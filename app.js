@@ -867,9 +867,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let heroEvParts = [];
   let heroEvPartTotal = 0;
   let heroEvManifest = null;
+  let heroEvSequenceLoading = false;
   let heroAeroParts = [];
   let heroAeroPartTotal = 0;
   let heroAeroManifest = null;
+  let heroAeroSequenceLoading = false;
   let heroFacilityParts = [];
   const heroFacilityPartTotal = 7;
   let heroSequenceStep = 0;
@@ -984,7 +986,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function initializeEvPartSequence() {
     const layer = document.querySelector('[data-ev-parts-layer]');
-    if (!layer) return;
+    if (!layer || heroEvParts.length || heroEvSequenceLoading) return;
+    heroEvSequenceLoading = true;
 
     try {
       const response = await fetch('images/hero-ev-parts/manifest.json');
@@ -1008,7 +1011,7 @@ document.addEventListener('DOMContentLoaded', () => {
         partNode.style.setProperty('--part-assembly', part.anchor ? '0' : '1');
         partNode.style.setProperty('--part-motion', '0');
 
-        sprite.src = 'images/hero-ev-parts/ev-parts-atlas.png';
+        sprite.src = 'images/hero-ev-parts/ev-parts-atlas.webp';
         sprite.alt = '';
         sprite.decoding = 'async';
         sprite.draggable = false;
@@ -1024,17 +1027,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       layer.replaceChildren(fragment);
+      const firstSprite = layer.querySelector('img');
+      if (firstSprite?.decode) await firstSprite.decode().catch(() => {});
+      layer.closest('[data-ev-sequence]')?.classList.add('is-parts-ready');
       const total = document.querySelector('[data-ev-part-total]');
       if (total) total.textContent = `/ ${String(heroEvPartTotal).padStart(3, '0')}`;
       updateHeroScrollMotion();
     } catch (error) {
       console.warn('EV component sequence could not be initialized.', error);
+    } finally {
+      heroEvSequenceLoading = false;
     }
   }
 
   async function initializeAeroPartSequence() {
     const layer = document.querySelector('[data-aero-parts-layer]');
-    if (!layer) return;
+    if (!layer || heroAeroParts.length || heroAeroSequenceLoading) return;
+    heroAeroSequenceLoading = true;
 
     try {
       const response = await fetch('images/hero-aerospace-parts/manifest.json');
@@ -1058,7 +1067,7 @@ document.addEventListener('DOMContentLoaded', () => {
         partNode.style.setProperty('--part-assembly', part.anchor ? '0' : '1');
         partNode.style.setProperty('--part-motion', '0');
 
-        sprite.src = 'images/hero-aerospace-parts/ev-parts-atlas.png';
+        sprite.src = 'images/hero-aerospace-parts/ev-parts-atlas.webp';
         sprite.alt = '';
         sprite.decoding = 'async';
         sprite.draggable = false;
@@ -1079,13 +1088,15 @@ document.addEventListener('DOMContentLoaded', () => {
       updateHeroScrollMotion();
     } catch (error) {
       console.warn('Aerospace component sequence could not be initialized.', error);
+    } finally {
+      heroAeroSequenceLoading = false;
     }
   }
 
   function initializeFacilityPartSequence() {
     const layer = document.querySelector('[data-facility-parts-layer]');
     const canvas = document.querySelector('[data-facility-parts-canvas]');
-    if (!layer || !canvas) return;
+    if (!layer || !canvas || heroFacilityParts.length) return;
 
     const depthScale = window.innerWidth <= 760 ? 0.58 : 1;
     const spreadScale = window.innerWidth <= 760 ? 0.5 : 1;
@@ -1121,7 +1132,7 @@ document.addEventListener('DOMContentLoaded', () => {
       partNode.style.setProperty('--part-assembly', '1');
       partNode.style.setProperty('--part-motion', '0');
 
-      image.src = 'images/hero-equipment-digital-twin.png';
+      image.src = 'images/hero-equipment-digital-twin.webp';
       image.alt = '';
       image.decoding = 'async';
       image.draggable = false;
@@ -1132,6 +1143,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     layer.replaceChildren(fragment);
     updateHeroScrollMotion();
+  }
+
+  function hydrateHeroSceneImages(industry) {
+    const slide = heroIndustrySlides.find(item => Number(item.dataset.heroIndustrySlide || 0) === industry);
+    if (!slide) return;
+
+    slide.querySelectorAll('img[data-src]').forEach(image => {
+      image.src = image.dataset.src;
+      image.removeAttribute('data-src');
+    });
+  }
+
+  function ensureHeroSceneAssets(industry) {
+    hydrateHeroSceneImages(industry);
+    if (industry === 0 && heroSequenceStep > 0) initializeEvPartSequence();
+    if (industry === 2) initializeAeroPartSequence();
+    if (industry === 3) initializeFacilityPartSequence();
+  }
+
+  function scheduleInitialHeroDetail() {
+    const queueWarmup = () => window.setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => initializeEvPartSequence(), { timeout: 2600 });
+      } else {
+        initializeEvPartSequence();
+      }
+    }, 900);
+
+    if (document.readyState === 'complete') queueWarmup();
+    else window.addEventListener('load', queueWarmup, { once: true });
   }
 
   function updateBomPartNodes(parts, total, sequenceProgress) {
@@ -1162,11 +1203,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateEvPartSequence(progress) {
-    if (!heroEvParts.length) return;
     const sequenceProgress = Math.max(0, Math.min(1, progress));
-    const released = updateBomPartNodes(heroEvParts, heroEvPartTotal, sequenceProgress);
+    const released = heroEvParts.length
+      ? updateBomPartNodes(heroEvParts, heroEvPartTotal, sequenceProgress)
+      : 0;
     const counter = document.querySelector('[data-ev-part-counter]');
-    if (counter) counter.textContent = String(Math.max(0, heroEvPartTotal - released)).padStart(3, '0');
+    if (counter && heroEvPartTotal) {
+      counter.textContent = String(Math.max(0, heroEvPartTotal - released)).padStart(3, '0');
+    }
     heroSection?.style.setProperty('--ev-sequence-progress', sequenceProgress.toFixed(4));
     heroSection?.style.setProperty('--ev-rotate-x', '0deg');
     heroSection?.style.setProperty('--ev-rotate-y', `${(sequenceProgress * 360).toFixed(3)}deg`);
@@ -1177,11 +1221,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateAeroPartSequence(progress) {
-    if (!heroAeroParts.length) return;
     const sequenceProgress = Math.max(0, Math.min(1, progress));
-    const released = updateBomPartNodes(heroAeroParts, heroAeroPartTotal, sequenceProgress);
+    const released = heroAeroParts.length
+      ? updateBomPartNodes(heroAeroParts, heroAeroPartTotal, sequenceProgress)
+      : 0;
     const counter = document.querySelector('[data-aero-part-counter]');
-    if (counter) counter.textContent = String(released).padStart(3, '0');
+    if (counter && heroAeroPartTotal) counter.textContent = String(released).padStart(3, '0');
     heroSection?.style.setProperty('--aero-sequence-progress', sequenceProgress.toFixed(4));
     heroSection?.style.setProperty('--aero-rotate-x', '0deg');
     heroSection?.style.setProperty('--aero-rotate-y', `${(sequenceProgress * -360).toFixed(3)}deg`);
@@ -1192,11 +1237,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateFacilityPartSequence(progress) {
-    if (!heroFacilityParts.length) return;
     const sequenceProgress = Math.max(0, Math.min(1, progress));
-    const released = updateBomPartNodes(heroFacilityParts, heroFacilityPartTotal, sequenceProgress);
+    const released = heroFacilityParts.length
+      ? updateBomPartNodes(heroFacilityParts, heroFacilityPartTotal, sequenceProgress)
+      : 0;
     const counter = document.querySelector('[data-facility-part-counter]');
-    if (counter) counter.textContent = String(released).padStart(3, '0');
+    if (counter && heroFacilityParts.length) counter.textContent = String(released).padStart(3, '0');
     heroSection?.style.setProperty('--facility-sequence-progress', sequenceProgress.toFixed(4));
     heroSection?.style.setProperty('--facility-rotate-x', '0deg');
     heroSection?.style.setProperty('--facility-rotate-y', `${(sequenceProgress * 360).toFixed(3)}deg`);
@@ -1208,6 +1254,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setHeroIndustry(nextIndustry) {
     if (!heroIndustrySlides.length) return;
+    ensureHeroSceneAssets(nextIndustry);
 
     heroIndustrySlides.forEach(slide => {
       const slideIndustry = Number(slide.dataset.heroIndustrySlide || 0);
@@ -1409,9 +1456,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   heroSection?.addEventListener('pointermove', updateHeroPointer, { passive: true });
   heroSection?.addEventListener('pointerleave', resetHeroPointer);
-  initializeEvPartSequence();
-  initializeAeroPartSequence();
-  initializeFacilityPartSequence();
+  scheduleInitialHeroDetail();
 
   window.addEventListener('resize', () => {
     if (heroEvManifest) {
@@ -1420,7 +1465,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroAeroManifest) {
       heroAeroParts.forEach(({ node, part }) => setAeroPartGeometry(node, part, heroAeroManifest));
     }
-    initializeFacilityPartSequence();
+    if (heroFacilityParts.length) {
+      heroFacilityParts = [];
+      initializeFacilityPartSequence();
+    }
   });
 
   // Legacy .reveal support
