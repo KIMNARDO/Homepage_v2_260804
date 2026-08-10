@@ -31,7 +31,12 @@ BROCHURE_FORM_ENDPOINT=https://formsubmit.co/ajax/kimnardo@papsnet.net
 
 다운로드는 관리자 이메일 전달이 성공한 뒤에만 허용됩니다. `RESEND_API_KEY`가 없거나 Resend가 실패하면 `BROCHURE_FORM_ENDPOINT`, `CONTACT_FORM_ENDPOINT`, 기본 FormSubmit 주소 순서로 대체 전송합니다.
 
+상담 요청은 검증이 끝나는 즉시 접수번호와 함께 Heroku 로그에 먼저 기록됩니다. 외부 메일 채널이 일시적으로 실패하면 HTTP `202 Accepted`로 접수를 확정하고 30초, 2분, 10분 간격으로 백그라운드 재전송합니다. 잘못된 `CONTACT_FORM_ENDPOINT`가 설정되어 있어도 기본 FormSubmit 주소를 한 번 더 시도합니다.
+
+FormSubmit이 상담 메일을 정상 구성하도록 표준 `name`, `email`, `company`, `phone`, `message` 필드와 한국어 영업 필드를 함께 전달합니다. 장기 운영에서는 FormSubmit 한 곳에만 의존하지 말고 Resend와 `LEAD_WEBHOOK_URL`을 함께 구성하는 것을 권장합니다.
+
 로컬 테스트에서 실제 메일을 보내지 않으려면 `LEAD_DELIVERY_MODE=log`를 사용합니다. 이 값은 운영 환경에 설정하지 않습니다.
+상담 폼만 로그 모드로 시험하려면 `CONTACT_DELIVERY_MODE=log`를 사용합니다.
 
 ## 수신 데이터
 

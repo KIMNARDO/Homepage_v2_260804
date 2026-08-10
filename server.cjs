@@ -9,8 +9,11 @@ const leadNotificationEmail = process.env.LEAD_NOTIFICATION_EMAIL || 'kimnardo@p
 const downloadTokenSecret = process.env.DOWNLOAD_TOKEN_SECRET || randomBytes(32).toString('hex');
 const leadRateLimits = new Map();
 const contactRateLimits = new Map();
+const pendingContactDeliveries = new Map();
 const contactProducts = new Set(['통합 PLM 전체', 'AI CADWin', 'Clip PDM', 'Clip PMS', 'Multi-BOM', 'Clip CMS']);
 const contactTimes = new Set(['오후 2시~5시', '오전 9시~12시', '오후 5시 이후', '시간 무관']);
+const deliveryRetryDelays = [0, 500, 1500];
+const pendingContactRetryDelays = [30 * 1000, 2 * 60 * 1000, 10 * 60 * 1000];
 
 const mimeTypes = {
   '.css': 'text/css; charset=utf-8',
@@ -248,8 +251,56 @@ function isValidDownloadToken(resource, expires, token) {
   return expected.length === provided.length && timingSafeEqual(expected, provided);
 }
 
+function wait(delayMs) {
+  return new Promise(resolveWait => setTimeout(resolveWait, delayMs));
+}
+
+function isRetryableDeliveryStatus(status) {
+  return status === 408 || status === 425 || status === 429 || status >= 500;
+}
+
+async function fetchDelivery(url, options, label) {
+  let lastError;
+
+  for (let attempt = 0; attempt < deliveryRetryDelays.length; attempt += 1) {
+    const delayMs = deliveryRetryDelays[attempt];
+    if (delayMs) await wait(delayMs);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: AbortSignal.timeout(8000),
+      });
+      const responseText = await response.text();
+      if (response.ok) return { response, responseText };
+
+      lastError = new Error(`${label} failed: ${response.status}`);
+      if (!isRetryableDeliveryStatus(response.status)) break;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError || new Error(`${label} failed`);
+}
+
+function parseFormSubmitResponse(responseText, label) {
+  try {
+    const payload = JSON.parse(responseText);
+    if (payload.success === false) {
+      throw new Error(`${label} rejected: ${cleanText(payload.message, 180) || 'unknown reason'}`);
+    }
+  } catch (error) {
+    if (error.message.startsWith(`${label} rejected:`)) throw error;
+  }
+}
+
+function uniqueEndpoints(...values) {
+  return [...new Set(values.filter(Boolean).map(value => String(value).trim()).filter(Boolean))];
+}
+
 async function deliverBrochureViaResend(lead, rows, htmlRows) {
-  const response = await fetch('https://api.resend.com/emails', {
+  await fetchDelivery('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
@@ -263,45 +314,55 @@ async function deliverBrochureViaResend(lead, rows, htmlRows) {
       text: rows.map(([label, value]) => `${label}: ${value}`).join('\n'),
       html: `<h2 style="font-family:Arial,sans-serif">새 Clip PLM 자료 다운로드</h2><table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">${htmlRows}</table>`,
     }),
-    signal: AbortSignal.timeout(8000),
-  });
-  if (!response.ok) throw new Error(`Resend brochure notification failed: ${response.status}`);
+  }, 'Resend brochure notification');
   return 'resend';
 }
 
 async function deliverBrochureViaFormSubmit(lead) {
-  const endpoint = process.env.BROCHURE_FORM_ENDPOINT
-    || process.env.CONTACT_FORM_ENDPOINT
-    || `https://formsubmit.co/ajax/${leadNotificationEmail}`;
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({
-      _subject: `[Clip PLM 자료 다운로드 ${lead.leadId}] ${lead.company} · ${lead.name}`,
-      _template: 'table',
-      _replyto: lead.email,
-      '접수번호': lead.leadId,
-      '회사명': lead.company,
-      '담당자명': lead.name,
-      '업무 이메일': lead.email,
-      '연락처': lead.phone || '미입력',
-      '선택 자료': lead.product,
-      '요청 파일': lead.resource,
-      '요청 시각': lead.requestedAt,
-      '유입 페이지': lead.sourcePage,
-      '접속 IP': lead.ip,
-    }),
-    signal: AbortSignal.timeout(8000),
-  });
-  const responseText = await response.text();
-  if (!response.ok) throw new Error(`FormSubmit brochure notification failed: ${response.status}`);
-  try {
-    const payload = JSON.parse(responseText);
-    if (payload.success === false) throw new Error('FormSubmit rejected brochure notification');
-  } catch (error) {
-    if (error.message === 'FormSubmit rejected brochure notification') throw error;
+  const endpoints = uniqueEndpoints(
+    process.env.BROCHURE_FORM_ENDPOINT,
+    process.env.CONTACT_FORM_ENDPOINT,
+    `https://formsubmit.co/ajax/${leadNotificationEmail}`,
+  );
+  const payload = {
+    _subject: `[Clip PLM 자료 다운로드 ${lead.leadId}] ${lead.company} · ${lead.name}`,
+    _template: 'table',
+    _replyto: lead.email,
+    _url: lead.sourcePage,
+    email: lead.email,
+    name: lead.name,
+    company: lead.company,
+    phone: lead.phone || '미입력',
+    message: `${lead.product} 자료 다운로드 요청`,
+    '접수번호': lead.leadId,
+    '선택 자료': lead.product,
+    '요청 파일': lead.resource,
+    '요청 시각': lead.requestedAt,
+    '유입 페이지': lead.sourcePage,
+    '접속 IP': lead.ip,
+  };
+  let lastError;
+
+  for (const endpoint of endpoints) {
+    try {
+      const { responseText } = await fetchDelivery(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'User-Agent': 'Papsnet-Website/1.0',
+        },
+        body: JSON.stringify(payload),
+      }, 'FormSubmit brochure notification');
+      parseFormSubmitResponse(responseText, 'FormSubmit brochure notification');
+      return 'formsubmit';
+    } catch (error) {
+      lastError = error;
+      console.error('[brochure-lead-formsubmit-endpoint-error]', lead.leadId, endpoint, error.message);
+    }
   }
-  return 'formsubmit';
+
+  throw lastError || new Error('FormSubmit brochure notification failed');
 }
 
 async function notifyLead(lead) {
@@ -352,7 +413,7 @@ async function notifyLead(lead) {
 }
 
 async function deliverContactViaResend(lead, rows, htmlRows) {
-  const response = await fetch('https://api.resend.com/emails', {
+  await fetchDelivery('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
@@ -366,46 +427,56 @@ async function deliverContactViaResend(lead, rows, htmlRows) {
       text: rows.map(([label, value]) => `${label}: ${value}`).join('\n'),
       html: `<h2 style="font-family:Arial,sans-serif">새 Clip PLM 상담 요청</h2><table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">${htmlRows}</table>`,
     }),
-    signal: AbortSignal.timeout(8000),
-  });
-  if (!response.ok) throw new Error(`Resend contact notification failed: ${response.status}`);
+  }, 'Resend contact notification');
   return 'resend';
 }
 
 async function deliverContactViaFormSubmit(lead) {
-  const endpoint = process.env.CONTACT_FORM_ENDPOINT || `https://formsubmit.co/ajax/${leadNotificationEmail}`;
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({
-      _subject: `[Clip PLM 상담 ${lead.leadId}] ${lead.company} · ${lead.name}`,
-      _template: 'table',
-      _replyto: lead.email,
-      '접수번호': lead.leadId,
-      '회사명': lead.company,
-      '담당자명': lead.name,
-      '연락처': lead.phone,
-      '업무 이메일': lead.email,
-      '관심 제품': lead.product,
-      '연락 가능 시간': lead.contactTime,
-      '문의 내용': lead.message,
-      '접수 시각': lead.requestedAt,
-      '유입 페이지': lead.sourcePage,
-    }),
-    signal: AbortSignal.timeout(8000),
-  });
-  const responseText = await response.text();
-  if (!response.ok) throw new Error(`FormSubmit contact notification failed: ${response.status}`);
-  try {
-    const payload = JSON.parse(responseText);
-    if (payload.success === false) throw new Error('FormSubmit rejected contact notification');
-  } catch (error) {
-    if (error.message === 'FormSubmit rejected contact notification') throw error;
+  const endpoints = uniqueEndpoints(
+    process.env.CONTACT_FORM_ENDPOINT,
+    `https://formsubmit.co/ajax/${leadNotificationEmail}`,
+  );
+  const payload = {
+    _subject: `[Clip PLM 상담 ${lead.leadId}] ${lead.company} · ${lead.name}`,
+    _template: 'table',
+    _replyto: lead.email,
+    _url: lead.sourcePage,
+    email: lead.email,
+    name: lead.name,
+    company: lead.company,
+    phone: lead.phone,
+    message: lead.message,
+    '접수번호': lead.leadId,
+    '관심 제품': lead.product,
+    '연락 가능 시간': lead.contactTime,
+    '접수 시각': lead.requestedAt,
+    '유입 페이지': lead.sourcePage,
+  };
+  let lastError;
+
+  for (const endpoint of endpoints) {
+    try {
+      const { responseText } = await fetchDelivery(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'User-Agent': 'Papsnet-Website/1.0',
+        },
+        body: JSON.stringify(payload),
+      }, 'FormSubmit contact notification');
+      parseFormSubmitResponse(responseText, 'FormSubmit contact notification');
+      return 'formsubmit';
+    } catch (error) {
+      lastError = error;
+      console.error('[contact-lead-formsubmit-endpoint-error]', lead.leadId, endpoint, error.message);
+    }
   }
-  return 'formsubmit';
+
+  throw lastError || new Error('FormSubmit contact notification failed');
 }
 
-async function notifyContactLead(lead) {
+function buildContactEmailContent(lead) {
   const rows = [
     ['접수번호', lead.leadId],
     ['회사명', lead.company],
@@ -421,20 +492,38 @@ async function notifyContactLead(lead) {
   const htmlRows = rows.map(([label, value]) => `
     <tr><th style="padding:9px 12px;text-align:left;background:#f1f4f2;border:1px solid #dce2df">${escapeHtml(label)}</th>
     <td style="padding:9px 12px;border:1px solid #dce2df">${escapeHtml(value)}</td></tr>`).join('');
+  return { rows, htmlRows };
+}
 
-  if (process.env.CONTACT_DELIVERY_MODE === 'log') return ['server-log'];
+async function deliverContactEmail(lead) {
+  const { rows, htmlRows } = buildContactEmailContent(lead);
+  const failures = [];
 
-  let emailChannel;
   if (process.env.RESEND_API_KEY && process.env.LEAD_FROM_EMAIL) {
     try {
-      emailChannel = await deliverContactViaResend(lead, rows, htmlRows);
+      return { channel: await deliverContactViaResend(lead, rows, htmlRows), failures };
     } catch (error) {
-      console.error('[contact-lead-resend-error]', error);
+      failures.push(`resend:${error.message}`);
+      console.error('[contact-lead-resend-error]', lead.leadId, error.message);
     }
   }
-  if (!emailChannel) emailChannel = await deliverContactViaFormSubmit(lead);
 
-  const delivered = [emailChannel];
+  try {
+    return { channel: await deliverContactViaFormSubmit(lead), failures };
+  } catch (error) {
+    failures.push(`formsubmit:${error.message}`);
+    return { channel: null, failures };
+  }
+}
+
+async function notifyContactLead(lead) {
+  if (process.env.CONTACT_DELIVERY_MODE === 'log') {
+    return { delivered: ['server-log'], failures: [], emailDelivered: true };
+  }
+
+  const email = await deliverContactEmail(lead);
+  const delivered = email.channel ? [email.channel] : [];
+  const failures = [...email.failures];
   if (process.env.LEAD_WEBHOOK_URL) {
     try {
       const response = await fetch(process.env.LEAD_WEBHOOK_URL, {
@@ -446,10 +535,41 @@ async function notifyContactLead(lead) {
       if (!response.ok) throw new Error(`Contact webhook failed: ${response.status}`);
       delivered.push('webhook');
     } catch (error) {
-      console.error('[contact-lead-webhook-error]', error);
+      failures.push(`webhook:${error.message}`);
+      console.error('[contact-lead-webhook-error]', lead.leadId, error.message);
     }
   }
-  return delivered;
+  return { delivered, failures, emailDelivered: Boolean(email.channel) };
+}
+
+function scheduleContactLeadRetry(lead, retryIndex = 0) {
+  if (retryIndex >= pendingContactRetryDelays.length) {
+    pendingContactDeliveries.delete(lead.leadId);
+    console.error('[contact-lead-delivery-exhausted]', lead.leadId);
+    return;
+  }
+
+  const delayMs = pendingContactRetryDelays[retryIndex];
+  pendingContactDeliveries.set(lead.leadId, { lead, retryIndex, scheduledAt: Date.now() + delayMs });
+  const timer = setTimeout(async () => {
+    try {
+      const delivery = await deliverContactEmail(lead);
+      if (delivery.channel) {
+        pendingContactDeliveries.delete(lead.leadId);
+        console.log('[contact-lead-delivery-recovered]', JSON.stringify({
+          leadId: lead.leadId,
+          delivered: [delivery.channel],
+          retry: retryIndex + 1,
+        }));
+        return;
+      }
+      console.error('[contact-lead-delivery-retry-failed]', lead.leadId, retryIndex + 1, delivery.failures.join(' | '));
+    } catch (error) {
+      console.error('[contact-lead-delivery-retry-error]', lead.leadId, retryIndex + 1, error.message);
+    }
+    scheduleContactLeadRetry(lead, retryIndex + 1);
+  }, delayMs);
+  timer.unref?.();
 }
 
 async function handleContactLeadRequest(req, res) {
@@ -510,13 +630,29 @@ async function handleContactLeadRequest(req, res) {
     return sendJson(res, 422, { message: errors[0], errors });
   }
 
+  // 외부 메일 서비스 상태와 무관하게 검증된 상담 정보는 먼저 Heroku 로그에 확정 기록한다.
+  console.log('[contact-lead-received]', JSON.stringify(lead));
+
   try {
-    const delivered = await notifyContactLead(lead);
-    console.log('[contact-lead]', JSON.stringify({ ...lead, delivered }));
-    return sendJson(res, 200, { ok: true, leadId: lead.leadId, receivedAt: lead.requestedAt });
+    const delivery = await notifyContactLead(lead);
+    const deliveryPending = !delivery.emailDelivered;
+    console.log('[contact-lead]', JSON.stringify({ ...lead, ...delivery, deliveryPending }));
+    if (deliveryPending) scheduleContactLeadRetry(lead);
+    return sendJson(res, deliveryPending ? 202 : 200, {
+      ok: true,
+      leadId: lead.leadId,
+      receivedAt: lead.requestedAt,
+      deliveryPending,
+    });
   } catch (error) {
-    console.error('[contact-lead-error]', lead.leadId, error);
-    return sendJson(res, 502, { message: '상담 메일 전달에 실패했습니다. 잠시 후 다시 시도해 주세요.' });
+    console.error('[contact-lead-delivery-unexpected-error]', lead.leadId, error.message);
+    scheduleContactLeadRetry(lead);
+    return sendJson(res, 202, {
+      ok: true,
+      leadId: lead.leadId,
+      receivedAt: lead.requestedAt,
+      deliveryPending: true,
+    });
   }
 }
 
