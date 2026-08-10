@@ -33,6 +33,8 @@ BROCHURE_FORM_ENDPOINT=https://formsubmit.co/ajax/kimnardo@papsnet.net
 
 상담 요청은 검증이 끝나는 즉시 접수번호와 함께 Heroku 로그에 먼저 기록됩니다. 외부 메일 채널이 일시적으로 실패하면 HTTP `202 Accepted`로 접수를 확정하고 30초, 2분, 10분 간격으로 백그라운드 재전송합니다. 잘못된 `CONTACT_FORM_ENDPOINT`가 설정되어 있어도 기본 FormSubmit 주소를 한 번 더 시도합니다.
 
+FormSubmit 응답은 `success: true` 또는 `success: "true"`인 경우에만 전달 성공으로 처리합니다. 운영 서버에서 FormSubmit이 차단되면 상담 화면이 공식 AJAX 경로로 한 번 더 전달하며, 이 경로도 실패한 경우 완료 화면에 메일 전달 지연 상태를 명시합니다.
+
 FormSubmit이 상담 메일을 정상 구성하도록 표준 `name`, `email`, `company`, `phone`, `message` 필드와 한국어 영업 필드를 함께 전달합니다. 장기 운영에서는 FormSubmit 한 곳에만 의존하지 말고 Resend와 `LEAD_WEBHOOK_URL`을 함께 구성하는 것을 권장합니다.
 
 로컬 테스트에서 실제 메일을 보내지 않으려면 `LEAD_DELIVERY_MODE=log`를 사용합니다. 이 값은 운영 환경에 설정하지 않습니다.

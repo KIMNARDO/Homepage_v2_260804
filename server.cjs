@@ -285,14 +285,22 @@ async function fetchDelivery(url, options, label) {
 }
 
 function parseFormSubmitResponse(responseText, label) {
+  let payload;
+
   try {
-    const payload = JSON.parse(responseText);
-    if (payload.success === false) {
-      throw new Error(`${label} rejected: ${cleanText(payload.message, 180) || 'unknown reason'}`);
-    }
-  } catch (error) {
-    if (error.message.startsWith(`${label} rejected:`)) throw error;
+    payload = JSON.parse(responseText);
+  } catch {
+    throw new Error(`${label} returned an invalid response`);
   }
+
+  // FormSubmit can return success as either a boolean or a string.
+  // Treat every value except an explicit true as a rejected delivery.
+  const accepted = payload.success === true || String(payload.success).toLowerCase() === 'true';
+  if (!accepted) {
+    throw new Error(`${label} rejected: ${cleanText(payload.message, 180) || 'unknown reason'}`);
+  }
+
+  return payload;
 }
 
 function uniqueEndpoints(...values) {
@@ -327,6 +335,7 @@ async function deliverBrochureViaFormSubmit(lead) {
   const payload = {
     _subject: `[Clip PLM 자료 다운로드 ${lead.leadId}] ${lead.company} · ${lead.name}`,
     _template: 'table',
+    _captcha: 'false',
     _replyto: lead.email,
     _url: lead.sourcePage,
     email: lead.email,
@@ -439,6 +448,7 @@ async function deliverContactViaFormSubmit(lead) {
   const payload = {
     _subject: `[Clip PLM 상담 ${lead.leadId}] ${lead.company} · ${lead.name}`,
     _template: 'table',
+    _captcha: 'false',
     _replyto: lead.email,
     _url: lead.sourcePage,
     email: lead.email,
@@ -461,7 +471,8 @@ async function deliverContactViaFormSubmit(lead) {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          'User-Agent': 'Papsnet-Website/1.0',
+          Origin: 'https://www.papsnet.net',
+          Referer: 'https://www.papsnet.net/',
         },
         body: JSON.stringify(payload),
       }, 'FormSubmit contact notification');

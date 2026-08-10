@@ -1943,10 +1943,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // 접수 완료 팝업 (폼 모달과 분리)
     const doneModal = document.getElementById('demoDoneModal');
 
-    function openDone(receiptId) {
+    function openDone(receiptId, deliveryPending = false) {
       if (!doneModal) return;
       const receipt = doneModal.querySelector('[data-demo-receipt]');
+      const title = doneModal.querySelector('[data-demo-done-title]');
+      const copy = doneModal.querySelector('[data-demo-done-copy]');
       if (receipt) receipt.textContent = receiptId || '메일 접수 완료';
+      if (title) {
+        title.textContent = deliveryPending
+          ? '상담 요청은 안전하게 접수되었습니다.'
+          : '상담 요청과 담당자 알림 접수가 완료되었습니다.';
+      }
+      if (copy) {
+        copy.textContent = deliveryPending
+          ? '담당자 메일 알림을 재전송하고 있습니다. 접수번호로 요청이 보관되어 있으며, 급한 경우 070-5001-1144로 연락해 주세요.'
+          : '담당자 메일 시스템이 상담 내용을 접수했습니다. 남겨주신 연락처로 곧 연락드리겠습니다.';
+      }
       doneModal.hidden = false;
       requestAnimationFrame(() => doneModal.classList.add('is-open'));
       document.body.style.overflow = 'hidden';
@@ -1981,6 +1993,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!statusField) return;
         statusField.textContent = message;
         statusField.dataset.state = state;
+      }
+
+      async function deliverContactLeadFromBrowser(values, leadId) {
+        const response = await fetch('https://formsubmit.co/ajax/kimnardo@papsnet.net', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            _subject: `[Clip PLM 상담 ${leadId}] ${values.company} · ${values.name}`,
+            _template: 'table',
+            _captcha: 'false',
+            _replyto: values.email,
+            _url: window.location.href,
+            email: values.email,
+            name: values.name,
+            company: values.company,
+            phone: values.phone,
+            message: values.message,
+            '접수번호': leadId,
+            '관심 제품': values.product,
+            '연락 가능 시간': values.contactTime,
+            '유입 페이지': window.location.href
+          })
+        });
+        const payload = await response.json().catch(() => ({}));
+        const accepted = payload.success === true || String(payload.success).toLowerCase() === 'true';
+        if (!response.ok || !accepted) {
+          throw new Error(payload.message || `FormSubmit delivery failed: ${response.status}`);
+        }
       }
 
       function validateDemoFields() {
@@ -2043,6 +2083,15 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         const f = new FormData(demoForm);
+        const leadValues = {
+          company: f.get('company'),
+          name: f.get('name'),
+          phone: f.get('phone'),
+          email: f.get('email'),
+          product: f.get('product'),
+          contactTime: f.get('contactTime'),
+          message: f.get('message')
+        };
         const submitBtn = demoForm.querySelector('.demo-submit');
         const btnHtml = submitBtn.innerHTML;
         leadFormState.submitting = true;
@@ -2057,13 +2106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
-              company: f.get('company'),
-              name: f.get('name'),
-              phone: f.get('phone'),
-              email: f.get('email'),
-              product: f.get('product'),
-              contactTime: f.get('contactTime'),
-              message: f.get('message'),
+              ...leadValues,
               consent: f.get('consent') === 'on',
               website: f.get('website'),
               startedAt: leadFormState.startedAt,
@@ -2074,9 +2117,19 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!res.ok || !result.ok) {
             throw new Error(result.message || '상담 요청을 접수하지 못했습니다.');
           }
+          let deliveryPending = Boolean(result.deliveryPending);
+          if (deliveryPending) {
+            setDemoStatus('상담 접수 완료. 담당자 메일 알림을 다시 전달하고 있습니다.', 'sending');
+            try {
+              await deliverContactLeadFromBrowser(leadValues, result.leadId);
+              deliveryPending = false;
+            } catch (deliveryError) {
+              console.error('[contact-browser-delivery-error]', deliveryError);
+            }
+          }
           demoForm.reset();
           closeDemo();
-          setTimeout(() => openDone(result.leadId), 220);
+          setTimeout(() => openDone(result.leadId, deliveryPending), 220);
 
         } catch (err) {
           const message = err instanceof TypeError
