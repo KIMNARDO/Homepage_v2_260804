@@ -3529,3 +3529,540 @@ body.theme-pdm .pdm-contact-scope-foot div i {
     body.theme-pdm .pdm-contact-scope article strong { font-size: 14px; }
     body.theme-pdm .pdm-contact-scope article p { font-size: 11px; }
 }
+
+/* =============================================
+   Product capability + technical specification system
+   ============================================= */
+
+.product-capabilities--cadwin .bento-glass .cap-bento-card:nth-child(1),
+.product-capabilities--cadwin .bento-glass .cap-bento-card:nth-child(4) {
+    --card-accent: #078690;
+}
+
+.product-capabilities--cadwin .bento-glass .cap-bento-card:nth-child(2),
+.product-capabilities--cadwin .bento-glass .cap-bento-card:nth-child(5) {
+    --card-accent: #2d7bd8;
+}
+
+.product-capabilities--cadwin .bento-glass .cap-bento-card:nth-child(3),
+.product-capabilities--cadwin .bento-glass .cap-bento-card:nth-child(6) {
+    --card-accent: #1d9b72;
+}
+
+.product-capabilities--dimensional .bento-glass > .cap-bento-card::before {
+    display: block !important;
+}
+
+.product-tech-stage {
+    --tech-accent: var(--theme-primary);
+    --tech-accent-alt: var(--theme-secondary);
+    --tech-surface: #101820;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(96px, 9vw, 142px) 0;
+    border-top: 0;
+    background: var(--tech-surface) !important;
+    color: #f5f8fa;
+}
+
+.product-tech-stage--cadwin {
+    --tech-accent: #4bd5c7;
+    --tech-accent-alt: #53a7ea;
+}
+
+.product-tech-stage--pms {
+    --tech-accent: #f07371;
+    --tech-accent-alt: #f1b65c;
+}
+
+.product-tech-stage--cms {
+    --tech-accent: #d77ca0;
+    --tech-accent-alt: #8e9bea;
+}
+
+.product-tech-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(121, 151, 164, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(121, 151, 164, 0.055) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 88%, transparent);
+}
+
+.product-tech-stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 8% 18%, color-mix(in srgb, var(--tech-accent), transparent 82%), transparent 26%),
+        radial-gradient(circle at 94% 76%, color-mix(in srgb, var(--tech-accent-alt), transparent 86%), transparent 30%);
+    opacity: 0.64;
+}
+
+.product-tech-stage > .container {
+    position: relative;
+    z-index: 1;
+}
+
+.product-tech-stage > .container > .section-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.58fr);
+    column-gap: clamp(48px, 8vw, 116px);
+    align-items: end;
+    max-width: 1180px;
+    margin: 0 auto clamp(46px, 5vw, 68px);
+    text-align: left;
+}
+
+.product-tech-stage > .container > .section-header .section-tag {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-bottom: 20px;
+    color: var(--tech-accent) !important;
+}
+
+.product-tech-stage > .container > .section-header .section-tag::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 2px;
+    margin-right: 10px;
+    vertical-align: middle;
+    background: currentColor;
+}
+
+.product-tech-stage > .container > .section-header h2 {
+    max-width: 760px;
+    margin: 0;
+    color: #f6f8f9;
+    font-size: clamp(46px, 5.1vw, 72px);
+    line-height: 1;
+    letter-spacing: 0;
+    text-wrap: balance;
+}
+
+.product-tech-stage > .container > .section-header p {
+    max-width: 38ch;
+    margin: 0 0 4px;
+    color: #9eacb5;
+    font-size: 16px;
+    line-height: 1.75;
+    text-wrap: pretty;
+}
+
+.product-tech-stage .specs-table-wrapper {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #35434d;
+    border-radius: 8px;
+    background: #151f27;
+    box-shadow: 0 34px 76px rgba(0, 0, 0, 0.3);
+}
+
+.product-tech-stage .specs-table-wrapper::before {
+    content: 'SYSTEM SPECIFICATION / VERIFIED CONFIGURATION';
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 20px;
+    border-bottom: 1px solid #35434d;
+    color: #84949f;
+    background:
+        radial-gradient(circle at 20px 50%, #eb746e 0 4px, transparent 5px),
+        radial-gradient(circle at 36px 50%, #e4b35c 0 4px, transparent 5px),
+        radial-gradient(circle at 52px 50%, #54c7a8 0 4px, transparent 5px),
+        #17222b;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-indent: 54px;
+}
+
+.product-tech-stage .specs-table {
+    color: #dfe7eb;
+    background: transparent;
+}
+
+.product-tech-stage .specs-table thead {
+    background: #111a21;
+}
+
+.product-tech-stage .specs-table th {
+    padding: 16px 24px;
+    border-color: #35434d;
+    color: #8999a4;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.product-tech-stage .specs-table tbody {
+    counter-reset: spec-row;
+}
+
+.product-tech-stage .specs-table tbody tr {
+    counter-increment: spec-row;
+    background: #151f27;
+    transition: background-color 220ms ease;
+}
+
+.product-tech-stage .specs-table tbody tr:nth-child(even) {
+    background: #131c24;
+}
+
+.product-tech-stage .specs-table tbody tr:hover {
+    background: #1b2a33;
+}
+
+.product-tech-stage .specs-table td {
+    padding: 20px 24px;
+    border-color: #2d3a44;
+    color: #b7c2c9;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.product-tech-stage .specs-table td:first-child {
+    width: 31%;
+    color: #edf3f5;
+    font-weight: 760;
+}
+
+.product-tech-stage .specs-table td:first-child::before {
+    content: counter(spec-row, decimal-leading-zero);
+    display: inline-block;
+    width: 42px;
+    margin-right: 14px;
+    color: var(--tech-accent);
+    font-size: 11px;
+    font-weight: 850;
+    font-variant-numeric: tabular-nums;
+}
+
+.product-tech-stage .specs-grid-section {
+    margin-top: 0;
+}
+
+.product-tech-stage .specs-grid {
+    counter-reset: technical-card;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1px;
+    max-width: 1180px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #35434d;
+    border-radius: 8px;
+    background: #35434d;
+    box-shadow: 0 34px 76px rgba(0, 0, 0, 0.3);
+}
+
+.product-tech-stage .spec-card,
+.product-tech-stage .spec-card:hover {
+    --module-accent: var(--tech-accent);
+    counter-increment: technical-card;
+    grid-column: span 4;
+    min-height: 292px;
+    padding: 28px 30px 30px;
+    overflow: hidden;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background:
+        radial-gradient(circle at 94% 10%, color-mix(in srgb, var(--module-accent), transparent 82%), transparent 34%),
+        #151f27 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: background-color 260ms ease !important;
+}
+
+.product-tech-stage .spec-card:nth-child(2),
+.product-tech-stage .spec-card:nth-child(5) {
+    --module-accent: var(--tech-accent-alt);
+}
+
+.product-tech-stage .spec-card:nth-child(3),
+.product-tech-stage .spec-card:nth-child(6) {
+    --module-accent: #67c7a0;
+}
+
+.product-tech-stage .spec-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--module-accent);
+    opacity: 1;
+    transform: scaleY(0.2);
+    transform-origin: top;
+    transition: transform 280ms cubic-bezier(.2,.8,.2,1);
+}
+
+.product-tech-stage .spec-card::after {
+    content: counter(technical-card, decimal-leading-zero);
+    position: absolute;
+    top: 26px;
+    right: 28px;
+    color: color-mix(in srgb, var(--module-accent), white 16%);
+    font-size: 12px;
+    font-weight: 850;
+    font-variant-numeric: tabular-nums;
+}
+
+.product-tech-stage .spec-card:hover {
+    background:
+        radial-gradient(circle at 94% 10%, color-mix(in srgb, var(--module-accent), transparent 72%), transparent 40%),
+        #1a2730 !important;
+}
+
+.product-tech-stage .spec-card:hover::before {
+    transform: scaleY(1);
+}
+
+.product-tech-stage .spec-card-header {
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr);
+    gap: 18px;
+    align-items: center;
+    min-height: 82px;
+    margin: 0 0 24px;
+    padding: 0 48px 22px 0;
+    border-color: #35434d;
+}
+
+.product-tech-stage .spec-card-icon,
+.product-tech-stage .spec-card:hover .spec-card-icon {
+    position: relative;
+    display: grid;
+    width: 76px;
+    height: 76px;
+    flex: 0 0 76px;
+    place-items: center;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.product-tech-stage .spec-card-icon::before {
+    display: none;
+}
+
+.product-tech-stage .spec-card-icon::after {
+    content: '';
+    position: absolute;
+    inset: 22px 10px 5px;
+    z-index: -1;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--module-accent), transparent 70%);
+    filter: blur(15px);
+}
+
+.product-tech-stage .spec-card-icon img,
+.product-tech-stage .spec-card:hover .spec-card-icon img {
+    display: block;
+    width: 70px;
+    height: 70px;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 13px rgba(0, 0, 0, 0.34));
+    animation: techIconFloat 5.4s ease-in-out infinite;
+}
+
+.product-tech-stage .spec-card:nth-child(even) .spec-card-icon img {
+    animation-delay: -2.4s;
+}
+
+.product-tech-stage .spec-card-header h3 {
+    margin: 0;
+    color: #f2f6f7;
+    font-size: clamp(20px, 1.7vw, 24px);
+    line-height: 1.3;
+    letter-spacing: 0;
+    word-break: keep-all;
+}
+
+.product-tech-stage .spec-list {
+    gap: 12px;
+}
+
+.product-tech-stage .spec-item {
+    gap: 12px;
+    color: #aebbc3;
+    font-size: 15px;
+    line-height: 1.55;
+    word-break: keep-all;
+}
+
+.product-tech-stage .spec-item .bullet {
+    width: 5px;
+    height: 5px;
+    margin-top: 9px;
+    border-radius: 50%;
+    background: var(--module-accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--module-accent), transparent 88%);
+}
+
+body.theme-pms .product-tech-stage .spec-card:nth-child(1) { grid-column: span 5; }
+body.theme-pms .product-tech-stage .spec-card:nth-child(2) { grid-column: span 3; }
+body.theme-pms .product-tech-stage .spec-card:nth-child(3) { grid-column: span 4; }
+body.theme-pms .product-tech-stage .spec-card:nth-child(4) { grid-column: span 4; }
+body.theme-pms .product-tech-stage .spec-card:nth-child(5) { grid-column: span 5; }
+body.theme-pms .product-tech-stage .spec-card:nth-child(6) { grid-column: span 3; }
+
+body.theme-cms .product-tech-stage .spec-card:nth-child(1),
+body.theme-cms .product-tech-stage .spec-card:nth-child(4) { grid-column: span 7; }
+
+body.theme-cms .product-tech-stage .spec-card:nth-child(2),
+body.theme-cms .product-tech-stage .spec-card:nth-child(3) { grid-column: span 5; }
+
+@keyframes techIconFloat {
+    0%, 100% { transform: translateY(3px) rotate(-2deg); }
+    50% { transform: translateY(-5px) rotate(2deg); }
+}
+
+@media (max-width: 900px) {
+    .product-tech-stage > .container > .section-header {
+        grid-template-columns: 1fr;
+        row-gap: 18px;
+    }
+
+    .product-tech-stage .spec-card,
+    .product-tech-stage .spec-card:hover,
+    body.theme-pms .product-tech-stage .spec-card:nth-child(n),
+    body.theme-cms .product-tech-stage .spec-card:nth-child(n) {
+        grid-column: span 6;
+    }
+}
+
+@media (max-width: 640px) {
+    .product-capabilities--dimensional {
+        padding: 82px 0 96px;
+    }
+
+    .product-capabilities--dimensional .bento-glass-header h2,
+    .product-tech-stage > .container > .section-header h2 {
+        font-size: clamp(36px, 11vw, 48px);
+        line-height: 1.06;
+    }
+
+    .product-capabilities--dimensional .capabilities-bento.bento-glass,
+    .product-tech-stage .specs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-capabilities--dimensional .bento-glass .cap-bento-card,
+    .product-capabilities--dimensional .bento-glass .cap-bento-card:hover {
+        min-height: 248px;
+        padding: 24px;
+    }
+
+    .product-capabilities--dimensional .bento-glass .cap-bento-icon,
+    .product-capabilities--dimensional .bento-glass .cap-bento-card:hover .cap-bento-icon {
+        top: 18px;
+        right: 18px;
+        width: 112px;
+        height: 112px;
+    }
+
+    .product-capabilities--dimensional .bento-glass .cap-bento-icon img,
+    .product-capabilities--dimensional .bento-glass .cap-bento-card:hover .cap-bento-icon img {
+        width: 94px;
+        height: 94px;
+    }
+
+    .product-capabilities--dimensional .bento-glass .cap-bento-card h3 {
+        max-width: calc(100% - 72px);
+        white-space: normal;
+    }
+
+    .product-tech-stage {
+        padding: 86px 0;
+    }
+
+    .product-tech-stage .spec-card,
+    .product-tech-stage .spec-card:hover,
+    body.theme-pms .product-tech-stage .spec-card:nth-child(n),
+    body.theme-cms .product-tech-stage .spec-card:nth-child(n) {
+        grid-column: 1 / -1;
+        min-height: 0;
+        padding: 24px;
+    }
+
+    .product-tech-stage .spec-card-header {
+        grid-template-columns: 64px minmax(0, 1fr);
+        gap: 14px;
+        min-height: 68px;
+        padding-right: 34px;
+    }
+
+    .product-tech-stage .spec-card-icon,
+    .product-tech-stage .spec-card:hover .spec-card-icon {
+        width: 62px;
+        height: 62px;
+    }
+
+    .product-tech-stage .spec-card-icon img,
+    .product-tech-stage .spec-card:hover .spec-card-icon img {
+        width: 58px;
+        height: 58px;
+    }
+
+    .product-tech-stage .specs-table-wrapper::before {
+        font-size: 9px;
+    }
+
+    .product-tech-stage .specs-table,
+    .product-tech-stage .specs-table tbody,
+    .product-tech-stage .specs-table tr,
+    .product-tech-stage .specs-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .product-tech-stage .specs-table thead {
+        display: none;
+    }
+
+    .product-tech-stage .specs-table tbody tr {
+        padding: 20px;
+        border-bottom: 1px solid #35434d;
+    }
+
+    .product-tech-stage .specs-table tbody tr:last-child {
+        border-bottom: 0;
+    }
+
+    .product-tech-stage .specs-table td,
+    .product-tech-stage .specs-table td:first-child {
+        width: 100%;
+        padding: 0;
+        border: 0;
+    }
+
+    .product-tech-stage .specs-table td:first-child {
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    .product-tech-stage .specs-table td:first-child::before {
+        width: 34px;
+        margin-right: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .product-tech-stage .spec-card-icon img,
+    .product-tech-stage .spec-card:hover .spec-card-icon img {
+        animation: none;
+    }
+}

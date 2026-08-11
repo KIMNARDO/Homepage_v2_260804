@@ -1,5 +1,3 @@
-import './lead-download.css';
-
 const PRODUCT_BY_FILE = {
   'AI_CADWin_브로슈어.pdf': 'AI CADWin',
   'Clip_PDM_브로슈어.pdf': 'Clip PDM',
