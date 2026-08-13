@@ -77,6 +77,8 @@ module.exports = defineConfig({
         clipcms: resolve(__dirname, 'product-clipcms.html'),
         brochure: resolve(__dirname, 'brochure.html'),
         companyIntro: resolve(__dirname, 'company-intro.html'),
+        contact: resolve(__dirname, 'contact.html'),
+        contactComplete: resolve(__dirname, 'contact-complete.html'),
       },
     },
   },

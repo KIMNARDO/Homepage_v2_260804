@@ -1,7 +1,7 @@
 const { createServer } = require('node:http');
-const { createReadStream, statSync } = require('node:fs');
+const { appendFileSync, createReadStream, mkdirSync, statSync } = require('node:fs');
 const { createHmac, randomBytes, timingSafeEqual } = require('node:crypto');
-const { basename, extname, join, resolve, sep } = require('node:path');
+const { basename, dirname, extname, join, resolve, sep } = require('node:path');
 
 const root = resolve(__dirname, 'dist');
 const port = Number(process.env.PORT) || 4173;
@@ -10,8 +10,22 @@ const downloadTokenSecret = process.env.DOWNLOAD_TOKEN_SECRET || randomBytes(32)
 const leadRateLimits = new Map();
 const contactRateLimits = new Map();
 const pendingContactDeliveries = new Map();
-const contactProducts = new Set(['통합 PLM 전체', 'AI CADWin', 'Clip PDM', 'Clip PMS', 'Multi-BOM', 'Clip CMS']);
+const contactProducts = new Set([
+  '통합 PLM 전체',
+  'AI CADWin',
+  '3D CAD 웹뷰어',
+  'Clip PDM',
+  'Clip PMS',
+  'Multi-BOM',
+  'MultiBOM',
+  'Clip CMS',
+  '아직 잘 모르겠음',
+]);
 const contactTimes = new Set(['오후 2시~5시', '오전 9시~12시', '오후 5시 이후', '시간 무관']);
+const implementationTimings = new Set(['', '3개월 이내', '6개월 이내', '1년 이내', '정보 수집 단계']);
+const companySizes = new Set(['', '50명 미만', '50~300명', '300~1,000명', '1,000명 이상']);
+const leadTypes = new Set(['contact', 'consult', 'diagnosis', 'demo', 'product']);
+const freeEmailDomains = new Set(['gmail.com', 'naver.com', 'daum.net', 'hanmail.net', 'nate.com', 'outlook.com', 'hotmail.com']);
 const deliveryRetryDelays = [0, 500, 1500];
 const pendingContactRetryDelays = [30 * 1000, 2 * 60 * 1000, 10 * 60 * 1000];
 
@@ -183,6 +197,13 @@ function consumeContactRateLimit(ip) {
 function createContactLeadId() {
   const date = new Date().toISOString().slice(0, 10).replaceAll('-', '');
   return `PLM-${date}-${randomBytes(3).toString('hex').toUpperCase()}`;
+}
+
+function archiveContactLead(lead) {
+  const archivePath = resolve(process.env.LEAD_ARCHIVE_PATH || join(__dirname, '.data', 'contact-leads.jsonl'));
+  mkdirSync(dirname(archivePath), { recursive: true });
+  appendFileSync(archivePath, `${JSON.stringify(lead)}\n`, { encoding: 'utf8', flag: 'a' });
+  return archivePath;
 }
 
 function createBrochureLeadId() {
@@ -457,8 +478,14 @@ async function deliverContactViaFormSubmit(lead) {
     phone: lead.phone,
     message: lead.message,
     '접수번호': lead.leadId,
-    '관심 제품': lead.product,
+    '부서 / 직책': lead.departmentTitle || '-',
+    '관심 제품': lead.products.join(', '),
+    '회사 규모': lead.companySize || '-',
+    '도입 검토 시기': lead.implementationTiming || '-',
+    '현재 사용 시스템': lead.currentSystems || '-',
+    '문의 유형': lead.leadType,
     '연락 가능 시간': lead.contactTime,
+    '개인정보 동의 시각': lead.consentAt,
     '접수 시각': lead.requestedAt,
     '유입 페이지': lead.sourcePage,
   };
@@ -492,13 +519,21 @@ function buildContactEmailContent(lead) {
     ['접수번호', lead.leadId],
     ['회사명', lead.company],
     ['담당자명', lead.name],
+    ['부서 / 직책', lead.departmentTitle || '-'],
     ['연락처', lead.phone],
     ['업무 이메일', lead.email],
-    ['관심 제품', lead.product],
-    ['연락 가능 시간', lead.contactTime],
-    ['문의 내용', lead.message],
+    ['이메일 유형', lead.isFreeEmail ? '개인 이메일' : '회사 이메일'],
+    ['관심 제품', lead.products.join(', ')],
+    ['회사 규모', lead.companySize || '-'],
+    ['도입 검토 시기', lead.implementationTiming || '-'],
+    ['현재 사용 시스템', lead.currentSystems || '-'],
+    ['문의 유형', lead.leadType],
+    ['연락 가능 시간', lead.contactTime || '-'],
+    ['문의 내용', lead.message || '-'],
+    ['개인정보 동의 시각', lead.consentAt],
     ['접수 시각', lead.requestedAt],
     ['유입 페이지', lead.sourcePage],
+    ['문의 작성 페이지', lead.formPage],
   ];
   const htmlRows = rows.map(([label, value]) => `
     <tr><th style="padding:9px 12px;text-align:left;background:#f1f4f2;border:1px solid #dce2df">${escapeHtml(label)}</th>
@@ -611,16 +646,35 @@ async function handleContactLeadRequest(req, res) {
     return sendJson(res, 400, { message: '상담 폼을 다시 열어 작성해 주세요.' });
   }
 
+  const submittedProducts = Array.isArray(body.products)
+    ? body.products
+    : String(body.product || '').split(',');
+  const products = [...new Set(submittedProducts
+    .map(product => cleanText(product, 80))
+    .filter(Boolean))]
+    .slice(0, 8);
+  const email = cleanText(body.email, 160).toLowerCase();
+  const emailDomain = email.split('@')[1] || '';
   const lead = {
     leadId: createContactLeadId(),
     company: cleanText(body.company, 80),
     name: cleanText(body.name, 40),
+    departmentTitle: cleanText(body.departmentTitle, 80),
     phone: cleanText(body.phone, 20),
-    email: cleanText(body.email, 160).toLowerCase(),
-    product: cleanText(body.product, 80),
+    email,
+    isFreeEmail: freeEmailDomains.has(emailDomain),
+    products,
+    product: products.join(', '),
+    companySize: cleanText(body.companySize, 40),
+    implementationTiming: cleanText(body.implementationTiming, 40),
+    currentSystems: cleanText(body.currentSystems, 240),
+    leadType: cleanText(body.leadType, 30) || 'contact',
     contactTime: cleanText(body.contactTime, 40),
     message: cleanText(body.message, 1200),
-    sourcePage: cleanText(body.sourcePage, 500),
+    sourcePage: cleanText(body.sourcePage, 500) || 'https://www.papsnet.net/contact.html',
+    formPage: cleanText(body.formPage, 500) || 'https://www.papsnet.net/contact.html',
+    consentAt: new Date().toISOString(),
+    clientConsentAt: cleanText(body.consentAt, 40),
     requestedAt: new Date().toISOString(),
     ip,
     userAgent: cleanText(req.headers['user-agent'], 300),
@@ -632,17 +686,26 @@ async function handleContactLeadRequest(req, res) {
   if (!isPlausibleName(lead.name)) errors.push('담당자명을 확인해 주세요.');
   if (!isValidPhone(lead.phone)) errors.push('연락 가능한 전화번호를 입력해 주세요.');
   if (!isValidEmail(lead.email)) errors.push('회신 가능한 이메일 주소를 입력해 주세요.');
-  if (!contactProducts.has(lead.product)) errors.push('관심 제품을 다시 선택해 주세요.');
-  if (!contactTimes.has(lead.contactTime)) errors.push('연락 가능 시간을 다시 선택해 주세요.');
-  if (lead.message.length < 10 || hasRepeatedJunk(lead.message)) errors.push('상담이 필요한 내용을 10자 이상 입력해 주세요.');
+  if (!lead.products.length || lead.products.some(product => !contactProducts.has(product))) errors.push('관심 제품을 다시 선택해 주세요.');
+  if (lead.contactTime && !contactTimes.has(lead.contactTime)) errors.push('연락 가능 시간을 다시 선택해 주세요.');
+  if (!implementationTimings.has(lead.implementationTiming)) errors.push('도입 검토 시기를 다시 선택해 주세요.');
+  if (!companySizes.has(lead.companySize)) errors.push('회사 규모를 다시 선택해 주세요.');
+  if (!leadTypes.has(lead.leadType)) errors.push('문의 유형을 다시 확인해 주세요.');
+  if (lead.message && hasRepeatedJunk(lead.message)) errors.push('문의 내용을 다시 확인해 주세요.');
 
   if (errors.length) {
     console.warn('[contact-spam-blocked]', JSON.stringify({ reason: 'validation', ip, errors }));
     return sendJson(res, 422, { message: errors[0], errors });
   }
 
-  // 외부 메일 서비스 상태와 무관하게 검증된 상담 정보는 먼저 Heroku 로그에 확정 기록한다.
+  // 외부 메일 서비스 상태와 무관하게 검증된 상담 정보는 먼저 서버 로그와 JSONL 원본에 기록한다.
   console.log('[contact-lead-received]', JSON.stringify(lead));
+  let archivePath = null;
+  try {
+    archivePath = archiveContactLead(lead);
+  } catch (error) {
+    console.error('[contact-lead-archive-error]', lead.leadId, error.message);
+  }
 
   try {
     const delivery = await notifyContactLead(lead);
@@ -654,6 +717,7 @@ async function handleContactLeadRequest(req, res) {
       leadId: lead.leadId,
       receivedAt: lead.requestedAt,
       deliveryPending,
+      archived: Boolean(archivePath),
     });
   } catch (error) {
     console.error('[contact-lead-delivery-unexpected-error]', lead.leadId, error.message);
@@ -663,6 +727,7 @@ async function handleContactLeadRequest(req, res) {
       leadId: lead.leadId,
       receivedAt: lead.requestedAt,
       deliveryPending: true,
+      archived: Boolean(archivePath),
     });
   }
 }

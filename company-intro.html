@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WNWPBJMK');</script>
+  <!-- End Google Tag Manager -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BSW4E81SS0"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BSW4E81SS0');</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="팹스넷 AI Clip PLM 인터랙티브 회사소개서">
@@ -8,6 +13,7 @@
   <link rel="stylesheet" href="company-intro.css">
 </head>
 <body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNWPBJMK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="intro-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
 
   <header class="intro-header" id="introHeader">
@@ -21,7 +27,7 @@
       <a href="#multibom">EPL</a>
       <a href="#execution">Execution</a>
     </nav>
-    <a class="intro-contact" href="mailto:kimnardo@papsnet.net">도입 문의</a>
+    <a class="intro-contact" href="contact.html?type=consult">도입 문의</a>
   </header>
 
   <aside class="scene-rail" aria-label="회사소개서 진행 상태">
@@ -32,7 +38,7 @@
     <a href="#multibom"><span>05</span><b>Multi-BOM EPL</b></a>
     <a href="#execution"><span>06</span><b>Project & AI</b></a>
     <a href="#cost"><span>07</span><b>Cost & integration</b></a>
-    <a href="#contact"><span>08</span><b>Contact</b></a>
+    <a href="contact.html?type=contact"><span>08</span><b>Contact</b></a>
   </aside>
 
   <main>
@@ -275,7 +281,7 @@
         </h2>
         <p>제품을 먼저 밀어 넣지 않습니다. 현재 CAD, 문서, BOM, 프로젝트, ERP와 원가 흐름을 확인하고 적용 범위와 연계 방식을 함께 설계합니다.</p>
         <div class="contact-actions">
-          <a class="action action-dark" href="mailto:kimnardo@papsnet.net">도입 범위 상담 <span aria-hidden="true">↗</span></a>
+          <a class="action action-dark" href="contact.html?type=consult">도입 범위 상담 <span aria-hidden="true">↗</span></a>
           <a class="action action-outline-dark" href="index.html">전체 홈페이지 <span aria-hidden="true">↗</span></a>
         </div>
         <div class="contact-meta">
@@ -288,6 +294,7 @@
   </main>
 
   <button class="motion-toggle" id="motionToggle" type="button" aria-pressed="false">MOTION ON</button>
+  <script type="module" src="analytics-events.js"></script>
   <script type="module" src="company-intro.js"></script>
 </body>
 </html>

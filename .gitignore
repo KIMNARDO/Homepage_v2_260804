@@ -36,6 +36,7 @@ images/papsnet-corporate-logo.jpeg
 
 .tmp/
 _screenshots/
+.data/
 
 # generated presentation and PDF QA artifacts (kept locally, not deployed)
 deck_build/
