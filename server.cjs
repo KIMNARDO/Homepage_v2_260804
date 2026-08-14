@@ -5,7 +5,18 @@ const { basename, dirname, extname, join, resolve, sep } = require('node:path');
 
 const root = resolve(__dirname, 'dist');
 const port = Number(process.env.PORT) || 4173;
-const leadNotificationEmail = process.env.LEAD_NOTIFICATION_EMAIL || 'kimnardo@papsnet.net';
+function parseEmailList(value) {
+  return [...new Set(String(value || '')
+    .split(',')
+    .map(email => email.trim().toLowerCase())
+    .filter(email => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)))];
+}
+
+const leadNotificationEmails = parseEmailList(
+  process.env.LEAD_NOTIFICATION_EMAILS || process.env.LEAD_NOTIFICATION_EMAIL || 'kimnardo@papsnet.net',
+);
+const leadNotificationEmail = leadNotificationEmails[0] || 'kimnardo@papsnet.net';
+const leadNotificationBackupEmails = leadNotificationEmails.slice(1);
 const downloadTokenSecret = process.env.DOWNLOAD_TOKEN_SECRET || randomBytes(32).toString('hex');
 const leadRateLimits = new Map();
 const contactRateLimits = new Map();
@@ -324,8 +335,45 @@ function parseFormSubmitResponse(responseText, label) {
   return payload;
 }
 
+function parseLeadWebhookResponse(responseText, label) {
+  let payload;
+
+  try {
+    payload = JSON.parse(responseText);
+  } catch {
+    throw new Error(`${label} returned an invalid response`);
+  }
+
+  if (payload.ok !== true) {
+    throw new Error(`${label} rejected: ${cleanText(payload.message, 180) || 'unknown reason'}`);
+  }
+
+  return payload;
+}
+
 function uniqueEndpoints(...values) {
   return [...new Set(values.filter(Boolean).map(value => String(value).trim()).filter(Boolean))];
+}
+
+async function deliverLeadWebhook(event, lead, { notificationRequested = true } = {}) {
+  if (!process.env.LEAD_WEBHOOK_URL) {
+    return { configured: false, delivered: false, emailSent: false, stored: false };
+  }
+
+  const { responseText } = await fetchDelivery(process.env.LEAD_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ event, notificationRequested, ...lead }),
+  }, `${event} webhook`);
+  const payload = parseLeadWebhookResponse(responseText, `${event} webhook`);
+
+  return {
+    configured: true,
+    delivered: true,
+    duplicate: payload.duplicate === true,
+    emailSent: payload.emailSent === true,
+    stored: payload.stored !== false,
+  };
 }
 
 async function deliverBrochureViaResend(lead, rows, htmlRows) {
@@ -338,6 +386,7 @@ async function deliverBrochureViaResend(lead, rows, htmlRows) {
     body: JSON.stringify({
       from: process.env.LEAD_FROM_EMAIL,
       to: [leadNotificationEmail],
+      ...(leadNotificationBackupEmails.length ? { bcc: leadNotificationBackupEmails } : {}),
       reply_to: lead.email,
       subject: `[Clip PLM 자료 다운로드 ${lead.leadId}] ${lead.company} · ${lead.name}`,
       text: rows.map(([label, value]) => `${label}: ${value}`).join('\n'),
@@ -414,30 +463,45 @@ async function notifyLead(lead) {
     <tr><th style="padding:9px 12px;text-align:left;background:#f1f4f2;border:1px solid #dce2df">${escapeHtml(label)}</th>
     <td style="padding:9px 12px;border:1px solid #dce2df">${escapeHtml(value)}</td></tr>`).join('');
 
-  let emailChannel;
-  if (process.env.RESEND_API_KEY && process.env.LEAD_FROM_EMAIL) {
-    try {
-      emailChannel = await deliverBrochureViaResend(lead, rows, htmlRows);
-    } catch (error) {
-      console.error('[brochure-lead-resend-error]', lead.leadId, error);
+  const delivered = [];
+  let webhookDelivered = false;
+  let emailDelivered = false;
+
+  // The durable Sheet/CRM record is attempted first so an email outage cannot lose the lead.
+  try {
+    const webhook = await deliverLeadWebhook('brochure.downloaded', lead);
+    webhookDelivered = webhook.delivered && webhook.stored;
+    emailDelivered = webhook.emailSent;
+    if (webhookDelivered) delivered.push('webhook');
+    if (emailDelivered) delivered.push('webhook-email');
+  } catch (error) {
+    console.error('[brochure-lead-webhook-error]', lead.leadId, error.message);
+  }
+
+  if (!emailDelivered) {
+    let emailChannel;
+    if (process.env.RESEND_API_KEY && process.env.LEAD_FROM_EMAIL) {
+      try {
+        emailChannel = await deliverBrochureViaResend(lead, rows, htmlRows);
+      } catch (error) {
+        console.error('[brochure-lead-resend-error]', lead.leadId, error.message);
+      }
+    }
+    if (!emailChannel) {
+      try {
+        emailChannel = await deliverBrochureViaFormSubmit(lead);
+      } catch (error) {
+        console.error('[brochure-lead-formsubmit-error]', lead.leadId, error.message);
+      }
+    }
+    if (emailChannel) {
+      emailDelivered = true;
+      delivered.push(emailChannel);
     }
   }
-  if (!emailChannel) emailChannel = await deliverBrochureViaFormSubmit(lead);
 
-  const delivered = [emailChannel];
-  if (process.env.LEAD_WEBHOOK_URL) {
-    try {
-      const response = await fetch(process.env.LEAD_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ event: 'brochure.downloaded', ...lead }),
-        signal: AbortSignal.timeout(8000),
-      });
-      if (!response.ok) throw new Error(`Lead webhook failed: ${response.status}`);
-      delivered.push('webhook');
-    } catch (error) {
-      console.error('[brochure-lead-webhook-error]', lead.leadId, error);
-    }
+  if (!webhookDelivered && !emailDelivered) {
+    throw new Error('Brochure lead delivery failed on every configured channel');
   }
   return delivered;
 }
@@ -452,6 +516,7 @@ async function deliverContactViaResend(lead, rows, htmlRows) {
     body: JSON.stringify({
       from: process.env.LEAD_FROM_EMAIL,
       to: [leadNotificationEmail],
+      ...(leadNotificationBackupEmails.length ? { bcc: leadNotificationBackupEmails } : {}),
       reply_to: lead.email,
       subject: `[Clip PLM 상담 ${lead.leadId}] ${lead.company} · ${lead.name}`,
       text: rows.map(([label, value]) => `${label}: ${value}`).join('\n'),
@@ -562,58 +627,89 @@ async function deliverContactEmail(lead) {
   }
 }
 
-async function notifyContactLead(lead) {
+async function notifyContactLead(lead, {
+  sendWebhook = true,
+  sendEmail = true,
+  notificationRequested = true,
+} = {}) {
   if (process.env.CONTACT_DELIVERY_MODE === 'log') {
-    return { delivered: ['server-log'], failures: [], emailDelivered: true };
+    return {
+      delivered: ['server-log'],
+      failures: [],
+      emailDelivered: true,
+      webhookConfigured: Boolean(process.env.LEAD_WEBHOOK_URL),
+      webhookDelivered: Boolean(process.env.LEAD_WEBHOOK_URL),
+    };
   }
 
-  const email = await deliverContactEmail(lead);
-  const delivered = email.channel ? [email.channel] : [];
-  const failures = [...email.failures];
-  if (process.env.LEAD_WEBHOOK_URL) {
+  const delivered = [];
+  const failures = [];
+  const webhookConfigured = Boolean(process.env.LEAD_WEBHOOK_URL);
+  let webhookDelivered = !webhookConfigured;
+  let emailDelivered = false;
+
+  if (sendWebhook && webhookConfigured) {
     try {
-      const response = await fetch(process.env.LEAD_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ event: 'contact.requested', ...lead }),
-        signal: AbortSignal.timeout(8000),
-      });
-      if (!response.ok) throw new Error(`Contact webhook failed: ${response.status}`);
+      const webhook = await deliverLeadWebhook('contact.requested', lead, { notificationRequested });
+      webhookDelivered = webhook.delivered && webhook.stored;
+      emailDelivered = webhook.emailSent;
       delivered.push('webhook');
+      if (emailDelivered) delivered.push('webhook-email');
     } catch (error) {
       failures.push(`webhook:${error.message}`);
       console.error('[contact-lead-webhook-error]', lead.leadId, error.message);
     }
   }
-  return { delivered, failures, emailDelivered: Boolean(email.channel) };
+
+  if (sendEmail && !emailDelivered) {
+    const email = await deliverContactEmail(lead);
+    failures.push(...email.failures);
+    if (email.channel) {
+      emailDelivered = true;
+      delivered.push(email.channel);
+    }
+  }
+
+  return { delivered, failures, emailDelivered, webhookConfigured, webhookDelivered };
 }
 
-function scheduleContactLeadRetry(lead, retryIndex = 0) {
+function scheduleContactLeadRetry(lead, state, retryIndex = 0) {
   if (retryIndex >= pendingContactRetryDelays.length) {
     pendingContactDeliveries.delete(lead.leadId);
-    console.error('[contact-lead-delivery-exhausted]', lead.leadId);
+    console.error('[contact-lead-delivery-exhausted]', lead.leadId, JSON.stringify(state));
     return;
   }
 
   const delayMs = pendingContactRetryDelays[retryIndex];
-  pendingContactDeliveries.set(lead.leadId, { lead, retryIndex, scheduledAt: Date.now() + delayMs });
+  pendingContactDeliveries.set(lead.leadId, { lead, state, retryIndex, scheduledAt: Date.now() + delayMs });
   const timer = setTimeout(async () => {
     try {
-      const delivery = await deliverContactEmail(lead);
-      if (delivery.channel) {
+      const delivery = await notifyContactLead(lead, {
+        sendWebhook: !state.webhookDelivered,
+        sendEmail: !state.emailDelivered,
+        notificationRequested: !state.emailDelivered,
+      });
+      const nextState = {
+        emailDelivered: state.emailDelivered || delivery.emailDelivered,
+        webhookDelivered: state.webhookDelivered || delivery.webhookDelivered,
+      };
+      const webhookComplete = !delivery.webhookConfigured || nextState.webhookDelivered;
+
+      if (nextState.emailDelivered && webhookComplete) {
         pendingContactDeliveries.delete(lead.leadId);
         console.log('[contact-lead-delivery-recovered]', JSON.stringify({
           leadId: lead.leadId,
-          delivered: [delivery.channel],
+          delivered: delivery.delivered,
           retry: retryIndex + 1,
         }));
         return;
       }
       console.error('[contact-lead-delivery-retry-failed]', lead.leadId, retryIndex + 1, delivery.failures.join(' | '));
+      scheduleContactLeadRetry(lead, nextState, retryIndex + 1);
     } catch (error) {
       console.error('[contact-lead-delivery-retry-error]', lead.leadId, retryIndex + 1, error.message);
+      scheduleContactLeadRetry(lead, state, retryIndex + 1);
     }
-    scheduleContactLeadRetry(lead, retryIndex + 1);
   }, delayMs);
   timer.unref?.();
 }
@@ -709,9 +805,14 @@ async function handleContactLeadRequest(req, res) {
 
   try {
     const delivery = await notifyContactLead(lead);
-    const deliveryPending = !delivery.emailDelivered;
+    const deliveryPending = !delivery.emailDelivered || !delivery.webhookDelivered;
     console.log('[contact-lead]', JSON.stringify({ ...lead, ...delivery, deliveryPending }));
-    if (deliveryPending) scheduleContactLeadRetry(lead);
+    if (deliveryPending) {
+      scheduleContactLeadRetry(lead, {
+        emailDelivered: delivery.emailDelivered,
+        webhookDelivered: delivery.webhookDelivered,
+      });
+    }
     return sendJson(res, deliveryPending ? 202 : 200, {
       ok: true,
       leadId: lead.leadId,
@@ -721,7 +822,7 @@ async function handleContactLeadRequest(req, res) {
     });
   } catch (error) {
     console.error('[contact-lead-delivery-unexpected-error]', lead.leadId, error.message);
-    scheduleContactLeadRetry(lead);
+    scheduleContactLeadRetry(lead, { emailDelivered: false, webhookDelivered: false });
     return sendJson(res, 202, {
       ok: true,
       leadId: lead.leadId,
