@@ -12,6 +12,7 @@ const runtimeAssets = [
   ['images/hero-equipment-digital-twin.webp', 'images/hero-equipment-digital-twin.webp'],
   ['images/clip-2d-viewer.png', 'images/clip-2d-viewer.png'],
   ['images/clip-3d-viewer.png', 'images/clip-3d-viewer.png'],
+  ['images/clip3d-viewer', 'images/clip3d-viewer'],
   ['images/cadwin_drawing_inspection.png', 'images/cadwin_drawing_inspection.png'],
   ['images/plm_project_dashboard.png', 'images/plm_project_dashboard.png'],
   ['images/pms_project_overview.png', 'images/pms_project_overview.png'],
@@ -25,6 +26,7 @@ const runtimeAssets = [
   ['videos/poster-cadwin-clean.png', 'videos/poster-cadwin-clean.png'],
   ['videos/v3-overview-preview.jpg', 'videos/v3-overview-preview.jpg'],
   ['clip_pdm_dashboard.png', 'clip_pdm_dashboard.png'],
+  ['brochures', 'brochures'],
 ];
 
 function copyRuntimeAssets() {
@@ -75,6 +77,7 @@ module.exports = defineConfig({
         clippms: resolve(__dirname, 'product-clippms.html'),
         multibom: resolve(__dirname, 'product-multibom.html'),
         clipcms: resolve(__dirname, 'product-clipcms.html'),
+        clip3dviewer: resolve(__dirname, 'product-clip3dviewer.html'),
         brochure: resolve(__dirname, 'brochure.html'),
         companyIntro: resolve(__dirname, 'company-intro.html'),
         contact: resolve(__dirname, 'contact.html'),

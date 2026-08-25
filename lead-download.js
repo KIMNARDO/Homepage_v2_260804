@@ -4,6 +4,7 @@ const PRODUCT_BY_FILE = {
   'Clip_PMS_브로슈어.pdf': 'Clip PMS',
   'Multi-BOM_브로슈어.pdf': 'Clip Multi-BOM EPL',
   'Clip_CMS_브로슈어.pdf': 'Clip CMS',
+  'Clip3D_Viewer_소개자료.pdf': 'Clip 3D Viewer',
 };
 
 function inferProduct(resource, explicitProduct) {

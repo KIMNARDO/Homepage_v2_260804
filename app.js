@@ -190,17 +190,17 @@ document.addEventListener('DOMContentLoaded', () => {
       specTwo: ['CONNECTED', '문서 · 개정']
     },
     viewer3d: {
-      image: 'images/clip-3d-viewer.png',
-      alt: 'Clip PLM 3D 형상 뷰어 화면',
-      window: 'CATIA 3D VIEWER',
-      eyebrow: '3D Viewer',
-      title: 'CATIA 형상을 PLM에서 검토',
-      copy: 'CATIA 데이터를 확인하는 3D 뷰어를 Clip PLM과 함께 제공합니다.',
-      href: 'product-clippdm.html',
-      link: '3D 뷰어 구성 보기',
-      caption: '제품 구조와 형상을 분해해 검토',
-      specOne: ['FORMAT', 'CATIA'],
-      specTwo: ['CONNECTED', 'BOM · 주석']
+      image: 'images/clip3d-viewer/viewer-npr.webp',
+      alt: 'Clip 3D Viewer의 실제 NPR 렌더링 화면',
+      window: 'WEB 3D CAD VIEWER',
+      eyebrow: 'Clip 3D Viewer',
+      title: '주요 CAD 형상을 브라우저에서 검토',
+      copy: '설치 없이 측정, 단면, 분해, 마크업과 제품 구조를 확인하고 Clip PLM 데이터 흐름에 연결합니다.',
+      href: 'product-clip3dviewer.html',
+      link: 'Clip 3D Viewer 자세히 보기',
+      caption: '실제 제품 화면에서 형상과 제품 구조를 검토',
+      specOne: ['FORMAT', '25+ CAD'],
+      specTwo: ['REVIEW', '측정 · 단면 · 분해']
     },
     chatbot: {
       image: 'images/product-tour/chatbot-results.png',
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ['images/icons3d/database-blue.webp', '문서 관리', '도면과 문서 기준화', '도면, 사양서, 산출물을 품목과 프로젝트에 연결해 관리합니다.'],
         ['images/icons3d/fact_check-purple.webp', '승인 흐름', '검토와 결재 이력', '부서별 승인 상태와 변경 요청을 같은 화면에서 추적합니다.'],
         ['images/icons3d/manage_history-blue.webp', '개정 관리', '리비전 추적', '최신본과 이전본의 변경 이력을 관리합니다.'],
-        ['images/icons3d/view_in_ar-cyan.webp', '통합 뷰어', '2D·3D 형상 확인', 'DWG·DXF 도면과 CATIA 3D 형상을 PLM에서 확인합니다.']
+        ['images/icons3d/view_in_ar-cyan.webp', '통합 뷰어', '2D·3D 형상 확인', 'DWG·DXF 도면과 주요 CAD 3D 형상을 PLM 데이터와 함께 확인합니다.']
       ]
     },
     pms: {
@@ -336,15 +336,15 @@ document.addEventListener('DOMContentLoaded', () => {
     bom: {
       href: 'product-multibom.html',
       image: 'images/multibom_dashboard_real.webp',
-      alt: 'Multi-BOM 구조 비교 화면',
-      eyebrow: 'Multi-BOM',
-      title: 'E-BOM과 M-BOM의 구조 차이를 비교',
-      copy: '설계 BOM과 제조 BOM을 같은 기준에서 비교하고 변경된 품목과 수량을 확인합니다.',
+      alt: 'Clip Multi-BOM EPL 다중 제품 구조 관리 화면',
+      eyebrow: 'Multi-BOM EPL',
+      title: '여러 0레벨 제품 구조를 한 화면에서 관리',
+      copy: '서로 다른 최상위 제품의 하위 BOM 구조를 나란히 생성·편집·비교하고 변경 범위를 확인합니다.',
       features: [
-        ['images/icons3d/account_tree-green.webp', '설계 BOM', 'E-BOM 구조 관리', '설계 관점의 제품 구조와 품목 관계를 관리합니다.'],
-        ['images/icons3d/layers-green.webp', '제조 BOM', 'M-BOM 구조 관리', '제조 관점의 공정과 조립 구조를 관리합니다.'],
-        ['images/icons3d/swap_horiz-green.webp', '구조 비교', '변경 항목 확인', 'BOM 간 추가, 삭제, 변경 항목을 비교합니다.'],
-        ['images/icons3d/hub-green.webp', '데이터 연결', '품목 관계 추적', '설계와 제조 데이터의 연결 관계를 확인합니다.']
+        ['images/icons3d/account_tree-green.webp', '다중 제품 구조', '0레벨별 하위 구조 관리', '제품마다 다른 Part·Assy 구조를 하나의 EPL 화면에서 관리합니다.'],
+        ['images/icons3d/layers-green.webp', '구조 편집', '레벨 자유 편집', 'BOM 레벨과 품목 관계를 업무 기준에 맞게 생성·수정·삭제합니다.'],
+        ['images/icons3d/swap_horiz-green.webp', 'CAD·PDF 입력', '설계 데이터에서 BOM 시작', 'AutoCAD·SolidWorks 연동 또는 고객 양식 PDF 가져오기를 구성할 수 있습니다.'],
+        ['images/icons3d/hub-green.webp', '데이터 연결', '뷰어·ERP 인터페이스', '2D·3D 검토와 고객 ERP 데이터 인터페이스를 도입 범위에 맞춰 연결합니다.']
       ]
     },
     cms: {
@@ -432,6 +432,67 @@ document.addEventListener('DOMContentLoaded', () => {
       setProductShowcase(nextTab.dataset.productTab);
     });
   });
+
+  // R1: Let visitors describe a task first, then route them to the matching
+  // real product surface instead of making them decode the product names.
+  const heroQueryForm = document.querySelector('[data-hero-query]');
+  const heroQueryResult = document.querySelector('[data-hero-query-result]');
+
+  if (heroQueryForm) {
+    heroQueryForm.querySelectorAll('[data-hero-query-example]').forEach(button => {
+      button.addEventListener('click', () => {
+        const input = heroQueryForm.querySelector('input[name="query"]');
+        if (!input) return;
+        input.value = button.dataset.heroQueryExample || '';
+        heroQueryForm.requestSubmit();
+      });
+    });
+
+    heroQueryForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const input = heroQueryForm.querySelector('input[name="query"]');
+      const query = input ? input.value.trim().toLowerCase() : '';
+      if (!query) return;
+
+      let target = document.querySelector('#products');
+      let productKey = 'cadwin';
+      let result = 'AI CADWin의 도면 분석 화면으로 안내합니다.';
+
+      if (/(3d|catia|3차원|형상)/i.test(query)) {
+        target = document.querySelector('#technology');
+        setTechnology('viewer3d');
+        result = 'Clip 3D Viewer의 실제 웹 검토 화면으로 안내합니다.';
+      } else if (/(2d|dwg|dxf|뷰어|viewer)/i.test(query)) {
+        target = document.querySelector('#technology');
+        setTechnology('viewer2d');
+        result = 'DWG·DXF 2D Viewer 구성으로 안내합니다.';
+      } else if (/(챗봇|chatbot|질문|자연어|assistant)/i.test(query)) {
+        target = document.querySelector('#technology');
+        setTechnology('chatbot');
+        result = 'PLM AI Chatbot 실제 화면으로 안내합니다.';
+      } else if (/(bom|epl|부품|구조|assy|어셈블리)/i.test(query)) {
+        productKey = 'bom';
+        result = 'Multi-BOM EPL의 다중 제품 구조 화면으로 안내합니다.';
+      } else if (/(프로젝트|pms|일정|지연|gate|wbs)/i.test(query)) {
+        productKey = 'pms';
+        result = 'Clip PMS의 프로젝트·일정 화면으로 안내합니다.';
+      } else if (/(원가|cms|비용|견적|sap|erp)/i.test(query)) {
+        productKey = 'cms';
+        result = 'Clip CMS의 원가 관리 화면으로 안내합니다.';
+      } else if (/(pdm|문서|리비전|개정|승인|체크인)/i.test(query)) {
+        productKey = 'pdm';
+        result = 'Clip PDM의 도면·문서·리비전 화면으로 안내합니다.';
+      } else if (/(autocad|solidworks|도면|검색|추출|cadwin|ai)/i.test(query)) {
+        productKey = 'cadwin';
+      }
+
+      if (target && target.id === 'products') setProductShowcase(productKey);
+      if (heroQueryResult) heroQueryResult.innerHTML = `<i aria-hidden="true"></i>${result}`;
+      window.setTimeout(() => {
+        if (target) target.scrollIntoView({ behavior: motionQuery.matches ? 'auto' : 'smooth', block: 'start' });
+      }, 120);
+    });
+  }
 
   // =============================
   // ACTUAL PRODUCT TOUR
@@ -1302,9 +1363,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateFacilityPartSequence(heroSequenceValues.facility);
 
     if (heroStepStatus) {
-      heroStepStatus.textContent = heroSequenceStep === 0
-        ? 'SCROLL · ASSEMBLE'
-        : `SCROLL · ${String(heroSequenceStep).padStart(2, '0')} / 03`;
+      const statusLabels = [
+        'SCROLL · 자동차 BOM 전개',
+        '01 / 03 · 자동차 BOM 조립',
+        '02 / 03 · 항공 구성·리비전',
+        '03 / 03 · 건축 디지털 트윈'
+      ];
+      heroStepStatus.textContent = statusLabels[heroSequenceStep];
     }
   }
 
@@ -2219,4 +2284,35 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+});
+
+/* =========================================
+   LAZY BROADCAST PLAYER
+   ========================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  const mediaPlayer = document.querySelector('[data-media-player]');
+  if (!mediaPlayer) return;
+
+  mediaPlayer.addEventListener('click', () => {
+    if (mediaPlayer.dataset.loaded === 'true') return;
+
+    const { videoId, videoStart, videoEnd } = mediaPlayer.dataset;
+    const iframe = document.createElement('iframe');
+    iframe.className = 'am-media-iframe';
+    iframe.title = '팍스경제TV 클로즈업기업현장 주식회사 팹스넷 소개 구간';
+    iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?start=${videoStart}&end=${videoEnd}&autoplay=1&rel=0&playsinline=1`;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allowFullscreen = true;
+
+    mediaPlayer.dataset.loaded = 'true';
+    mediaPlayer.replaceChildren(iframe);
+
+    window.papsnetAnalytics?.push('media_play', {
+      media_name: '팍스경제TV 클로즈업기업현장',
+      media_source: 'youtube',
+      media_segment: '00:29-06:41',
+      page_path: window.location.pathname
+    });
+  }, { once: true });
 });

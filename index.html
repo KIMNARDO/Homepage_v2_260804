@@ -39,7 +39,7 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="amphora-plm.css?v=20260806-platform-workflow-3">
+    <link rel="stylesheet" href="amphora-plm.css?v=20260824-media-feature-1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -89,14 +89,14 @@
 
   <nav class="nav has-announcement" id="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo" aria-label="Papsnet 홈">
+      <a href="/" class="nav-logo" aria-label="(주)팹스넷 메인 페이지로 이동">
         <div class="nav-logo-img-wrap"><img src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
       </a>
 
       <div class="nav-center">
         <div class="nav-dropdown">
           <button class="nav-dropdown-trigger nav-link" aria-expanded="false" aria-haspopup="true">
-            솔루션 <span class="material-symbols-rounded nav-dropdown-chevron" aria-hidden="true">expand_more</span>
+            솔루션 <span class="nav-dropdown-chevron" aria-hidden="true"></span>
           </button>
           <div class="nav-dropdown-menu">
             <a href="product-cadwin.html" class="nav-dropdown-item" data-product="cadwin">
@@ -114,6 +114,9 @@
             <a href="product-clipcms.html" class="nav-dropdown-item" data-product="cms">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip CMS</span><span class="nav-dropdown-item-desc">사전·사후 원가관리</span></span>
             </a>
+            <a href="product-clip3dviewer.html" class="nav-dropdown-item" data-product="viewer3d">
+              <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip 3D Viewer</span><span class="nav-dropdown-item-desc">웹 기반 3D CAD 검토</span></span>
+            </a>
           </div>
         </div>
         <a href="#platform" class="nav-link">플랫폼</a>
@@ -125,8 +128,8 @@
 
       <div class="nav-right">
         <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">
-          <span class="material-symbols-rounded theme-icon-light" aria-hidden="true">dark_mode</span>
-          <span class="material-symbols-rounded theme-icon-dark" aria-hidden="true">light_mode</span>
+          <span class="theme-icon-light" aria-hidden="true"></span>
+          <span class="theme-icon-dark" aria-hidden="true"></span>
         </button>
         <a href="contact.html?type=contact" class="btn btn-secondary">문의하기</a>
         <a href="contact.html?type=consult" class="btn btn-primary">도입 상담</a>
@@ -141,11 +144,11 @@
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-inner">
       <div class="mobile-menu-header">
-        <a href="index.html" class="nav-logo">
+        <a href="/" class="nav-logo" aria-label="(주)팹스넷 메인 페이지로 이동">
           <div class="nav-logo-img-wrap"><img src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
         </a>
         <button class="mobile-menu-close" id="mobileMenuClose" aria-label="메뉴 닫기">
-          <span class="material-symbols-rounded">close</span>
+          <span class="ui-close-symbol" aria-hidden="true">×</span>
         </button>
       </div>
       <nav class="mobile-nav">
@@ -156,6 +159,7 @@
         <a href="product-clippms.html" class="mobile-nav-link">Clip PMS</a>
         <a href="product-multibom.html" class="mobile-nav-link">Multi-BOM</a>
         <a href="product-clipcms.html" class="mobile-nav-link">Clip CMS</a>
+        <a href="product-clip3dviewer.html" class="mobile-nav-link">Clip 3D Viewer</a>
         <a href="#process" class="mobile-nav-link">도입 흐름</a>
         <a href="#customers" class="mobile-nav-link">고객사</a>
         <a href="#faq" class="mobile-nav-link">FAQ</a>
@@ -266,28 +270,61 @@
         <div class="am-editorial-copy">
           <div class="am-editorial-overline">
             <span>(주)팹스넷</span>
-            <span>CLIP PLM / PRODUCT DATA SYSTEM</span>
+            <span>AI CLIP PLM / PRODUCT DATA SYSTEM</span>
           </div>
           <h1>
-            <span class="am-editorial-line"><span>모든 설계 변경을</span></span>
-            <span class="am-editorial-line"><span><em>제품 데이터</em> 하나로.</span></span>
+            <span class="am-editorial-line am-copy-desktop"><span>AI 도면 검색부터 제조 BOM·원가관리까지,</span></span>
+            <span class="am-editorial-line am-copy-desktop"><span>PDM·PMS로 하나 되는 <em>Clip PLM.</em></span></span>
+            <span class="am-editorial-line am-copy-mobile"><span>AI 도면 검색·PDM</span></span>
+            <span class="am-editorial-line am-copy-mobile"><span>PMS·BOM·원가관리</span></span>
+            <span class="am-editorial-line am-copy-mobile"><span><em>Clip PLM</em> 하나로.</span></span>
           </h1>
-          <p>도면·리비전·BOM·프로젝트·원가를 연결해 제품개발의 흐름과 회사 성과를 함께 관리합니다.</p>
+          <p>도면·리비전·BOM·프로젝트·사전·사후 원가의 변경 영향을 하나의 제품 데이터 흐름으로 관리합니다.</p>
+          <form class="am-hero-query" data-hero-query>
+            <div class="am-query-brand" aria-hidden="true">
+              <span>CLIP</span>
+              <strong>AI</strong>
+              <small>GUIDE / 01</small>
+              <i></i><i></i><i></i>
+            </div>
+            <div class="am-query-console">
+              <div class="am-query-head">
+                <label for="heroFeatureQuery">
+                  <span>제품개발 데이터에 질문하세요</span>
+                  <small>도면 · BOM · 프로젝트 · 원가</small>
+                </label>
+                <span class="am-query-status"><i aria-hidden="true"></i>DATA ONLINE</span>
+              </div>
+              <div class="am-query-field">
+                <span class="am-query-icon" aria-hidden="true"></span>
+                <input id="heroFeatureQuery" name="query" type="search" placeholder="예: 비슷한 도면과 연결된 BOM을 찾아줘" autocomplete="off" required>
+                <button type="submit"><span>ASK</span><b aria-hidden="true">↗</b></button>
+              </div>
+              <div class="am-query-foot">
+                <div class="am-query-suggestions" aria-label="추천 업무">
+                  <button type="button" data-hero-query-example="유사 도면 찾기">유사 도면</button>
+                  <button type="button" data-hero-query-example="다중 BOM 구조 비교">BOM 비교</button>
+                  <button type="button" data-hero-query-example="지연 프로젝트 확인">지연 확인</button>
+                </div>
+                <p data-hero-query-result aria-live="polite"><i aria-hidden="true"></i>업무를 선택하거나 직접 입력하세요.</p>
+              </div>
+            </div>
+          </form>
           <div class="am-hero-actions">
-            <a href="#platform" class="btn btn-primary btn-lg">Clip 플랫폼 보기</a>
+            <a href="#products" class="btn btn-primary btn-lg">Clip 제품 탐색</a>
             <a href="contact.html?type=diagnosis" class="btn btn-secondary btn-lg">PLM 도입 진단</a>
           </div>
         </div>
 
         <div class="am-editorial-index" role="tablist" aria-label="산업별 제품 데이터 장면">
           <button type="button" class="is-active" role="tab" aria-selected="true" data-hero-step="1">
-            <b>01</b><span>EV ASSEMBLY</span>
+            <b>01</b><span><small>AUTOMOTIVE</small>자동차 제품 BOM</span>
           </button>
           <button type="button" role="tab" aria-selected="false" data-hero-step="2">
-            <b>02</b><span>AEROSPACE</span>
+            <b>02</b><span><small>AEROSPACE</small>항공 구성·리비전</span>
           </button>
           <button type="button" role="tab" aria-selected="false" data-hero-step="3">
-            <b>03</b><span>DIGITAL TWIN</span>
+            <b>03</b><span><small>FACILITY</small>건축 디지털 트윈</span>
           </button>
         </div>
 
@@ -305,11 +342,93 @@
             <strong>AutoCAD Integration</strong>
           </div>
           <a href="#platform" aria-label="Clip 플랫폼 섹션으로 이동">
-            <span data-hero-step-status>SCROLL · 01 / 03</span>
+            <span data-hero-step-status>SCROLL · 자동차 BOM 조립</span>
             <i aria-hidden="true">↓</i>
           </a>
         </div>
       </div>
+      </div>
+    </section>
+
+    <section class="am-section am-media-feature" id="media-feature" aria-labelledby="mediaFeatureTitle">
+      <div class="am-shell">
+        <div class="am-media-feature-head blur-fade">
+          <div class="am-media-feature-title">
+            <span class="am-media-source">
+              <span class="material-symbols-rounded" aria-hidden="true">smart_display</span>
+              팍스경제TV <i aria-hidden="true"></i> YOUTUBE FEATURE
+            </span>
+            <h2 id="mediaFeatureTitle">
+              <span>팍스경제TV 「클로즈업기업현장」</span>
+              <span>에서 만난 <b>(주)팹스넷</b></span>
+            </h2>
+          </div>
+          <div class="am-media-feature-copy">
+            <p>AI 도면 검색부터 PDM, Multi-BOM EPL, 프로젝트, 사전·사후 원가까지. (주)팹스넷이 제조 데이터의 단절을 하나의 Clip PLM 흐름으로 연결하는 과정을 방송에서 확인해 보세요.</p>
+            <dl class="am-media-meta">
+              <div><dt>방영</dt><dd>2026.08.18</dd></div>
+              <div><dt>소개 구간</dt><dd>00:29–06:41</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="am-media-stage blur-fade" data-delay="1">
+          <button
+            class="am-media-player"
+            type="button"
+            data-media-player
+            data-video-id="kHt8meHiTOs"
+            data-video-start="29"
+            data-video-end="401"
+            aria-label="팍스경제TV 클로즈업기업현장 주식회사 팹스넷 소개 구간 재생"
+          >
+            <img
+              src="images/media/papsnet-paxnet-feature.jpg"
+              alt="팍스경제TV 클로즈업기업현장에 소개된 주식회사 팹스넷 방송 영상"
+              width="1280"
+              height="720"
+              loading="lazy"
+              decoding="async"
+            >
+            <span class="am-media-shade" aria-hidden="true"></span>
+            <span class="am-media-company-badge" aria-hidden="true">
+              <small>FEATURED COMPANY</small>
+              <strong>(주)팹스넷</strong>
+              <em>AI CLIP PLM</em>
+            </span>
+            <span class="am-media-play" aria-hidden="true"><span class="material-symbols-rounded">play_arrow</span></span>
+            <span class="am-media-caption">
+              <small>팍스경제TV · 클로즈업기업현장</small>
+              <strong>도면·BOM·프로젝트·원가를<br>하나의 제품 데이터로</strong>
+            </span>
+            <span class="am-media-time" aria-hidden="true">06:12</span>
+          </button>
+
+          <aside class="am-media-notes" aria-label="방송에서 소개된 팹스넷 제품 흐름">
+            <ol>
+              <li>
+                <span class="am-media-step">01</span>
+                <span class="am-media-note-copy"><strong>AI 도면 검색</strong><small>유사 도면·설계 정보 탐색</small></span>
+                <span class="material-symbols-rounded am-media-note-arrow" aria-hidden="true">arrow_forward</span>
+              </li>
+              <li>
+                <span class="am-media-step">02</span>
+                <span class="am-media-note-copy"><strong>PDM·BOM 연결</strong><small>리비전·변경 이력·제품 구조</small></span>
+                <span class="material-symbols-rounded am-media-note-arrow" aria-hidden="true">arrow_forward</span>
+              </li>
+              <li>
+                <span class="am-media-step">03</span>
+                <span class="am-media-note-copy"><strong>프로젝트·원가</strong><small>일정·사전 원가·사후 원가 판단</small></span>
+                <span class="material-symbols-rounded am-media-note-arrow" aria-hidden="true">arrow_forward</span>
+              </li>
+            </ol>
+            <a class="am-youtube-link" href="https://www.youtube.com/watch?v=kHt8meHiTOs&amp;t=29s" target="_blank" rel="noopener noreferrer" aria-label="YouTube에서 팹스넷 소개 영상 전체 보기">
+              <span class="am-youtube-mark" aria-hidden="true"><span class="material-symbols-rounded">smart_display</span></span>
+              <span class="am-youtube-copy"><strong>YouTube에서 전체 영상 보기</strong><small>00:29부터 팹스넷 소개 구간 재생</small></span>
+              <span class="material-symbols-rounded am-youtube-open" aria-hidden="true">open_in_new</span>
+            </a>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -383,9 +502,9 @@
               <span class="am-platform-product-copy"><small>COST LIFECYCLE</small><strong>Clip CMS</strong></span>
               <i aria-hidden="true">05</i>
             </a>
-            <a href="#technology" class="am-platform-product">
+            <a href="product-clip3dviewer.html" class="am-platform-product">
               <span class="am-platform-product-icon"><img src="images/icons3d/view_in_ar-cyan.webp" alt=""></span>
-              <span class="am-platform-product-copy"><small>VIEW &amp; ASK</small><strong>AI · Viewer</strong></span>
+              <span class="am-platform-product-copy"><small>WEB 3D CAD</small><strong>Clip 3D Viewer</strong></span>
               <i aria-hidden="true">06</i>
             </a>
           </div>
@@ -622,7 +741,7 @@
             <span class="am-kicker">AI &amp; CAD Technology</span>
             <h2>도면·AI·PLM을 하나의 작업면으로.</h2>
           </div>
-          <p><strong>DWG·DXF 2D 뷰어, CATIA 3D 뷰어, PLM AI 챗봇, AutoCAD 연동</strong>을 Clip PLM의 제품개발 데이터와 함께 제공합니다.</p>
+          <p><strong>DWG·DXF 2D 뷰어, 주요 CAD 웹 3D 뷰어, PLM AI 챗봇, AutoCAD 연동</strong>을 Clip PLM의 제품개발 데이터와 함께 제공합니다.</p>
         </div>
 
         <div class="am-tech-stage blur-fade" data-delay="1" data-tech-stage data-active-tech="viewer2d">
@@ -639,7 +758,7 @@
             </button>
             <button class="am-tech-tab" type="button" role="tab" aria-selected="false" data-tech-tab="viewer3d">
               <span class="am-tech-tab-index">02</span>
-              <span class="am-tech-tab-copy"><small>CATIA</small><strong>3D 형상 검토</strong></span>
+              <span class="am-tech-tab-copy"><small>MULTI-CAD</small><strong>3D 웹 검토</strong></span>
               <i aria-hidden="true"></i>
             </button>
             <button class="am-tech-tab" type="button" role="tab" aria-selected="false" data-tech-tab="chatbot">
@@ -685,46 +804,33 @@
           <p>도면과 문서 관리부터 프로젝트, BOM, 원가까지 필요한 솔루션을 선택해 실제 화면과 세부 기능을 확인할 수 있습니다.</p>
         </div>
 
-        <div class="am-solution-selector-head blur-fade" data-delay="1">
-          <div>
-            <span>솔루션 선택</span>
-            <strong>관심 제품을 선택해 실제 화면과 핵심 기능을 확인하세요.</strong>
-          </div>
-          <p><b data-product-step>01</b><span>/ 05</span><em data-product-current>AI CADWin</em></p>
-        </div>
-
-        <div class="am-media-strip blur-fade" data-delay="1" role="tablist" aria-label="솔루션별 상세 정보 선택">
-          <button class="am-video-card am-solution-tab active" type="button" role="tab" aria-selected="true" data-product-tab="cadwin" data-index="01">
-            <video src="videos/hero-cadwin.mp4" poster="videos/poster-cadwin-clean.png" autoplay muted loop playsinline></video>
-            <div>
-              <span>제품 영상</span>
-              <strong>AI CADWin 도면 분석 데모</strong>
+        <div class="am-product-explorer blur-fade" data-delay="1">
+          <div class="am-product-nav">
+            <div class="am-product-nav-head">
+              <span>PRODUCT EXPLORER</span>
+              <strong>제품을 선택하면 실제 화면과 핵심 기능이 바뀝니다.</strong>
+              <p><b data-product-step>01</b><span>/ 05</span><em data-product-current>AI CADWin</em></p>
             </div>
-            <i class="am-tab-action"><b aria-hidden="true">↓</b></i>
-          </button>
-          <button class="am-page-card am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="pdm" data-index="02">
-            <img src="images/plm_project_dashboard.png" alt="Clip PDM 프로젝트 대시보드 화면" loading="lazy" decoding="async">
-            <span>Clip PDM 상세</span>
-            <i class="am-tab-action"><b aria-hidden="true">↓</b></i>
-          </button>
-          <button class="am-page-card am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="pms" data-index="03">
-            <img src="images/pms_project_overview.png" alt="Clip PMS 프로젝트 현황 화면" loading="lazy" decoding="async">
-            <span>Clip PMS 상세</span>
-            <i class="am-tab-action"><b aria-hidden="true">↓</b></i>
-          </button>
-          <button class="am-page-card am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="bom" data-index="04">
-            <img src="images/multibom_dashboard_real.webp" alt="Multi-BOM 구조 비교 화면" loading="lazy" decoding="async">
-            <span>Multi-BOM 상세</span>
-            <i class="am-tab-action"><b aria-hidden="true">↓</b></i>
-          </button>
-          <button class="am-page-card am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="cms" data-index="05">
-            <img src="images/cms_cost_dashboard.png" alt="Clip CMS 원가 대시보드 화면" loading="lazy" decoding="async">
-            <span>Clip CMS 상세</span>
-            <i class="am-tab-action"><b aria-hidden="true">↓</b></i>
-          </button>
-        </div>
+            <div class="am-product-nav-list" role="tablist" aria-label="솔루션별 상세 정보 선택">
+              <button class="am-solution-tab active" type="button" role="tab" aria-selected="true" data-product-tab="cadwin" data-index="01">
+                <b>01</b><span><small>AI DRAWING</small><strong>AI CADWin</strong><em>도면 분석 자동화</em></span><i aria-hidden="true">↗</i>
+              </button>
+              <button class="am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="pdm" data-index="02">
+                <b>02</b><span><small>PRODUCT DATA</small><strong>Clip PDM</strong><em>도면·문서·리비전</em></span><i aria-hidden="true">↗</i>
+              </button>
+              <button class="am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="pms" data-index="03">
+                <b>03</b><span><small>PROJECT FLOW</small><strong>Clip PMS</strong><em>프로젝트·일정·이슈</em></span><i aria-hidden="true">↗</i>
+              </button>
+              <button class="am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="bom" data-index="04">
+                <b>04</b><span><small>ENGINEERING PART LIST</small><strong>Multi-BOM EPL</strong><em>다중 제품 구조 관리</em></span><i aria-hidden="true">↗</i>
+              </button>
+              <button class="am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="cms" data-index="05">
+                <b>05</b><span><small>COST MANAGEMENT</small><strong>Clip CMS</strong><em>사전·사후 원가</em></span><i aria-hidden="true">↗</i>
+              </button>
+            </div>
+          </div>
 
-        <div class="am-product-showcase" aria-live="polite">
+          <div class="am-product-showcase" aria-live="polite">
           <a class="am-product-card am-product-large blur-fade" href="product-cadwin.html" data-product-detail-link>
             <img src="images/cadwin_drawing_inspection.png" alt="AI CADWin 도면 검사 화면" loading="lazy" decoding="async" data-product-detail-image>
             <div>
@@ -762,6 +868,7 @@
             <h3>개정 이력 관리</h3>
             <p>도면 변경 이력을 기준으로 후속 업무의 영향을 확인합니다.</p>
           </article>
+          </div>
         </div>
 
       </div>
@@ -855,7 +962,7 @@
   <footer class="footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <a href="index.html" class="footer-logo">
+        <a href="/" class="footer-logo" aria-label="(주)팹스넷 메인 페이지로 이동">
           <img src="papsnet_logo.jpg" alt="Papsnet" loading="lazy" decoding="async">
         </a>
         <p>제조업의 설계, 생산, 원가 데이터를 하나로 연결하는 PLM 솔루션 파트너</p>
@@ -874,6 +981,7 @@
           <li><a href="product-clippms.html">Clip PMS</a></li>
           <li><a href="product-multibom.html">Multi-BOM</a></li>
           <li><a href="product-clipcms.html">Clip CMS</a></li>
+          <li><a href="product-clip3dviewer.html">Clip 3D Viewer</a></li>
         </ul>
       </div>
 
@@ -907,7 +1015,7 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="맨 위로">
-    <span class="material-symbols-rounded">arrow_upward</span>
+    <span class="ui-up-symbol" aria-hidden="true">↑</span>
   </button>
 
   <a href="contact.html?type=demo" class="floating-demo-cta" aria-label="무료 데모 상담 신청">
@@ -1059,7 +1167,7 @@
   </div>
 
   <script type="module" src="analytics-events.js"></script>
-  <script type="module" src="app.js?v=20260804-responsive-alignment-1"></script>
+  <script type="module" src="app.js?v=20260824-media-feature-1"></script>
 </body>
 
 </html>
