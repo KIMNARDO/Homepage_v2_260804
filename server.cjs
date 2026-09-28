@@ -30,6 +30,7 @@ const contactProducts = new Set([
   'Multi-BOM',
   'MultiBOM',
   'Clip CMS',
+  'SpinFire Insight',
   '아직 잘 모르겠음',
 ]);
 const contactTimes = new Set(['오후 2시~5시', '오전 9시~12시', '오후 5시 이후', '시간 무관']);

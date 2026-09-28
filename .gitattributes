@@ -1,0 +1,7 @@
+# Keep these SVGs byte-identical to the deployed Linux build so Vite asset
+# filenames are stable when this project is checked out on Windows.
+images/brand/autocad.svg text eol=lf
+images/brand/solidworks.svg text eol=lf
+
+# Preserve PDF streams and byte offsets across Windows and Linux checkouts.
+public/downloads/*.pdf binary

@@ -29,12 +29,28 @@ const typeCopy = {
   },
 };
 
-const copy = typeCopy[leadType] || typeCopy.consult;
+const isSpinFireInquiry = requestedProduct.toLowerCase() === 'spinfire insight';
+const copy = isSpinFireInquiry ? {
+  kicker: 'SPINFIRE INSIGHT / TECH SOFT 3D',
+  title: 'SpinFire 도입을<br>함께 검토하겠습니다.',
+  lede: '사용하는 CAD 형식과 검토 업무를 알려주시면 필요한 기능과 라이선스 범위를 팹스넷이 함께 확인합니다.',
+} : typeCopy[leadType] || typeCopy.consult;
 document.querySelector('#contactKicker').textContent = copy.kicker;
 document.querySelector('#contactTitle').innerHTML = copy.title;
 document.querySelector('#contactLede').textContent = copy.lede;
 document.querySelector('#leadType').value = leadType;
 document.querySelector('#startedAt').value = String(startedAt);
+
+if (isSpinFireInquiry) {
+  document.title = 'SpinFire Insight 도입 상담 | 팹스넷';
+  const steps = document.querySelectorAll('.contact-steps li');
+  steps[0].querySelector('strong').textContent = 'CAD 환경 확인';
+  steps[0].querySelector('p').textContent = '사용하는 파일 형식·버전과 검토 업무를 확인합니다.';
+  steps[1].querySelector('strong').textContent = '기능·라이선스 검토';
+  steps[1].querySelector('p').textContent = '측정·비교 등 필요한 기능과 사용 범위를 정리합니다.';
+  form.querySelector('[name="currentSystems"]').placeholder = '예: CATIA V5, NX, SOLIDWORKS, STEP';
+  form.querySelector('[name="message"]').placeholder = '사용할 CAD 형식, 필요한 검토 기능과 예상 사용자 수를 알려주세요.';
+}
 
 if (requestedProduct) {
   const requested = [...form.querySelectorAll('input[name="products"]')]

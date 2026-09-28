@@ -1,6 +1,6 @@
 const { defineConfig } = require('vite');
 const { resolve } = require('path');
-const { copyFileSync, mkdirSync, readdirSync, statSync } = require('fs');
+const { copyFileSync, mkdirSync, readdirSync, statSync, readFileSync } = require('fs');
 
 const runtimeAssets = [
   ['images/hero-ev-parts', 'images/hero-ev-parts'],
@@ -65,9 +65,36 @@ function copyRuntimeAssets() {
   };
 }
 
+function newsContent() {
+  const contentPath = resolve(__dirname, 'content/news.json');
+  return {
+    name: 'papsnet-news-content',
+    transformIndexHtml: {
+      order: 'pre',
+      async handler(html) {
+        if (!html.includes('<!-- PAPSNET_NEWS_CONTENT -->')) return html;
+        const { validateNews, visibleNews, renderNewsItems, renderNewsFilters, renderNewsFallback, NEWS_PAGE_SIZE } = await import('./news-renderer.mjs');
+        const data = validateNews(JSON.parse(readFileSync(contentPath, 'utf8')));
+        const items = visibleNews(data);
+        return html
+          .replace('<!-- PAPSNET_NEWS_CONTENT -->', renderNewsItems(items.slice(0, NEWS_PAGE_SIZE), data))
+          .replace('<!-- PAPSNET_NEWS_FILTERS -->', renderNewsFilters(data))
+          .replace('<!-- PAPSNET_NEWS_FALLBACK -->', renderNewsFallback(data))
+          .replace('<!-- PAPSNET_NEWS_COUNT -->', `${items.length}개의 소식`);
+      },
+    },
+    configureServer(server) {
+      server.watcher.add(contentPath);
+      server.watcher.on('change', path => {
+        if (resolve(path) === contentPath) server.ws.send({ type: 'full-reload' });
+      });
+    },
+  };
+}
+
 module.exports = defineConfig({
   base: './',
-  plugins: [copyRuntimeAssets()],
+  plugins: [copyRuntimeAssets(), newsContent()],
   build: {
     rollupOptions: {
       input: {

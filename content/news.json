@@ -1,0 +1,215 @@
+{
+  "categories": [
+    {
+      "id": "media",
+      "label": "언론 보도"
+    },
+    {
+      "id": "education",
+      "label": "교육 활동"
+    },
+    {
+      "id": "company",
+      "label": "기업 소식"
+    }
+  ],
+  "items": [
+    {
+      "id": "paxnet-tv-2026",
+      "category": "media",
+      "kind": "video",
+      "published": true,
+      "date": "2026-08-18",
+      "source": "팍스경제TV · 클로즈업기업현장",
+      "title": "팍스경제TV에서 만난 팹스넷",
+      "summary": "도면부터 BOM·프로젝트·원가까지, 제조 데이터를 연결하는 Clip PLM을 방송에서 소개합니다.",
+      "image": "/images/news/papsnet-paxnet-feature.jpg",
+      "imageAlt": "팍스경제TV 클로즈업기업현장에 소개된 팹스넷 방송 화면",
+      "sourceUrl": "https://www.youtube.com/watch?v=kHt8meHiTOs&t=29s",
+      "paragraphs": [
+        "팍스경제TV ‘클로즈업기업현장’에서 팹스넷의 제품과 제조 데이터 관리 이야기를 소개했습니다.",
+        "AI 도면 검색에서 PDM·BOM 연결, 프로젝트와 원가 관리로 이어지는 Clip PLM의 제품 흐름을 확인할 수 있습니다. 팹스넷 소개 구간은 00:29부터 06:41까지입니다."
+      ],
+      "video": {
+        "id": "kHt8meHiTOs",
+        "start": 29,
+        "end": 401,
+        "label": "00:29–06:41"
+      }
+    },
+    {
+      "id": "hankyung-jobjoy-2026",
+      "category": "media",
+      "kind": "article",
+      "published": true,
+      "date": "2026-04-06",
+      "source": "한경 JOB&JOY",
+      "title": "한경 JOB&JOY가 소개한 팹스넷의 국산 PLM 기술",
+      "summary": "BOM 분석을 바탕으로 도면·제품·원가 데이터를 연결하는 팹스넷의 기술과 성장 이야기를 담았습니다.",
+      "coverLabel": "한경 JOB&JOY",
+      "coverTitle": "국산 PLM,\nBOM으로 연결하다",
+      "sourceUrl": "https://magazine.hankyung.com/job-joy/article/202604060648d",
+      "sourceTitle": "[부천산업진흥원 창업도약패키지 선정기업 CEO] 국산 PLM 솔루션 전문기업으로 ‘BOM(부품표)’을 가장 잘 아는 기업 ‘팹스넷’",
+      "paragraphs": [
+        "한경 JOB&JOY가 김현석 대표 인터뷰를 통해 팹스넷의 국산 PLM 기술과 제조 현장에서 쌓아온 경험을 소개했습니다.",
+        "기사는 자체 플랫폼 CLIP, AI 도면관리 솔루션 CADWin, BOM 기반 원가관리 시스템을 다룹니다. 도면에서 시작한 데이터를 제품·프로젝트·원가 관리로 연결하는 기술과 창업도약패키지를 통한 제품 고도화 과정도 소개합니다."
+      ]
+    },
+    {
+      "id": "hwagok-ai-lecture",
+      "category": "education",
+      "kind": "gallery",
+      "published": true,
+      "date": null,
+      "source": "화곡고등학교",
+      "title": "AI 기술, 교실에서 만나다",
+      "summary": "화곡고등학교 학생들과 AI의 변화, 미래의 일과 진로에 대해 함께 생각한 강의 현장입니다.",
+      "image": "/images/education/hwagok-ai-01.jpg",
+      "imageAlt": "화곡고등학교 AI 강의에서 설명하는 강사와 강의를 듣는 학생들",
+      "paragraphs": [
+        "화곡고등학교 학생들과 AI의 변화와 가능성을 이야기했습니다. 상상 속 AI와 실제 AI를 비교하고, 기술이 바꾸는 일과 진로를 함께 살펴봤습니다.",
+        "질문과 대화를 통해 학생들이 AI를 가까이에서 이해하고 자신의 미래를 생각해 보는 시간이었습니다."
+      ],
+      "photos": [
+        {
+          "src": "/images/education/hwagok-ai-01.jpg",
+          "alt": "상상 속 AI와 실제 AI를 비교하며 설명하는 강사와 학생들",
+          "caption": "상상 속 AI와 실제 AI를 함께 살펴보는 시간",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-01.jpg"
+        },
+        {
+          "src": "/images/education/hwagok-ai-02.jpg",
+          "alt": "발표 화면을 보며 AI 강의를 듣는 화곡고등학교 학생들",
+          "caption": "강의에 집중하는 화곡고등학교 학생들",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-02.jpg"
+        },
+        {
+          "src": "/images/education/hwagok-ai-03.jpg",
+          "alt": "AI와 일자리의 변화를 주제로 강의가 진행되는 교실",
+          "caption": "AI와 함께 달라질 일과 진로를 생각하는 시간",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-03.jpg"
+        },
+        {
+          "src": "/images/education/hwagok-ai-04.jpg",
+          "alt": "AI 강의 중 학생과 소통하는 강사",
+          "caption": "학생들과 가까이에서 생각을 나누는 현장",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-04.jpg"
+        },
+        {
+          "src": "/images/education/hwagok-ai-05.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-05.jpg",
+          "alt": "성적과 미래의 삶을 주제로 학생들에게 설명하는 강사",
+          "caption": "성적과 진로를 함께 생각해 보는 시간"
+        },
+        {
+          "src": "/images/education/hwagok-ai-06.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-06.jpg",
+          "alt": "AI의 선택을 소개하는 발표 화면과 강의를 듣는 학생들",
+          "caption": "AI의 새로운 선택에 대해 나누는 이야기"
+        },
+        {
+          "src": "/images/education/hwagok-ai-07.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-07.jpg",
+          "alt": "화곡고등학교 교실에서 학생들과 함께 진행하는 AI 강의",
+          "caption": "교실에서 함께 살펴보는 AI의 가능성"
+        },
+        {
+          "src": "/images/education/hwagok-ai-08.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-08.jpg",
+          "alt": "교실 뒤쪽에서 바라본 강사와 학생들의 강의 현장",
+          "caption": "여러 시선이 모인 화곡고등학교 AI 강의"
+        },
+        {
+          "src": "/images/education/hwagok-ai-09.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-09.jpg",
+          "alt": "학생들이 박수를 보내며 참여하는 AI 강의 현장",
+          "caption": "학생들의 참여와 박수가 함께한 시간"
+        },
+        {
+          "src": "/images/education/hwagok-ai-10.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-10.jpg",
+          "alt": "강의 중 일어선 학생과 대화하는 강사와 주변 학생들",
+          "caption": "학생과 가까이에서 소통하는 강의"
+        },
+        {
+          "src": "/images/education/hwagok-ai-11.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-11.jpg",
+          "alt": "AI 사례가 표시된 화면을 설명하는 강사와 학생들",
+          "caption": "AI의 선택을 함께 생각해 보는 교실"
+        },
+        {
+          "src": "/images/education/hwagok-ai-12.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-12.jpg",
+          "alt": "알파고와 이세돌 사례를 화면으로 설명하는 강사",
+          "caption": "알파고 사례로 살펴보는 AI의 변화"
+        },
+        {
+          "src": "/images/education/hwagok-ai-13.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-13.jpg",
+          "alt": "AI 사례를 설명하는 강사를 바라보는 학생들",
+          "caption": "설명과 질문이 오가는 강의 현장"
+        },
+        {
+          "src": "/images/education/hwagok-ai-14.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-14.jpg",
+          "alt": "바둑 대결 사례가 표시된 발표 화면과 강의 중인 교실",
+          "caption": "AI와 사람의 대결을 통해 생각하는 기술"
+        },
+        {
+          "src": "/images/education/hwagok-ai-15.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-15.jpg",
+          "alt": "기계가 잘하는 일을 주제로 설명하는 강사와 학생들",
+          "caption": "기계가 잘하는 일을 함께 살펴보는 시간"
+        },
+        {
+          "src": "/images/education/hwagok-ai-16.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-16.jpg",
+          "alt": "AI 사례 화면을 보며 강의를 듣는 화곡고등학교 학생들",
+          "caption": "화면 속 사례로 이해하는 인공지능"
+        },
+        {
+          "src": "/images/education/hwagok-ai-17.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-17.jpg",
+          "alt": "강사가 학생에게 물건을 건네며 대화하는 강의 현장",
+          "caption": "학생들과 함께 나누는 현장 이야기"
+        },
+        {
+          "src": "/images/education/hwagok-ai-18.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-18.jpg",
+          "alt": "세상이 변한 나의 일자리라는 주제의 발표 화면과 학생들",
+          "caption": "AI와 함께 달라질 일과 진로 이야기"
+        },
+        {
+          "src": "/images/education/hwagok-ai-19.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-19.jpg",
+          "alt": "상상 속 AI와 실제 AI를 비교하는 화면 앞에서 설명하는 강사",
+          "caption": "상상했던 AI와 실제로 만난 AI"
+        },
+        {
+          "src": "/images/education/hwagok-ai-20.jpg",
+          "thumbnail": "/images/education/thumbnails/hwagok-ai-20.jpg",
+          "alt": "운동장에서 바라본 화곡고등학교 교사 전경",
+          "caption": "AI 강의가 열린 화곡고등학교 전경"
+        }
+      ]
+    },
+    {
+      "id": "spinfire-partnership",
+      "category": "company",
+      "kind": "announcement",
+      "published": true,
+      "date": null,
+      "source": "Tech Soft 3D × PAPSNET",
+      "title": "Tech Soft 3D와 SpinFire 총판 계약 체결",
+      "summary": "팹스넷이 Tech Soft 3D와 함께 SpinFire를 공급합니다. 제품 소개와 자료를 홈페이지에서 확인하세요.",
+      "image": "/images/spinfire/spinfire-section-cut.jpg",
+      "imageAlt": "SpinFire Insight의 기어박스 단면 검토 화면",
+      "paragraphs": [
+        "팹스넷은 Tech Soft 3D와 SpinFire 총판 계약을 체결했습니다.",
+        "SpinFire Insight의 제품 소개, 주요 기능 화면과 한국어 소개서를 홈페이지에 마련했습니다. 제품별 기능과 도입 관련 내용은 SpinFire 소개에서 확인할 수 있습니다."
+      ],
+      "relatedUrl": "#spinfire",
+      "relatedLabel": "SpinFire 제품 살펴보기"
+    }
+  ]
+}

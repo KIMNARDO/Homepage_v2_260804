@@ -39,7 +39,10 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
   <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="amphora-plm.css?v=20260824-media-feature-1">
+  <link rel="stylesheet" href="amphora-plm.css">
+  <link rel="stylesheet" href="home-news.css">
+  <link rel="stylesheet" href="home-spinfire.css">
+  <link rel="stylesheet" href="home-refinements.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -73,6 +76,15 @@
 </head>
 
 <body class="plm-home-v2">
+  <svg class="papsnet-logo-filters" width="0" height="0" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="papsnet-logo-on-dark" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <!-- Blue chroma excludes the white matte left in the original small PNG. -->
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 .35  0 0 0 0 .72  0 0 0 0 .95  -2 0 2 0 0" result="blue-mark" />
+        <feComposite in="blue-mark" in2="SourceAlpha" operator="in" />
+      </filter>
+    </defs>
+  </svg>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNWPBJMK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
@@ -90,7 +102,7 @@
   <nav class="nav has-announcement" id="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo" aria-label="(주)팹스넷 메인 페이지로 이동">
-        <div class="nav-logo-img-wrap"><img src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
+        <div class="nav-logo-img-wrap"><img class="papsnet-logo-mark" src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
       </a>
 
       <div class="nav-center">
@@ -117,11 +129,15 @@
             <a href="product-clip3dviewer.html" class="nav-dropdown-item" data-product="viewer3d">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip 3D Viewer</span><span class="nav-dropdown-item-desc">웹 기반 3D CAD 검토</span></span>
             </a>
+            <a href="#spinfire" class="nav-dropdown-item">
+              <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">SpinFire Insight</span><span class="nav-dropdown-item-desc">Tech Soft 3D · CAD 뷰어</span></span>
+            </a>
           </div>
         </div>
         <a href="#platform" class="nav-link">플랫폼</a>
         <a href="#process" class="nav-link">도입 흐름</a>
         <a href="#customers" class="nav-link">고객사</a>
+        <a href="#news" class="nav-link">소식</a>
         <a href="#faq" class="nav-link">FAQ</a>
         <a href="brochure.html" class="nav-link">브로슈어</a>
       </div>
@@ -135,6 +151,7 @@
         <a href="contact.html?type=consult" class="btn btn-primary">도입 상담</a>
       </div>
 
+      <a href="contact.html?type=demo" class="am-mobile-contact" aria-label="무료 데모 상담 신청">상담</a>
       <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
         <span></span><span></span><span></span>
       </button>
@@ -145,7 +162,7 @@
     <div class="mobile-menu-inner">
       <div class="mobile-menu-header">
         <a href="/" class="nav-logo" aria-label="(주)팹스넷 메인 페이지로 이동">
-          <div class="nav-logo-img-wrap"><img src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
+          <div class="nav-logo-img-wrap"><img class="papsnet-logo-mark" src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
         </a>
         <button class="mobile-menu-close" id="mobileMenuClose" aria-label="메뉴 닫기">
           <span class="ui-close-symbol" aria-hidden="true">×</span>
@@ -160,8 +177,10 @@
         <a href="product-multibom.html" class="mobile-nav-link">Multi-BOM</a>
         <a href="product-clipcms.html" class="mobile-nav-link">Clip CMS</a>
         <a href="product-clip3dviewer.html" class="mobile-nav-link">Clip 3D Viewer</a>
+        <a href="#spinfire" class="mobile-nav-link">SpinFire Insight</a>
         <a href="#process" class="mobile-nav-link">도입 흐름</a>
         <a href="#customers" class="mobile-nav-link">고객사</a>
+        <a href="#news" class="mobile-nav-link">팹스넷 소식</a>
         <a href="#faq" class="mobile-nav-link">FAQ</a>
         <a href="brochure.html" class="mobile-nav-link">브로슈어</a>
       </nav>
@@ -341,7 +360,7 @@
             <span>DESIGN CONNECTED</span>
             <strong>AutoCAD Integration</strong>
           </div>
-          <a href="#platform" aria-label="Clip 플랫폼 섹션으로 이동">
+          <a href="#news" aria-label="팹스넷 소식 섹션으로 이동">
             <span data-hero-step-status>SCROLL · 자동차 BOM 조립</span>
             <i aria-hidden="true">↓</i>
           </a>
@@ -350,87 +369,32 @@
       </div>
     </section>
 
-    <section class="am-section am-media-feature" id="media-feature" aria-labelledby="mediaFeatureTitle">
+    <section class="am-section am-news" id="news" aria-labelledby="newsTitle">
       <div class="am-shell">
-        <div class="am-media-feature-head blur-fade">
-          <div class="am-media-feature-title">
-            <span class="am-media-source">
-              <span class="material-symbols-rounded" aria-hidden="true">smart_display</span>
-              팍스경제TV <i aria-hidden="true"></i> YOUTUBE FEATURE
-            </span>
-            <h2 id="mediaFeatureTitle">
-              <span>팍스경제TV 「클로즈업기업현장」</span>
-              <span>에서 만난 <b>(주)팹스넷</b></span>
-            </h2>
-          </div>
-          <div class="am-media-feature-copy">
-            <p>AI 도면 검색부터 PDM, Multi-BOM EPL, 프로젝트, 사전·사후 원가까지. (주)팹스넷이 제조 데이터의 단절을 하나의 Clip PLM 흐름으로 연결하는 과정을 방송에서 확인해 보세요.</p>
-            <dl class="am-media-meta">
-              <div><dt>방영</dt><dd>2026.08.18</dd></div>
-              <div><dt>소개 구간</dt><dd>00:29–06:41</dd></div>
-            </dl>
-          </div>
+        <header class="news-heading">
+          <div><span class="news-kicker">NEWS &amp; STORIES</span><h2 id="newsTitle">팹스넷 소식</h2></div>
+          <p>언론에서 만난 기술, 현장에서 나눈 경험.<br>팹스넷의 새로운 이야기를 전합니다.</p>
+        </header>
+        <div class="news-toolbar">
+          <div class="news-filters" data-news-filters role="group" aria-label="소식 분류" hidden><!-- PAPSNET_NEWS_FILTERS --></div>
+          <p class="news-status" data-news-status role="status" aria-live="polite"><!-- PAPSNET_NEWS_COUNT --></p>
         </div>
-
-        <div class="am-media-stage blur-fade" data-delay="1">
-          <button
-            class="am-media-player"
-            type="button"
-            data-media-player
-            data-video-id="kHt8meHiTOs"
-            data-video-start="29"
-            data-video-end="401"
-            aria-label="팍스경제TV 클로즈업기업현장 주식회사 팹스넷 소개 구간 재생"
-          >
-            <img
-              src="images/media/papsnet-paxnet-feature.jpg"
-              alt="팍스경제TV 클로즈업기업현장에 소개된 주식회사 팹스넷 방송 영상"
-              width="1280"
-              height="720"
-              loading="lazy"
-              decoding="async"
-            >
-            <span class="am-media-shade" aria-hidden="true"></span>
-            <span class="am-media-company-badge" aria-hidden="true">
-              <small>FEATURED COMPANY</small>
-              <strong>(주)팹스넷</strong>
-              <em>AI CLIP PLM</em>
-            </span>
-            <span class="am-media-play" aria-hidden="true"><span class="material-symbols-rounded">play_arrow</span></span>
-            <span class="am-media-caption">
-              <small>팍스경제TV · 클로즈업기업현장</small>
-              <strong>도면·BOM·프로젝트·원가를<br>하나의 제품 데이터로</strong>
-            </span>
-            <span class="am-media-time" aria-hidden="true">06:12</span>
-          </button>
-
-          <aside class="am-media-notes" aria-label="방송에서 소개된 팹스넷 제품 흐름">
-            <ol>
-              <li>
-                <span class="am-media-step">01</span>
-                <span class="am-media-note-copy"><strong>AI 도면 검색</strong><small>유사 도면·설계 정보 탐색</small></span>
-                <span class="material-symbols-rounded am-media-note-arrow" aria-hidden="true">arrow_forward</span>
-              </li>
-              <li>
-                <span class="am-media-step">02</span>
-                <span class="am-media-note-copy"><strong>PDM·BOM 연결</strong><small>리비전·변경 이력·제품 구조</small></span>
-                <span class="material-symbols-rounded am-media-note-arrow" aria-hidden="true">arrow_forward</span>
-              </li>
-              <li>
-                <span class="am-media-step">03</span>
-                <span class="am-media-note-copy"><strong>프로젝트·원가</strong><small>일정·사전 원가·사후 원가 판단</small></span>
-                <span class="material-symbols-rounded am-media-note-arrow" aria-hidden="true">arrow_forward</span>
-              </li>
-            </ol>
-            <a class="am-youtube-link" href="https://www.youtube.com/watch?v=kHt8meHiTOs&amp;t=29s" target="_blank" rel="noopener noreferrer" aria-label="YouTube에서 팹스넷 소개 영상 전체 보기">
-              <span class="am-youtube-mark" aria-hidden="true"><span class="material-symbols-rounded">smart_display</span></span>
-              <span class="am-youtube-copy"><strong>YouTube에서 전체 영상 보기</strong><small>00:29부터 팹스넷 소개 구간 재생</small></span>
-              <span class="material-symbols-rounded am-youtube-open" aria-hidden="true">open_in_new</span>
-            </a>
-          </aside>
-        </div>
+        <div class="news-content" id="newsContent" data-news-content><!-- PAPSNET_NEWS_CONTENT --></div>
+        <nav class="news-pagination" data-news-pagination aria-label="소식 페이지" hidden>
+          <button type="button" data-news-previous aria-label="이전 소식 페이지"><span class="material-symbols-rounded" aria-hidden="true">chevron_left</span></button>
+          <span data-news-page-label>1 / 1</span>
+          <button type="button" data-news-next aria-label="다음 소식 페이지"><span class="material-symbols-rounded" aria-hidden="true">chevron_right</span></button>
+        </nav>
+        <noscript><p>전체 소식 원문과 사진</p><ul><!-- PAPSNET_NEWS_FALLBACK --></ul></noscript>
       </div>
     </section>
+    <dialog class="news-dialog" data-news-dialog aria-labelledby="newsDialogTitle">
+      <header class="news-dialog-heading">
+        <div><p data-news-dialog-category>팹스넷 소식</p><h2 id="newsDialogTitle">소식 자세히 보기</h2></div>
+        <button class="news-dialog-close" type="button" data-news-close aria-label="소식 상세 닫기" autofocus><span>닫기</span><span class="material-symbols-rounded" aria-hidden="true">close</span></button>
+      </header>
+      <div class="news-dialog-body" data-news-body></div>
+    </dialog>
 
     <section class="am-section am-platform" id="platform">
       <div class="am-shell">
@@ -538,7 +502,7 @@
       <div class="am-shell">
         <div class="am-impact-head blur-fade">
           <span class="am-kicker">Engineering data to business decisions</span>
-          <h2 class="am-text-reveal am-reveal-soft">도면 변경을<br>경영 판단의 데이터로.</h2>
+          <h2>도면 변경을<br>경영 판단의 데이터로.</h2>
           <p>Clip은 설계 변경과 BOM, 프로젝트, 원가 흐름을 연결합니다. 매출·영업이익·생산성을 분석하고 개선하기 위한 일관된 제품 데이터 기반을 만드는 것이 목표입니다.</p>
         </div>
 
@@ -595,6 +559,13 @@
           <a href="#product-tour" data-tour-jump="assistant">7초 데모 보기 <span aria-hidden="true">▶</span></a>
         </div>
 
+        <div class="am-tour-navigation" aria-label="제품 화면 탐색">
+          <p aria-live="polite" aria-atomic="true">제품 화면 <b data-tour-status>01</b><span> / 05</span></p>
+          <div>
+            <button type="button" data-tour-prev aria-label="이전 제품 화면"><span class="material-symbols-rounded" aria-hidden="true">chevron_left</span></button>
+            <button type="button" data-tour-next aria-label="다음 제품 화면"><span class="material-symbols-rounded" aria-hidden="true">chevron_right</span></button>
+          </div>
+        </div>
         <div class="am-tour-console blur-fade" data-delay="1">
           <div class="am-tour-rail" role="tablist" aria-label="Clip PMS 제품 화면 선택">
             <button class="am-tour-tab active" type="button" role="tab" aria-selected="true" data-tour-tab="dashboard" data-tour-index="0">
@@ -694,10 +665,6 @@
           </div>
         </div>
 
-        <div class="am-tour-status" aria-hidden="true">
-          <span class="active"></span><span></span><span></span><span></span><span></span>
-          <p><b data-tour-status>01</b> / 05</p>
-        </div>
       </div>
     </section>
 
@@ -709,28 +676,24 @@
           <p>처음부터 모든 기능을 밀어 넣지 않습니다. 현재 도면, BOM, ERP, 원가 흐름을 확인하고 필요한 범위부터 구축합니다.</p>
         </div>
 
-        <div class="am-process-grid">
-          <article class="am-process-card blur-fade" data-delay="0">
-            <div class="am-process-top"><span>01</span><img src="images/icons3d/search-blue.webp" alt="" loading="lazy" decoding="async"></div>
-            <h3>현 업무 진단</h3>
-            <p>도면 등록, 품번, BOM 변경, 승인 흐름의 단절 지점을 확인합니다.</p>
-          </article>
-          <article class="am-process-card blur-fade" data-delay="1">
-            <div class="am-process-top"><span>02</span><img src="images/icons3d/database-blue.webp" alt="" loading="lazy" decoding="async"></div>
-            <h3>데이터 구조 설계</h3>
-            <p>품목, 문서, 프로젝트, 원가 구조를 현장 기준에 맞춥니다.</p>
-          </article>
-          <article class="am-process-card blur-fade" data-delay="2">
-            <div class="am-process-top"><span>03</span><img src="images/icons3d/layers-green.webp" alt="" loading="lazy" decoding="async"></div>
-            <h3>제품별 단계 구축</h3>
-            <p>PDM, PMS, Multi-BOM, CMS를 필요한 순서로 구축합니다.</p>
-          </article>
-          <article class="am-process-card blur-fade" data-delay="3">
-            <div class="am-process-top"><span>04</span><img src="images/icons3d/hub-cyan.webp" alt="" loading="lazy" decoding="async"></div>
-            <h3>연동과 정착</h3>
-            <p>ERP, CAD, 파일 서버 연동과 사용자 정착을 함께 진행합니다.</p>
-          </article>
-        </div>
+        <ol class="am-process-flow" aria-label="PLM 도입 4단계">
+          <li>
+            <span class="am-process-number" aria-hidden="true">01</span>
+            <div><h3>현 업무 진단</h3><p>도면 등록, 품번, BOM 변경, 승인 흐름의 단절 지점을 확인합니다.</p></div>
+          </li>
+          <li>
+            <span class="am-process-number" aria-hidden="true">02</span>
+            <div><h3>데이터 구조 설계</h3><p>품목, 문서, 프로젝트, 원가 구조를 현장 기준에 맞춥니다.</p></div>
+          </li>
+          <li>
+            <span class="am-process-number" aria-hidden="true">03</span>
+            <div><h3>제품별 단계 구축</h3><p>PDM, PMS, Multi-BOM, CMS를 필요한 순서로 구축합니다.</p></div>
+          </li>
+          <li>
+            <span class="am-process-number" aria-hidden="true">04</span>
+            <div><h3>연동과 정착</h3><p>ERP, CAD, 파일 서버 연동과 사용자 정착을 함께 진행합니다.</p></div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -874,6 +837,91 @@
       </div>
     </section>
 
+    <!-- Keep the existing section:nth-of-type backgrounds unchanged. -->
+    <div class="spinfire-insert">
+      <section class="am-spinfire" id="spinfire" aria-labelledby="spinfireTitle">
+        <div class="am-shell">
+          <div class="spinfire-partnership">
+            <p><strong>Tech Soft 3D</strong><span aria-hidden="true">×</span><strong>PAPSNET</strong></p>
+            <span class="spinfire-partner-label">SpinFire 총판 계약 체결</span>
+          </div>
+
+          <div class="spinfire-heading">
+            <div>
+              <p class="spinfire-kicker">CAD VIEWING &amp; ANALYSIS</p>
+              <h2 id="spinfireTitle">SpinFire Insight<span aria-hidden="true">.</span></h2>
+              <p class="spinfire-headline">CAD 데이터, 모든 부서가 함께 봅니다.</p>
+            </div>
+            <div class="spinfire-intro">
+              <p>원본 CAD 프로그램 없이 2D 도면과 3D 모델을 열고, 측정하고, 검토하세요. 팹스넷이 Tech Soft 3D와 함께 SpinFire를 공급합니다.</p>
+              <div class="spinfire-actions">
+                <a class="spinfire-cta" href="contact.html?type=product&amp;product=SpinFire%20Insight">SpinFire 도입 상담<span class="material-symbols-rounded" aria-hidden="true">north_east</span></a>
+                <a class="spinfire-text-link" href="https://www.techsoft3d.com/enterprise/spinfire-insight/" target="_blank" rel="noopener noreferrer">공식 제품 보기<span class="material-symbols-rounded" aria-hidden="true">open_in_new</span><span class="spinfire-sr-only"> (새 창)</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="spinfire-workspace" data-spinfire-workspace>
+            <div class="spinfire-feature-list" aria-label="SpinFire 주요 기능" data-spinfire-tabs>
+              <a class="spinfire-feature" id="spinfire-tab-section" href="/images/spinfire/spinfire-section-cut.jpg" data-spinfire-tab="spinfire-panel-section">
+                <span class="spinfire-feature-number">01</span><span><strong>단면 검토</strong><small>모델을 잘라 내부 구조와 부품 배치를 확인합니다.</small></span><span class="material-symbols-rounded spinfire-feature-arrow" aria-hidden="true">arrow_outward</span>
+              </a>
+              <a class="spinfire-feature" id="spinfire-tab-measure" href="/images/spinfire/spinfire-measurement.jpg" data-spinfire-tab="spinfire-panel-measure">
+                <span class="spinfire-feature-number">02</span><span><strong>정밀 측정</strong><small>길이·거리·반경 등 검토에 필요한 치수를 빠르게 파악합니다.</small></span><span class="material-symbols-rounded spinfire-feature-arrow" aria-hidden="true">arrow_outward</span>
+              </a>
+              <a class="spinfire-feature" id="spinfire-tab-compare" href="/images/spinfire/spinfire-model-compare.jpg" data-spinfire-tab="spinfire-panel-compare">
+                <span class="spinfire-feature-number">03</span><span><strong>모델 비교</strong><small>두 모델의 차이를 비교해 설계 변경 내용을 검토합니다.</small></span><span class="material-symbols-rounded spinfire-feature-arrow" aria-hidden="true">arrow_outward</span>
+              </a>
+            </div>
+            <div class="spinfire-stage">
+              <div class="spinfire-stage-head"><span>제품 화면으로 살펴보기</span><span>Windows 데스크톱</span></div>
+              <figure id="spinfire-panel-section" class="spinfire-panel" data-spinfire-panel>
+                <a href="/images/spinfire/spinfire-section-cut.jpg" target="_blank" rel="noopener noreferrer" aria-label="SpinFire 단면 검토 화면 크게 보기 (새 창)">
+                  <img src="/images/spinfire/spinfire-section-cut.jpg" alt="SpinFire Insight에서 기어박스 모델의 단면을 열어 내부 기어와 축을 확인하는 제품 화면" width="1920" height="1080" loading="lazy" decoding="async">
+                  <span class="spinfire-image-zoom"><span class="material-symbols-rounded" aria-hidden="true">open_in_full</span>화면 확대</span>
+                </a>
+                <figcaption><strong>단면 검토</strong><span>보이지 않던 내부 구조까지 확인합니다.</span></figcaption>
+              </figure>
+              <figure id="spinfire-panel-measure" class="spinfire-panel" data-spinfire-panel hidden>
+                <a href="/images/spinfire/spinfire-measurement.jpg" target="_blank" rel="noopener noreferrer" aria-label="SpinFire 정밀 측정 화면 크게 보기 (새 창)">
+                  <img src="/images/spinfire/spinfire-measurement.jpg" alt="SpinFire Insight의 Smart Dimensioning으로 CAD 모델의 치수를 표시한 제품 화면" width="1920" height="1080" loading="lazy" decoding="async">
+                  <span class="spinfire-image-zoom"><span class="material-symbols-rounded" aria-hidden="true">open_in_full</span>화면 확대</span>
+                </a>
+                <figcaption><strong>정밀 측정</strong><span>거리와 치수를 모델 위에서 살펴봅니다.</span></figcaption>
+              </figure>
+              <figure id="spinfire-panel-compare" class="spinfire-panel" data-spinfire-panel hidden>
+                <a href="/images/spinfire/spinfire-model-compare.jpg" target="_blank" rel="noopener noreferrer" aria-label="SpinFire 모델 비교 화면 크게 보기 (새 창)">
+                  <img src="/images/spinfire/spinfire-model-compare.jpg" alt="SpinFire Insight에서 두 CAD 모델을 색상으로 구분해 형상 차이를 비교하는 제품 화면" width="1920" height="1080" loading="lazy" decoding="async">
+                  <span class="spinfire-image-zoom"><span class="material-symbols-rounded" aria-hidden="true">open_in_full</span>화면 확대</span>
+                </a>
+                <figcaption><strong>모델 비교</strong><span>변경 전후의 형상 차이를 시각적으로 확인합니다.</span></figcaption>
+              </figure>
+            </div>
+
+            <p class="spinfire-more-features"><span class="material-symbols-rounded" aria-hidden="true">edit_note</span>마크업과 주석으로 검토 의견도 함께 남깁니다.</p>
+          </div>
+
+          <div class="spinfire-formats">
+            <span>주요 지원 CAD</span>
+            <ul aria-label="대표적인 지원 CAD 형식"><li>CATIA V5</li><li>NX</li><li>Creo</li><li>SOLIDWORKS</li><li>Inventor</li><li>STEP</li><li>JT</li></ul>
+          </div>
+
+          <div class="spinfire-resources" aria-label="SpinFire 제품 자료">
+            <a href="/downloads/papsnet-spinfire-insight-ko.pdf" download="PAPSNET-SpinFire-Insight-KO.pdf">
+              <span class="material-symbols-rounded" aria-hidden="true">description</span><span><strong>제품 소개서</strong><small>팹스넷 소개 자료 · 한국어 PDF</small></span><span class="material-symbols-rounded" aria-hidden="true">download</span>
+            </a>
+            <a href="https://www.techsoft3d.com/enterprise/spinfire-insight/cad-formats/" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-rounded" aria-hidden="true">view_in_ar</span><span><strong>지원 형식 확인</strong><small>CAD 형식·버전·에디션별 범위</small></span><span class="material-symbols-rounded" aria-hidden="true">open_in_new</span><span class="spinfire-sr-only"> (새 창)</span>
+            </a>
+            <a href="https://docs.techsoft3d.com/spinfire/insight/" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-rounded" aria-hidden="true">menu_book</span><span><strong>공식 사용 가이드</strong><small>설치부터 기능별 사용 방법까지</small></span><span class="material-symbols-rounded" aria-hidden="true">open_in_new</span><span class="spinfire-sr-only"> (새 창)</span>
+            </a>
+          </div>
+          <p class="spinfire-source">제품 화면: Tech Soft 3D 공식 자료. 지원 형식·버전 및 내보내기 범위는 에디션에 따라 다릅니다.</p>
+        </div>
+      </section>
+    </div>
+
     <section class="am-section am-customers" id="customers">
       <div class="am-shell">
         <div class="am-section-head am-customers-head blur-fade">
@@ -982,6 +1030,7 @@
           <li><a href="product-multibom.html">Multi-BOM</a></li>
           <li><a href="product-clipcms.html">Clip CMS</a></li>
           <li><a href="product-clip3dviewer.html">Clip 3D Viewer</a></li>
+          <li><a href="#spinfire">SpinFire Insight</a></li>
         </ul>
       </div>
 
@@ -999,6 +1048,7 @@
         <h4>회사</h4>
         <ul>
           <li><a href="index.html">홈</a></li>
+          <li><a href="#news">팹스넷 소식</a></li>
           <li><a href="contact.html?type=contact">도입 문의</a></li>
           <li><a href="https://www.papsnet.net" target="_blank" rel="noopener">www.papsnet.net</a></li>
         </ul>
@@ -1168,6 +1218,8 @@
 
   <script type="module" src="analytics-events.js"></script>
   <script type="module" src="app.js?v=20260824-media-feature-1"></script>
+  <script type="module" src="home-news.js"></script>
+  <script type="module" src="home-spinfire.js"></script>
 </body>
 
 </html>

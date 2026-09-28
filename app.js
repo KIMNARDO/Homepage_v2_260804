@@ -1,4 +1,5 @@
 import './lead-download.js';
+import { createWheelStepGate } from './scroll-gesture.mjs';
 
 /* =============================================
    Papsnet Homepage — AntiGravity + Magic UI
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        const offset = document.body.classList.contains('plm-home-v2') ? 132 : 80;
+        const offset = document.body.classList.contains('plm-home-v2') ? (window.innerWidth <= 760 ? 88 : 132) : 80;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
@@ -503,7 +504,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (productTour) {
     const tourTabs = Array.from(productTour.querySelectorAll('[data-tour-tab]'));
     const tourPanels = Array.from(productTour.querySelectorAll('[data-tour-panel]'));
-    const tourStatusBars = Array.from(productTour.querySelectorAll('.am-tour-status > span'));
     const tourWindow = productTour.querySelector('[data-tour-window]');
     const tourEyebrow = productTour.querySelector('[data-tour-eyebrow]');
     const tourTitle = productTour.querySelector('[data-tour-title]');
@@ -513,9 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tourJumpLinks = Array.from(productTour.querySelectorAll('[data-tour-jump]'));
     const reduceTourMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let tourIndex = 0;
-    let tourTimer = null;
     let tourInView = false;
-    let tourPaused = false;
     let tourRailProgrammatic = false;
     let tourRailScrollTimer = null;
 
@@ -552,16 +550,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    const restartTourTimer = () => {
-      window.clearInterval(tourTimer);
-      productTour.classList.remove('is-running');
-      if (reduceTourMotion || !tourInView || tourPaused || tourTabs.length < 2) return;
-      void productTour.offsetWidth;
-      productTour.classList.add('is-running');
-      tourTimer = window.setInterval(() => {
-        setTourStep((tourIndex + 1) % tourTabs.length);
-      }, 7000);
+    // A product screen stays selected while it is being read. Only the demo video loops.
+    const updateTourVideos = () => {
+      tourVideos.forEach(video => {
+        const active = video.closest('[data-tour-panel]')?.dataset.tourPanel === productTour.dataset.tour;
+        if (!active || !tourInView || reduceTourMotion) {
+          video.pause();
+        } else {
+          video.play()?.catch(() => {});
+        }
+      });
     };
+
+    tourTabs.forEach(tab => {
+      tab.id = `tour-tab-${tab.dataset.tourTab}`;
+      tab.setAttribute('aria-controls', `tour-panel-${tab.dataset.tourTab}`);
+    });
+    tourPanels.forEach(panel => {
+      panel.id = `tour-panel-${panel.dataset.tourPanel}`;
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', `tour-tab-${panel.dataset.tourPanel}`);
+    });
 
     function setTourStep(nextIndex) {
       if (!tourTabs.length) return;
@@ -576,7 +585,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tab.setAttribute('aria-selected', active ? 'true' : 'false');
         tab.tabIndex = active ? 0 : -1;
       });
-      if (window.innerWidth <= 720) {
+      if (window.innerWidth <= 920) {
         const rail = productTour.querySelector('.am-tour-rail');
         const activeTab = tourTabs[tourIndex];
         window.requestAnimationFrame(() => {
@@ -592,19 +601,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
       tourPanels.forEach(panel => {
-        panel.classList.toggle('active', panel.dataset.tourPanel === activeKey);
+        const active = panel.dataset.tourPanel === activeKey;
+        panel.classList.toggle('active', active);
+        panel.hidden = !active;
       });
-      tourVideos.forEach(video => {
-        const active = video.closest('[data-tour-panel]')?.dataset.tourPanel === activeKey;
-        if (!active || reduceTourMotion) {
-          video.pause();
-          return;
-        }
-        video.currentTime = 0;
-        const playRequest = video.play();
-        if (playRequest) playRequest.catch(() => {});
-      });
-      tourStatusBars.forEach((bar, index) => bar.classList.toggle('active', index === tourIndex));
+      updateTourVideos();
 
       if (activeData) {
         if (tourWindow) tourWindow.textContent = activeData.window;
@@ -613,24 +614,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tourCopy) tourCopy.textContent = activeData.copy;
       }
       if (tourStatus) tourStatus.textContent = String(tourIndex + 1).padStart(2, '0');
-      restartTourTimer();
     }
+
+    productTour.querySelector('[data-tour-prev]')?.addEventListener('click', () => setTourStep(tourIndex - 1));
+    productTour.querySelector('[data-tour-next]')?.addEventListener('click', () => setTourStep(tourIndex + 1));
 
     tourTabs.forEach((tab, index) => {
       tab.addEventListener('click', () => setTourStep(index));
       tab.addEventListener('keydown', event => {
-        if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return;
+        if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
         const direction = ['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1;
-        const nextIndex = (index + direction + tourTabs.length) % tourTabs.length;
-        tourTabs[nextIndex].focus();
+        const nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? tourTabs.length - 1 : (index + direction + tourTabs.length) % tourTabs.length;
+        tourTabs[nextIndex].focus({ preventScroll: true });
         setTourStep(nextIndex);
       });
     });
 
     const tourRail = productTour.querySelector('.am-tour-rail');
     tourRail?.addEventListener('scroll', () => {
-      if (window.innerWidth > 720 || tourRailProgrammatic) return;
+      if (window.innerWidth > 920 || tourRailProgrammatic) return;
       window.clearTimeout(tourRailScrollTimer);
       tourRailScrollTimer = window.setTimeout(() => {
         const railCenter = tourRail.scrollLeft + (tourRail.clientWidth / 2);
@@ -658,30 +661,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    productTour.addEventListener('pointerenter', () => {
-      tourPaused = true;
-      restartTourTimer();
-    });
-    productTour.addEventListener('pointerleave', () => {
-      tourPaused = false;
-      restartTourTimer();
-    });
-    productTour.addEventListener('focusin', () => {
-      tourPaused = true;
-      restartTourTimer();
-    });
-    productTour.addEventListener('focusout', event => {
-      if (productTour.contains(event.relatedTarget)) return;
-      tourPaused = false;
-      restartTourTimer();
-    });
-
     const tourObserver = new IntersectionObserver(entries => {
       tourInView = entries[0].isIntersecting;
-      restartTourTimer();
-    }, { threshold: 0.32 });
+      updateTourVideos();
+    }, { threshold: 0.01 });
 
-    tourObserver.observe(productTour);
+    tourObserver.observe(productTour.querySelector('.am-tour-screen'));
     setTourStep(0);
   }
 
@@ -790,6 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const textRevealTargets = document.querySelectorAll(
     '.plm-home-v2 .am-hero:not(.am-hero-editorial) h1, ' +
     '.plm-home-v2 .am-section-head h2, ' +
+    '.plm-home-v2 .am-impact-head h2, ' +
     '.plm-home-v2 .am-technology-head h2, ' +
     '.plm-home-v2 .am-tour-heading h2, ' +
     '.plm-home-v2 .am-proof-card h2, ' +
@@ -938,11 +924,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let heroSequenceStep = 0;
   let heroSequenceFrame = 0;
   let heroSequenceAnimating = false;
-  let heroWheelAccumulator = 0;
-  let heroWheelResetTimer = 0;
+  const heroWheelStep = createWheelStepGate();
   let heroExitLock = false;
-  let heroTouchStartY = null;
-  let heroTouchHandled = false;
+  let heroExitTimer = 0;
   const heroSequenceValues = { ev: 1, aero: 0, facility: 0 };
   const heroSequenceStates = [
     { industry: 0, ev: 1, aero: 0, facility: 0, explode: 1 },
@@ -1420,11 +1404,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function exitHeroSequence() {
-    const nextSection = document.querySelector('#platform');
+    const nextSection = document.querySelector('#news') || heroSection?.nextElementSibling;
     if (!nextSection || heroExitLock) return;
     heroExitLock = true;
     nextSection.scrollIntoView({ behavior: motionQuery.matches ? 'auto' : 'smooth', block: 'start' });
-    window.setTimeout(() => { heroExitLock = false; }, 900);
+    window.clearTimeout(heroExitTimer);
+    heroExitTimer = window.setTimeout(() => { heroExitLock = false; }, 900);
   }
 
   function handleHeroDirection(direction) {
@@ -1441,24 +1426,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleHeroWheel(event) {
+    // Mobile/touch layouts use native page scrolling; the scene buttons remain available.
+    if (window.innerWidth <= 760 || event.ctrlKey || event.target.closest('input, textarea, select, [contenteditable="true"], dialog, .mobile-menu.open')) return;
+    // Absorb the remainder of the gesture while landing on news, even after leaving the hero.
+    if (heroExitLock) {
+      event.preventDefault();
+      window.clearTimeout(heroExitTimer);
+      heroExitTimer = window.setTimeout(() => { heroExitLock = false; }, 350);
+      return;
+    }
     if (!heroIsInControlRange() || Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
     const direction = Math.sign(event.deltaY);
     if (!direction || (direction < 0 && heroSequenceStep === 0)) return;
 
     event.preventDefault();
-    if (heroSequenceAnimating || heroExitLock) return;
-
-    heroWheelAccumulator += event.deltaY;
-    window.clearTimeout(heroWheelResetTimer);
-    heroWheelResetTimer = window.setTimeout(() => { heroWheelAccumulator = 0; }, 140);
-    if (Math.abs(heroWheelAccumulator) < 18) return;
-
-    const accumulatedDirection = Math.sign(heroWheelAccumulator);
-    heroWheelAccumulator = 0;
-    handleHeroDirection(accumulatedDirection);
+    const step = heroWheelStep(event, performance.now(), window.innerHeight);
+    if (!heroSequenceAnimating && step) handleHeroDirection(step);
   }
 
   function handleHeroKeydown(event) {
+    if (window.innerWidth <= 760 || event.target.closest('input, textarea, select, button, a, [contenteditable="true"], dialog, .mobile-menu.open')) return;
     if (!heroIsInControlRange()) return;
     const downKeys = ['ArrowDown', 'PageDown', ' '];
     const upKeys = ['ArrowUp', 'PageUp'];
@@ -1467,22 +1454,6 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     handleHeroDirection(downKeys.includes(event.key) ? 1 : -1);
   }
-
-  heroSection?.addEventListener('touchstart', event => {
-    heroTouchStartY = event.touches[0]?.clientY ?? null;
-    heroTouchHandled = false;
-  }, { passive: true });
-
-  heroSection?.addEventListener('touchmove', event => {
-    if (heroTouchHandled || heroTouchStartY === null || !heroIsInControlRange()) return;
-    const currentY = event.touches[0]?.clientY ?? heroTouchStartY;
-    const delta = heroTouchStartY - currentY;
-    if (Math.abs(delta) < 46) return;
-    if (delta < 0 && heroSequenceStep === 0) return;
-    event.preventDefault();
-    heroTouchHandled = true;
-    handleHeroDirection(Math.sign(delta));
-  }, { passive: false });
 
   window.addEventListener('wheel', handleHeroWheel, { passive: false });
   window.addEventListener('keydown', handleHeroKeydown);

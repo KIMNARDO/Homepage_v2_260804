@@ -28,13 +28,13 @@
 }
 
 html[data-theme="dark"] {
-  --am-bg: #10100f;
-  --am-panel: #171614;
-  --am-card: #1f1e1b;
-  --am-ink: #fff8e8;
-  --am-muted: #b9b0a1;
-  --am-line: rgba(255, 248, 232, 0.14);
-  --am-soft-line: rgba(255, 248, 232, 0.09);
+  --am-bg: #101719;
+  --am-panel: #101719;
+  --am-card: #192329;
+  --am-ink: #f2f6f7;
+  --am-muted: #a9b7bf;
+  --am-line: rgba(225, 239, 247, 0.18);
+  --am-soft-line: rgba(225, 239, 247, 0.09);
 }
 
 html,
@@ -131,7 +131,8 @@ html[data-theme="dark"] .plm-home-v2 .nav-inner {
   height: 44px;
   border: 0;
   overflow: hidden;
-  background: #fff;
+  background: transparent;
+  padding: 0;
   box-shadow: none;
 }
 
@@ -143,8 +144,20 @@ html[data-theme="dark"] .plm-home-v2 .nav-inner {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
   transform: scale(1);
+}
+
+.papsnet-logo-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] body.plm-home-v2 :is(.nav.scrolled, .mobile-menu) .nav-logo img.papsnet-logo-mark {
+  filter: url("#papsnet-logo-on-dark");
 }
 
 .plm-home-v2 .nav-center {
@@ -2269,7 +2282,7 @@ html[data-theme="dark"] .am-platform-map {
 
 /* One canvas and one spacing rhythm across the homepage. */
 .plm-home-v2 .am-section:nth-of-type(even):not(.am-technology) {
-  background: #f8f8f5;
+  background: var(--am-panel);
 }
 
 .plm-home-v2 .am-section-head {
@@ -8660,7 +8673,7 @@ html[data-theme="dark"] .am-tour-heading .am-kicker {
 }
 
 .plm-home-v2 .nav:not(.scrolled) .nav-logo img {
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
   filter: none;
 }
 
