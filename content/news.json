@@ -15,6 +15,24 @@
   ],
   "items": [
     {
+      "id": "clip-2d-viewer-demo",
+      "category": "company",
+      "kind": "announcement",
+      "published": true,
+      "date": "2026-11-13",
+      "source": "팹스넷",
+      "title": "CLIP 2D Viewer로 보는 개정 도면의 차이",
+      "summary": "17초 시연에서 실제 도면의 유사 후보와 개정 전후에 달라진 부분을 확인하세요.",
+      "image": "/videos/clip2d-comparison.jpg",
+      "imageAlt": "CLIP 2D Viewer에서 연 기계 도면의 전체 형상과 치수",
+      "paragraphs": [
+        "이전에 검토한 도면과 비슷한 후보를 찾고, 개정본에서 달라진 위치를 짚어 보는 과정을 담았습니다. 전체 도면과 비교 결과를 한 화면에서 확인할 수 있습니다.",
+        "귀사 도면으로 같은 작업을 확인하고 싶다면 시연 페이지에서 맞춤 상담을 신청하세요."
+      ],
+      "relatedUrl": "/product-clip2dviewer.html#viewer-film",
+      "relatedLabel": "17초 도면 비교 시연 보기"
+    },
+    {
       "id": "paxnet-tv-2026",
       "category": "media",
       "kind": "video",
@@ -36,6 +54,24 @@
         "end": 401,
         "label": "00:29–06:41"
       }
+    },
+    {
+      "id": "hankookilbo-plm-2026",
+      "category": "media",
+      "kind": "article",
+      "published": true,
+      "date": "2026-05-27",
+      "source": "한국일보",
+      "title": "한국일보가 소개한 팹스넷의 고정밀 제조업 PLM",
+      "summary": "한국일보가 자동차 부품·반도체 장비·의료기기 제조사를 위한 CLIP 시리즈와 CADWin AI의 유사 도면 검색을 소개했습니다.",
+      "coverLabel": "한국일보",
+      "coverTitle": "고정밀 제조업을 위한\n한국형 PLM",
+      "sourceUrl": "https://www.hankookilbo.com/news/article/A2026052715000003724",
+      "sourceTitle": "고정밀산업에 제품수명주기관리 솔루션 공급",
+      "paragraphs": [
+        "한국일보는 ‘2026 디지털이노베이션 대상’ 기획에서 팹스넷의 CLIP 시리즈를 다뤘습니다. 제조사가 도면과 프로젝트를 관리하고 협력사와 데이터를 주고받는 데 쓰는 플랫폼입니다.",
+        "기사는 설계자가 이전 도면을 다시 활용할 수 있도록 유사 도면을 찾아주는 CADWin AI도 함께 소개했습니다."
+      ]
     },
     {
       "id": "hankyung-jobjoy-2026",

@@ -55,9 +55,11 @@
       ]
     }
     </script>
+<link rel="stylesheet" href="product-screen-gallery.css">
+    <link rel="stylesheet" href="product-unified.css">
 </head>
 
-<body class="theme-pdm">
+<body class="product-unified theme-pdm">
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNWPBJMK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- Skip Navigation -->
@@ -85,7 +87,7 @@
             <div class="nav-center">
                 <div class="nav-dropdown">
                     <button class="nav-dropdown-trigger nav-link active" aria-expanded="false" aria-haspopup="true">
-                        제품 <span class="material-symbols-rounded nav-dropdown-chevron">expand_more</span>
+                        제품 <svg class="nav-dropdown-chevron nav-vector-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
                     <div class="nav-dropdown-menu">
                         <a href="product-cadwin.html" class="nav-dropdown-item" data-product="cadwin">
@@ -120,7 +122,7 @@
                         </a>
                         <a href="product-clip3dviewer.html" class="nav-dropdown-item" data-product="viewer3d">
                             <span class="nav-dropdown-item-text">
-                                <span class="nav-dropdown-item-name">Clip 3D Viewer <span class="footer-badge">New</span></span>
+                                <span class="nav-dropdown-item-name">CLIP 3D Viewer <span class="footer-badge">New</span></span>
                                 <span class="nav-dropdown-item-desc">주요 CAD 웹 검토</span>
                             </span>
                         </a>
@@ -163,7 +165,7 @@
                 <a href="product-clippms.html" class="mobile-nav-link">Clip PMS</a>
                 <a href="product-multibom.html" class="mobile-nav-link">Multi-BOM</a>
                 <a href="product-clipcms.html" class="mobile-nav-link">Clip CMS <span class="footer-badge">New</span></a>
-                <a href="product-clip3dviewer.html" class="mobile-nav-link">Clip 3D Viewer <span class="footer-badge">New</span></a>
+                <a href="product-clip3dviewer.html" class="mobile-nav-link">CLIP 3D Viewer <span class="footer-badge">New</span></a>
                 <a href="#capabilities" class="mobile-nav-link">핵심 기능</a>
                 <a href="#features" class="mobile-nav-link">상세 기능</a>
                 <a href="index.html#customers" class="mobile-nav-link">고객 사례</a>
@@ -192,14 +194,14 @@
                 </p>
                 <div class="hero-actions">
                     <a href="contact.html?type=consult&amp;product=Clip%20PDM" class="btn btn-primary">도입 상담 요청</a>
-                    <a href="brochures/Clip_PDM_브로슈어.pdf" class="btn btn-glass" download>
+                    <a href="brochures/Clip_PDM_브로슈어.pdf" class="btn btn-glass" download data-lead-download data-product="Clip PDM" title="핵심 기능과 실제 화면을 담은 5페이지 PDF">
                         <span class="material-symbols-rounded">download</span>
-                        브로슈어 다운로드
+                        브로슈어 다운로드 · PDF 5p
                     </a>
                 </div>
             </div>
             <div class="product-hero-visual">
-                <img src="260528_등록이미지/관리자데시보드.png" alt="Clip PDM 관리자 대시보드 — 도면·BOM·결재 현황" fetchpriority="high" decoding="async">
+                <img src="images/product-highlights/pdm-screen.webp" alt="CLiP PDM 도면 상세와 첨부 미리보기" fetchpriority="high" decoding="async">
             </div>
         </div>
     </section>
@@ -221,7 +223,7 @@
             </div>
             <div class="trust-stat">
                 <div class="trust-number">ECO</div>
-                <div class="trust-label">설계변경 프로세스 자동화</div>
+                <div class="trust-label">설계변경·결재 이력</div>
             </div>
         </div>
     </section>
@@ -236,184 +238,42 @@
             </div>
 
             <div class="capabilities-bento bento-glass">
-                <div class="cap-bento-card blur-fade blur-fade-d1">
-                    <div class="cap-bento-icon"><img src="images/icons3d/database-blue.webp" alt="" loading="lazy" decoding="async"></div>
+                <div class="cap-bento-card pdm-vector-card blur-fade blur-fade-d1">
+                    <div class="cap-bento-icon"><svg class="pdm-feature-vector" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><ellipse cx="36" cy="20" rx="22" ry="8" fill="var(--pd-soft)"/><path d="M14 20v36c0 4.4 9.8 8 22 8s22-3.6 22-8V20M14 32c0 4.4 9.8 8 22 8s22-3.6 22-8M14 44c0 4.4 9.8 8 22 8s22-3.6 22-8"/><ellipse cx="36" cy="20" rx="22" ry="8"/><circle cx="58" cy="57" r="12" fill="var(--pd-card)"/><path d="m52 57 4 4 8-9"/></svg></div>
                     <h3>중앙 집중식 저장소</h3>
                     <p>도면·부품·문서를 단일 저장소에서 관리.</p>
                 </div>
-                <div class="cap-bento-card blur-fade blur-fade-d2">
-                    <div class="cap-bento-icon"><img src="images/icons3d/manage_history-blue.webp" alt="" loading="lazy" decoding="async"></div>
-                    <h3>자동 버전 관리</h3>
-                    <p>Check-in/out으로 리비전 이력 자동 추적.</p>
+                <div class="cap-bento-card pdm-vector-card blur-fade blur-fade-d2">
+                    <div class="cap-bento-icon"><svg class="pdm-feature-vector" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 12h25l12 12v35a5 5 0 0 1-5 5H20a5 5 0 0 1-5-5V17a5 5 0 0 1 5-5Z" fill="var(--pd-soft)"/><path d="M44 12v13h13M25 32h14M25 41h10M25 50h8"/><circle cx="53" cy="51" r="18" fill="var(--pd-card)"/><path d="M53 40v12l8 5M37 38v9h9"/></svg></div>
+                    <h3>체크인·개정 관리</h3>
+                    <p>체크인·체크아웃 상태와 개정 이력 확인.</p>
                 </div>
-                <div class="cap-bento-card blur-fade blur-fade-d3">
-                    <div class="cap-bento-icon"><img src="images/icons3d/account_tree-blue.webp" alt="" loading="lazy" decoding="async"></div>
-                    <h3>Multi-BOM 연계</h3>
-                    <p>E-BOM·M-BOM·S-BOM 변경 영향 함께 검토.</p>
+                <div class="cap-bento-card pdm-vector-card blur-fade blur-fade-d3">
+                    <div class="cap-bento-icon"><svg class="pdm-feature-vector" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M40 27v12M16 49V39h48v10M40 39v10"/><rect x="28" y="10" width="24" height="17" rx="5" fill="var(--pd-soft)"/><rect x="6" y="49" width="20" height="18" rx="5" fill="var(--pd-soft)"/><rect x="30" y="49" width="20" height="18" rx="5" fill="var(--pd-card)"/><rect x="54" y="49" width="20" height="18" rx="5" fill="var(--pd-soft)"/><path d="M35 18h10M13 58h6M37 58h6M61 58h6"/></svg></div>
+                    <h3>다단계 BOM 관리</h3>
+                    <p>조립품·부품 구조와 수량·리비전·상태 확인.</p>
                 </div>
-                <div class="cap-bento-card blur-fade blur-fade-d4">
-                    <div class="cap-bento-icon"><img src="images/icons3d/swap_horiz-blue.webp" alt="" loading="lazy" decoding="async"></div>
-                    <h3>설계변경(ECO) 자동화</h3>
-                    <p>ECR 접수부터 승인·배포까지 흐름 자동화.</p>
+                <div class="cap-bento-card pdm-vector-card blur-fade blur-fade-d4">
+                    <div class="cap-bento-icon"><svg class="pdm-feature-vector" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 29h43l-9-9M64 51H21l9 9"/><path d="m59 29-9 9M21 51l9-9"/><path d="M15 20v-4a5 5 0 0 1 5-5h17M65 60v4a5 5 0 0 1-5 5H43"/><circle cx="15" cy="20" r="4" fill="var(--pd-card)"/><circle cx="65" cy="60" r="4" fill="var(--pd-card)"/><rect x="9" y="38" width="12" height="20" rx="3" fill="var(--pd-soft)"/><rect x="59" y="22" width="12" height="20" rx="3" fill="var(--pd-soft)"/></svg></div>
+                    <h3>설계변경(ECO) 관리</h3>
+                    <p>변경 사유·대상 도면·결재 이력을 연결.</p>
                 </div>
-                <div class="cap-bento-card blur-fade blur-fade-d1">
-                    <div class="cap-bento-icon"><img src="images/icons3d/lock-blue.webp" alt="" loading="lazy" decoding="async"></div>
+                <div class="cap-bento-card pdm-vector-card blur-fade blur-fade-d1">
+                    <div class="cap-bento-icon"><svg class="pdm-feature-vector" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M40 8 67 19v20c0 16-13 26-27 33C26 65 13 55 13 39V19Z" fill="var(--pd-soft)"/><rect x="27" y="34" width="26" height="23" rx="5" fill="var(--pd-card)"/><path d="M32 34v-7a8 8 0 0 1 16 0v7M40 43v6"/></svg></div>
                     <h3>접근 제어 · 배포</h3>
-                    <p>역할 기반(RBAC) 권한으로 배포 범위 제어.</p>
+                    <p>담당 역할에 맞춰 자료의 열람·배포 범위를 관리.</p>
                 </div>
-                <div class="cap-bento-card blur-fade blur-fade-d2">
-                    <div class="cap-bento-icon"><img src="images/icons3d/hub-blue.webp" alt="" loading="lazy" decoding="async"></div>
+                <div class="cap-bento-card pdm-vector-card blur-fade blur-fade-d2">
+                    <div class="cap-bento-icon"><svg class="pdm-feature-vector" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M40 21v12M21 53l12-8M59 53l-12-8"/><circle cx="40" cy="40" r="12" fill="var(--pd-card)"/><rect x="29" y="6" width="22" height="15" rx="4" fill="var(--pd-soft)"/><rect x="5" y="53" width="24" height="17" rx="4" fill="var(--pd-soft)"/><rect x="51" y="53" width="24" height="17" rx="4" fill="var(--pd-soft)"/><path d="m34 40 4 4 8-8M12 61h10M58 61h10M35 13h10"/></svg></div>
                     <h3>주요 CAD 시스템 연동</h3>
-                    <p>AutoCAD·SolidWorks·CATIA 등 CAD 연동.</p>
+                    <p>사용 CAD에 맞춰 등록·연동 범위를 협의.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ===== Feature Blocks ===== -->
-    <section class="product-features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">상세 기능</span>
-                <h2>실제 화면 기준으로<br>업무 흐름을 보여줍니다</h2>
-                <p>최신 PDM 화면 이미지에 맞춘 역할별 대시보드와 도면 관리 화면</p>
-            </div>
-
-            <!-- Feature 1: User Dashboard -->
-            <div class="product-feature-block reveal">
-                <div class="pf-text">
-                    <span class="pf-tag">사용자 대시보드</span>
-                    <h3>내 업무와 도면을<br>한 화면에서 확인</h3>
-                    <p>내 체크아웃 도면, 할 일, 검토 대기, 읽지 않은 알림을 요약하고 오늘 일정과 프로젝트별 업무 현황을 함께 보여줍니다. 최근 작업 도면과 도면 상태 분포까지 개인 업무 기준으로 바로 확인합니다.</p>
-                    <div class="pf-chips">
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>내 체크아웃 도면</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>오늘 일정</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>프로젝트별 업무 현황</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>최근 작업 도면</span>
-                    </div>
-                    <a href="contact.html?type=demo&amp;product=Clip%20PDM" class="btn btn-primary">데모 요청 <span class="arrow" aria-hidden="true">→</span></a>
-                </div>
-                <div class="pf-media">
-                    <img src="260528_등록이미지/개인데시보드_01.png" alt="Clip PDM 개인 대시보드 화면" loading="lazy" decoding="async">
-                </div>
-            </div>
-
-            <!-- Feature 2: Team Lead Dashboard -->
-            <div class="product-feature-block reverse reveal">
-                <div class="pf-text">
-                    <span class="pf-tag">팀장 대시보드</span>
-                    <h3>팀 프로젝트와 리스크를<br>한눈에 점검</h3>
-                    <p>진행 프로젝트, 팀 도면 수, 진행 중인 팀 작업, 검토·승인 대기, 지연 작업, 이슈·리스크를 상단 지표로 확인합니다. 프로젝트 진행 현황, 팀원 작업 부하, 자원 사용량, 오늘 활동 요약까지 팀장 관점으로 묶어 보여줍니다.</p>
-                    <div class="pf-chips">
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>진행 프로젝트 지표</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>검토·승인 대기</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>지연 작업 Top 5</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>팀원·자원 사용 현황</span>
-                    </div>
-                    <a href="contact.html?type=demo&amp;product=Clip%20PDM" class="btn btn-primary">데모 요청 <span class="arrow" aria-hidden="true">→</span></a>
-                </div>
-                <div class="pf-media">
-                    <img src="260528_등록이미지/팀장데시보드_02.png" alt="Clip PDM 팀장 대시보드 화면" loading="lazy" decoding="async">
-                </div>
-            </div>
-
-            <!-- Feature 3: Drawing Management -->
-            <div class="product-feature-block reveal">
-                <div class="pf-text">
-                    <span class="pf-tag">도면 등록 · 관리</span>
-                    <h3>도면 파일과 분류 정보를<br>단계별로 등록</h3>
-                    <p>기본 정보, 분류 정보, 추가 정보, 검토 및 등록 단계로 도면을 입력합니다. CAD·PDF·DWG·첨부 파일을 함께 올리고, PDF/DWG/3D 미리보기와 관련 부품·문서·변경 정보를 같은 화면에서 확인합니다.</p>
-                    <div class="pf-chips">
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>도면 기본정보 등록</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>분류 코드·품명 관리</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>파일 미리보기</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>관련 부품·문서 연결</span>
-                    </div>
-                    <a href="contact.html?type=demo&amp;product=Clip%20PDM" class="btn btn-primary">데모 요청 <span class="arrow" aria-hidden="true">→</span></a>
-                </div>
-                <div class="pf-media">
-                    <img src="260528_등록이미지/도면등록_01.png" alt="Clip PDM 도면 등록 화면" loading="lazy" decoding="async">
-                </div>
-            </div>
-
-            <!-- Feature 4: Executive Dashboard -->
-            <div class="product-feature-block reverse reveal">
-                <div class="pf-text">
-                    <span class="pf-tag">관리자 대시보드</span>
-                    <h3>시스템 운영 현황을<br>관리자 기준으로 점검</h3>
-                    <p>사용자, 도면, 프로젝트, 저장 용량, 보안 경고, 진행 중인 결재를 상단 지표로 확인합니다. 권한·그룹·역할 관리, 분류 체계, 백업·복구, 감사 로그, 시스템 모니터링까지 운영자가 필요한 관리 영역으로 바로 이동합니다.</p>
-                    <div class="pf-chips">
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>사용자·권한 관리</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>분류 체계 관리</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>감사 로그 조회</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>시스템 상태 요약</span>
-                    </div>
-                    <a href="contact.html?type=demo&amp;product=Clip%20PDM" class="btn btn-primary">데모 요청 <span class="arrow" aria-hidden="true">→</span></a>
-                </div>
-                <div class="pf-media">
-                    <img src="260528_등록이미지/관리자데시보드.png" alt="Clip PDM 관리자 대시보드 화면" loading="lazy" decoding="async">
-                </div>
-            </div>
-
-            <!-- Feature 5: Check-out -->
-            <div class="product-feature-block reveal">
-                <div class="pf-text">
-                    <span class="pf-tag">도면 체크아웃</span>
-                    <h3>체크아웃 상태와<br>리비전 이력을 함께 관리</h3>
-                    <p>도면 정보, 체크아웃 가능 여부, 체크아웃 버전, 포함 파일, 리비전 이력을 한 화면에 표시합니다. 도면 뷰어에서 구조와 도면을 확인하고, 참조·종속 관계와 작업 이력까지 연결해 변경 흐름을 추적합니다.</p>
-                    <div class="pf-chips">
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>체크아웃 가능 상태</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>리비전 이력</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>도면 뷰어</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>참조·종속 관계</span>
-                    </div>
-                    <a href="contact.html?type=demo&amp;product=Clip%20PDM" class="btn btn-primary">데모 요청 <span class="arrow" aria-hidden="true">→</span></a>
-                </div>
-                <div class="pf-media">
-                    <img src="260528_등록이미지/도면체크아웃.png" alt="Clip PDM 도면 체크아웃 화면" loading="lazy" decoding="async">
-                </div>
-            </div>
-
-            <!-- Feature 6: Multi-BOM -->
-            <div class="product-feature-block reverse reveal">
-                <div class="pf-text">
-                    <span class="pf-tag">Multi-BOM 비교</span>
-                    <h3>E-BOM과 M-BOM의<br>차이를 표로 비교</h3>
-                    <p>Source E-BOM과 Target M-BOM을 선택해 구조 비교, 변경 요약, 수량 비교, 속성 비교, 텍스트 비교를 수행합니다. 추가됨, 삭제됨, 수정됨, 수량 변경 항목을 색상과 요약 지표로 구분하고 상세 정보와 최근 비교 이력까지 확인합니다.</p>
-                    <div class="pf-chips">
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>구조·수량 비교</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>추가·삭제 항목 표시</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>변경 유형 필터</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>최근 비교 이력</span>
-                    </div>
-                    <a href="contact.html?type=demo&amp;product=Clip%20PDM" class="btn btn-primary">데모 요청 <span class="arrow" aria-hidden="true">→</span></a>
-                </div>
-                <div class="pf-media">
-                    <img src="260528_등록이미지/Multi-BOM%20비교.png" alt="Clip PDM Multi-BOM 비교 화면" loading="lazy" decoding="async">
-                </div>
-            </div>
-
-            <!-- Feature 7: Drawing Search & Filter -->
-            <div class="product-feature-block reveal">
-                <div class="pf-text">
-                    <span class="pf-tag">도면 검색 · 필터링</span>
-                    <h3>조건 검색과 빠른 검색으로<br>도면을 찾습니다</h3>
-                    <p>도면번호, 도면명, 품목코드, 품명, 프로젝트, 담당자, 도면 유형, 상태, 리비전, 재질, 표면 처리, 생성일·수정일을 조합해 검색합니다. 빠른 기간 검색, 즐겨찾기 검색, 엑셀·PDF 다운로드, 일괄 다운로드와 비교하기 기능을 제공합니다.</p>
-                    <div class="pf-chips">
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>도면번호·품목 검색</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>상태·리비전 필터</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>즐겨찾기 검색</span>
-                        <span class="pf-chip"><span class="material-symbols-rounded">check_circle</span>다운로드·비교</span>
-                    </div>
-                    <a href="contact.html?type=demo&amp;product=Clip%20PDM" class="btn btn-primary">데모 요청 <span class="arrow" aria-hidden="true">→</span></a>
-                </div>
-                <div class="pf-media">
-                    <img src="260528_등록이미지/도면검색.png" alt="Clip PDM 도면 검색 화면" loading="lazy" decoding="async">
-                </div>
-            </div>
-
-        </div>
-    </section>
+    <section class="product-screen-gallery" id="features" data-screen-gallery="pdm" style="--sg-accent:#772343"><div class="container"><div class="section-header"><span class="section-tag">CLiP PDM · 핵심 실제 화면</span><h2>제품의 핵심 업무를<br>실제 화면으로 확인하세요.</h2><p>도면의 품번·분류·리비전을 기준으로 제품 구조와 설계변경을 연결합니다. 등록한 자료가 검토·결재·배포 업무로 이어집니다.</p></div><ol class="sg-workflow"><li><span>01</span>도면 등록·개정</li><li><span>02</span>BOM 구조 확인</li><li><span>03</span>설계변경·결재</li></ol><div class="sg-controls" role="group" aria-label="CLiP PDM 핵심 화면 선택"><button type="button" data-screen-index="0" aria-pressed="true">도면 상세</button><button type="button" data-screen-index="1" aria-pressed="false">다단계 BOM</button><button type="button" data-screen-index="2" aria-pressed="false">설계변경</button></div><div class="sg-panel"><div class="sg-text"><span class="sg-product">CLiP PDM</span><h3 data-screen-title>PDM · 도면 상세와 미리보기</h3><p data-screen-copy>도면의 기본 정보·리비전·분류와 첨부 파일을 한 화면에서 확인합니다.</p><ul data-screen-points><li>품번·분류·리비전으로 도면 식별</li><li>상세 정보와 첨부 미리보기 확인</li><li>개정·결재 이력으로 검토 근거 확인</li></ul><a class="sg-consult" href="contact.html?type=demo&amp;product=Clip+PDM">우리 업무 기준으로 데모 상담 ↗</a></div><figure><a data-screen-zoom href="images/product-highlights/pdm-screen.webp" target="_blank" rel="noopener" aria-label="PDM · 도면 상세와 미리보기 크게 보기"><img data-screen-image src="images/product-highlights/pdm-screen.webp" alt="PDM · 도면 상세와 미리보기" width="1800" height="1125" loading="lazy"></a><figcaption data-screen-caption>제공된 제품 소개자료의 실제 화면 · 클릭하여 확대</figcaption></figure></div><p class="sg-scope">CAD 연동과 자료 이관, 결재 규칙은 고객 환경에 맞춰 구성합니다.</p></div></section>
 
     <!-- ===== Outcomes / ROI ===== -->
     <section class="product-outcomes" id="outcomes">
@@ -421,7 +281,7 @@
             <div class="section-header">
                 <span class="section-tag">도입 효과</span>
                 <h2>도면 관리 흐름을 정리합니다</h2>
-                <p>수치 과장보다 실제 운영에서 확인해야 할 변화에 집중합니다</p>
+                <p>현재 업무와 실제 화면을 비교하며 도입 후 달라질 점을 확인하세요</p>
             </div>
             <div class="outcomes-grid pdm-outcome-flow" aria-label="Clip PDM 도입 효과 흐름">
                 <article class="outcome-card blur-fade">
@@ -476,81 +336,7 @@
     </section>
 
     <!-- ===== Product Specs ===== -->
-    <section class="product-specs pdm-system-specs" id="specs">
-        <div class="container">
-            <div class="pdm-spec-heading">
-                <div>
-                    <span class="section-tag">PDM SYSTEM STACK</span>
-                    <h2>도면 데이터가 흐르는<br>시스템 구조</h2>
-                </div>
-                <div class="pdm-spec-heading-copy">
-                    <span>ARCHITECTURE / 06 LAYERS</span>
-                    <p>웹 접속부터 API, 데이터, 보안, 뷰어까지 Clip PDM의 핵심 시스템 요소를 레이어별로 확인합니다.</p>
-                </div>
-            </div>
-            <div class="pdm-spec-console slide-up-active">
-                <div class="pdm-spec-console-bar">
-                    <div class="pdm-window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-                    <span>CLIP.PDM / SYSTEM ARCHITECTURE</span>
-                    <strong><i aria-hidden="true"></i> SYSTEM READY</strong>
-                </div>
-                <div class="pdm-spec-grid">
-                    <article class="pdm-spec-module">
-                        <div class="pdm-spec-index"><span>01</span><small>ACCESS</small></div>
-                        <div class="pdm-spec-module-copy">
-                            <strong>Web-based Client</strong>
-                            <p>브라우저를 기준으로 도면·문서·변경 업무에 접근</p>
-                        </div>
-                        <img src="images/icons3d/hub-cyan.webp" alt="" loading="lazy" decoding="async">
-                    </article>
-                    <article class="pdm-spec-module">
-                        <div class="pdm-spec-index"><span>02</span><small>API</small></div>
-                        <div class="pdm-spec-module-copy">
-                            <strong>RESTful API / Multi-Tier</strong>
-                            <p>업무 서비스와 외부 시스템 연결을 고려한 아키텍처</p>
-                        </div>
-                        <img src="images/icons3d/hub-purple.webp" alt="" loading="lazy" decoding="async">
-                    </article>
-                    <article class="pdm-spec-module">
-                        <div class="pdm-spec-index"><span>03</span><small>DATA</small></div>
-                        <div class="pdm-spec-module-copy">
-                            <strong>Enterprise Database</strong>
-                            <p>고객사의 기존 DB와 인프라 환경을 확인해 도입 범위 협의</p>
-                        </div>
-                        <img src="images/icons3d/database-green.webp" alt="" loading="lazy" decoding="async">
-                    </article>
-                    <article class="pdm-spec-module">
-                        <div class="pdm-spec-index"><span>04</span><small>SERVER</small></div>
-                        <div class="pdm-spec-module-copy">
-                            <strong>Windows / Linux</strong>
-                            <p>Windows Server와 Linux 기반의 서버 환경 구성</p>
-                        </div>
-                        <img src="images/icons3d/settings-purple.webp" alt="" loading="lazy" decoding="async">
-                    </article>
-                    <article class="pdm-spec-module">
-                        <div class="pdm-spec-index"><span>05</span><small>SECURITY</small></div>
-                        <div class="pdm-spec-module-copy">
-                            <strong>AES-256 / SSL·TLS / RBAC</strong>
-                            <p>전송·저장 보호와 역할 기반 접근 제어를 시스템 구성에 반영</p>
-                        </div>
-                        <img src="images/icons3d/lock-blue.webp" alt="" loading="lazy" decoding="async">
-                    </article>
-                    <article class="pdm-spec-module">
-                        <div class="pdm-spec-index"><span>06</span><small>VIEWER</small></div>
-                        <div class="pdm-spec-module-copy">
-                            <strong>WebGL 2D·3D Viewer</strong>
-                            <p>DWG·DXF 및 3D 형상을 PLM 업무 화면 안에서 확인</p>
-                        </div>
-                        <img src="images/icons3d/view_in_ar-cyan.webp" alt="" loading="lazy" decoding="async">
-                    </article>
-                </div>
-                <div class="pdm-spec-footnote">
-                    <span>DEPLOYMENT NOTE</span>
-                    <p>DB·서버·CAD 연동 범위는 고객사 인프라와 보안 기준을 확인한 뒤 확정합니다.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="product-specs"><div class="container"><div class="section-header"><span class="section-tag">도입 전 확인</span><h2>기존 도면으로, 달라질 관리 업무를 확인하세요.</h2></div><div class="sg-brief-grid"><article><h3>자료 이관</h3><p>현재 도면·품번·엑셀 BOM을 기준으로 분류와 초기 반입 범위를 정합니다.</p></article><article><h3>CAD·업무 시스템 연계</h3><p>사용 CAD와 ERP·MES 등 연계 대상별 지원 범위와 데이터 흐름을 확인합니다.</p></article><article><h3>결재·보안·배포 규칙</h3><p>조직과 역할, 결재선, 문서 보안 및 협력사 배포 범위를 함께 설정합니다.</p></article></div></div></section>
 
     <!-- ===== Integrations ===== -->
     <section class="product-integrations pdm-integration-section" id="integrations">
@@ -560,7 +346,7 @@
                     <span class="section-tag">CAD / DATA INTERFACE</span>
                     <h2>설계 환경은 유지하고,<br>제품 데이터를 연결합니다.</h2>
                 </div>
-                <p>직접 연동과 고객 선택 개발, 데이터 인터페이스를 구분해 현재 운영 환경에 맞는 Clip PDM 도입 범위를 설계합니다.</p>
+                <p>사용 중인 설계 환경을 유지하면서 필요한 제품 정보를 연결합니다. 지원 여부와 추가 개발 범위는 현재 운영 환경을 기준으로 확인합니다.</p>
             </div>
             <div class="pdm-integration-board">
                 <div class="pdm-integration-lane pdm-integration-lane-input">
@@ -607,7 +393,7 @@
                     </article>
                     <article class="pdm-connector-card">
                         <div class="pdm-brand-mark pdm-brand-system"><img src="images/icons3d/factory-blue.webp" alt="MES 및 그룹웨어" loading="lazy" decoding="async"></div>
-                        <div><strong>MES / Groupware</strong><p>고객 업무 절차와 데이터 테이블 기준 맞춤 연동</p></div>
+                        <div><strong>MES / Groupware</strong><p>업무에 필요한 정보와 협업 범위 확인</p></div>
                         <span class="pdm-connector-status is-interface">INTERFACE</span>
                     </article>
                 </div>
@@ -626,7 +412,7 @@
             <div class="pdm-contact-copy">
                 <span class="pdm-contact-kicker"><i aria-hidden="true"></i>PDM SCOPING SESSION</span>
                 <h2>현재 설계 환경을 기준으로, <br>도면 관리 체계를 설계합니다.</h2>
-                <p>사용 중인 CAD, 파일 서버, 승인 절차와 ERP 인터페이스 범위를 먼저 확인합니다. 필요한 기능부터 Clip PDM 적용 구조를 함께 설계합니다.</p>
+                <p>귀사의 도면으로 최신 자료 찾기, 변경 이력 확인, 승인 업무를 살펴보세요. 현재 설계 환경에 필요한 기능과 연계 범위를 시연 상담에서 함께 확인합니다.</p>
                 <div class="cta-actions">
                     <a href="contact.html?type=consult&amp;product=Clip%20PDM" class="btn btn-primary">도입 범위 상담 요청 <span aria-hidden="true">↗</span></a>
                     <a href="tel:070-50011144" class="btn btn-glass">070-5001-1144</a>
@@ -697,7 +483,7 @@
                     <li><a href="product-clippms.html">Clip PMS</a></li>
                     <li><a href="product-multibom.html">Multi-BOM</a></li>
                     <li><a href="product-clipcms.html">Clip CMS <span class="footer-badge">New</span></a></li>
-                    <li><a href="product-clip3dviewer.html">Clip 3D Viewer <span class="footer-badge">New</span></a></li>
+                    <li><a href="product-clip3dviewer.html">CLIP 3D Viewer <span class="footer-badge">New</span></a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -730,6 +516,7 @@
 
     <script type="module" src="analytics-events.js"></script>
     <script type="module" src="app.js"></script>
+<script type="module" src="product-screen-gallery.js"></script>
 </body>
 
 </html>

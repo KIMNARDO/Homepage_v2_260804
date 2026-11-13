@@ -1,10 +1,13 @@
 const PRODUCT_BY_FILE = {
+  'CLiP_2D_Viewer_제품소개.pdf': 'CLIP VIEW 2D',
+  'CLiP_DDMS_제품소개.pdf': 'CLiP DDMS',
+  'Papsnet_CLiP_솔루션_브로슈어.pdf': '통합 PLM 전체',
   'AI_CADWin_브로슈어.pdf': 'AI CADWin',
   'Clip_PDM_브로슈어.pdf': 'Clip PDM',
   'Clip_PMS_브로슈어.pdf': 'Clip PMS',
   'Multi-BOM_브로슈어.pdf': 'Clip Multi-BOM EPL',
   'Clip_CMS_브로슈어.pdf': 'Clip CMS',
-  'Clip3D_Viewer_소개자료.pdf': 'Clip 3D Viewer',
+  'Clip3D_Viewer_소개자료.pdf': 'CLIP 3D Viewer',
 };
 
 function inferProduct(resource, explicitProduct) {
@@ -22,11 +25,11 @@ function createLeadDialog() {
       <aside class="lead-download-aside" aria-hidden="true">
         <div>
           <p class="lead-download-kicker">CLIP PLM · RESOURCE</p>
-          <strong>제품 자료를 보내드릴 준비가 됐습니다.</strong>
+          <strong>핵심 기능부터 확인해 보세요.</strong>
         </div>
         <ul>
-          <li>선택한 제품 자료 즉시 다운로드</li>
-          <li>도입 환경에 맞춘 후속 안내</li>
+          <li>공개 소개 PDF 다운로드</li>
+          <li>전체 기능·구축 범위는 상담으로 안내</li>
           <li>입력 정보는 리드 확인 목적으로만 사용</li>
         </ul>
         <p class="lead-download-step">01 / DOWNLOAD REQUEST</p>
@@ -38,7 +41,7 @@ function createLeadDialog() {
           </svg>
         </button>
         <h2 class="lead-download-heading" id="leadDownloadTitle">간단한 정보 입력 후<br>자료를 확인하세요.</h2>
-        <p class="lead-download-intro">필수 항목 세 가지만 입력하면 다운로드가 바로 시작됩니다.</p>
+        <p class="lead-download-intro">공개 소개 PDF를 제공합니다. 상세 자료와 맞춤 데모는 상담을 신청해 주세요.</p>
         <div class="lead-download-fields">
           <label class="lead-download-field">
             <span>회사명 *</span>
@@ -114,7 +117,7 @@ function initLeadDownloads() {
     activeRequest = { resource, product, action: isPrint ? 'print' : 'download' };
     lastTrigger = trigger;
     form.reset();
-    productInput.value = product;
+    productInput.value = ({'CLIP VIEW 2D': 'CLIP 2D Viewer', '3D CAD 웹뷰어': 'CLIP 3D Viewer'})[product] || product;
     setStatus('제출 즉시 다운로드가 시작됩니다.');
     submitButton.disabled = false;
     submitButton.textContent = isPrint ? 'PDF 인쇄 열기' : '자료 다운로드';

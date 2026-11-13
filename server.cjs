@@ -4,6 +4,8 @@ const { createHmac, randomBytes, timingSafeEqual } = require('node:crypto');
 const { basename, dirname, extname, join, resolve, sep } = require('node:path');
 
 const root = resolve(__dirname, 'dist');
+const publicResources = require('./public-resources.json');
+const publicPdfPaths = new Set(publicResources.map(item => '/brochures/' + item.file));
 const port = Number(process.env.PORT) || 4173;
 function parseEmailList(value) {
   return [...new Set(String(value || '')
@@ -25,6 +27,8 @@ const contactProducts = new Set([
   '통합 PLM 전체',
   'AI CADWin',
   '3D CAD 웹뷰어',
+  'CLIP VIEW 2D',
+  'CLiP DDMS',
   'Clip PDM',
   'Clip PMS',
   'Multi-BOM',
@@ -256,7 +260,7 @@ function resolveLeadResource(resource) {
     return null;
   }
 
-  if (!decodedResource.startsWith('/brochures/') || extname(decodedResource).toLowerCase() !== '.pdf') {
+  if (!publicPdfPaths.has(decodedResource) || extname(decodedResource).toLowerCase() !== '.pdf') {
     return null;
   }
 
@@ -862,7 +866,7 @@ async function handleLeadRequest(req, res) {
     userAgent: cleanText(req.headers['user-agent'], 300),
   };
 
-  const isPrintResource = lead.resource === 'print:solution-brochure';
+  const isPrintResource = false; // Public downloads are limited to the reviewed PDFs.
   const resourcePath = isPrintResource ? null : resolveLeadResource(lead.resource);
 
   if (body.website || !body.consent || !isPlausibleCompany(lead.company) || !isPlausibleName(lead.name) || !isValidEmail(lead.email) || !lead.product) {
@@ -941,6 +945,6 @@ createServer(async (req, res) => {
     res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
     return res.end('Bad Request');
   }
-}).listen(port, '0.0.0.0', () => {
+}).listen(port, process.env.HOST || '0.0.0.0', () => {
   console.log(`Papsnet homepage is listening on port ${port}`);
 });

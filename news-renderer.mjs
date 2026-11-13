@@ -1,3 +1,4 @@
+import { renderSiteIcon } from './site-icons.js';
 export const NEWS_PAGE_SIZE = 4;
 
 export function escapeHtml(value = '') {
@@ -57,7 +58,7 @@ function newsCard(item, featured, data) {
   return `<article class="${featured ? 'news-featured' : 'news-row'}">
     <a class="news-story-link" href="${escapeHtml(fallback)}" data-news-id="${escapeHtml(item.id)}" aria-label="${escapeHtml(item.title)} ${action}">
       <div class="news-cover">${newsCover(item)}<span class="news-cover-type">${escapeHtml(category)}</span></div>
-      <div class="news-card-copy"><div class="news-meta">${newsMeta(item)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><span class="news-read">${action} <span aria-hidden="true">↗</span></span></div>
+      <div class="news-card-copy"><div class="news-meta">${newsMeta(item)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><span class="news-read">${action} ${renderSiteIcon('north_east')}</span></div>
     </a>
   </article>`;
 }

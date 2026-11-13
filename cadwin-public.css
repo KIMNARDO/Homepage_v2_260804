@@ -1,0 +1,43 @@
+/* CADWin public overview: outcomes and consultation, using existing product tokens. */
+body.product-unified.cadwin-public .section-header>p{margin-inline:0}
+body.product-unified.cadwin-public .product-cta>.container{background:none;border:0;border-radius:0;box-shadow:none}
+body.product-unified.cadwin-public .product-cta>.container::after{content:none}
+body.product-unified.cadwin-public .cw-hero .container{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px}
+body.product-unified.cadwin-public .cw-hero h1{font-size:clamp(38px,4vw,58px)}
+body.product-unified.cadwin-public .cw-hero-note{margin:18px 0 0;color:var(--pd-muted);font-size:12px;line-height:1.8}
+body.product-unified.cadwin-public .cw-brand-visual{margin:0;border:1px solid var(--pd-line);border-radius:20px;overflow:hidden;background:var(--pd-card)}
+body.product-unified.cadwin-public .cw-brand-visual img{display:block;width:100%;height:auto;border:0;border-radius:0}
+body.product-unified.cadwin-public .cw-brand-visual figcaption{padding:20px 24px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+body.product-unified.cadwin-public .cw-brand-visual figcaption strong{font-size:16px;color:var(--pd-ink)}
+body.product-unified.cadwin-public .cw-brand-visual figcaption span{font-size:11px;line-height:1.7;color:var(--pd-muted)}
+body.product-unified.cadwin-public :is(.cw-feature-grid,.cw-impact-grid){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+body.product-unified.cadwin-public .cw-feature{display:grid;grid-template-columns:1fr 64px;gap:16px;padding:28px;background:var(--pd-card);border:1px solid var(--pd-line);border-radius:16px}
+body.product-unified.cadwin-public .cw-number{font:700 11px/1.6 Inter,sans-serif;letter-spacing:1px;color:var(--pd-accent)}
+body.product-unified.cadwin-public .cw-symbol{width:64px;height:64px;color:var(--pd-accent)}
+body.product-unified.cadwin-public .cw-symbol svg{display:block;width:100%;height:100%}
+body.product-unified.cadwin-public .cw-feature h3{grid-column:1/-1;margin:0;font-size:23px;line-height:1.45;letter-spacing:-.8px;color:var(--pd-ink)}
+body.product-unified.cadwin-public .cw-feature p{grid-column:1/-1;margin:0;font-size:14px;line-height:1.85;color:var(--pd-muted);word-break:keep-all}
+body.product-unified.cadwin-public .cw-result-list{border-block:1px solid var(--pd-line)}
+body.product-unified.cadwin-public .cw-result-list article{display:grid;grid-template-columns:130px minmax(0,1fr) 230px;gap:30px;align-items:center;padding:32px 8px}
+body.product-unified.cadwin-public .cw-result-list article+article{border-top:1px solid var(--pd-line)}
+body.product-unified.cadwin-public .cw-result-list h3{font-size:23px;line-height:1.5;letter-spacing:-.8px;margin:0 0 12px;color:var(--pd-ink)}
+body.product-unified.cadwin-public .cw-result-list p{font-size:14px;line-height:1.85;color:var(--pd-muted);margin:0;word-break:keep-all}
+body.product-unified.cadwin-public .cw-result-list .cw-result-value{padding:20px 24px;border-radius:12px;background:var(--pd-soft);color:var(--pd-accent);font-size:16px;font-weight:700}
+body.product-unified.cadwin-public .cw-result-value span{display:block;margin-bottom:7px;font-size:10px;font-weight:500;letter-spacing:.7px}
+body.product-unified.cadwin-public .cw-results-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:28px}
+body.product-unified.cadwin-public .cw-results-cta p{margin:0;font-size:12px;line-height:1.9;color:var(--pd-muted)}
+body.product-unified.cadwin-public .cw-results-cta .btn{flex-shrink:0}
+body.product-unified.cadwin-public .cw-impact-grid article{padding:28px;border-left:2px solid var(--pd-accent)}
+body.product-unified.cadwin-public .cw-impact-grid span{font-size:11px;font-weight:700;color:var(--pd-accent)}
+body.product-unified.cadwin-public .cw-impact-grid h3{font-size:25px;line-height:1.5;letter-spacing:-.8px;color:var(--pd-ink);margin:18px 0 14px}
+body.product-unified.cadwin-public .cw-impact-grid p{font-size:14px;line-height:1.9;color:var(--pd-muted);margin:0;word-break:keep-all}
+body.product-unified.cadwin-public .cw-consult{padding:72px 0;background:var(--pd-card);border-block:1px solid var(--pd-line)}
+body.product-unified.cadwin-public .cw-consult-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+body.product-unified.cadwin-public .cw-consult h2{font-size:clamp(30px,3vw,44px);line-height:1.35;letter-spacing:-1.6px;color:var(--pd-ink);margin:0 0 22px}
+body.product-unified.cadwin-public .cw-consult p{font-size:14px;line-height:1.9;color:var(--pd-muted);margin:0;max-width:460px;word-break:keep-all}
+body.product-unified.cadwin-public .cw-consult ol{list-style:none;display:grid;gap:24px;padding:0;margin:0}
+body.product-unified.cadwin-public .cw-consult li{display:flex;gap:20px;align-items:flex-start}
+body.product-unified.cadwin-public .cw-consult li>b{background:var(--pd-soft);color:var(--pd-accent);border-radius:10px;width:42px;height:42px;display:grid;place-items:center;flex-shrink:0;font:700 12px Inter,sans-serif}
+body.product-unified.cadwin-public .cw-consult h3{font-size:17px;color:var(--pd-ink);margin:0 0 7px}
+@media(max-width:1050px){body.product-unified.cadwin-public .cw-result-list article{grid-template-columns:100px minmax(0,1fr);gap:18px}body.product-unified.cadwin-public .cw-result-value{grid-column:2}body.product-unified.cadwin-public .cw-feature{padding:22px}body.product-unified.cadwin-public .cw-impact-grid article{padding:20px}}
+@media(max-width:760px){body.product-unified.cadwin-public .cw-hero .container,body.product-unified.cadwin-public :is(.cw-feature-grid,.cw-impact-grid,.cw-consult-grid){grid-template-columns:1fr;gap:20px}body.product-unified.cadwin-public .cw-hero .container{gap:32px}body.product-unified.cadwin-public .cw-hero h1{font-size:38px;letter-spacing:-1.8px}body.product-unified.cadwin-public .cw-feature{grid-template-columns:1fr 54px;gap:12px}body.product-unified.cadwin-public .cw-symbol{width:54px;height:54px}body.product-unified.cadwin-public .cw-feature h3{font-size:22px}body.product-unified.cadwin-public .cw-result-list article{grid-template-columns:1fr;gap:16px;padding:28px 0}body.product-unified.cadwin-public .cw-result-value{grid-column:auto}body.product-unified.cadwin-public .cw-results-cta{flex-direction:column;align-items:flex-start}body.product-unified.cadwin-public .cw-impact-grid h3{font-size:23px}body.product-unified.cadwin-public .cw-consult{padding:56px 0}body.product-unified.cadwin-public .cw-consult-grid{gap:30px}}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WNWPBJMK');</script>
+  <!-- End Google Tag Manager -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BSW4E81SS0"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BSW4E81SS0');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLIP 2D Viewer — 도면 측정·비교·AI 유사 검색 | 팹스넷</title>
+  <meta name="description" content="CLIP 2D Viewer는 DWG·DXF 도면을 열고 측정·주석·1:1 비교·1:N 유사 검색으로 검토하는 2D 뷰어입니다.">
+  <link rel="canonical" href="https://www.papsnet.net/product-clip2dviewer.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CLIP 2D Viewer — 도면 측정·비교·AI 유사 검색 | 팹스넷">
+  <meta property="og:description" content="DWG·DXF 도면의 측정, 개정 비교, 유사 후보 검색을 실제 제품 화면으로 확인하세요.">
+  <meta property="og:url" content="https://www.papsnet.net/product-clip2dviewer.html">
+  <meta property="og:image" content="https://www.papsnet.net/images/viewer-branding/drawing-change.webp?v=fullframe2">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="팹스넷">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="papsnet_logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="images/viewer-branding/drawing-change.webp?v=fullframe2" fetchpriority="high">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="lead-download.css">
+  <link rel="stylesheet" href="clip3d-viewer.css?v=20260824-1">
+
+
+  <link rel="stylesheet" href="viewer-capabilities.css">
+    <link rel="stylesheet" href="product-unified.css">
+  <link rel="stylesheet" href="viewer-branding.css">
+</head>
+<body class="product-unified viewer3d-page viewer2d-page">
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNWPBJMK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <div class="scroll-progress-bar" id="scrollProgress"></div>
+
+  <div class="announcement" id="announcement">
+    <div class="container">
+      <span class="announcement-highlight">2D CAD</span>
+      도면 열람부터 개정 비교, 유사 도면 검색까지 실제 화면으로 확인하세요.
+      <a href="#viewer-film">실제 화면 보기 <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <nav class="nav has-announcement" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="(주)팹스넷 메인 페이지로 이동">
+        <div class="nav-logo-img-wrap"><img src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
+      </a>
+      <div class="nav-center">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger nav-link active" aria-expanded="false" aria-haspopup="true">제품 <span class="nav-dropdown-chevron" aria-hidden="true"></span></button>
+          <div class="nav-dropdown-menu">
+            <a href="product-clip3dviewer.html" class="nav-dropdown-item"><img class="clip-viewer-icon" src="images/viewer-branding/clip-3d-viewer-icon.jpg" alt="" width="36" height="36"><span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">CLIP 3D Viewer</span><span class="nav-dropdown-item-desc">웹 기반 3D CAD 검토</span></span></a>
+            <a href="product-cadwin.html" class="nav-dropdown-item"><span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">AI CADWin</span><span class="nav-dropdown-item-desc">AI 도면 자동화</span></span></a>
+            <a href="product-clippdm.html" class="nav-dropdown-item"><span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip PDM</span><span class="nav-dropdown-item-desc">도면·문서·제품 데이터</span></span></a>
+            <a href="product-clippms.html" class="nav-dropdown-item"><span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip PMS</span><span class="nav-dropdown-item-desc">프로젝트·일정 관리</span></span></a>
+            <a href="product-multibom.html" class="nav-dropdown-item"><span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Multi-BOM EPL</span><span class="nav-dropdown-item-desc">다중 제품 구조 관리</span></span></a>
+            <a href="product-clipcms.html" class="nav-dropdown-item"><span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip CMS</span><span class="nav-dropdown-item-desc">사전·사후 원가관리</span></span></a>
+            <a href="product-clip2dviewer.html" class="nav-dropdown-item" aria-current="page"><img class="clip-viewer-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="36" height="36"><span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">CLIP 2D Viewer</span><span class="nav-dropdown-item-desc">도면 측정·비교·AI 유사 검색</span></span></a>
+          </div>
+        </div>
+        <a href="#viewer-film" class="nav-link">실제 화면</a>
+        <a href="#viewer-consult" class="nav-link">맞춤 시연</a>
+        <a href="brochure.html" class="nav-link">브로슈어</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="테마 전환"><span class="theme-icon-light" aria-hidden="true"></span><span class="theme-icon-dark" aria-hidden="true"></span></button>
+        <a href="contact.html?type=contact&amp;product=CLIP+VIEW+2D" class="btn btn-secondary">문의하기</a>
+        <a href="contact.html?type=consult&amp;product=CLIP+VIEW+2D" class="btn btn-primary">도입 상담</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-header">
+        <a href="/" class="nav-logo" aria-label="(주)팹스넷 메인 페이지로 이동"><div class="nav-logo-img-wrap"><img src="images/papsnet-logo-transparent.png" alt="Papsnet"></div></a>
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="메뉴 닫기"><span class="ui-close-symbol" aria-hidden="true">×</span></button>
+      </div>
+      <nav class="mobile-nav">
+        <a href="product-clip3dviewer.html" class="mobile-nav-link"><img class="clip-viewer-icon" src="images/viewer-branding/clip-3d-viewer-icon.jpg" alt="" width="36" height="36">CLIP 3D Viewer</a>
+        <a href="product-cadwin.html" class="mobile-nav-link">AI CADWin</a>
+        <a href="product-clippdm.html" class="mobile-nav-link">Clip PDM</a>
+        <a href="product-clippms.html" class="mobile-nav-link">Clip PMS</a>
+        <a href="product-multibom.html" class="mobile-nav-link">Multi-BOM EPL</a>
+        <a href="product-clipcms.html" class="mobile-nav-link">Clip CMS</a>
+        <a href="product-clip2dviewer.html" class="mobile-nav-link" aria-current="page"><img class="clip-viewer-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="36" height="36">CLIP 2D Viewer</a>
+        <a href="#viewer-film" class="mobile-nav-link">실제 화면</a>
+        <a href="#viewer-consult" class="mobile-nav-link">맞춤 시연</a>
+        <a href="brochure.html" class="mobile-nav-link">브로슈어</a>
+      </nav>
+      <div class="mobile-menu-cta"><a href="contact.html?type=consult&amp;product=CLIP+VIEW+2D" class="btn btn-primary">도입 상담 요청</a></div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="viewer-hero"><div class="viewer-shell viewer-hero-grid">
+      <div class="viewer-hero-copy"><p class="viewer-kicker clip-viewer-heading"><span class="clip-viewer-brand"><img class="clip-viewer-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="40" height="40"><span>CLIP 2D Viewer</span></span></p>
+        <h1>개정 도면,<br><em>달라진 곳부터.</em></h1>
+        <p class="viewer-hero-lead">생산과 품질 담당자가 개정 전후 도면의 차이를 눈으로 확인하고, 이전 작업에서 참고할 도면을 찾습니다.</p>
+        <div class="viewer-hero-actions"><a class="viewer-button viewer-button-primary" href="contact.html?type=demo&amp;product=CLIP+VIEW+2D">우리 도면으로 시연 문의</a><a class="viewer-text-link" href="#viewer-film">대표 시연 보기 ↓</a></div>
+      </div>
+      <figure class="viewer-hero-visual"><a class="viewer-result-original" href="images/viewer-branding/drawing-change.webp?v=fullframe2" target="_blank" rel="noopener" aria-label="개정 도면 비교 전체 화면 크게 보기"><img src="images/viewer-branding/drawing-change.webp?v=fullframe2" alt="도면 전체와 개정 차이를 함께 보는 비교 화면" width="1600" height="900" fetchpriority="high"></a><figcaption><strong>개정 전후 도면 비교 결과</strong><a class="viewer-original-link" href="images/viewer-branding/drawing-change.webp?v=fullframe2" target="_blank" rel="noopener">크게 보기 ↗</a></figcaption></figure>
+    </div></section>
+    <section class="viewer-section viewer-film" id="viewer-film" aria-labelledby="viewer-film-title">
+      <div class="viewer-shell result-layout">
+        <div class="result-copy">
+          <span class="viewer-kicker">CLIP 2D Viewer · 대표 시연</span>
+          <h2 id="viewer-film-title">유사 도면을 찾고<br>개정 차이를 확인하세요.</h2>
+          <p>도면 전체를 보면서 유사 후보와 개정 전후의 차이를 확인하는 실제 시연입니다.</p>
+          <a class="viewer-button viewer-button-primary" href="contact.html?type=demo&amp;product=CLIP+VIEW+2D">우리 도면으로 시연 문의</a>
+        </div>
+        <a class="result-film" data-film href="videos/clip2d-comparison.mp4?v=fullframe2"><img src="videos/clip2d-comparison.jpg?v=fullframe2" alt="CLIP 2D Viewer에서 연 도면의 전체 형상" width="1280" height="720"><span><strong>대표 시연 재생</strong><small>17초</small></span></a>
+      </div>
+        <dialog class="guide-dialog" id="guide-dialog" aria-labelledby="guide-now">
+          <div class="guide-player">
+            <div class="guide-player-head"><strong id="guide-now">유사 도면 검색과 개정 비교</strong><form method="dialog"><button type="submit" autofocus>닫기</button></form></div>
+            <video id="guide-video" playsinline preload="none" width="1920" height="1080" aria-labelledby="guide-now"></video>
+            <div class="guide-player-controls">
+              <div class="guide-transport">
+                <button type="button" id="guide-play">재생</button>
+                <input type="range" id="guide-seek" min="0" max="0" step="0.1" value="0" aria-label="영상 재생 위치" disabled>
+                <span id="guide-time">0:00 / 0:00</span>
+              </div>
+              <div class="guide-player-meta">
+                <a id="guide-direct" href="videos/clip2d-comparison.mp4?v=fullframe2" target="_blank" rel="noopener">영상만 열기 ↗</a>
+                <button type="button" id="guide-fullscreen" hidden>전체 화면</button>
+              </div>
+            </div>
+          </div>
+        </dialog>
+    </section>
+    <section class="viewer-cta" id="viewer-consult"><div class="viewer-shell viewer-cta-inner"><p><strong>우리 회사 도면에도 적용할 수 있을까요?</strong><span>DWG·DXF 샘플로 열람 환경과 검토 범위를 함께 확인합니다.</span></p><a class="viewer-button viewer-button-primary" href="contact.html?type=demo&amp;product=CLIP+VIEW+2D">맞춤 시연 신청</a></div></section>
+  </main>
+  <footer class="footer viewer-footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="(주)팹스넷 메인 페이지로 이동"><img src="images/papsnet-logo-transparent.png" alt="Papsnet" loading="lazy" decoding="async"></a>
+        <p>제조업의 설계, 제품 구조, 프로젝트, 원가 데이터를 하나로 연결하는 AI Clip PLM 파트너</p>
+        <div class="footer-contact-inline">
+          <a href="tel:070-50011144"><span class="material-symbols-rounded">call</span>070-5001-1144</a>
+          <a href="mailto:kimnardo@papsnet.net"><span class="material-symbols-rounded">mail</span>kimnardo@papsnet.net</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>제품</h4><ul><li><a href="product-cadwin.html">AI CADWin</a></li><li><a href="product-clippdm.html">Clip PDM</a></li><li><a href="product-clippms.html">Clip PMS</a></li><li><a href="product-multibom.html">Multi-BOM EPL</a></li><li><a href="product-clipcms.html">Clip CMS</a></li><li><a href="product-clip3dviewer.html">CLIP 3D Viewer</a></li></ul></div>
+      <div class="footer-col"><h4>자료</h4><ul><li><a href="brochure.html">브로슈어</a></li><li><a href="#viewer-film">실제 화면</a></li><li><a href="contact.html?type=demo&amp;product=CLIP+VIEW+2D">데모 상담</a></li><li><a href="index.html#customers">고객사</a></li></ul></div>
+      <div class="footer-col"><h4>회사</h4><ul><li><a href="index.html">홈</a></li><li><a href="contact.html?type=consult&amp;product=CLIP+VIEW+2D">도입 상담</a></li><li><a href="https://www.papsnet.net" target="_blank" rel="noopener">www.papsnet.net</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-status"><span class="footer-status-dot"></span>제조업 PLM 구축 상담 가능</div><p class="footer-copyright">© 2026 PapsNet Co., Ltd. All rights reserved.</p></div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="맨 위로"><span class="material-symbols-rounded">arrow_upward</span></button>
+  <script type="module" src="analytics-events.js"></script><script type="module" src="app.js"></script><script type="module" src="viewer-film.js"></script><script type="module" src="lead-download.js"></script>
+</body></html>

@@ -2,7 +2,11 @@ const { defineConfig } = require('vite');
 const { resolve } = require('path');
 const { copyFileSync, mkdirSync, readdirSync, statSync, readFileSync } = require('fs');
 
+const approvedPdfFiles = new Set(require('./public-resources.json').map(item => item.file));
+
 const runtimeAssets = [
+  ['images/product-highlights', 'images/product-highlights'],
+  ['images/public-brochures', 'images/public-brochures'],
   ['images/hero-ev-parts', 'images/hero-ev-parts'],
   ['images/hero-aerospace-parts', 'images/hero-aerospace-parts'],
   ['images/hero-aerospace-blueprint.webp', 'images/hero-aerospace-blueprint.webp'],
@@ -36,6 +40,7 @@ function copyRuntimeAssets() {
     mkdirSync(destination, { recursive: true });
 
     for (const entry of entries) {
+      if (source === resolve(__dirname, 'brochures') && !approvedPdfFiles.has(entry.name)) continue;
       const sourcePath = resolve(source, entry.name);
       const destinationPath = resolve(destination, entry.name);
 
@@ -50,6 +55,14 @@ function copyRuntimeAssets() {
   return {
     name: 'copy-runtime-assets',
     closeBundle() {
+      // Copy public assets except retired product PDFs; original files remain untouched.
+      for (const entry of readdirSync(resolve(__dirname, 'public'), { withFileTypes: true })) {
+        if (entry.name === 'brochures') continue;
+        const source = resolve(__dirname, 'public', entry.name);
+        const target = resolve(__dirname, 'dist', entry.name);
+        if (entry.isDirectory()) copyAsset(source, target);
+        else copyFileSync(source, target);
+      }
       for (const [source, target] of runtimeAssets) {
         const sourcePath = resolve(__dirname, source);
         const destination = resolve(__dirname, 'dist', target);
@@ -96,14 +109,17 @@ module.exports = defineConfig({
   base: './',
   plugins: [copyRuntimeAssets(), newsContent()],
   build: {
+    copyPublicDir: false,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         cadwin: resolve(__dirname, 'product-cadwin.html'),
         clippdm: resolve(__dirname, 'product-clippdm.html'),
+          clipddms: resolve(__dirname, 'product-clipddms.html'),
         clippms: resolve(__dirname, 'product-clippms.html'),
         multibom: resolve(__dirname, 'product-multibom.html'),
         clipcms: resolve(__dirname, 'product-clipcms.html'),
+        clip2dviewer: resolve(__dirname, 'product-clip2dviewer.html'),
         clip3dviewer: resolve(__dirname, 'product-clip3dviewer.html'),
         brochure: resolve(__dirname, 'brochure.html'),
         companyIntro: resolve(__dirname, 'company-intro.html'),

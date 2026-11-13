@@ -1,0 +1,33 @@
+/* Homepage symbols share the product pages' rounded, currentColor SVG language.
+   The legacy font class remains only as a sizing hook for existing components. */
+body.plm-home-v2 .site-vector-icon {
+  --pd-card:var(--am-card);
+  --pd-soft:var(--hc-soft);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:1em;
+  height:1em;
+  flex-shrink:0;
+  font-family:inherit!important;
+  font-style:normal;
+  line-height:1;
+  vertical-align:middle;
+  letter-spacing:0;
+}
+body.plm-home-v2 .site-vector-icon>svg{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}
+body.plm-home-v2 .hp-role-top>.site-vector-icon{font-size:48px;color:var(--hc-accent)}
+body.plm-home-v2 .hp-role-top{min-height:48px}
+body.plm-home-v2 .hp-identity .site-vector-icon{--pd-card:#132324;--pd-soft:#294443}
+body.plm-home-v2 .site-link-arrow{width:1em;height:1em}
+body.plm-home-v2 .nav-dropdown-chevron.site-vector-icon{width:16px;height:16px;border:0;border-radius:0;transform:none;margin-left:4px}
+body.plm-home-v2 .nav-dropdown.open .nav-dropdown-chevron.site-vector-icon{transform:rotate(180deg)}
+body.plm-home-v2 :is(.theme-icon-light,.theme-icon-dark).site-vector-icon{width:20px;height:20px;flex-basis:20px;border:0;border-radius:0;transform:none}
+body.plm-home-v2 .theme-icon-dark.site-vector-icon{display:none}
+html[data-theme=dark] body.plm-home-v2 .theme-icon-light.site-vector-icon{display:none}
+html[data-theme=dark] body.plm-home-v2 .theme-icon-dark.site-vector-icon{display:inline-flex}
+body.plm-home-v2 .theme-icon-dark.site-vector-icon::before,
+body.plm-home-v2 .am-query-icon.site-vector-icon::after{content:none}
+body.plm-home-v2 .am-query-icon.site-vector-icon{width:24px;height:24px;border:0;border-radius:0;color:var(--hero-lime)}
+body.plm-home-v2 .ui-up-symbol.site-vector-icon{width:22px;height:22px}
+@media(max-width:760px){body.plm-home-v2 .hp-role-top>.site-vector-icon{font-size:42px}body.plm-home-v2 .hp-role-top{min-height:42px}}

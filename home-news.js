@@ -1,3 +1,4 @@
+import { renderSiteIcon } from './site-icons.js';
 import newsData from './content/news.json';
 import { escapeHtml as e, validateNews, visibleNews, getNewsPage, renderNewsItems, newsMeta, newsCover } from './news-renderer.mjs';
 
@@ -55,7 +56,7 @@ if (section) {
     const photo = item.photos[0];
     return `<div class="news-gallery" aria-label="강의 사진">
       <figure><img data-news-photo src="${e(photo.src)}" alt="${e(photo.alt)}" width="1280" height="960"><figcaption aria-live="polite"><span data-news-photo-caption>${e(photo.caption)}</span><span data-news-photo-counter>1 / ${item.photos.length}</span></figcaption></figure>
-      <div class="news-gallery-controls"><button type="button" data-news-photo-previous aria-label="이전 강의 사진"><span class="material-symbols-rounded" aria-hidden="true">chevron_left</span></button><div class="news-gallery-thumbnails" role="group" aria-label="강의 사진 선택">${item.photos.map((photo, index) => `<button type="button" data-news-photo-index="${index}" aria-label="강의 사진 ${index + 1}" aria-pressed="${index === 0}" tabindex="${index === 0 ? 0 : -1}"><img src="${e(photo.thumbnail || photo.src)}" alt="" width="240" height="180" loading="lazy" decoding="async"><span aria-hidden="true">${index + 1}</span></button>`).join('')}</div><button type="button" data-news-photo-next aria-label="다음 강의 사진"><span class="material-symbols-rounded" aria-hidden="true">chevron_right</span></button></div>
+      <div class="news-gallery-controls"><button type="button" data-news-photo-previous aria-label="이전 강의 사진">${renderSiteIcon('chevron_left')}</button><div class="news-gallery-thumbnails" role="group" aria-label="강의 사진 선택">${item.photos.map((photo, index) => `<button type="button" data-news-photo-index="${index}" aria-label="강의 사진 ${index + 1}" aria-pressed="${index === 0}" tabindex="${index === 0 ? 0 : -1}"><img src="${e(photo.thumbnail || photo.src)}" alt="" width="240" height="180" loading="lazy" decoding="async"><span aria-hidden="true">${index + 1}</span></button>`).join('')}</div><button type="button" data-news-photo-next aria-label="다음 강의 사진">${renderSiteIcon('chevron_right')}</button></div>
       ${item.photos.length > 6 ? '<p class="news-gallery-hint">작은 사진을 좌우로 넘겨 다른 장면을 선택하세요.</p>' : ''}
     </div>`;
   }
@@ -103,9 +104,9 @@ if (section) {
     } else if (item.kind === 'article') {
       media = `<div class="news-article-cover">${newsCover(item)}</div>`;
     }
-    const source = item.sourceUrl ? `<div class="news-source-box">${item.sourceTitle ? `<p class="news-original-title">원문 기사 · ${e(item.sourceTitle)}</p>` : ''}<a class="news-detail-link" href="${e(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">${item.kind === 'video' ? 'YouTube에서 전체 영상 보기' : '기사 원문 보기'}<span class="material-symbols-rounded" aria-hidden="true">open_in_new</span><span class="news-sr-only"> (새 창)</span></a></div>` : '';
+    const source = item.sourceUrl ? `<div class="news-source-box">${item.sourceTitle ? `<p class="news-original-title">원문 기사 · ${e(item.sourceTitle)}</p>` : ''}<a class="news-detail-link" href="${e(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">${item.kind === 'video' ? 'YouTube에서 전체 영상 보기' : '기사 원문 보기'}${renderSiteIcon('open_in_new')}<span class="news-sr-only"> (새 창)</span></a></div>` : '';
     const videoInfo = item.kind === 'video' ? `<div class="news-video-info"><div><p>팹스넷 소개 · ${e(item.video.label)}</p><p class="news-video-quality">고화질 보기: 영상 설정 → 화질 → 1080p</p></div>${source}</div>` : '';
-    const related = item.relatedUrl ? `<a class="news-detail-link" href="${e(item.relatedUrl)}" data-news-related>${e(item.relatedLabel)}<span aria-hidden="true">↗</span></a>` : '';
+    const related = item.relatedUrl ? `<a class="news-detail-link" href="${e(item.relatedUrl)}" data-news-related>${e(item.relatedLabel)}${renderSiteIcon('north_east')}</a>` : '';
     dialogBody.innerHTML = `<div class="news-meta news-detail-meta">${newsMeta(item)}</div>${media}${videoInfo}<div class="news-detail-copy">${item.paragraphs.map(text => `<p>${e(text)}</p>`).join('')}${item.kind === 'video' ? '' : source}${related}</div>`;
     if (!dialog.open) dialog.showModal();
     dialog.scrollTop = 0;

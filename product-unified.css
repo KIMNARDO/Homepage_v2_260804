@@ -1,0 +1,331 @@
+/* The body class attribute raises specificity above legacy rules when Vite shares CSS chunks. */
+/* Product detail presentation aligned with home-platform / home-cohesion.
+   Product screenshots, documents and gallery behavior stay in their source files. */
+body.product-unified[class] {
+  --pd-surface:#f8f8f5; --pd-card:#fff; --pd-ink:#10161f; --pd-muted:#5f6b78;
+  --pd-line:rgba(16,22,31,.14); --pd-accent:#1c6569; --pd-soft:#eaf1ec;
+  --theme-primary:#1c6569; --theme-secondary:#437b70; --theme-dark:#132324;
+  --theme-accent:var(--pd-accent); --theme-bg-light:var(--pd-soft);
+  --theme-text-gradient:linear-gradient(120deg,#1c6569,#1c6569);
+  --bg-primary:var(--pd-surface); --bg-secondary:var(--pd-card);
+  --text-primary:var(--pd-ink); --text-secondary:var(--pd-muted); --border-color:var(--pd-line);
+  --viewer-ink:var(--pd-surface); --viewer-ink-2:var(--pd-card);
+  --viewer-panel:var(--pd-card); --viewer-panel-soft:var(--pd-soft);
+  --viewer-paper:var(--pd-surface); --viewer-paper-2:var(--pd-card);
+  --viewer-line:var(--pd-line); --viewer-line-strong:var(--pd-line);
+  --viewer-text:var(--pd-ink); --viewer-dark-text:var(--pd-ink);
+  --viewer-muted:var(--pd-muted); --viewer-dark-muted:var(--pd-muted);
+  --viewer-cyan:var(--pd-accent); --viewer-lime:var(--pd-accent);
+  background:var(--pd-surface); color:var(--pd-ink);
+}
+html[data-theme=dark] body.product-unified[class] {
+  --pd-surface:#101719; --pd-card:#192329; --pd-ink:#edf2ee; --pd-muted:#a8b8b3;
+  --pd-line:rgba(199,218,212,.18); --pd-accent:#c7e56c; --pd-soft:#25342e;
+  --theme-text-gradient:linear-gradient(120deg,#c7e56c,#c7e56c);
+}
+body.product-unified[class] :is(main .container,.viewer-shell) {width:min(1360px,calc(100% - 80px));max-width:1360px;margin-inline:auto;padding-inline:0}
+body.product-unified[class] main > section {scroll-margin-top:125px}
+body.product-unified[class] :is(.product-capabilities,.product-features,.product-outcomes,.product-specs,.specs-grid-section,.product-integrations,.product-screen-gallery,.viewer-section) {padding-block:88px;background:var(--pd-surface);color:var(--pd-ink)}
+body.product-unified[class] :is(.product-features,.product-screen-gallery,.product-integrations,.viewer-workspace-section,.vc-formats,.viewer-scope) {background:var(--pd-card)}
+body.product-unified[class] .product-capabilities--dimensional {background:var(--pd-surface)!important}
+body.product-unified[class] .product-capabilities--dimensional::before {content:none}
+body.product-unified[class] .product-tech-stage {background:var(--pd-surface)!important}
+body.product-unified[class] :is(.product-tech-stage,.viewer-hero,.viewer-workspace-section,.product-cta)::before,
+body.product-unified[class] :is(.product-tech-stage,.viewer-hero,.product-cta)::after {content:none}
+/* Editorial headings and consistent reading rhythm. */
+body.product-unified[class] :is(.section-header,.bento-glass-header,.viewer-section-head,.pdm-integration-heading) {max-width:none;margin:0 0 40px;text-align:left}
+body.product-unified[class] :is(.section-header,.viewer-section-head,.pdm-integration-heading) h2 {color:var(--pd-ink);font-size:clamp(34px,4vw,58px);font-weight:800;line-height:1.2;letter-spacing:-2.2px;word-break:keep-all}
+body.product-unified[class] :is(.section-header,.viewer-section-head,.pdm-integration-heading)>p {max-width:680px;margin-top:20px;color:var(--pd-muted);font-size:14px;line-height:1.9}
+body.product-unified[class] :is(.section-tag,.pf-tag,.viewer-section-head>span,.viewer-section-head>div>span) {display:block;width:fit-content;margin:0 0 20px;padding:0!important;border:0;background:none!important;box-shadow:none;color:var(--pd-muted)!important;font:700 11px/1.5 Inter,'Noto Sans KR',sans-serif;letter-spacing:1.8px}
+body.product-unified[class] .section-tag::before {content:none!important}
+body.product-unified[class] :is(.bento-grad,.gradient-text) {color:var(--pd-accent)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+body.product-unified[class] :is(.viewer-section-head-split,.product-tech-stage>.container>.section-header) {grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:20px 56px;align-items:end}
+body.product-unified[class] .product-tech-stage>.container>.section-header h2 {font-size:clamp(34px,4vw,58px);line-height:1.2;color:var(--pd-ink);letter-spacing:-2.2px}
+body.product-unified[class] .product-tech-stage>.container>.section-header p {font-size:14px;line-height:1.9;color:var(--pd-muted)}
+/* Product introduction: retain the full original screen or video. */
+body.product-unified[class] :is(.product-hero,.viewer-hero) {min-height:0;padding:calc(var(--nav-h) + var(--announcement-h) + 56px) 0 64px;background:var(--pd-surface);color:var(--pd-ink)}
+body.product-unified[class] .product-hero .container {grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px;align-items:center}
+body.product-unified[class] .viewer-hero-grid {grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:48px 56px}
+body.product-unified[class] :is(.product-hero-text,.viewer-hero-copy) {min-width:0;max-width:620px}
+body.product-unified[class] :is(.product-hero h1,.viewer-hero h1) {margin:0;color:var(--pd-ink);font-size:clamp(38px,4.1vw,60px);font-weight:800;line-height:1.18;letter-spacing:-2.4px;word-break:keep-all}
+body.product-unified[class] .viewer-hero h1 em {color:var(--pd-accent)}
+body.product-unified[class] :is(.product-desc,.viewer-hero-lead) {margin-top:24px;color:var(--pd-muted);font-size:15px;line-height:1.9}
+body.product-unified[class] .product-badge {margin-bottom:24px;padding:8px 12px;background:var(--pd-soft);color:var(--pd-accent);border:1px solid var(--pd-line);border-radius:6px;font-size:11px;letter-spacing:1px}
+body.product-unified[class] .viewer-kicker {line-height:1.5;letter-spacing:1.2px}
+body.product-unified[class] .viewer-kicker span {color:var(--pd-accent)}
+body.product-unified[class] :is(.hero-actions,.viewer-hero-actions) {gap:12px;margin-top:30px;justify-content:flex-start}
+body.product-unified[class] :is(.product-hero-visual,.viewer-hero-visual) {min-width:0;transform:none;box-shadow:none}
+body.product-unified[class] .product-hero-visual :is(img,video) {width:100%;height:auto;object-fit:contain;border:1px solid var(--pd-line);border-radius:18px;box-shadow:none}
+body.product-unified[class] .viewer-hero-visual {border:1px solid var(--pd-line);border-radius:18px;background:var(--pd-card);overflow:hidden}
+body.product-unified[class] .viewer-hero-visual figcaption {background:var(--pd-card);color:var(--pd-ink);border-color:var(--pd-line)}
+body.product-unified[class] .viewer-hero-callout {position:static;display:inline-flex;flex-direction:column;gap:5px;margin:0 0 16px 16px;padding:12px 16px;border:1px solid var(--pd-line);border-radius:8px;background:var(--pd-soft);box-shadow:none;color:var(--pd-ink)}
+body.product-unified[class] .viewer-hero-callout small {color:var(--pd-accent)}
+/* Shared button language; scoped so download forms and site navigation stay intact. */
+body.product-unified[class] main :is(.btn,.viewer-button) {min-height:48px;border-radius:8px!important;font-size:13px;font-weight:700;box-shadow:none}
+body.product-unified[class] main :is(.btn-primary,.viewer-button-primary) {background:#1c6569!important;border:1px solid #1c6569!important;color:#fff!important}
+body.product-unified[class] main :is(.btn-primary,.viewer-button-primary):hover {background:#174e51!important;border-color:#174e51!important}
+body.product-unified[class] main :is(.btn-glass,.viewer-button-secondary) {background:transparent!important;border:1px solid var(--pd-line)!important;color:var(--pd-ink)!important;backdrop-filter:none}
+body.product-unified[class] main :is(a,button):focus-visible {outline:3px solid var(--pd-accent);outline-offset:4px}
+/* Evidence strips match the homepage identity panel. */
+body.product-unified[class] .product-trust {padding:0;background:#132324}
+body.product-unified[class] .trust-stat .trust-number {color:#c7e56c;font-size:25px}
+body.product-unified[class] .trust-stat .trust-label {color:#b8c9c1;font-size:12px;line-height:1.7}
+body.product-unified[class] .viewer-fact-rail {border:1px solid #35514a;border-radius:16px;overflow:hidden;background:#132324;color:#edf2ee}
+body.product-unified[class] .viewer-fact-rail>div {padding:24px;border-color:#35514a}
+body.product-unified[class] .viewer-fact-rail small {color:#b8c9c1}
+body.product-unified[class] .viewer-fact-rail strong {font-size:22px;color:#c7e56c}
+body.product-unified[class] .viewer-fact-rail span {font-size:12px;line-height:1.7;color:#b8c9c1}
+/* Capability cards and existing feature media. */
+body.product-unified[class] .capabilities-bento.bento-glass {max-width:none;gap:18px;border:0;border-radius:0;background:none;overflow:visible;box-shadow:none}
+body.product-unified[class] .bento-glass>.cap-bento-card {min-height:220px;padding:28px;border:1px solid var(--pd-line)!important;border-radius:16px;background:var(--pd-card)!important;box-shadow:none!important}
+body.product-unified[class] .bento-glass>.cap-bento-card h3 {font-size:22px;line-height:1.4;color:var(--pd-ink);letter-spacing:-.6px}
+body.product-unified[class] .bento-glass>.cap-bento-card p {max-width:none;font-size:14px;line-height:1.85;color:var(--pd-muted)}
+body.product-unified[class] .bento-glass .cap-bento-icon {background:var(--pd-soft);border:0;border-radius:8px}
+body.product-unified[class] .bento-glass .cap-bento-icon::before {color:var(--pd-accent)}
+body.product-unified[class] .product-feature-block {gap:48px;padding-block:48px;margin:0;border-bottom:1px solid var(--pd-line)}
+body.product-unified[class] .product-feature-block:last-child {border:0;padding-bottom:0}
+body.product-unified[class] .pf-text h3 {color:var(--pd-ink);font-size:30px;line-height:1.35;letter-spacing:-1px}
+body.product-unified[class] .pf-text p {color:var(--pd-muted);font-size:14px;line-height:1.9}
+body.product-unified[class] .pf-checklist li {color:var(--pd-muted);font-size:14px}
+body.product-unified[class] .pf-media {border-radius:18px;box-shadow:none;border:1px solid var(--pd-line);background:var(--pd-surface);overflow:hidden}
+body.product-unified[class] .pf-media :is(img,video) {object-fit:contain;box-shadow:none;border-radius:0}
+/* Legacy dimensional cards have higher specificity in Vite's shared CSS chunks. */
+body.product-unified[class] .product-capabilities--dimensional .bento-glass-header {max-width:none;margin-bottom:40px;gap:20px 56px}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass-header .section-tag,
+body.product-unified[class] .product-tech-stage>.container>.section-header .section-tag {padding:0!important;border:0!important;background:none!important;box-shadow:none!important;color:var(--pd-muted)!important;backdrop-filter:none!important}
+body.product-unified[class] .product-capabilities--dimensional .capabilities-bento.bento-glass {grid-template-columns:repeat(3,minmax(0,1fr));max-width:none}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass>.cap-bento-card {grid-column:auto;min-height:240px;justify-content:flex-end;padding:28px;gap:14px;background:var(--pd-card)!important;border:1px solid var(--pd-line)!important;border-radius:16px;box-shadow:none!important;transform:none!important;backdrop-filter:none!important}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass>.cap-bento-card::after {content:none}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass>.cap-bento-card::before {color:var(--pd-accent)}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass .cap-bento-icon {width:80px;height:80px;right:24px;top:24px;background:none;border:0}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass .cap-bento-icon::after {content:none}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass .cap-bento-icon img {width:74px;height:74px;animation:none;filter:none;transform:none}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass .cap-bento-card h3 {white-space:normal;color:var(--pd-ink);font-size:22px;line-height:1.4;letter-spacing:-.6px}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass .cap-bento-card p {max-width:none;color:var(--pd-muted);font-size:14px;line-height:1.85}
+/* Original click-through galleries, with a unified surround. */
+body.product-unified[class] .product-screen-gallery {--sg-accent:#1c6569!important}
+body.product-unified[class] .sg-panel {gap:36px;padding:32px;border:1px solid var(--pd-line);border-radius:20px;background:var(--pd-surface)}
+body.product-unified[class] :is(.sg-product,.sg-consult,.sg-workflow span) {color:var(--pd-accent)}
+body.product-unified[class] .sg-panel figure a {border-radius:12px}
+body.product-unified[class] .sg-text h3 {font-size:25px;letter-spacing:-.7px;color:var(--pd-ink)}
+body.product-unified[class] .sg-controls button {border-radius:8px;background:var(--pd-surface);border-color:var(--pd-line);color:var(--pd-ink)}
+body.product-unified[class] .sg-controls button[aria-pressed=true] {background:#1c6569;border-color:#1c6569;color:#fff}
+body.product-unified[class] .sg-workflow {border-radius:12px;background:var(--pd-surface)}
+body.product-unified[class] .viewer-demo {min-height:0;grid-template-columns:260px minmax(0,1fr);border:1px solid var(--pd-line);border-radius:20px;overflow:hidden;box-shadow:none;background:var(--pd-surface)}
+body.product-unified[class] .viewer-demo-tabs {background:#132324;border-color:#35514a;scrollbar-color:#819c87 #132324}
+body.product-unified[class] .viewer-demo-tab {color:#b8c9c1;border-color:#35514a}
+body.product-unified[class] .viewer-demo-tab.active {background:#233c34;color:#f4f7ed}
+body.product-unified[class] .viewer-demo-tab.active::before {background:#c7e56c}
+body.product-unified[class] .viewer-demo-tab small {color:#b8c9c1}
+body.product-unified[class] .viewer-demo-tab i {color:#c7e56c}
+body.product-unified[class] .viewer-demo-copy h3 {font-size:24px;line-height:1.4}
+/* Technical cards and tables retain every existing specification. */
+body.product-unified[class] :is(.sg-brief-grid,.specs-grid,.outcomes-grid,.vc-grid,.vc-choice-grid,.viewer-workflow-grid) {gap:18px}
+body.product-unified[class] :is(.sg-brief-grid article,.spec-card,.outcome-card,.vc-grid article,.vc-choice-grid article,.viewer-workflow-grid article,.viewer-pipeline article,.viewer-scope-grid article) {padding:28px;border:1px solid var(--pd-line)!important;border-radius:16px!important;background:var(--pd-card)!important;box-shadow:none!important;color:var(--pd-ink);min-height:0}
+body.product-unified[class] :is(.spec-card,.outcome-card)::before,
+body.product-unified[class] :is(.spec-card,.outcome-card)::after {content:none}
+body.product-unified[class] :is(.spec-card-header h3,.outcome-content h3,.sg-brief-grid h3,.vc-grid h3,.vc-choice-grid h3,.viewer-workflow-grid h3) {color:var(--pd-ink);font-size:22px;line-height:1.4;letter-spacing:-.6px}
+body.product-unified[class] :is(.spec-item,.outcome-desc,.sg-brief-grid p,.vc-grid p,.vc-choice-grid p,.viewer-workflow-grid p) {color:var(--pd-muted);font-size:14px;line-height:1.85}
+body.product-unified[class] .specs-grid {max-width:none;border:0;background:none;box-shadow:none;overflow:visible}
+body.product-unified[class] .product-tech-stage .spec-card {--module-accent:var(--pd-accent);padding:28px}
+body.product-unified[class] .product-tech-stage .spec-card-icon {background:var(--pd-soft);border:0;box-shadow:none}
+body.product-unified[class] .specs-table-wrapper {max-width:none;border:1px solid var(--pd-line);border-radius:16px;background:var(--pd-card);box-shadow:none;overflow-x:auto}
+body.product-unified[class] .specs-table-wrapper::before {content:none}
+body.product-unified[class] .specs-table {background:var(--pd-card);color:var(--pd-ink);margin:0}
+body.product-unified[class] .specs-table :is(thead,th) {background:var(--pd-soft);color:var(--pd-ink);border-color:var(--pd-line)}
+body.product-unified[class] .specs-table tbody tr {background:var(--pd-card)}
+body.product-unified[class] .specs-table tbody tr:nth-child(even) {background:var(--pd-surface)}
+body.product-unified[class] .specs-table td {color:var(--pd-muted);border-color:var(--pd-line);font-size:14px;line-height:1.8}
+body.product-unified[class] .specs-table td:first-child {color:var(--pd-ink)}
+body.product-unified[class] .specs-table td:first-child::before {color:var(--pd-accent)}
+body.product-unified[class] .vc-format-list,body.product-unified[class] .vc-format-list article {border-color:var(--pd-line)}
+body.product-unified[class] .vc-note {border-color:var(--pd-accent);border-radius:0 12px 12px 0;background:var(--pd-soft)}
+body.product-unified[class] .viewer-workflow-grid {border:0}
+body.product-unified[class] .viewer-workflow-grid h3 {margin-top:32px}
+body.product-unified[class] .viewer-workflow-grid article::after {content:none}
+body.product-unified[class] .viewer-workflow-grid article b {font-size:25px;color:var(--pd-accent)}
+body.product-unified[class] .viewer-pipeline {gap:0;grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr) 24px minmax(0,1fr) 24px minmax(0,1fr)}
+body.product-unified[class] .viewer-scope-grid article {padding:32px}
+body.product-unified[class] .viewer-scope-grid article h3 {font-size:28px;line-height:1.35}
+body.product-unified[class] .viewer-scope-grid article>p {margin-bottom:28px}
+body.product-unified[class] .viewer-scope-grid article>p b {color:var(--pd-accent)}
+body.product-unified[class] .viewer-scope-grid li {border-color:var(--pd-line);color:var(--pd-muted);opacity:1;font-size:14px;line-height:1.85}
+body.product-unified[class] .integration-logo-item {background:var(--pd-surface);border:1px solid var(--pd-line);border-radius:12px;color:var(--pd-ink)}
+/* Existing PDM integrations keep their original logos and relationships. */
+body.product-unified[class] .pdm-integration-board {background:var(--pd-surface);border:1px solid var(--pd-line);border-radius:20px;box-shadow:none}
+body.product-unified[class] .pdm-connector-card {background:var(--pd-card);border-color:var(--pd-line);border-radius:12px;box-shadow:none}
+body.product-unified[class] .pdm-connector-card strong {color:var(--pd-ink)}
+body.product-unified[class] .pdm-connector-card p {color:var(--pd-muted)}
+body.product-unified[class].theme-pdm .product-outcomes {background:var(--pd-surface)}
+body.product-unified[class].theme-pdm .pdm-outcome-flow {gap:18px;margin-top:32px;background:none;border:0;border-radius:0;box-shadow:none;overflow:visible}
+body.product-unified[class].theme-pdm .pdm-outcome-flow::before,
+body.product-unified[class].theme-pdm .pdm-outcome-flow::after,
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-card::after {content:none}
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-card {min-height:0;padding:26px;background:var(--pd-card)!important;border:1px solid var(--pd-line)!important;border-radius:16px!important;color:var(--pd-ink)}
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-card-top {height:64px}
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-content {margin-top:24px}
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-step {color:var(--pd-accent);font-size:28px}
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-kicker {color:var(--pd-accent)}
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-label {color:var(--pd-ink);font-size:22px}
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-desc {color:var(--pd-muted);font-size:14px;line-height:1.85}
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-icon {border:0;background:var(--pd-soft);box-shadow:none}
+body.product-unified[class].theme-pdm .pdm-outcome-flow .outcome-next {display:none}
+body.product-unified[class].theme-pdm .pdm-integration-section {background:var(--pd-card);padding-block:88px}
+body.product-unified[class].theme-pdm .pdm-integration-section::before {content:none}
+body.product-unified[class].theme-pdm .pdm-integration-heading {gap:32px 56px;margin-bottom:40px}
+body.product-unified[class].theme-pdm .pdm-integration-heading h2 {color:var(--pd-ink);font-size:clamp(34px,4vw,58px);line-height:1.2;letter-spacing:-2.2px}
+body.product-unified[class].theme-pdm .pdm-integration-heading>p {color:var(--pd-muted);font-size:14px;line-height:1.9}
+body.product-unified[class].theme-pdm .pdm-integration-board {background:#132324;border:1px solid #35514a;border-radius:20px;box-shadow:none;margin-top:0}
+body.product-unified[class].theme-pdm .pdm-connector-card {background:#1d302b;border-color:#35514a;border-radius:12px;box-shadow:none}
+body.product-unified[class].theme-pdm .pdm-connector-card strong {color:#f4f7ed}
+body.product-unified[class].theme-pdm .pdm-connector-card p {color:#b8c9c1}
+body.product-unified[class].theme-pdm .pdm-lane-label {color:#b8c9c1}
+/* Consultation has the same dark green and lime treatment as the homepage. */
+body.product-unified[class] :is(.product-cta,.viewer-cta) {padding:80px 0;background:#132324;color:#f4f7ed;border:0;text-align:left}
+body.product-unified[class] .product-cta h2,body.product-unified[class] .viewer-cta p strong {color:#f4f7ed;font-size:clamp(30px,3.4vw,46px);line-height:1.3;font-weight:800;letter-spacing:-1.4px}
+body.product-unified[class] .product-cta p {color:#b8c9c1;font-size:14px;line-height:1.9}
+body.product-unified[class] .product-cta .cta-actions {justify-content:flex-start}
+body.product-unified[class] :is(.product-cta,.viewer-cta) :is(.btn-primary,.viewer-button-primary) {background:#c7e56c!important;border-color:#c7e56c!important;color:#132324!important}
+body.product-unified[class] :is(.product-cta,.viewer-cta) :is(.btn-primary,.viewer-button-primary):hover {background:#d8ed9c!important;border-color:#d8ed9c!important}
+body.product-unified[class] .product-cta .btn-glass {color:#f4f7ed!important;border-color:#6d837a!important}
+body.product-unified[class] .viewer-cta p span {color:#c7e56c}
+body.product-unified[class].theme-pdm .pdm-contact-cta {padding:80px 0;background:#132324}
+body.product-unified[class].theme-pdm .pdm-contact-cta .container {max-width:1360px;border:1px solid #35514a;border-radius:20px;background:#132324;box-shadow:none}
+body.product-unified[class].theme-pdm .pdm-contact-cta .container::before,
+body.product-unified[class].theme-pdm .pdm-contact-cta .container::after {content:none}
+body.product-unified[class].theme-pdm .pdm-contact-scope {background:#1d302b;border-color:#35514a}
+@media(max-width:1100px) {
+  body.product-unified[class] :is(main .container,.viewer-shell) {width:calc(100% - 48px)}
+  body.product-unified[class] .product-hero .container,body.product-unified[class] .viewer-hero-grid {gap:36px}
+  body.product-unified[class] .viewer-pipeline {grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  body.product-unified[class] .viewer-pipeline-link {display:none}
+  body.product-unified[class].theme-pdm .pdm-contact-cta .container {grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+}
+@media(max-width:900px) {
+  body.product-unified[class] .product-hero .container {grid-template-columns:1fr}
+  body.product-unified[class] .viewer-hero-grid {grid-template-columns:1fr;grid-template-areas:'copy' 'visual' 'facts'}
+  body.product-unified[class] .viewer-hero-copy,body.product-unified[class] .product-hero-text {max-width:none}
+  body.product-unified[class] :is(.viewer-section-head-split,.product-tech-stage>.container>.section-header) {grid-template-columns:1fr;gap:16px}
+  body.product-unified[class] .viewer-demo {display:flex;flex-direction:column}
+  body.product-unified[class] .product-capabilities--dimensional .capabilities-bento.bento-glass {grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.product-unified[class] .product-capabilities--dimensional .bento-glass-header {grid-template-columns:1fr;gap:16px}
+}
+@media(max-width:640px) {
+  body.product-unified[class] :is(main .container,.viewer-shell) {width:calc(100% - 32px)}
+  body.product-unified[class] :is(.product-capabilities,.product-features,.product-outcomes,.product-specs,.specs-grid-section,.product-integrations,.product-screen-gallery,.viewer-section) {padding-block:60px}
+  body.product-unified[class] :is(.product-hero,.viewer-hero) {padding-top:calc(var(--nav-h) + var(--announcement-h) + 32px);padding-bottom:40px}
+  body.product-unified[class] :is(.product-hero h1,.viewer-hero h1) {font-size:38px;line-height:1.2;letter-spacing:-1.5px}
+  body.product-unified[class] :is(.section-header,.viewer-section-head,.pdm-integration-heading) h2,
+  body.product-unified[class] .product-tech-stage>.container>.section-header h2 {font-size:32px;letter-spacing:-1.2px;line-height:1.25}
+  body.product-unified[class] :is(.section-header,.viewer-section-head,.pdm-integration-heading) {margin-bottom:28px}
+  body.product-unified[class] .product-capabilities--dimensional .capabilities-bento.bento-glass {grid-template-columns:1fr}
+  body.product-unified[class] .product-capabilities--dimensional .bento-glass>.cap-bento-card {min-height:220px}
+  body.product-unified[class] .bento-glass>.cap-bento-card {min-height:0;padding:24px}
+  body.product-unified[class] .product-trust .container {grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.product-unified[class] .product-trust .trust-stat {padding:20px 16px;border-bottom:1px solid #35514a}
+  body.product-unified[class] .trust-stat:nth-child(2n) {border-right:0}
+  body.product-unified[class] .trust-stat .trust-number {font-size:22px}
+  body.product-unified[class] .viewer-fact-rail>div {padding:20px 16px}
+  body.product-unified[class] .viewer-fact-rail strong {font-size:18px}
+  body.product-unified[class] .product-feature-block {padding-block:32px;gap:24px}
+  body.product-unified[class] .pf-text h3 {font-size:26px}
+  body.product-unified[class] .sg-panel {padding:20px;gap:24px}
+  body.product-unified[class] .sg-text h3 {font-size:23px}
+  body.product-unified[class] .sg-controls {gap:8px}
+  body.product-unified[class] .sg-controls button {padding:12px;font-size:12px}
+  body.product-unified[class] .sg-workflow li {padding:14px 10px;font-size:12px}
+  body.product-unified[class] :is(.viewer-workflow-grid,.viewer-pipeline) {grid-template-columns:1fr}
+  body.product-unified[class] .viewer-demo-copy {padding:22px;gap:14px;grid-template-columns:48px minmax(0,1fr)}
+  body.product-unified[class] .viewer-demo-copy h3 {font-size:21px}
+  body.product-unified[class] .viewer-demo-tab {flex-basis:170px}
+  body.product-unified[class] :is(.sg-brief-grid article,.spec-card,.outcome-card,.vc-grid article,.vc-choice-grid article,.viewer-workflow-grid article,.viewer-pipeline article,.viewer-scope-grid article) {padding:24px}
+  body.product-unified[class] .specs-table :is(th,td) {padding:14px 12px;font-size:12px}
+  body.product-unified[class] .specs-table td:first-child::before {display:block;width:auto;margin:0 0 6px}
+  body.product-unified[class] :is(.product-cta,.viewer-cta) {padding-block:60px}
+  body.product-unified[class].theme-pdm .pdm-contact-cta .container {grid-template-columns:1fr}
+  body.product-unified[class].theme-pdm .pdm-contact-cta,body.product-unified[class].theme-pdm .pdm-integration-section {padding-block:60px}
+  body.product-unified[class].theme-pdm .pdm-integration-heading h2 {font-size:32px;letter-spacing:-1.2px}
+  body.product-unified[class] .viewer-cta-inner {align-items:stretch;flex-direction:column;gap:28px}
+}
+/* Use one vector chevron instead of stacking a font glyph on the legacy CSS arrow. */
+body.product-unified .nav-dropdown-trigger .nav-vector-chevron {display:block;flex:0 0 16px;width:16px;height:16px;margin:0 0 0 4px;border:0;transform:none;color:currentColor}
+body.product-unified .nav-dropdown.open .nav-dropdown-trigger .nav-vector-chevron {transform:rotate(180deg)}
+/* Shared decorative vectors; original product screenshots and materials remain separate. */
+body.product-unified[class] .product-capabilities--dimensional .bento-glass>:is(.pdm-vector-card,.feature-vector-card) {
+  display:grid;grid-template-columns:80px minmax(0,1fr);grid-template-rows:auto auto;
+  align-content:center;align-items:center;gap:10px 22px;min-height:192px;padding:34px 28px 28px;
+}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass>:is(.pdm-vector-card,.feature-vector-card)::before {top:15px;left:auto;right:20px;font-size:10px;opacity:.7}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass :is(.pdm-vector-card,.feature-vector-card) .cap-bento-icon {
+  position:static;grid-column:1;grid-row:1 / 3;display:grid;place-items:center;width:80px;height:88px;
+  border:0;border-radius:16px;background:var(--pd-soft);color:var(--pd-accent);box-shadow:none;
+}
+body.product-unified[class] .product-capabilities--dimensional :is(.pdm-feature-vector,.product-feature-vector) {display:block;width:70px;height:70px;overflow:visible}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass :is(.pdm-vector-card,.feature-vector-card) h3 {grid-column:2;align-self:end;margin:0;font-size:20px;line-height:1.45;letter-spacing:-.6px}
+body.product-unified[class] .product-capabilities--dimensional .bento-glass :is(.pdm-vector-card,.feature-vector-card) p {grid-column:2;align-self:start;margin:0;font-size:13px;line-height:1.85}
+@media(max-width:1100px) {
+  body.product-unified[class] .product-capabilities--dimensional .bento-glass>:is(.pdm-vector-card,.feature-vector-card) {grid-template-columns:64px minmax(0,1fr);gap:10px 16px;padding-inline:22px}
+  body.product-unified[class] .product-capabilities--dimensional .bento-glass :is(.pdm-vector-card,.feature-vector-card) .cap-bento-icon {width:64px;height:76px;border-radius:12px}
+  body.product-unified[class] .product-capabilities--dimensional :is(.pdm-feature-vector,.product-feature-vector) {width:60px;height:60px}
+}
+@media(max-width:640px) {
+  body.product-unified[class] .product-capabilities--dimensional .bento-glass>:is(.pdm-vector-card,.feature-vector-card) {min-height:166px;padding-block:30px 24px}
+}
+/* Specifications and integrations use the same stroke, surface and accent. */
+body.product-unified[class] .product-feature-vector {display:block;flex:none;width:64px;height:64px;color:var(--pd-accent)}
+body.product-unified[class] .product-tech-stage .spec-card-icon {
+  flex:0 0 64px;width:64px;height:70px;min-height:0;border:0;border-radius:12px;
+  background:var(--pd-soft);box-shadow:none;
+}
+body.product-unified[class] .product-tech-stage .spec-card-icon::before,
+body.product-unified[class] .product-tech-stage .spec-card-icon::after {content:none}
+body.product-unified[class] .product-tech-stage .spec-card-icon .product-feature-vector {width:56px;height:56px}
+body.product-unified[class] .product-tech-stage .spec-card-header {gap:18px;margin-bottom:20px;padding-bottom:20px;border-color:var(--pd-line)}
+body.product-unified[class] .product-tech-stage .spec-card-header h3 {font-size:21px;line-height:1.45}
+body.product-unified[class] .integration-logo-item {gap:14px;padding:20px 24px;min-height:84px}
+body.product-unified[class] .integration-logo-item .product-feature-vector {width:38px;height:38px}
+/* Longer viewer explanations retain full card width below a compact icon/title row. */
+body.product-unified[class] :is(.vc-grid,.sg-brief-grid)>.vector-info-card {
+  display:grid;grid-template-columns:64px minmax(0,1fr);grid-template-rows:auto auto auto;
+  align-content:start;gap:8px 18px;padding:24px;
+}
+body.product-unified[class] .vector-info-card>.feature-vector-icon {
+  grid-column:1;grid-row:1 / 3;align-self:center;display:grid;place-items:center;
+  width:64px;height:72px;margin:0;border-radius:12px;background:var(--pd-soft);
+}
+body.product-unified[class] .vector-info-card .product-feature-vector {width:58px;height:58px}
+body.product-unified[class] .vector-info-card>span:not(.feature-vector-icon) {grid-column:2;align-self:end;font-size:10px;line-height:1.5;letter-spacing:.7px}
+body.product-unified[class] :is(.vc-grid,.sg-brief-grid)>.vector-info-card h3 {grid-column:2;align-self:center;margin:0;font-size:20px;line-height:1.5;letter-spacing:-.6px;word-break:keep-all}
+body.product-unified[class] .sg-brief-grid>.vector-info-card h3 {grid-row:1 / 3}
+body.product-unified[class] :is(.vc-grid,.sg-brief-grid)>.vector-info-card p {grid-column:1 / -1;margin:10px 0 0;font-size:14px;line-height:1.85}
+body.product-unified[class] .viewer-pipeline article>.product-feature-vector {width:56px;height:56px;margin:8px 0 20px}
+@media(min-width:901px) and (max-width:1100px) {
+  body.product-unified[class] .product-capabilities--dimensional .capabilities-bento.bento-glass {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px) {
+  body.product-unified[class] .product-tech-stage .spec-card-header h3 {font-size:19px}
+  body.product-unified[class] :is(.vc-grid,.sg-brief-grid)>.vector-info-card {padding:22px;gap:8px 16px}
+}
+
+/* Keep the two published drawing views at their recorded aspect ratio. */
+body.product-unified.viewer2d-page .viewer-hero {
+  padding-top:calc(var(--nav-h) + var(--announcement-h) + clamp(18px,2vw,28px));
+  padding-bottom:clamp(18px,2.4vw,32px);
+}
+body.product-unified.viewer2d-page .viewer-hero-grid {
+  grid-template-areas:"copy visual";
+  gap:0 clamp(22px,3vw,44px);
+}
+body.product-unified.viewer2d-page .viewer-hero-visual img {
+  display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;
+}
+body.product-unified.viewer2d-page .viewer-hero-visual figcaption {min-height:0;padding:10px 16px}
+body.product-unified.viewer2d-page #viewer-film {padding-block:clamp(22px,3vw,42px)}
+.viewer2d-page .result-layout {gap:clamp(18px,3vw,40px)}
+@media(max-width:900px) {
+  body.product-unified.viewer2d-page .viewer-hero-grid {grid-template-areas:"copy" "visual";gap:18px}
+}
+
+.viewer2d-page .viewer-result-original {display:block;cursor:zoom-in}
+.viewer2d-page .viewer-hero-visual figcaption {display:flex;align-items:center;justify-content:space-between;gap:12px}
+.viewer2d-page .viewer-original-link {font-size:12px;font-weight:700;color:var(--pd-ink);text-decoration:underline;text-underline-offset:3px}

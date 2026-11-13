@@ -1,3 +1,4 @@
+import { initProductHighlights } from './home-products.js';
 import './lead-download.js';
 import { createWheelStepGate } from './scroll-gesture.mjs';
 
@@ -178,38 +179,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const technologyData = {
     viewer2d: {
-      image: 'images/clip-2d-viewer.png',
-      alt: 'Clip PLM DWG 2D 도면 뷰어 화면',
-      window: 'DWG / DXF VIEWER',
-      eyebrow: '2D Viewer',
-      title: 'DWG·DXF를 PLM 안에서 확인',
-      copy: '도면 파일과 관련 문서, 개정 정보를 같은 화면에서 확인합니다.',
-      href: 'product-clippdm.html',
-      link: 'Clip PDM에서 자세히 보기',
-      caption: '도면과 개정 정보를 한 화면에서 확인',
+      brandIcon: 'images/viewer-branding/clip-2d-viewer-icon.jpg',
+      image: 'images/viewer-branding/drawing-change.webp?v=fullframe2',
+      alt: 'CLIP 2D Viewer 실제 1:1 도면 비교 화면',
+      window: '2D DRAWING REVIEW',
+      eyebrow: 'CLIP 2D Viewer',
+      title: '개정 차이와 유사 도면 확인',
+      copy: '개정된 위치를 확인하고 보유 도면에서 참고할 후보를 찾습니다.',
+      href: 'product-clip2dviewer.html',
+      link: 'CLIP 2D Viewer 자세히 보기',
+      caption: '도면 위에 표시된 개정 차이',
       specOne: ['FORMAT', 'DWG · DXF'],
-      specTwo: ['CONNECTED', '문서 · 개정']
+      specTwo: ['REVIEW', '측정 · 비교 · 검색']
     },
     viewer3d: {
-      image: 'images/clip3d-viewer/viewer-npr.webp',
-      alt: 'Clip 3D Viewer의 실제 NPR 렌더링 화면',
+      brandIcon: 'images/viewer-branding/clip-3d-viewer-icon.jpg',
+      image: 'images/clip3d-viewer/viewer-measure.webp',
+      alt: 'CLIP 3D Viewer 실제 형상 측정 화면',
       window: 'WEB 3D CAD VIEWER',
-      eyebrow: 'Clip 3D Viewer',
-      title: '주요 CAD 형상을 브라우저에서 검토',
-      copy: '설치 없이 측정, 단면, 분해, 마크업과 제품 구조를 확인하고 Clip PLM 데이터 흐름에 연결합니다.',
+      eyebrow: 'CLIP 3D Viewer',
+      title: '웹에서 형상을 검토하고, 수치로 확인',
+      copy: '측정·단면·분해·마크업과 나란히 모델 비교, 제품 구조 탐색을 활용합니다. CAD 변환 환경과 PLM 연계 범위는 도입 시 협의합니다.',
       href: 'product-clip3dviewer.html',
-      link: 'Clip 3D Viewer 자세히 보기',
-      caption: '실제 제품 화면에서 형상과 제품 구조를 검토',
-      specOne: ['FORMAT', '25+ CAD'],
-      specTwo: ['REVIEW', '측정 · 단면 · 분해']
+      link: 'CLIP 3D Viewer 자세히 보기',
+      caption: '거리 측정값과 부품 구조가 표시된 실제 화면',
+      specOne: ['CAD', '형식·버전 확인'],
+      specTwo: ['REVIEW', '측정 · 단면 · 비교']
     },
     chatbot: {
       image: 'images/product-tour/chatbot-results.png',
       alt: '실제 Clip PLM 프로젝트 화면에서 AI 챗봇으로 데이터를 조회한 화면',
       window: 'AI CHATBOT / PLM DATA',
       eyebrow: 'AI Chatbot',
-      title: 'PLM 데이터에 대화형으로 접근',
-      copy: '제품개발 데이터를 대상으로 사용하는 AI 챗봇을 Clip PLM과 함께 제공합니다.',
+      title: '질문에서 프로젝트 결과 카드까지',
+      copy: '실제 화면의 “OEM 프로젝트를 리스트업해줘” 질문에 프로젝트명·요약·날짜가 담긴 결과 카드가 표시됩니다.',
       href: 'product-clippdm.html',
       link: 'Clip PLM 구성 보기',
       caption: '현재 화면을 유지한 채 프로젝트 데이터를 질의',
@@ -217,17 +220,17 @@ document.addEventListener('DOMContentLoaded', () => {
       specTwo: ['WORKSPACE', '프로젝트 화면']
     },
     autocad: {
-      image: 'videos/poster-cadwin-clean.png',
-      alt: 'AI CADWin AutoCAD 연동 화면',
-      window: 'AUTOCAD INTEGRATION',
-      eyebrow: 'AutoCAD Integration',
-      title: '설계 환경과 PLM을 연결',
-      copy: 'AI CADWin은 AutoCAD 환경에서 BOM 정보 추출과 도면 검색을 지원합니다.',
-      href: 'product-cadwin.html',
-      link: 'AI CADWin 자세히 보기',
-      caption: 'AutoCAD 작업에서 도면 정보와 BOM을 연결',
-      specOne: ['SOURCE', 'AUTOCAD'],
-      specTwo: ['CONNECTED', '도면 · BOM']
+      image: '도면이지CADWin_260203.jpg',
+      alt: 'AI CADWin 제품 소개 이미지',
+      window: 'AI CADWin / DESIGN REUSE',
+      eyebrow: 'AI CADWin',
+      title: '쌓인 도면을, 다음 설계의 자산으로.',
+      copy: '기존 도면을 재활용하고, BOM 정보를 옮겨 적는 반복 업무를 줄이세요. 귀사 도면으로 실제 결과와 도입 범위를 확인하는 맞춤 시연을 상담합니다.',
+      href: 'contact.html?type=demo&product=AI%20CADWin',
+      link: '우리 도면으로 시연 상담',
+      caption: 'AI CADWin 제품 소개 이미지 · 실제 결과는 시연 상담에서 확인',
+      specOne: ['VALUE', '도면 재활용 · 반복 입력 감소'],
+      specTwo: ['CONSULT', '고객 도면으로 적용 범위 확인']
     }
   };
 
@@ -241,9 +244,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (techWindow) techWindow.textContent = data.window;
     if (techEyebrow) techEyebrow.textContent = data.eyebrow;
+    const brandIcon = document.querySelector('[data-tech-brand-icon]');
+    if (brandIcon) {
+      brandIcon.hidden = !data.brandIcon;
+      if (data.brandIcon) brandIcon.src = data.brandIcon;
+    }
     if (techTitle) techTitle.textContent = data.title;
     if (techCopy) techCopy.textContent = data.copy;
     if (techStage) techStage.dataset.activeTech = targetKey;
+    const techMediaLabel = document.querySelector('[data-tech-media-label]');
+    if (techMediaLabel) techMediaLabel.textContent = targetKey === 'autocad' ? 'PRODUCT OVERVIEW' : 'ACTUAL PRODUCT WORKSPACE';
+    const cadwinDetail = document.querySelector('[data-cadwin-detail]');
+    if (cadwinDetail) cadwinDetail.hidden = targetKey !== 'autocad';
     if (techCaption) techCaption.textContent = data.caption;
     if (techSpecOneLabel) techSpecOneLabel.textContent = data.specOne[0];
     if (techSpecOneValue) techSpecOneValue.textContent = data.specOne[1];
@@ -276,163 +288,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // =============================
   // PRODUCT SHOWCASE TABS
   // =============================
-  const productShowcase = document.querySelector('.am-product-showcase');
-  const productsSection = document.querySelector('#products');
-  const productTabs = document.querySelectorAll('[data-product-tab]');
-  const productDetailLink = document.querySelector('[data-product-detail-link]');
-  const productDetailImage = document.querySelector('[data-product-detail-image]');
-  const productDetailEyebrow = document.querySelector('[data-product-detail-eyebrow]');
-  const productDetailTitle = document.querySelector('[data-product-detail-title]');
-  const productDetailCopy = document.querySelector('[data-product-detail-copy]');
-  const productFeatures = document.querySelectorAll('[data-product-feature]');
-  const productStep = document.querySelector('[data-product-step]');
-  const productCurrent = document.querySelector('[data-product-current]');
-  let currentProductKey = 'cadwin';
-  if (productShowcase) productShowcase.dataset.product = currentProductKey;
-  if (productsSection) productsSection.dataset.product = currentProductKey;
-
-  const productShowcaseData = {
-    cadwin: {
-      href: 'product-cadwin.html',
-      image: 'images/cadwin_drawing_inspection.png',
-      alt: 'AI CADWin 도면 검사 화면',
-      eyebrow: 'AI CADWin',
-      title: 'AI 도면 검색과 도면 정보 추출',
-      copy: 'CAD 도면의 표제란, 부품 정보, 유사 도면을 빠르게 찾고 설계 데이터 재사용을 지원합니다.',
-      features: [
-        ['images/icons3d/smart_toy-cyan.webp', '도면 인식', '표제란과 부품 정보 추출', 'AutoCAD 도면에서 품번, 재질, 수량 등 BOM 정보를 추출합니다.'],
-        ['images/icons3d/search-blue.webp', '유사 도면', '형상 기반 검색', 'AI 형상 인식을 기반으로 기존 도면의 유사도를 분석합니다.'],
-        ['images/icons3d/account_tree-cyan.webp', 'BOM 연결', '도면 정보의 구조화', '추출한 정보를 품목과 BOM 데이터에 연결합니다.'],
-        ['images/icons3d/draw-cyan.webp', 'CAD 연동', 'AutoCAD 리본 통합', 'AutoCAD 환경에서 AI CADWin 기능을 사용할 수 있습니다.']
-      ]
-    },
-    pdm: {
-      href: 'product-clippdm.html',
-      image: 'images/plm_project_dashboard.png',
-      alt: 'Clip PDM 프로젝트와 도면 관리 화면',
-      eyebrow: 'Clip PDM',
-      title: '도면과 문서 승인 흐름을 한곳에서 관리',
-      copy: '체크인, 체크아웃, 개정, 승인 이력을 제품 데이터 기준으로 묶어 설계 변경의 기준 화면을 만듭니다.',
-      features: [
-        ['images/icons3d/database-blue.webp', '문서 관리', '도면과 문서 기준화', '도면, 사양서, 산출물을 품목과 프로젝트에 연결해 관리합니다.'],
-        ['images/icons3d/fact_check-purple.webp', '승인 흐름', '검토와 결재 이력', '부서별 승인 상태와 변경 요청을 같은 화면에서 추적합니다.'],
-        ['images/icons3d/manage_history-blue.webp', '개정 관리', '리비전 추적', '최신본과 이전본의 변경 이력을 관리합니다.'],
-        ['images/icons3d/view_in_ar-cyan.webp', '통합 뷰어', '2D·3D 형상 확인', 'DWG·DXF 도면과 주요 CAD 3D 형상을 PLM 데이터와 함께 확인합니다.']
-      ]
-    },
-    pms: {
-      href: 'product-clippms.html',
-      image: 'images/pms_project_overview.png',
-      alt: 'Clip PMS 프로젝트 일정과 산출물 관리 화면',
-      eyebrow: 'Clip PMS',
-      title: '프로젝트 일정과 산출물을 업무 단계별로 추적',
-      copy: '개발 단계, 담당자, 산출물, 이슈를 프로젝트 기준으로 연결해 지연 구간과 책임 범위를 빠르게 확인합니다.',
-      features: [
-        ['images/icons3d/calendar_month-orange.webp', '일정 관리', '단계별 마일스톤', '개발 단계와 Gate 일정을 한 화면에서 확인합니다.'],
-        ['images/icons3d/view_timeline-orange.webp', '업무 구조', '일정과 담당자', '업무 단위별 담당자, 기간, 진행 상태를 추적합니다.'],
-        ['images/icons3d/warning-orange.webp', '이슈 추적', '지연과 리스크 관리', '지연 업무와 주요 이슈를 프로젝트 기준으로 관리합니다.'],
-        ['images/icons3d/description-purple.webp', '산출물 관리', '검토 자료 연결', '회의록, 도면, 보고서 등 산출물을 일정과 함께 관리합니다.']
-      ]
-    },
-    bom: {
-      href: 'product-multibom.html',
-      image: 'images/multibom_dashboard_real.webp',
-      alt: 'Clip Multi-BOM EPL 다중 제품 구조 관리 화면',
-      eyebrow: 'Multi-BOM EPL',
-      title: '여러 0레벨 제품 구조를 한 화면에서 관리',
-      copy: '서로 다른 최상위 제품의 하위 BOM 구조를 나란히 생성·편집·비교하고 변경 범위를 확인합니다.',
-      features: [
-        ['images/icons3d/account_tree-green.webp', '다중 제품 구조', '0레벨별 하위 구조 관리', '제품마다 다른 Part·Assy 구조를 하나의 EPL 화면에서 관리합니다.'],
-        ['images/icons3d/layers-green.webp', '구조 편집', '레벨 자유 편집', 'BOM 레벨과 품목 관계를 업무 기준에 맞게 생성·수정·삭제합니다.'],
-        ['images/icons3d/swap_horiz-green.webp', 'CAD·PDF 입력', '설계 데이터에서 BOM 시작', 'AutoCAD·SolidWorks 연동 또는 고객 양식 PDF 가져오기를 구성할 수 있습니다.'],
-        ['images/icons3d/hub-green.webp', '데이터 연결', '뷰어·ERP 인터페이스', '2D·3D 검토와 고객 ERP 데이터 인터페이스를 도입 범위에 맞춰 연결합니다.']
-      ]
-    },
-    cms: {
-      href: 'product-clipcms.html',
-      image: 'images/cms_cost_dashboard.png',
-      alt: 'Clip CMS 원가 분석 대시보드 화면',
-      eyebrow: 'Clip CMS',
-      title: '사전 원가와 사후 원가를 같은 기준으로 비교',
-      copy: '자재비, 가공비, 견적, 실제 원가를 제품 기준으로 연결해 변경이 비용에 미치는 영향을 분석합니다.',
-      features: [
-        ['images/icons3d/calculate-purple.webp', '사전 원가', '견적 기준 관리', '제품과 품목 기준으로 사전 원가 데이터를 관리합니다.'],
-        ['images/icons3d/payments-amber.webp', '사후 원가', '실적 원가 비교', '사전 원가와 사후 원가를 같은 구조에서 비교합니다.'],
-        ['images/icons3d/query_stats-amber.webp', '영향 분석', '변경 비용 검토', '설계 변경 전후의 원가 데이터를 비교합니다.'],
-        ['images/icons3d/monitoring-amber.webp', '대시보드', '원가 현황 확인', '프로젝트와 제품별 원가 데이터를 화면에서 확인합니다.']
-      ]
-    }
-  };
-
-  function setProductShowcase(targetKey) {
-    const data = productShowcaseData[targetKey];
-    if (!data || !productShowcase) return;
-
-    currentProductKey = targetKey;
-    productShowcase.dataset.product = targetKey;
-    if (productsSection) productsSection.dataset.product = targetKey;
-    productShowcase.classList.add('is-changing');
-
-    const selectedTab = Array.from(productTabs).find(tab => tab.dataset.productTab === targetKey);
-    if (productStep && selectedTab) productStep.textContent = selectedTab.dataset.index || '01';
-    if (productCurrent) productCurrent.textContent = data.eyebrow;
-
-    if (productDetailLink) productDetailLink.href = data.href;
-    if (productDetailImage) {
-      productDetailImage.src = data.image;
-      productDetailImage.alt = data.alt;
-    }
-    if (productDetailEyebrow) productDetailEyebrow.textContent = data.eyebrow;
-    if (productDetailTitle) productDetailTitle.textContent = data.title;
-    if (productDetailCopy) productDetailCopy.textContent = data.copy;
-
-    productFeatures.forEach((card, index) => {
-      const feature = data.features[index];
-      if (!feature) return;
-      if (targetKey === 'cadwin' && index === 2) feature[0] = 'images/icons3d/account_tree-green.webp';
-      if (targetKey === 'cadwin' && index === 3) feature[0] = 'images/icons3d/manage_history-orange.webp';
-      const mark = card.querySelector('[data-feature-mark]');
-      const label = card.querySelector('[data-feature-label]');
-      const title = card.querySelector('h3');
-      const copy = card.querySelector('p');
-
-      if (mark) {
-        let icon = mark.querySelector('img');
-        if (!icon) {
-          icon = document.createElement('img');
-          icon.alt = '';
-          icon.decoding = 'async';
-          mark.textContent = '';
-          mark.appendChild(icon);
-        }
-        icon.src = feature[0];
-      }
-      if (label) label.textContent = feature[1];
-      if (title) title.textContent = feature[2];
-      if (copy) copy.textContent = feature[3];
-    });
-
-    productTabs.forEach(tab => {
-      const active = tab.dataset.productTab === targetKey;
-      tab.classList.toggle('active', active);
-      tab.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-
-    window.setTimeout(() => productShowcase.classList.remove('is-changing'), 180);
-  }
-
-  productTabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => setProductShowcase(tab.dataset.productTab));
-    tab.addEventListener('keydown', (event) => {
-      if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
-      event.preventDefault();
-      const direction = event.key === 'ArrowRight' ? 1 : -1;
-      const nextIndex = (index + direction + productTabs.length) % productTabs.length;
-      const nextTab = productTabs[nextIndex];
-      nextTab.focus();
-      setProductShowcase(nextTab.dataset.productTab);
-    });
-  });
+  let currentProductKey = '2d';
+  const setProductShowcase = initProductHighlights(key => { currentProductKey = key; });
 
   // R1: Let visitors describe a task first, then route them to the matching
   // real product surface instead of making them decode the product names.
@@ -457,16 +314,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let target = document.querySelector('#products');
       let productKey = 'cadwin';
-      let result = 'AI CADWin의 도면 분석 화면으로 안내합니다.';
+      let result = 'AI CADWin의 도입 효과와 맞춤 시연 상담으로 안내합니다.';
 
       if (/(3d|catia|3차원|형상)/i.test(query)) {
         target = document.querySelector('#technology');
         setTechnology('viewer3d');
-        result = 'Clip 3D Viewer의 실제 웹 검토 화면으로 안내합니다.';
+        result = 'CLIP 3D Viewer의 실제 웹 검토 화면으로 안내합니다.';
       } else if (/(2d|dwg|dxf|뷰어|viewer)/i.test(query)) {
-        target = document.querySelector('#technology');
-        setTechnology('viewer2d');
-        result = 'DWG·DXF 2D Viewer 구성으로 안내합니다.';
+        productKey = '2d';
+        result = 'CLIP 2D Viewer의 핵심 기능과 실제 화면으로 안내합니다.';
       } else if (/(챗봇|chatbot|질문|자연어|assistant)/i.test(query)) {
         target = document.querySelector('#technology');
         setTechnology('chatbot');
@@ -480,6 +336,9 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (/(원가|cms|비용|견적|sap|erp)/i.test(query)) {
         productKey = 'cms';
         result = 'Clip CMS의 원가 관리 화면으로 안내합니다.';
+      } else if (/(ddms|dds|배포|협력사|회수)/i.test(query)) {
+        productKey = 'dds';
+        result = 'CLiP DDMS의 도면 배포·수신 추적 화면으로 안내합니다.';
       } else if (/(pdm|문서|리비전|개정|승인|체크인)/i.test(query)) {
         productKey = 'pdm';
         result = 'Clip PDM의 도면·문서·리비전 화면으로 안내합니다.';
@@ -510,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tourCopy = productTour.querySelector('[data-tour-copy]');
     const tourStatus = productTour.querySelector('[data-tour-status]');
     const tourVideos = Array.from(productTour.querySelectorAll('video'));
-    const tourJumpLinks = Array.from(productTour.querySelectorAll('[data-tour-jump]'));
+    const tourJumpLinks = Array.from(document.querySelectorAll('[data-tour-jump]'));
     const reduceTourMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let tourIndex = 0;
     let tourInView = false;
@@ -546,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window: 'PLM AI ASSISTANT · PROJECT DATA',
         eyebrow: 'AI ASSISTANT',
         title: '검색 조건 대신 자연어로 프로젝트 조회',
-        copy: 'Clip PLM 안의 프로젝트 데이터를 대상으로 질문하고, 관련 프로젝트와 업무 결과를 목록으로 확인합니다.'
+        copy: '“OEM 프로젝트를 리스트업해줘”라고 질문한 뒤 프로젝트 결과 카드를 확인하는 실제 시연입니다. 더보기로 나머지 결과를 확인합니다.'
       }
     };
 
@@ -1791,6 +1650,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const productDefaultMap = {
+      '2d': 'CLIP VIEW 2D',
+      dds: 'CLiP DDMS',
       cadwin: 'AI CADWin',
       pdm: 'Clip PDM',
       pms: 'Clip PMS',
@@ -1798,6 +1659,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const messageDefaults = {
+      'CLIP VIEW 2D': '사용 중인 도면으로 열람·측정·개정 비교와 유사 도면 검색을 상담받고 싶습니다.',
+      'CLiP DDMS': '협력사 도면 배포와 수신확인·회수 절차를 상담받고 싶습니다.',
       '통합 PLM 전체': '현재 도면, BOM, ERP 흐름의 누수 지점과 단계별 PLM 도입 범위를 상담받고 싶습니다.',
       'AI CADWin': '반복되는 도면 검색과 정보 추출 시간을 줄일 수 있는 AI CADWin 적용 범위를 상담받고 싶습니다.',
       'Clip PDM': '도면 최신본, 개정 및 승인 이력을 연결하는 Clip PDM 도입 범위를 상담받고 싶습니다.',

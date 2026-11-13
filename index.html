@@ -36,13 +36,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="amphora-plm.css">
   <link rel="stylesheet" href="home-news.css">
   <link rel="stylesheet" href="home-spinfire.css">
   <link rel="stylesheet" href="home-refinements.css">
+  <link rel="stylesheet" href="home-products.css">
+  <link rel="stylesheet" href="home-platform.css">
+  <link rel="stylesheet" href="home-cohesion.css">
+  <link rel="stylesheet" href="home-icons.css">
+  <link rel="stylesheet" href="lead-download.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -73,6 +76,7 @@
     ]
   }
   </script>
+  <link rel="stylesheet" href="viewer-branding.css">
 </head>
 
 <body class="plm-home-v2">
@@ -95,7 +99,7 @@
     <div class="container">
       <span class="announcement-highlight">Clip PLM</span>
       도면·BOM·프로젝트·원가를 하나의 제품개발 데이터로 연결합니다.
-      <a href="#platform">플랫폼 보기 <span class="arrow" aria-hidden="true">→</span></a>
+      <a href="#platform">플랫폼 보기 <span class="arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></span></a>
     </div>
   </div>
 
@@ -108,11 +112,11 @@
       <div class="nav-center">
         <div class="nav-dropdown">
           <button class="nav-dropdown-trigger nav-link" aria-expanded="false" aria-haspopup="true">
-            솔루션 <span class="nav-dropdown-chevron" aria-hidden="true"></span>
+            솔루션 <span class="nav-dropdown-chevron site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></span>
           </button>
           <div class="nav-dropdown-menu">
             <a href="product-cadwin.html" class="nav-dropdown-item" data-product="cadwin">
-              <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">AI CADWin</span><span class="nav-dropdown-item-desc">AI 도면 자동화</span></span>
+              <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">AI CADWin</span><span class="nav-dropdown-item-desc">도면 재활용·업무 개선</span></span>
             </a>
             <a href="product-clippdm.html" class="nav-dropdown-item" data-product="pdm">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip PDM</span><span class="nav-dropdown-item-desc">도면·문서·제품 데이터</span></span>
@@ -126,8 +130,8 @@
             <a href="product-clipcms.html" class="nav-dropdown-item" data-product="cms">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip CMS</span><span class="nav-dropdown-item-desc">사전·사후 원가관리</span></span>
             </a>
-            <a href="product-clip3dviewer.html" class="nav-dropdown-item" data-product="viewer3d">
-              <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip 3D Viewer</span><span class="nav-dropdown-item-desc">웹 기반 3D CAD 검토</span></span>
+            <a href="product-clip3dviewer.html" class="nav-dropdown-item" data-product="viewer3d"><img class="clip-viewer-icon" src="images/viewer-branding/clip-3d-viewer-icon.jpg" alt="" width="36" height="36">
+              <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">CLIP 3D Viewer</span><span class="nav-dropdown-item-desc">웹 기반 3D CAD 검토</span></span>
             </a>
             <a href="#spinfire" class="nav-dropdown-item">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">SpinFire Insight</span><span class="nav-dropdown-item-desc">Tech Soft 3D · CAD 뷰어</span></span>
@@ -144,8 +148,8 @@
 
       <div class="nav-right">
         <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">
-          <span class="theme-icon-light" aria-hidden="true"></span>
-          <span class="theme-icon-dark" aria-hidden="true"></span>
+          <span class="theme-icon-light site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 14A9 9 0 0 1 10 3a9 9 0 1 0 10 11Z"/></svg></span>
+          <span class="theme-icon-dark site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span>
         </button>
         <a href="contact.html?type=contact" class="btn btn-secondary">문의하기</a>
         <a href="contact.html?type=consult" class="btn btn-primary">도입 상담</a>
@@ -165,7 +169,7 @@
           <div class="nav-logo-img-wrap"><img class="papsnet-logo-mark" src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
         </a>
         <button class="mobile-menu-close" id="mobileMenuClose" aria-label="메뉴 닫기">
-          <span class="ui-close-symbol" aria-hidden="true">×</span>
+          <span class="ui-close-symbol site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></span>
         </button>
       </div>
       <nav class="mobile-nav">
@@ -176,7 +180,7 @@
         <a href="product-clippms.html" class="mobile-nav-link">Clip PMS</a>
         <a href="product-multibom.html" class="mobile-nav-link">Multi-BOM</a>
         <a href="product-clipcms.html" class="mobile-nav-link">Clip CMS</a>
-        <a href="product-clip3dviewer.html" class="mobile-nav-link">Clip 3D Viewer</a>
+        <a href="product-clip3dviewer.html" class="mobile-nav-link"><img class="clip-viewer-icon" src="images/viewer-branding/clip-3d-viewer-icon.jpg" alt="" width="36" height="36">CLIP 3D Viewer</a>
         <a href="#spinfire" class="mobile-nav-link">SpinFire Insight</a>
         <a href="#process" class="mobile-nav-link">도입 흐름</a>
         <a href="#customers" class="mobile-nav-link">고객사</a>
@@ -289,35 +293,29 @@
         <div class="am-editorial-copy">
           <div class="am-editorial-overline">
             <span>(주)팹스넷</span>
-            <span>AI CLIP PLM / PRODUCT DATA SYSTEM</span>
+            <span>Clip PLM</span>
           </div>
           <h1>
-            <span class="am-editorial-line am-copy-desktop"><span>AI 도면 검색부터 제조 BOM·원가관리까지,</span></span>
-            <span class="am-editorial-line am-copy-desktop"><span>PDM·PMS로 하나 되는 <em>Clip PLM.</em></span></span>
-            <span class="am-editorial-line am-copy-mobile"><span>AI 도면 검색·PDM</span></span>
-            <span class="am-editorial-line am-copy-mobile"><span>PMS·BOM·원가관리</span></span>
-            <span class="am-editorial-line am-copy-mobile"><span><em>Clip PLM</em> 하나로.</span></span>
+            <span class="am-editorial-line"><span>설계가 바뀌면,</span></span>
+            <span class="am-editorial-line"><span><em>어디까지 달라질까요?</em></span></span>
           </h1>
-          <p>도면·리비전·BOM·프로젝트·사전·사후 원가의 변경 영향을 하나의 제품 데이터 흐름으로 관리합니다.</p>
+          <p>Clip PLM에서 개정 도면과 연결된 부품표(BOM), 프로젝트 일정, 원가를 확인하세요.</p>
+          <div class="am-hero-actions">
+            <a href="product-clip2dviewer.html#viewer-film" class="btn btn-primary btn-lg"><span aria-hidden="true">▷</span> 도면 비교 시연 <small>17초</small></a>
+            <a href="contact.html?type=diagnosis" class="btn btn-secondary btn-lg">PLM 도입 상담</a>
+          </div>
           <form class="am-hero-query" data-hero-query>
-            <div class="am-query-brand" aria-hidden="true">
-              <span>CLIP</span>
-              <strong>AI</strong>
-              <small>GUIDE / 01</small>
-              <i></i><i></i><i></i>
-            </div>
             <div class="am-query-console">
               <div class="am-query-head">
                 <label for="heroFeatureQuery">
-                  <span>제품개발 데이터에 질문하세요</span>
+                  <span>우리 업무에 맞는 제품 찾기</span>
                   <small>도면 · BOM · 프로젝트 · 원가</small>
                 </label>
-                <span class="am-query-status"><i aria-hidden="true"></i>DATA ONLINE</span>
               </div>
               <div class="am-query-field">
-                <span class="am-query-icon" aria-hidden="true"></span>
-                <input id="heroFeatureQuery" name="query" type="search" placeholder="예: 비슷한 도면과 연결된 BOM을 찾아줘" autocomplete="off" required>
-                <button type="submit"><span>ASK</span><b aria-hidden="true">↗</b></button>
+                <span class="am-query-icon site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg></span>
+                <input id="heroFeatureQuery" name="query" type="search" placeholder="예: 이전에 만든 유사 도면 찾기" autocomplete="off" required>
+                <button type="submit"><span>찾기</span><b class="site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></b></button>
               </div>
               <div class="am-query-foot">
                 <div class="am-query-suggestions" aria-label="추천 업무">
@@ -329,10 +327,7 @@
               </div>
             </div>
           </form>
-          <div class="am-hero-actions">
-            <a href="#products" class="btn btn-primary btn-lg">Clip 제품 탐색</a>
-            <a href="contact.html?type=diagnosis" class="btn btn-secondary btn-lg">PLM 도입 진단</a>
-          </div>
+
         </div>
 
         <div class="am-editorial-index" role="tablist" aria-label="산업별 제품 데이터 장면">
@@ -358,11 +353,11 @@
           </div>
           <div>
             <span>DESIGN CONNECTED</span>
-            <strong>AutoCAD Integration</strong>
+            <strong>CADWin · 설계 자산 재활용</strong>
           </div>
           <a href="#news" aria-label="팹스넷 소식 섹션으로 이동">
             <span data-hero-step-status>SCROLL · 자동차 BOM 조립</span>
-            <i aria-hidden="true">↓</i>
+            <i class="site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v16m-7-7 7 7 7-7"/></svg></i>
           </a>
         </div>
       </div>
@@ -373,7 +368,7 @@
       <div class="am-shell">
         <header class="news-heading">
           <div><span class="news-kicker">NEWS &amp; STORIES</span><h2 id="newsTitle">팹스넷 소식</h2></div>
-          <p>언론에서 만난 기술, 현장에서 나눈 경험.<br>팹스넷의 새로운 이야기를 전합니다.</p>
+          <p>제품의 실제 시연과 팹스넷의 언론 보도, 교육 현장 소식을 전합니다.</p>
         </header>
         <div class="news-toolbar">
           <div class="news-filters" data-news-filters role="group" aria-label="소식 분류" hidden><!-- PAPSNET_NEWS_FILTERS --></div>
@@ -381,9 +376,9 @@
         </div>
         <div class="news-content" id="newsContent" data-news-content><!-- PAPSNET_NEWS_CONTENT --></div>
         <nav class="news-pagination" data-news-pagination aria-label="소식 페이지" hidden>
-          <button type="button" data-news-previous aria-label="이전 소식 페이지"><span class="material-symbols-rounded" aria-hidden="true">chevron_left</span></button>
+          <button type="button" data-news-previous aria-label="이전 소식 페이지"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m14 6-6 6 6 6"/></svg></span></button>
           <span data-news-page-label>1 / 1</span>
-          <button type="button" data-news-next aria-label="다음 소식 페이지"><span class="material-symbols-rounded" aria-hidden="true">chevron_right</span></button>
+          <button type="button" data-news-next aria-label="다음 소식 페이지"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m10 6 6 6-6 6"/></svg></span></button>
         </nav>
         <noscript><p>전체 소식 원문과 사진</p><ul><!-- PAPSNET_NEWS_FALLBACK --></ul></noscript>
       </div>
@@ -391,112 +386,53 @@
     <dialog class="news-dialog" data-news-dialog aria-labelledby="newsDialogTitle">
       <header class="news-dialog-heading">
         <div><p data-news-dialog-category>팹스넷 소식</p><h2 id="newsDialogTitle">소식 자세히 보기</h2></div>
-        <button class="news-dialog-close" type="button" data-news-close aria-label="소식 상세 닫기" autofocus><span>닫기</span><span class="material-symbols-rounded" aria-hidden="true">close</span></button>
+        <button class="news-dialog-close" type="button" data-news-close aria-label="소식 상세 닫기" autofocus><span>닫기</span><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></span></button>
       </header>
       <div class="news-dialog-body" data-news-body></div>
     </dialog>
 
-    <section class="am-section am-platform" id="platform">
-      <div class="am-shell">
-        <div class="am-platform-head blur-fade">
-          <span class="am-kicker">One identity · One product data</span>
-          <h2 class="am-text-reveal am-reveal-soft">하나의 계정으로, 설계에서 경영까지.</h2>
-          <p>SSO를 출발점으로 역할별 업무와 Clip 제품군을 연결해 같은 제품 데이터를 기준으로 일합니다.</p>
-        </div>
+<section class="am-section hp-products" id="products" data-product="2d">
+ <div class="am-shell"><div class="hp-heading"><div><span class="hp-kicker">CLiP SOLUTIONS</span><h2>우리 업무에 필요한 기능부터.</h2></div><p>도면 검토부터 제품 데이터·협력사 배포·개발 일정까지.<br>핵심 기능과 실제 화면으로 필요한 솔루션을 확인하세요.</p></div>
+ <div class="hp-tabs" role="tablist" aria-label="제품소개"><button type="button" class="hp-tab active" role="tab" id="product-tab-2d" aria-controls="product-summary" aria-selected="true" tabindex="0" data-product-tab="2d"><img class="clip-viewer-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="40" height="40"><span><strong>CLIP 2D Viewer</strong><small>열람·측정·비교</small></span></button><button type="button" class="hp-tab" role="tab" id="product-tab-pdm" aria-controls="product-summary" aria-selected="false" tabindex="-1" data-product-tab="pdm"><img src="images/product-highlights/pdm-art.webp" alt="" width="58" height="70"><span><strong>CLiP PDM</strong><small>도면·BOM·설계변경</small></span></button><button type="button" class="hp-tab" role="tab" id="product-tab-dds" aria-controls="product-summary" aria-selected="false" tabindex="-1" data-product-tab="dds"><img src="images/product-highlights/dds-art.webp" alt="" width="58" height="70"><span><strong>CLiP DDMS</strong><small>배포·수신·회수</small></span></button><button type="button" class="hp-tab" role="tab" id="product-tab-pms" aria-controls="product-summary" aria-selected="false" tabindex="-1" data-product-tab="pms"><img src="images/product-highlights/pms-art.webp" alt="" width="58" height="70"><span><strong>CLiP PMS</strong><small>일정·게이트·산출물</small></span></button></div>
+ <section class="hp-viewer-demo" id="viewer-demo" aria-labelledby="demo-heading">
+   <div class="demo-copy">
+     <div class="demo-product"><img src="images/viewer-branding/clip-2d-viewer-icon.jpg" width="36" height="36" alt=""><span>CLIP 2D Viewer</span></div>
+     <h3 id="demo-heading">비슷한 도면을 찾고,<br>바뀐 치수를 확인하세요.</h3>
+     <p>기준 도면으로 유사 후보를 찾는 1:N 검색과 개정 전후의 차이를 짚는 1:1 비교를 실제 화면으로 보세요.</p>
+     <div class="demo-actions"><a class="demo-consult" href="contact.html?type=demo&amp;product=CLIP+VIEW+2D">우리 도면으로 시연 문의 ↗</a><a href="product-clip2dviewer.html#viewer-film">대표 시연 자세히 보기 →</a></div>
+   </div>
+   <figure><video controls playsinline preload="none" width="1920" height="1080" poster="videos/clip2d-comparison.jpg?v=fullframe2" aria-label="CLIP 2D Viewer 대표 시연 · 유사 도면 검색과 개정 비교" src="videos/clip2d-comparison.mp4?v=fullframe2"><a href="videos/clip2d-comparison.mp4?v=fullframe2">대표 시연 열기</a></video><figcaption><span>대표 시연</span> 유사 도면 검색과 개정 비교</figcaption></figure>
+ </section>
+ <div class="hp-panel" id="product-summary" role="tabpanel" aria-labelledby="product-tab-2d" tabindex="0">
+  <div class="hp-copy"><div class="hp-brand"><img src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="40" height="40" data-product-art><div><span data-product-tag>VIEW · MEASURE · COMPARE</span><p data-product-name>CLIP 2D Viewer</p></div></div><h3 data-product-title>개정 도면의 차이를 바로 확인하세요.</h3><p class="hp-intro" data-product-copy>CAD 없이 도면을 확인해야 하는 생산·품질·구매 담당자를 위한 Windows·웹 뷰어입니다.</p>
+  <ol class="hp-workflow" data-product-workflow hidden></ol>
+  <ul class="hp-features"><li data-product-feature><b>개정 비교</b><p>바뀐 위치를 도면 위에서 확인합니다.</p></li><li data-product-feature><b>유사 도면 검색</b><p>이전 작업에서 참고할 도면을 찾습니다.</p></li><li data-product-feature><b>도면 열람</b><p>생산·품질 부서에서 DWG·DXF를 검토합니다.</p></li></ul>
+  <div class="hp-actions"><a class="hp-primary" href="contact.html?type=demo&amp;product=CLIP+VIEW+2D" data-product-consult>맞춤 데모 상담 ↗</a><a class="hp-download" href="brochures/CLiP_2D_Viewer_제품소개.pdf" download data-lead-download data-product="CLIP VIEW 2D" data-product-download>제품 소개 PDF ↓</a></div></div>
+  <div class="hp-evidence"><div class="hp-view-controls" role="group" aria-label="제품 기능별 실제 화면" data-product-views hidden></div><p class="hp-view-copy" data-product-view-copy hidden></p><div class="hp-screen-label"><span data-product-media-label>개정 도면 비교</span><a href="images/viewer-branding/drawing-change.webp?v=fullframe2" target="_blank" rel="noopener" data-product-fullscreen aria-label="2D 도면 비교 화면 크게 보기">화면 크게 보기 ↗</a></div><a class="hp-screen" href="images/viewer-branding/drawing-change.webp?v=fullframe2" target="_blank" rel="noopener" data-product-fullscreen><img src="images/viewer-branding/drawing-change.webp?v=fullframe2" alt="도면 전체와 개정 차이를 함께 보는 비교 화면" width="1800" height="1125" loading="lazy" decoding="async" data-product-screen></a><div class="hp-evidence-footer"><p class="hp-caption" data-product-caption>도면 전체와 개정 차이를 함께 보는 비교 화면</p><p class="hp-scope" data-product-scope>귀사 도면으로 도입 범위를 확인하세요.</p><a class="hp-detail" href="product-clip2dviewer.html" data-product-detail>제품 자세히 보기 ↗</a></div></div>
+ </div>
 
-        <div class="am-platform-map blur-fade" data-delay="1" aria-label="Clip PLM SSO와 제품 데이터 연결 구조">
-          <div class="am-platform-map-intro">
-            <span>CONNECTED PRODUCT WORKFLOW</span>
-            <strong>하나의 인증으로 모든 Clip 제품에 연결</strong>
-          </div>
-
-          <svg class="am-platform-connections" viewBox="0 0 1120 520" preserveAspectRatio="none" aria-hidden="true">
-            <g class="am-platform-path-base">
-              <path d="M218 110 H330 V202 H430" />
-              <path d="M218 260 H430" />
-              <path d="M218 410 H330 V318 H430" />
-              <path d="M690 202 H790 V110 H902" />
-              <path d="M690 260 H902" />
-              <path d="M690 318 H790 V410 H902" />
-            </g>
-            <g class="am-platform-path-signal">
-              <path d="M218 110 H330 V202 H430" pathLength="100" />
-              <path d="M218 260 H430" pathLength="100" />
-              <path d="M218 410 H330 V318 H430" pathLength="100" />
-              <path d="M690 202 H790 V110 H902" pathLength="100" />
-              <path d="M690 260 H902" pathLength="100" />
-              <path d="M690 318 H790 V410 H902" pathLength="100" />
-            </g>
-          </svg>
-
-          <div class="am-platform-products am-platform-products-left">
-            <a href="product-cadwin.html" class="am-platform-product">
-              <span class="am-platform-product-icon"><img src="images/icons3d/draw-blue.webp" alt=""></span>
-              <span class="am-platform-product-copy"><small>DRAWING AI</small><strong>AI CADWin</strong></span>
-              <i aria-hidden="true">01</i>
-            </a>
-            <a href="product-clippdm.html" class="am-platform-product">
-              <span class="am-platform-product-icon"><img src="images/icons3d/database-blue.webp" alt=""></span>
-              <span class="am-platform-product-copy"><small>PRODUCT DATA</small><strong>Clip PDM</strong></span>
-              <i aria-hidden="true">02</i>
-            </a>
-            <a href="product-clippms.html" class="am-platform-product">
-              <span class="am-platform-product-icon"><img src="images/icons3d/calendar_month-orange.webp" alt=""></span>
-              <span class="am-platform-product-copy"><small>PROJECT FLOW</small><strong>Clip PMS</strong></span>
-              <i aria-hidden="true">03</i>
-            </a>
-          </div>
-
-          <div class="am-platform-core">
-            <img src="images/clip-sso-glass-hub.png" alt="" loading="lazy" decoding="async">
-            <span>CLIP PLATFORM</span>
-            <strong>SSO</strong>
-            <small>ROLE BASED ACCESS</small>
-            <div class="am-platform-orbit" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-          </div>
-
-          <div class="am-platform-products am-platform-products-right">
-            <a href="product-multibom.html" class="am-platform-product">
-              <span class="am-platform-product-icon"><img src="images/icons3d/layers-green.webp" alt=""></span>
-              <span class="am-platform-product-copy"><small>ENGINEERING PART LIST</small><strong>Multi-BOM EPL</strong></span>
-              <i aria-hidden="true">04</i>
-            </a>
-            <a href="product-clipcms.html" class="am-platform-product">
-              <span class="am-platform-product-icon"><img src="images/icons3d/calculate-purple.webp" alt=""></span>
-              <span class="am-platform-product-copy"><small>COST LIFECYCLE</small><strong>Clip CMS</strong></span>
-              <i aria-hidden="true">05</i>
-            </a>
-            <a href="product-clip3dviewer.html" class="am-platform-product">
-              <span class="am-platform-product-icon"><img src="images/icons3d/view_in_ar-cyan.webp" alt=""></span>
-              <span class="am-platform-product-copy"><small>WEB 3D CAD</small><strong>Clip 3D Viewer</strong></span>
-              <i aria-hidden="true">06</i>
-            </a>
-          </div>
-
-          <div class="am-platform-access" aria-label="SSO 역할별 접근 대상">
-            <span>설계·R&amp;D</span><span>PM·품질</span><span>구매·생산</span><span>경영진</span>
-          </div>
-        </div>
-
-        <div class="am-platform-value-grid">
-          <article class="blur-fade">
-            <span>IDENTITY</span>
-            <h3>하나의 계정으로 모든 Clip 업무에 접근</h3>
-            <p>조직 역할에 따라 필요한 제품과 데이터 권한을 연결합니다.</p>
-          </article>
-          <article class="blur-fade" data-delay="1">
-            <span>TRACEABILITY</span>
-            <h3>변경 원인부터 후속 영향까지 추적</h3>
-            <p>리비전·BOM·일정·원가를 하나의 제품 데이터 흐름으로 잇습니다.</p>
-          </article>
-          <article class="blur-fade" data-delay="2">
-            <span>VISIBILITY</span>
-            <h3>현장 데이터를 경영 판단으로 확장</h3>
-            <p>프로젝트와 제품 변화의 맥락을 전사 의사결정으로 연결합니다.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+ <div class="hp-ai" id="ai-evidence" aria-labelledby="ai-evidence-title">
+  <div class="hp-ai-heading">
+   <div><span class="hp-kicker">AI 적용 사례</span><h2 id="ai-evidence-title">도면과 프로젝트를 찾는 두 가지 방법</h2></div>
+   <p>설계자는 도면 한 장으로 유사 후보를 찾고, 프로젝트 담당자는 질문 한 줄로 관련 프로젝트를 조회합니다.</p>
+  </div>
+  <div class="hp-ai-grid">
+   <article class="hp-ai-card">
+    <div class="hp-ai-label">CLIP 2D Viewer · 유사 도면 검색</div><h3>기준 도면과 닮은 후보 찾기</h3>
+    <a class="hp-ai-image" href="images/viewer-branding/drawing-match.webp?v=fullframe2" target="_blank" rel="noopener" aria-label="유사 도면 검색 전체 화면 크게 보기"><img src="images/viewer-branding/drawing-match.webp?v=fullframe2" alt="전체 작업 화면 중앙에 표시된 유사도 순위와 선택한 후보 도면" width="1600" height="900" loading="lazy"></a>
+    <p class="hp-ai-source">후보 목록에서 유사도와 도면 형상을 함께 확인할 수 있습니다.</p>
+    <div class="hp-result-actions"><a class="hp-ai-cta" href="contact.html?type=demo&amp;product=CLIP+VIEW+2D">우리 도면으로 시연 문의 ↗</a><a href="images/viewer-branding/drawing-match.webp?v=fullframe2" target="_blank" rel="noopener">화면 크게 보기 ↗</a></div>
+   </article>
+   <article class="hp-ai-card">
+    <div class="hp-ai-label">CLiP PLM · AI 챗봇</div><h3>질문 한 줄로 OEM 프로젝트 조회</h3>
+    <video class="hp-ai-image" id="plm-result-loop" muted playsinline loop preload="none" poster="videos/plm-project-results.jpg" width="960" height="540" aria-label="PLM 전체 화면에서 챗봇의 실제 질문과 프로젝트 결과 다섯 건을 차례로 보여주는 영상" src="videos/plm-project-results.mp4"></video>
+    <p class="hp-ai-source">“OEM 프로젝트를 리스트업해줘”라는 질문에 10건이 검색됐고, 첫 화면에 5건이 표시됩니다.</p>
+    <div class="hp-result-actions"><a class="hp-ai-cta" href="images/product-highlights/plm-ai-project-results.webp" target="_blank" rel="noopener">결과 크게 보기 ↗</a><button type="button" data-result-play aria-controls="plm-result-loop" hidden>재생</button></div>
+   </article>
+  </div>
+ </div>
+ <div class="hp-more"><span>함께 검토할 솔루션</span><a href="product-cadwin.html">AI CADWin ↗</a><a href="product-multibom.html">Multi-BOM EPL ↗</a><a href="product-clipcms.html">Clip CMS ↗</a><a href="product-clip3dviewer.html">CLIP 3D Viewer ↗</a><a href="brochure.html">전체 자료실 ↗</a></div>
+ </div></section>
 
     <section class="am-section am-business-impact" id="business-impact">
       <div class="am-shell">
@@ -549,7 +485,7 @@
         <div class="am-ai-promo-line blur-fade" data-delay="1">
           <div>
             <span>CLIP PLM / AI CHATBOT</span>
-            <strong>업무 화면 안에서 PLM 데이터를 자연어로 조회합니다.</strong>
+            <strong>“OEM 프로젝트를 리스트업해줘” — 질문에 프로젝트 결과 카드로 답합니다.</strong>
           </div>
           <ul aria-label="Clip PLM AI 챗봇 주요 기능">
             <li>프로젝트 조회</li>
@@ -562,8 +498,8 @@
         <div class="am-tour-navigation" aria-label="제품 화면 탐색">
           <p aria-live="polite" aria-atomic="true">제품 화면 <b data-tour-status>01</b><span> / 05</span></p>
           <div>
-            <button type="button" data-tour-prev aria-label="이전 제품 화면"><span class="material-symbols-rounded" aria-hidden="true">chevron_left</span></button>
-            <button type="button" data-tour-next aria-label="다음 제품 화면"><span class="material-symbols-rounded" aria-hidden="true">chevron_right</span></button>
+            <button type="button" data-tour-prev aria-label="이전 제품 화면"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m14 6-6 6 6 6"/></svg></span></button>
+            <button type="button" data-tour-next aria-label="다음 제품 화면"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m10 6 6 6-6 6"/></svg></span></button>
           </div>
         </div>
         <div class="am-tour-console blur-fade" data-delay="1">
@@ -660,7 +596,7 @@
                 <h3 data-tour-title>팀장이 먼저 봐야 할 지연과 이슈</h3>
               </div>
               <p data-tour-copy>프로젝트 단계, 진행률, 지연 과제와 이슈를 같은 화면에서 비교해 우선 대응할 업무를 찾습니다.</p>
-              <a href="product-clippms.html">Clip PMS 자세히 보기 <span aria-hidden="true">↗</span></a>
+              <a href="product-clippms.html">Clip PMS 자세히 보기 <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a>
             </div>
           </div>
         </div>
@@ -704,24 +640,22 @@
             <span class="am-kicker">AI &amp; CAD Technology</span>
             <h2>도면·AI·PLM을 하나의 작업면으로.</h2>
           </div>
-          <p><strong>DWG·DXF 2D 뷰어, 주요 CAD 웹 3D 뷰어, PLM AI 챗봇, AutoCAD 연동</strong>을 Clip PLM의 제품개발 데이터와 함께 제공합니다.</p>
+          <p><strong>DWG·DXF 2D 뷰어, 주요 CAD 웹 3D 뷰어, PLM AI 챗봇, CADWin의 설계 데이터 활용</strong>을 Clip PLM의 제품개발 데이터와 함께 제공합니다.</p>
         </div>
 
         <div class="am-tech-stage blur-fade" data-delay="1" data-tech-stage data-active-tech="viewer2d">
           <div class="am-tech-stage-meta">
             <span>CLIP / TECHNOLOGY LAYER</span>
-            <p><i aria-hidden="true"></i><b data-tech-window>DWG / DXF VIEWER</b></p>
+            <p><i aria-hidden="true"></i><b data-tech-window>2D DRAWING REVIEW</b></p>
           </div>
 
           <div class="am-tech-tabs" role="tablist" aria-label="팹스넷 핵심 기술 선택">
-            <button class="am-tech-tab active" type="button" role="tab" aria-selected="true" data-tech-tab="viewer2d">
-              <span class="am-tech-tab-index">01</span>
-              <span class="am-tech-tab-copy"><small>DWG · DXF</small><strong>2D 도면 검토</strong></span>
+            <button class="am-tech-tab active" type="button" role="tab" aria-selected="true" data-tech-tab="viewer2d"><img class="clip-viewer-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="40" height="40">
+              <span class="am-tech-tab-copy"><small>DWG · DXF</small><strong>CLIP 2D Viewer</strong></span>
               <i aria-hidden="true"></i>
             </button>
-            <button class="am-tech-tab" type="button" role="tab" aria-selected="false" data-tech-tab="viewer3d">
-              <span class="am-tech-tab-index">02</span>
-              <span class="am-tech-tab-copy"><small>MULTI-CAD</small><strong>3D 웹 검토</strong></span>
+            <button class="am-tech-tab" type="button" role="tab" aria-selected="false" data-tech-tab="viewer3d"><img class="clip-viewer-icon" src="images/viewer-branding/clip-3d-viewer-icon.jpg" alt="" width="40" height="40">
+              <span class="am-tech-tab-copy"><small>MULTI-CAD</small><strong>CLIP 3D Viewer</strong></span>
               <i aria-hidden="true"></i>
             </button>
             <button class="am-tech-tab" type="button" role="tab" aria-selected="false" data-tech-tab="chatbot">
@@ -731,109 +665,56 @@
             </button>
             <button class="am-tech-tab" type="button" role="tab" aria-selected="false" data-tech-tab="autocad">
               <span class="am-tech-tab-index">04</span>
-              <span class="am-tech-tab-copy"><small>AUTOCAD</small><strong>CAD·PLM 연동</strong></span>
+              <span class="am-tech-tab-copy"><small>AI CADWin</small><strong>도면 재활용·업무 개선</strong></span>
               <i aria-hidden="true"></i>
             </button>
           </div>
 
           <div class="am-tech-panel" aria-live="polite">
             <figure class="am-tech-visual">
-              <div class="am-tech-window-bar"><i></i><i></i><i></i><span>ACTUAL PRODUCT WORKSPACE</span></div>
-              <img src="images/clip-2d-viewer.png" alt="Clip PLM DWG 2D 도면 뷰어 화면" loading="lazy" decoding="async" data-tech-image>
-              <figcaption><span>PRODUCT VIEW</span><b data-tech-caption>도면과 개정 정보를 한 화면에서 확인</b></figcaption>
+              <div class="am-tech-window-bar"><i></i><i></i><i></i><span data-tech-media-label>ACTUAL PRODUCT WORKSPACE</span></div>
+              <img src="images/viewer-branding/drawing-change.webp?v=fullframe2" alt="CLIP 2D Viewer 실제 1:1 도면 비교 화면" loading="lazy" decoding="async" data-tech-image>
+              <figcaption><span>PRODUCT VIEW</span><b data-tech-caption>도면 위에 표시된 개정 차이</b></figcaption>
             </figure>
             <div class="am-tech-copy">
-              <span data-tech-eyebrow>2D Viewer</span>
-              <h3 data-tech-title>DWG·DXF를 PLM 안에서 확인</h3>
-              <p data-tech-copy>도면 파일과 관련 문서, 개정 정보를 같은 화면에서 확인합니다.</p>
+              <div class="clip-viewer-brand"><img class="clip-viewer-icon clip-tech-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" data-tech-brand-icon alt="" width="40" height="40"><span data-tech-eyebrow>CLIP 2D Viewer</span></div>
+              <h3 data-tech-title>개정 차이와 유사 도면 확인</h3>
+              <p data-tech-copy>개정된 위치를 확인하고 보유 도면에서 참고할 후보를 찾습니다.</p>
               <dl class="am-tech-specs">
                 <div><dt data-tech-spec-one-label>FORMAT</dt><dd data-tech-spec-one-value>DWG · DXF</dd></div>
-                <div><dt data-tech-spec-two-label>CONNECTED</dt><dd data-tech-spec-two-value>문서 · 개정</dd></div>
+                <div><dt data-tech-spec-two-label>REVIEW</dt><dd data-tech-spec-two-value>측정 · 비교 · 검색</dd></div>
               </dl>
-              <a href="product-clippdm.html" data-tech-link>Clip PDM에서 자세히 보기 <span aria-hidden="true">↗</span></a>
+              <a href="product-clip2dviewer.html" data-tech-link>CLIP 2D Viewer 자세히 보기 <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a>
+              <a class="am-cadwin-detail" href="product-cadwin.html" data-cadwin-detail hidden>CADWin 도입 효과와 상담 안내</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="am-section am-products" id="products">
+    <section class="am-section hp-platform" id="platform" aria-labelledby="platformTitle">
       <div class="am-shell">
-        <div class="am-section-head am-products-head blur-fade">
-          <div>
-            <span class="am-kicker">솔루션</span>
-            <h2>제품개발 전 과정을 하나의 흐름으로 연결합니다.</h2>
-          </div>
-          <p>도면과 문서 관리부터 프로젝트, BOM, 원가까지 필요한 솔루션을 선택해 실제 화면과 세부 기능을 확인할 수 있습니다.</p>
-        </div>
-
-        <div class="am-product-explorer blur-fade" data-delay="1">
-          <div class="am-product-nav">
-            <div class="am-product-nav-head">
-              <span>PRODUCT EXPLORER</span>
-              <strong>제품을 선택하면 실제 화면과 핵심 기능이 바뀝니다.</strong>
-              <p><b data-product-step>01</b><span>/ 05</span><em data-product-current>AI CADWin</em></p>
-            </div>
-            <div class="am-product-nav-list" role="tablist" aria-label="솔루션별 상세 정보 선택">
-              <button class="am-solution-tab active" type="button" role="tab" aria-selected="true" data-product-tab="cadwin" data-index="01">
-                <b>01</b><span><small>AI DRAWING</small><strong>AI CADWin</strong><em>도면 분석 자동화</em></span><i aria-hidden="true">↗</i>
-              </button>
-              <button class="am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="pdm" data-index="02">
-                <b>02</b><span><small>PRODUCT DATA</small><strong>Clip PDM</strong><em>도면·문서·리비전</em></span><i aria-hidden="true">↗</i>
-              </button>
-              <button class="am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="pms" data-index="03">
-                <b>03</b><span><small>PROJECT FLOW</small><strong>Clip PMS</strong><em>프로젝트·일정·이슈</em></span><i aria-hidden="true">↗</i>
-              </button>
-              <button class="am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="bom" data-index="04">
-                <b>04</b><span><small>ENGINEERING PART LIST</small><strong>Multi-BOM EPL</strong><em>다중 제품 구조 관리</em></span><i aria-hidden="true">↗</i>
-              </button>
-              <button class="am-solution-tab" type="button" role="tab" aria-selected="false" data-product-tab="cms" data-index="05">
-                <b>05</b><span><small>COST MANAGEMENT</small><strong>Clip CMS</strong><em>사전·사후 원가</em></span><i aria-hidden="true">↗</i>
-              </button>
-            </div>
-          </div>
-
-          <div class="am-product-showcase" aria-live="polite">
-          <a class="am-product-card am-product-large blur-fade" href="product-cadwin.html" data-product-detail-link>
-            <img src="images/cadwin_drawing_inspection.png" alt="AI CADWin 도면 검사 화면" loading="lazy" decoding="async" data-product-detail-image>
-            <div>
-              <span data-product-detail-eyebrow>AI CADWin</span>
-              <h3 data-product-detail-title>AI 도면 검색과 도면 정보 추출</h3>
-              <p data-product-detail-copy>CAD 도면의 표제란, 부품 정보, 유사 도면을 빠르게 찾고 설계 데이터 재사용을 지원합니다.</p>
-              <em data-product-detail-cta>상세 페이지 보기</em>
-            </div>
-          </a>
-
-          <article class="am-product-card am-feature-card blur-fade" data-delay="1" data-product-feature="0">
-            <span class="am-feature-mark" data-feature-mark><img src="images/icons3d/smart_toy-cyan.webp" alt="" loading="lazy" decoding="async"></span>
-            <span data-feature-label>도면 인식</span>
-            <h3>표제란과 부품 정보 추출</h3>
-            <p>CAD 도면의 핵심 정보를 읽어 설계 데이터로 정리합니다.</p>
-          </article>
-
-          <article class="am-product-card am-feature-card blur-fade" data-delay="2" data-product-feature="1">
-            <span class="am-feature-mark" data-feature-mark><img src="images/icons3d/search-blue.webp" alt="" loading="lazy" decoding="async"></span>
-            <span data-feature-label>유사 도면</span>
-            <h3>검색과 재사용</h3>
-            <p>기존 도면을 빠르게 찾아 반복 설계 시간을 줄입니다.</p>
-          </article>
-
-          <article class="am-product-card am-feature-card blur-fade" data-delay="3" data-product-feature="2">
-            <span class="am-feature-mark" data-feature-mark><img src="images/icons3d/account_tree-green.webp" alt="" loading="lazy" decoding="async"></span>
-            <span data-feature-label>BOM 연결</span>
-            <h3>E-BOM 전환</h3>
-            <p>도면 정보를 품목과 BOM 데이터의 시작점으로 연결합니다.</p>
-          </article>
-
-          <article class="am-product-card am-feature-card blur-fade" data-delay="4" data-product-feature="3">
-            <span class="am-feature-mark" data-feature-mark><img src="images/icons3d/manage_history-orange.webp" alt="" loading="lazy" decoding="async"></span>
-            <span data-feature-label>변경 추적</span>
-            <h3>개정 이력 관리</h3>
-            <p>도면 변경 이력을 기준으로 후속 업무의 영향을 확인합니다.</p>
-          </article>
+        <header class="hp-platform-heading">
+          <div><span class="hp-platform-kicker">CLiP CONNECTED WORKSPACE</span><h2 id="platformTitle">하나의 계정으로,<br><em>설계에서 경영까지.</em></h2></div>
+          <div class="hp-platform-intro"><p>부서마다 다른 업무.<br><strong>함께 보는 제품 데이터.</strong></p><span>통합 인증을 출발점으로 도면·BOM·일정·원가를 연결합니다. 역할에 필요한 제품과 데이터를 중심으로 업무 환경을 구성합니다.</span></div>
+        </header>
+        <div class="hp-platform-workspace">
+          <aside class="hp-identity" aria-label="통합 계정과 역할별 접근 구성">
+            <div class="hp-identity-top"><span>ONE ACCOUNT</span><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="9" r="5"/><path d="m12 12 8 8M16 16l3-3M18 18l3-3"/></svg></span></div>
+            <div class="hp-identity-mark" aria-hidden="true"><div class="hp-identity-ring"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="9" r="3"/><path d="M5 18a7 7 0 0 1 14 0"/></svg></span></div><i></i><i></i><i></i></div>
+            <div class="hp-identity-title"><span>CLiP PLATFORM</span><h3>한 번의 로그인.<br>이어지는 업무.</h3><p>SSO · 통합 인증</p></div>
+            <ul><li><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M9 3h6v4H9ZM15 12h3M15 16h3M6 18v-1a3 3 0 0 1 6 0v1"/><circle cx="9" cy="12" r="2"/></svg></span>하나의 사용자 계정</li><li><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg></span>조직·역할별 접근 권한</li><li><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="2" y="16" width="6" height="5" rx="1"/><rect x="16" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M5 16v-4h14v4"/></svg></span>업무에 맞춘 제품 연결</li></ul>
+            <span class="hp-identity-foot">IDENTITY → ROLE → WORKSPACE</span>
+          </aside>
+          <div class="hp-role-grid" aria-label="설계에서 경영까지 역할별 업무와 제품">
+            <article class="hp-role" style="--role-accent:#1c6569"><div class="hp-role-top"><span>01 / ENGINEERING</span><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 65V15l50 50Z" fill="var(--pd-card)"/><path d="M22 55V38l17 17ZM12 27h6M12 39h6M12 51h6M38 44l-3-11L59 9l12 12-24 24ZM54 14l12 12M35 33l12 12"/></svg></span></div><h3>설계·R&amp;D</h3><p>도면을 검토하고,<br>제품의 기준을 만듭니다.</p><ul class="hp-role-tasks"><li>도면 측정·비교</li><li>리비전·설계변경</li></ul><div class="hp-role-links"><a href="product-clip2dviewer.html">CLIP 2D Viewer <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a><a href="product-clip3dviewer.html">CLIP 3D Viewer <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a><a href="product-clippdm.html">CLiP PDM <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a><a href="product-cadwin.html">AI CADWin <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a></div></article>
+            <article class="hp-role" style="--role-accent:#876021"><div class="hp-role-top"><span>02 / PROJECT &amp; QUALITY</span><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 10h32l13 13v43a5 5 0 0 1-5 5H21a5 5 0 0 1-5-5Z" fill="var(--pd-card)"/><path d="M47 10v14h14M25 32h24M25 41h15M25 59l6-6 6 6 6-9"/><circle cx="60" cy="53" r="13" fill="var(--pd-soft)"/><path d="m54 53 4 4 8-9"/></svg></span></div><h3>개발·품질</h3><p>일정과 산출물을 살피고,<br>다음 단계를 준비합니다.</p><ul class="hp-role-tasks"><li>프로젝트·간트</li><li>게이트·산출물</li></ul><div class="hp-role-links"><a href="product-clippms.html">CLiP PMS <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a><a href="product-clippdm.html">CLiP PDM <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a></div></article>
+            <article class="hp-role" style="--role-accent:#446f3b"><div class="hp-role-top"><span>03 / OPERATIONS</span><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 68V35l18-11v15l18-12v13h10V12h11v56Z" fill="var(--pd-card)"/><path d="M12 68h57M22 49h7v8h-7ZM39 49h7v8h-7ZM57 49h5v8h-5Z"/></svg></span></div><h3>구매·생산</h3><p>제품 구조를 확인하고,<br>협력사에 도면을 전달합니다.</p><ul class="hp-role-tasks"><li>BOM·부품 구성</li><li>배포·수신·회수</li></ul><div class="hp-role-links"><a href="product-multibom.html">Multi-BOM EPL <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a><a href="product-clipddms.html">CLiP DDMS <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a></div></article>
+            <article class="hp-role" style="--role-accent:#755486"><div class="hp-role-top"><span>04 / MANAGEMENT</span><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="13" width="62" height="48" rx="5" fill="var(--pd-card)"/><path d="M30 69h20M40 61v8M18 24h17M18 33h11M41 45l8-10 8 4 8-15M18 45v7M27 40v12"/></svg></span></div><h3>경영·원가</h3><p>프로젝트와 원가를 살펴,<br>판단의 근거를 모읍니다.</p><ul class="hp-role-tasks"><li>원가 검토</li><li>프로젝트 현황</li></ul><div class="hp-role-links"><a href="product-clipcms.html">CLiP CMS <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a><a href="product-clippms.html">CLiP PMS <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a></div></article>
           </div>
         </div>
-
+        <div class="hp-data-flow" aria-label="공통 제품 데이터 연결 흐름"><div><span>ONE PRODUCT DATA</span><strong>같은 기준으로 이어지는 업무</strong></div><ol><li>도면·리비전</li><li>제품 구조·BOM</li><li>일정·산출물</li><li>원가·의사결정</li></ol></div>
+        <div class="hp-platform-bottom"><p>통합 인증, 연계 제품과 데이터 범위는 고객사의 시스템·권한 정책에 맞춰 구성합니다.</p><a href="contact.html?type=consult&amp;product=Clip+PDM">우리 회사의 업무 연결 상담 <span class="site-link-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a></div>
       </div>
     </section>
 
@@ -855,8 +736,8 @@
             <div class="spinfire-intro">
               <p>원본 CAD 프로그램 없이 2D 도면과 3D 모델을 열고, 측정하고, 검토하세요. 팹스넷이 Tech Soft 3D와 함께 SpinFire를 공급합니다.</p>
               <div class="spinfire-actions">
-                <a class="spinfire-cta" href="contact.html?type=product&amp;product=SpinFire%20Insight">SpinFire 도입 상담<span class="material-symbols-rounded" aria-hidden="true">north_east</span></a>
-                <a class="spinfire-text-link" href="https://www.techsoft3d.com/enterprise/spinfire-insight/" target="_blank" rel="noopener noreferrer">공식 제품 보기<span class="material-symbols-rounded" aria-hidden="true">open_in_new</span><span class="spinfire-sr-only"> (새 창)</span></a>
+                <a class="spinfire-cta" href="contact.html?type=product&amp;product=SpinFire%20Insight">SpinFire 도입 상담<span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a>
+                <a class="spinfire-text-link" href="https://www.techsoft3d.com/enterprise/spinfire-insight/" target="_blank" rel="noopener noreferrer">공식 제품 보기<span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4 10 14M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></svg></span><span class="spinfire-sr-only"> (새 창)</span></a>
               </div>
             </div>
           </div>
@@ -864,13 +745,13 @@
           <div class="spinfire-workspace" data-spinfire-workspace>
             <div class="spinfire-feature-list" aria-label="SpinFire 주요 기능" data-spinfire-tabs>
               <a class="spinfire-feature" id="spinfire-tab-section" href="/images/spinfire/spinfire-section-cut.jpg" data-spinfire-tab="spinfire-panel-section">
-                <span class="spinfire-feature-number">01</span><span><strong>단면 검토</strong><small>모델을 잘라 내부 구조와 부품 배치를 확인합니다.</small></span><span class="material-symbols-rounded spinfire-feature-arrow" aria-hidden="true">arrow_outward</span>
+                <span class="spinfire-feature-number">01</span><span><strong>단면 검토</strong><small>모델을 잘라 내부 구조와 부품 배치를 확인합니다.</small></span><span class="material-symbols-rounded spinfire-feature-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
               </a>
               <a class="spinfire-feature" id="spinfire-tab-measure" href="/images/spinfire/spinfire-measurement.jpg" data-spinfire-tab="spinfire-panel-measure">
-                <span class="spinfire-feature-number">02</span><span><strong>정밀 측정</strong><small>길이·거리·반경 등 검토에 필요한 치수를 빠르게 파악합니다.</small></span><span class="material-symbols-rounded spinfire-feature-arrow" aria-hidden="true">arrow_outward</span>
+                <span class="spinfire-feature-number">02</span><span><strong>정밀 측정</strong><small>길이·거리·반경 등 검토에 필요한 치수를 빠르게 파악합니다.</small></span><span class="material-symbols-rounded spinfire-feature-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
               </a>
               <a class="spinfire-feature" id="spinfire-tab-compare" href="/images/spinfire/spinfire-model-compare.jpg" data-spinfire-tab="spinfire-panel-compare">
-                <span class="spinfire-feature-number">03</span><span><strong>모델 비교</strong><small>두 모델의 차이를 비교해 설계 변경 내용을 검토합니다.</small></span><span class="material-symbols-rounded spinfire-feature-arrow" aria-hidden="true">arrow_outward</span>
+                <span class="spinfire-feature-number">03</span><span><strong>모델 비교</strong><small>두 모델의 차이를 비교해 설계 변경 내용을 검토합니다.</small></span><span class="material-symbols-rounded spinfire-feature-arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
               </a>
             </div>
             <div class="spinfire-stage">
@@ -878,27 +759,27 @@
               <figure id="spinfire-panel-section" class="spinfire-panel" data-spinfire-panel>
                 <a href="/images/spinfire/spinfire-section-cut.jpg" target="_blank" rel="noopener noreferrer" aria-label="SpinFire 단면 검토 화면 크게 보기 (새 창)">
                   <img src="/images/spinfire/spinfire-section-cut.jpg" alt="SpinFire Insight에서 기어박스 모델의 단면을 열어 내부 기어와 축을 확인하는 제품 화면" width="1920" height="1080" loading="lazy" decoding="async">
-                  <span class="spinfire-image-zoom"><span class="material-symbols-rounded" aria-hidden="true">open_in_full</span>화면 확대</span>
+                  <span class="spinfire-image-zoom"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-6 6M10 20H4v-6M4 20l6-6"/></svg></span>화면 확대</span>
                 </a>
                 <figcaption><strong>단면 검토</strong><span>보이지 않던 내부 구조까지 확인합니다.</span></figcaption>
               </figure>
               <figure id="spinfire-panel-measure" class="spinfire-panel" data-spinfire-panel hidden>
                 <a href="/images/spinfire/spinfire-measurement.jpg" target="_blank" rel="noopener noreferrer" aria-label="SpinFire 정밀 측정 화면 크게 보기 (새 창)">
                   <img src="/images/spinfire/spinfire-measurement.jpg" alt="SpinFire Insight의 Smart Dimensioning으로 CAD 모델의 치수를 표시한 제품 화면" width="1920" height="1080" loading="lazy" decoding="async">
-                  <span class="spinfire-image-zoom"><span class="material-symbols-rounded" aria-hidden="true">open_in_full</span>화면 확대</span>
+                  <span class="spinfire-image-zoom"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-6 6M10 20H4v-6M4 20l6-6"/></svg></span>화면 확대</span>
                 </a>
                 <figcaption><strong>정밀 측정</strong><span>거리와 치수를 모델 위에서 살펴봅니다.</span></figcaption>
               </figure>
               <figure id="spinfire-panel-compare" class="spinfire-panel" data-spinfire-panel hidden>
                 <a href="/images/spinfire/spinfire-model-compare.jpg" target="_blank" rel="noopener noreferrer" aria-label="SpinFire 모델 비교 화면 크게 보기 (새 창)">
                   <img src="/images/spinfire/spinfire-model-compare.jpg" alt="SpinFire Insight에서 두 CAD 모델을 색상으로 구분해 형상 차이를 비교하는 제품 화면" width="1920" height="1080" loading="lazy" decoding="async">
-                  <span class="spinfire-image-zoom"><span class="material-symbols-rounded" aria-hidden="true">open_in_full</span>화면 확대</span>
+                  <span class="spinfire-image-zoom"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-6 6M10 20H4v-6M4 20l6-6"/></svg></span>화면 확대</span>
                 </a>
                 <figcaption><strong>모델 비교</strong><span>변경 전후의 형상 차이를 시각적으로 확인합니다.</span></figcaption>
               </figure>
             </div>
 
-            <p class="spinfire-more-features"><span class="material-symbols-rounded" aria-hidden="true">edit_note</span>마크업과 주석으로 검토 의견도 함께 남깁니다.</p>
+            <p class="spinfire-more-features"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h12M4 10h8M4 15h5M13 20l-3 1 1-4L19 9l3 3Z"/></svg></span>마크업과 주석으로 검토 의견도 함께 남깁니다.</p>
           </div>
 
           <div class="spinfire-formats">
@@ -908,13 +789,13 @@
 
           <div class="spinfire-resources" aria-label="SpinFire 제품 자료">
             <a href="/downloads/papsnet-spinfire-insight-ko.pdf" download="PAPSNET-SpinFire-Insight-KO.pdf">
-              <span class="material-symbols-rounded" aria-hidden="true">description</span><span><strong>제품 소개서</strong><small>팹스넷 소개 자료 · 한국어 PDF</small></span><span class="material-symbols-rounded" aria-hidden="true">download</span>
+              <span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 3h9l5 5v13H5ZM14 3v5h5M8 12h8M8 16h6"/></svg></span><span><strong>제품 소개서</strong><small>팹스넷 소개 자료 · 한국어 PDF</small></span><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></span>
             </a>
             <a href="https://www.techsoft3d.com/enterprise/spinfire-insight/cad-formats/" target="_blank" rel="noopener noreferrer">
-              <span class="material-symbols-rounded" aria-hidden="true">view_in_ar</span><span><strong>지원 형식 확인</strong><small>CAD 형식·버전·에디션별 범위</small></span><span class="material-symbols-rounded" aria-hidden="true">open_in_new</span><span class="spinfire-sr-only"> (새 창)</span>
+              <span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5v9l-9 5-9-5V8ZM3 8l9 5 9-5M12 13v9M7.5 5.5l9 5v4"/></svg></span><span><strong>지원 형식 확인</strong><small>CAD 형식·버전·에디션별 범위</small></span><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4 10 14M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></svg></span><span class="spinfire-sr-only"> (새 창)</span>
             </a>
             <a href="https://docs.techsoft3d.com/spinfire/insight/" target="_blank" rel="noopener noreferrer">
-              <span class="material-symbols-rounded" aria-hidden="true">menu_book</span><span><strong>공식 사용 가이드</strong><small>설치부터 기능별 사용 방법까지</small></span><span class="material-symbols-rounded" aria-hidden="true">open_in_new</span><span class="spinfire-sr-only"> (새 창)</span>
+              <span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5C9 3 5 3 2 4v15c4-1 7-1 10 1 3-2 6-2 10-1V4c-3-1-7-1-10 1ZM12 5v15M5 8h4M5 12h4M15 8h4M15 12h4"/></svg></span><span><strong>공식 사용 가이드</strong><small>설치부터 기능별 사용 방법까지</small></span><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4 10 14M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></svg></span><span class="spinfire-sr-only"> (새 창)</span>
             </a>
           </div>
           <p class="spinfire-source">제품 화면: Tech Soft 3D 공식 자료. 지원 형식·버전 및 내보내기 범위는 에디션에 따라 다릅니다.</p>
@@ -926,13 +807,14 @@
       <div class="am-shell">
         <div class="am-section-head am-customers-head blur-fade">
           <span class="am-kicker">고객사</span>
-          <h2>제조 현장에서 검증한 Clip PLM</h2>
-          <p>자동차 부품, 의료기기, 장비, 소재 분야의 R&D 프로세스에 맞춰 구축했습니다.</p>
+          <h2>팹스넷과 함께하는 제조 기업</h2>
+          <p>자동차 부품부터 의료기기, 발전소용 밸브까지 다양한 제조 분야의 고객사를 소개합니다.</p>
         </div>
       </div>
 
       <div class="am-logo-marquee" aria-label="고객사 로고">
         <div class="am-logo-track">
+          <div class="am-logo-item samshin-logo"><img src="홈페이지_고객사_이미지/samshin.png" alt="(주)삼신 · SAMSHIN" width="166" height="49" loading="lazy" decoding="async"></div>
           <div class="am-logo-item"><img src="홈페이지_고객사_이미지/현대공업.png" alt="현대공업" loading="lazy" decoding="async"></div>
           <div class="am-logo-item"><img src="홈페이지_고객사_이미지/하이로닉.png" alt="하이로닉" loading="lazy" decoding="async"></div>
           <div class="am-logo-item"><img src="홈페이지_고객사_이미지/하나.png" alt="하나" loading="lazy" decoding="async"></div>
@@ -941,6 +823,7 @@
           <div class="am-logo-item"><img src="홈페이지_고객사_이미지/네오바이오텍.png" alt="네오바이오텍" loading="lazy" decoding="async"></div>
           <div class="am-logo-item"><img src="홈페이지_고객사_이미지/디에스시.png" alt="디에스시" loading="lazy" decoding="async"></div>
           <div class="am-logo-item"><img src="홈페이지_고객사_이미지/ams.png" alt="AMS" loading="lazy" decoding="async"></div>
+          <div class="am-logo-item samshin-logo" aria-hidden="true"><img src="홈페이지_고객사_이미지/samshin.png" alt="" width="166" height="49" loading="lazy" decoding="async"></div>
           <div class="am-logo-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/현대공업.png" alt="" loading="lazy" decoding="async"></div>
           <div class="am-logo-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/하이로닉.png" alt="" loading="lazy" decoding="async"></div>
           <div class="am-logo-item" aria-hidden="true"><img src="홈페이지_고객사_이미지/하나.png" alt="" loading="lazy" decoding="async"></div>
@@ -961,9 +844,9 @@
             <h2>도면 변경 하나가 BOM과 원가까지 흔들릴 때</h2>
           </div>
           <div class="am-proof-list">
-            <p><span class="material-symbols-rounded" aria-hidden="true">task_alt</span> 변경 이력과 승인 상태를 추적해야 할 때</p>
-            <p><span class="material-symbols-rounded" aria-hidden="true">task_alt</span> ERP BOM과 설계 BOM의 차이가 반복될 때</p>
-            <p><span class="material-symbols-rounded" aria-hidden="true">task_alt</span> 프로젝트 일정과 산출물 관리가 엑셀에 흩어질 때</p>
+            <p><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg></span> 변경 이력과 승인 상태를 추적해야 할 때</p>
+            <p><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg></span> ERP BOM과 설계 BOM의 차이가 반복될 때</p>
+            <p><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg></span> 프로젝트 일정과 산출물 관리가 엑셀에 흩어질 때</p>
           </div>
         </div>
       </div>
@@ -1015,9 +898,9 @@
         </a>
         <p>제조업의 설계, 생산, 원가 데이터를 하나로 연결하는 PLM 솔루션 파트너</p>
         <div class="footer-contact-inline">
-          <a href="tel:070-50011144"><span class="material-symbols-rounded">call</span>070-5001-1144</a>
-          <a href="tel:+821050502011"><span class="material-symbols-rounded">smartphone</span>+82 10-5050-2011</a>
-          <a href="mailto:kimnardo@papsnet.net"><span class="material-symbols-rounded">mail</span>kimnardo@papsnet.net</a>
+          <a href="tel:070-50011144"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 3 3 5-3 3a15 15 0 0 0 6 6l3-3 5 3-1 4C10 22 2 14 3 4Z"/></svg></span>070-5001-1144</a>
+          <a href="tel:+821050502011"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4M11 19h2"/></svg></span>+82 10-5050-2011</a>
+          <a href="mailto:kimnardo@papsnet.net"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></span>kimnardo@papsnet.net</a>
         </div>
       </div>
 
@@ -1029,7 +912,7 @@
           <li><a href="product-clippms.html">Clip PMS</a></li>
           <li><a href="product-multibom.html">Multi-BOM</a></li>
           <li><a href="product-clipcms.html">Clip CMS</a></li>
-          <li><a href="product-clip3dviewer.html">Clip 3D Viewer</a></li>
+          <li><a href="product-clip3dviewer.html">CLIP 3D Viewer</a></li>
           <li><a href="#spinfire">SpinFire Insight</a></li>
         </ul>
       </div>
@@ -1065,11 +948,11 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="맨 위로">
-    <span class="ui-up-symbol" aria-hidden="true">↑</span>
+    <span class="ui-up-symbol site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20V4m-7 7 7-7 7 7"/></svg></span>
   </button>
 
   <a href="contact.html?type=demo" class="floating-demo-cta" aria-label="무료 데모 상담 신청">
-    <span class="material-symbols-rounded" aria-hidden="true">forum</span>
+    <span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h14v11H8l-5 4V4a1 1 0 0 1 1-1ZM8 18h9l4 3V8"/></svg></span>
     <strong>데모 상담</strong>
   </a>
 
@@ -1077,7 +960,7 @@
     <div class="demo-modal-backdrop" data-diagnosis-close></div>
     <div class="demo-modal-card diagnosis-modal-card" role="dialog" aria-modal="true" aria-labelledby="diagnosisModalTitle">
       <button class="demo-modal-close" type="button" aria-label="진단 닫기" data-diagnosis-close>
-        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+        <span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></span>
       </button>
       <span class="section-tag">PLM QUICK DIAGNOSIS</span>
       <h3 id="diagnosisModalTitle">우리 회사의 끊긴 업무 흐름을 찾아보세요.</h3>
@@ -1112,7 +995,7 @@
           </div>
         </fieldset>
 
-        <button type="submit" class="btn btn-primary btn-lg diagnosis-submit">진단 결과 보기 <span class="arrow" aria-hidden="true">→</span></button>
+        <button type="submit" class="btn btn-primary btn-lg diagnosis-submit">진단 결과 보기 <span class="arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></span></button>
       </form>
 
       <div class="diagnosis-result" data-diagnosis-result hidden aria-live="polite">
@@ -1131,7 +1014,7 @@
     <div class="demo-modal-backdrop" data-demo-close></div>
     <div class="demo-modal-card" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
       <button class="demo-modal-close" type="button" aria-label="닫기" data-demo-close>
-        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+        <span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></span>
       </button>
       <span class="section-tag">데모 상담</span>
       <h3 id="demoModalTitle">상담 일정을 요청하세요.</h3>
@@ -1159,13 +1042,15 @@
             <select name="product">
               <option>통합 PLM 전체</option>
               <option>AI CADWin</option>
+              <option value="CLIP VIEW 2D">CLIP 2D Viewer</option>
+              <option>CLiP DDMS</option>
               <option>Clip PDM</option>
               <option>Clip PMS</option>
               <option>Multi-BOM</option>
               <option>Clip CMS</option>
             </select>
           </label>
-          <button type="button" class="btn btn-primary btn-lg demo-next">연락 방법 선택 <span class="arrow" aria-hidden="true">→</span></button>
+          <button type="button" class="btn btn-primary btn-lg demo-next">연락 방법 선택 <span class="arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></span></button>
         </fieldset>
 
         <fieldset class="demo-form-step" data-demo-step="2" hidden>
@@ -1190,15 +1075,15 @@
           </label>
           <div class="demo-form-actions">
             <button type="button" class="btn btn-secondary btn-lg demo-prev">이전</button>
-            <button type="submit" class="btn btn-primary btn-lg demo-submit">상담 요청 보내기 <span class="arrow" aria-hidden="true">→</span></button>
+            <button type="submit" class="btn btn-primary btn-lg demo-submit">상담 요청 보내기 <span class="arrow site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></span></button>
           </div>
           <p class="demo-form-status" data-demo-status role="status" aria-live="polite"></p>
         </fieldset>
         <p class="demo-modal-note">검증이 완료된 요청만 팹스넷 영업 담당자에게 전달되며 접수번호가 발급됩니다.</p>
       </form>
       <div class="demo-modal-alt">
-        <a href="tel:070-50011144"><span class="material-symbols-rounded" aria-hidden="true">call</span>070-5001-1144</a>
-        <a href="tel:+821050502011"><span class="material-symbols-rounded" aria-hidden="true">smartphone</span>+82 10-5050-2011</a>
+        <a href="tel:070-50011144"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 3 3 5-3 3a15 15 0 0 0 6 6l3-3 5 3-1 4C10 22 2 14 3 4Z"/></svg></span>070-5001-1144</a>
+        <a href="tel:+821050502011"><span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4M11 19h2"/></svg></span>+82 10-5050-2011</a>
       </div>
     </div>
   </div>
@@ -1207,7 +1092,7 @@
     <div class="demo-modal-backdrop" data-done-close></div>
     <div class="demo-modal-card demo-modal-card-compact" role="alertdialog" aria-modal="true" aria-labelledby="demoDoneTitle">
       <div class="demo-form-done" role="status">
-        <span class="material-symbols-rounded" aria-hidden="true">mark_email_read</span>
+        <span class="material-symbols-rounded site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20H3V6h18v5M3 6l9 7 9-7m-6 11 3 3 4-5"/></svg></span>
         <h4 id="demoDoneTitle" data-demo-done-title>상담 요청이 접수되었습니다.</h4>
         <p data-demo-done-copy>남겨주신 연락처로 담당자가 곧 연락드리겠습니다.</p>
         <p class="demo-receipt">접수번호 <strong data-demo-receipt></strong></p>

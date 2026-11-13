@@ -22,7 +22,7 @@ const typeLabels = {
 
 document.querySelector('#leadNumber').textContent = leadId;
 document.querySelector('#leadTypeLabel').textContent = typeLabels[leadType] || '도입 상담';
-document.querySelector('#leadProducts').textContent = products.length ? products.join(' · ') : '상담 시 확인';
+document.querySelector('#leadProducts').textContent = products.length ? products.map(product => ({'CLIP VIEW 2D': 'CLIP 2D Viewer', '3D CAD 웹뷰어': 'CLIP 3D Viewer'})[product] || product).join(' · ') : '상담 시 확인';
 
 const conversionKey = `papsnetLeadTracked:${conversion.leadId || 'none'}`;
 if (isVerifiedSession && !sessionStorage.getItem(conversionKey)) {

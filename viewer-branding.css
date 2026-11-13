@@ -1,0 +1,55 @@
+/* Supplied JPEG marks: preserve the original light tile and aspect ratio. */
+body .clip-viewer-icon,
+body.plm-home-v2 #products[data-product="2d"] [data-product-art] {
+  display:block;
+  width:40px;
+  height:40px;
+  min-width:40px;
+  flex:0 0 40px;
+  aspect-ratio:1;
+  object-fit:contain;
+  background:#fff;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  filter:none;
+  transform:none;
+  animation:none;
+  transition:none;
+  mix-blend-mode:normal;
+  opacity:1;
+}
+body .clip-viewer-icon[hidden] {display:none}
+body .clip-viewer-brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  text-transform:none;
+  letter-spacing:normal;
+  font-weight:700;
+}
+body .clip-viewer-brand>span {min-width:0;overflow-wrap:normal;word-break:normal}
+body.product-unified[class] .viewer-kicker.clip-viewer-heading {font-size:18px;text-transform:none;letter-spacing:normal}
+body .nav-dropdown-item>.clip-viewer-icon,
+body .mobile-nav-link>.clip-viewer-icon {width:36px;height:36px;min-width:36px;flex-basis:36px}
+body .mobile-nav-link:has(>.clip-viewer-icon) {display:flex;align-items:center;gap:12px}
+body.plm-home-v2 #products .hp-tab>.clip-viewer-icon {width:40px;height:40px;min-width:40px;filter:none;box-shadow:none}
+body.plm-home-v2 #products[data-product="2d"] .hp-brand {gap:14px}
+body.plm-home-v2 #products[data-product="2d"] .hp-brand>div {min-width:0}
+body.plm-home-v2 #products[data-product="2d"] .hp-brand p {font-size:clamp(19px,2vw,25px);line-height:1.35}
+body.plm-home-v2 #technology .am-tech-tab:has(>.clip-viewer-icon) {grid-template-columns:40px minmax(0,1fr) 8px}
+body.plm-home-v2 #technology .am-tech-tab-copy strong {white-space:normal;word-break:normal;overflow-wrap:normal}
+body.plm-home-v2 #technology .clip-viewer-brand {color:var(--hc-accent);font-size:16px;margin-bottom:16px}
+body.plm-home-v2 .viewer-window-bar b,
+body.product-unified[class] .viewer-window-bar b,
+body.product-unified[class] .sg-product,
+body.product-unified[class] .viewer-cta p>span {text-transform:none}
+@media(max-width:1100px){
+  body.plm-home-v2 #technology .am-tech-tab:has(>.clip-viewer-icon) {grid-template-columns:40px minmax(0,1fr)}
+}
+@media(max-width:480px){
+  body.plm-home-v2 #products .hp-tab:has(>.clip-viewer-icon) {flex-wrap:wrap;align-content:center}
+  body.plm-home-v2 #technology .am-tech-tab:has(>.clip-viewer-icon) {grid-template-columns:minmax(0,1fr);gap:8px}
+  body.product-unified[class] .viewer-kicker.clip-viewer-heading {font-size:17px}
+}

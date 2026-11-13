@@ -1,0 +1,46 @@
+[
+  {
+    "key": "2d",
+    "name": "CLIP 2D Viewer",
+    "product": "CLIP VIEW 2D",
+    "file": "CLiP_2D_Viewer_제품소개.pdf",
+    "pages": 5,
+    "summary": "설계팀 밖에서도 도면을 직접 확인하도록. 열람·측정·주석·비교를 하나의 검토 흐름으로.",
+    "scope": "DWG는 변환 환경이 필요합니다. AI 검색은 별도 서비스 연동이 필요하며, 앱·웹의 기능 범위는 도입 구성에 따라 확인합니다."
+  },
+  {
+    "key": "dds",
+    "name": "CLiP DDMS",
+    "product": "CLiP DDMS",
+    "file": "CLiP_DDMS_제품소개.pdf",
+    "pages": 5,
+    "summary": "승인된 도면의 전달부터 수신확인과 회수까지. 협력사와의 도면 배포를 기록으로 연결합니다.",
+    "scope": "회수는 시스템 내 접근 차단과 폐기확인 절차입니다. 이미 외부에 저장·인쇄된 사본의 물리적 삭제를 보장하지 않습니다."
+  },
+  {
+    "key": "pdm",
+    "name": "CLiP PDM",
+    "product": "Clip PDM",
+    "file": "Clip_PDM_브로슈어.pdf",
+    "pages": 5,
+    "summary": "도면·BOM·설계변경·결재를 연결해 제품 데이터의 기준과 변경 이력을 관리합니다.",
+    "scope": "CAD 연동, 자료 이관, 채번·결재 규칙과 타 시스템 연결은 고객 환경에 맞춰 범위를 확인합니다."
+  },
+  {
+    "key": "pms",
+    "name": "CLiP PMS",
+    "product": "Clip PMS",
+    "file": "Clip_PMS_브로슈어.pdf",
+    "pages": 5,
+    "summary": "고객 마일스톤·WBS·간트·게이트 점검을 연결해 개발 일정과 산출물의 진행을 확인합니다.",
+    "scope": "간트 선행관계는 표시·저장을 지원합니다. 일정 자동 재계산을 전제로 하지 않으며, 업무 규칙과 연동 범위는 상담 시 확인합니다."
+  },
+  {
+    "key": "all",
+    "name": "CLiP 솔루션 브로슈어",
+    "product": "통합 PLM 전체",
+    "file": "Papsnet_CLiP_솔루션_브로슈어.pdf",
+    "pages": 6,
+    "summary": "도면 검토·제품 데이터·협력사 배포·개발 일정의 네 가지 업무를 소개합니다."
+  }
+]

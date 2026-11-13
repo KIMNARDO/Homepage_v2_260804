@@ -1,0 +1,186 @@
+/* Resource library and consultation flow share the homepage visual language.
+   Presentation only: original resources, fields, validation and delivery remain unchanged. */
+body.service-unified {
+  --su-paper:#f8f8f5; --su-card:#fff; --su-ink:#10161f; --su-muted:#5f6b78;
+  --su-line:rgba(16,22,31,.14); --su-green:#132324; --su-teal:#1c6569;
+  --su-lime:#c7e56c; --su-soft:#eaf1ec;
+  --ink:var(--su-ink); --muted:var(--su-muted); --paper:var(--su-paper);
+  --surface:var(--su-card); --line:var(--su-line); --signal:var(--su-lime);
+  --signal-dark:var(--su-green); --teal:var(--su-teal);
+  background:var(--su-paper);color:var(--su-ink);
+  font-family:'Noto Sans KR','Malgun Gothic',sans-serif;
+}
+body.service-unified :is(a,button,input,select,textarea):focus-visible {outline:3px solid var(--su-teal);outline-offset:4px}
+body.service-unified :is(.wrap,.contact-layout,.complete-layout) {width:min(1360px,calc(100% - 80px));max-width:1360px;margin-inline:auto}
+body.service-unified :is(header,.contact-header) {width:100%;max-width:none;min-height:88px;margin:0;padding:18px max(40px,calc((100vw - 1360px)/2));background:var(--su-card);border:0;border-bottom:1px solid var(--su-line);box-shadow:none;backdrop-filter:none;color:var(--su-ink)}
+body.service-unified header nav {font-size:13px;font-weight:600;color:var(--su-muted);gap:28px}
+body.service-unified header nav a:hover {color:var(--su-teal)}
+body.service-unified .contact-phone {border:1px solid var(--su-line);border-radius:8px;font-size:13px}
+body.service-unified .contact-logo {background:none;padding:0}
+body.service-unified .contact-logo img {width:124px;height:40px}
+body.service-unified .brand {color:var(--su-teal);font-family:Inter,sans-serif;font-size:24px;letter-spacing:-1px}
+body.service-unified :is(.eyebrow,.contact-kicker) {font:700 11px/1.5 Inter,'Noto Sans KR',sans-serif;letter-spacing:1.8px;color:var(--su-muted);margin:0 0 20px}
+body.service-unified :is(.hero h1,.contact-intro h1,.complete-message h1) {max-width:none;margin:0;font-size:clamp(38px,4.1vw,60px);font-weight:800;line-height:1.2;letter-spacing:-2.4px;word-break:keep-all;text-wrap:pretty}
+body.service-unified .hero h1 em {color:var(--su-teal)}
+body.service-unified :is(.lede,.contact-lede) {margin:24px 0 0;max-width:600px;color:var(--su-muted);font-size:15px;line-height:1.9}
+body.service-unified :is(.button,.submit-button) {min-height:48px;border-radius:8px;background:var(--su-teal);color:#fff;font-size:13px;font-weight:700;box-shadow:none;transition:background-color .18s ease}
+body.service-unified :is(.button,.submit-button):hover {background:#174e51;transform:none}
+/* Brochure covers are the supplied originals; the surrounding cards are refreshed. */
+body.service-unified .hero {padding:72px 0 80px;background:var(--su-paper);color:var(--su-ink);border-bottom:1px solid var(--su-line)}
+body.service-unified .hero-grid {grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px}
+body.service-unified .hero .lede {margin-bottom:30px}
+body.service-unified .overview {border:1px solid var(--su-line);border-radius:20px;background:var(--su-card);box-shadow:none}
+body.service-unified .overview>div {padding:28px 32px}
+body.service-unified .overview h2 {color:var(--su-ink);font-size:25px;line-height:1.4;letter-spacing:-.7px}
+body.service-unified .overview .eyebrow {color:var(--su-teal)}
+body.service-unified .overview p:not(.eyebrow) {color:var(--su-muted);font-size:13px;line-height:1.85}
+body.service-unified .catalogue {padding-block:88px;scroll-margin-top:24px}
+body.service-unified .section-head {margin-bottom:40px}
+body.service-unified .section-head h2 {color:var(--su-ink);font-size:clamp(34px,4vw,58px);font-weight:800;line-height:1.2;letter-spacing:-2.2px;word-break:keep-all}
+body.service-unified .section-head>p:last-child {color:var(--su-muted);font-size:14px;line-height:1.9}
+body.service-unified .cards {gap:24px}
+body.service-unified .resource-card {border:1px solid var(--su-line);border-radius:20px;background:var(--su-card);box-shadow:none;display:flex;flex-direction:column}
+body.service-unified :is(.resource-card,.overview)>img {width:100%;height:auto;object-fit:contain;border-bottom:1px solid var(--su-line)}
+body.service-unified .card-copy {padding:32px;display:flex;flex:1;flex-direction:column}
+body.service-unified .card-copy h2 {font-size:27px;line-height:1.4;letter-spacing:-.8px;color:var(--su-ink)}
+body.service-unified .card-copy>p:not(.eyebrow) {font-size:14px;line-height:1.9;color:var(--su-muted);min-height:0}
+body.service-unified .card-copy ul {margin:6px 0 28px;color:var(--su-muted);font-size:13px;line-height:1.9}
+body.service-unified .card-actions {margin-top:auto;padding-top:24px;border-top:1px solid var(--su-line)}
+body.service-unified .card-actions>a:last-child {color:var(--su-teal);font-size:13px;line-height:1.6}
+body.service-unified :is(#pdm,#pms,[id="2d"]) .button {background:var(--su-teal)}
+body.service-unified :is(#pdm,#pms,[id="2d"]) .button:hover {background:#174e51}
+body.service-unified .note {margin-top:28px;color:var(--su-muted);font-size:12px;line-height:1.9}
+body.service-unified .consult {padding:48px;background:var(--su-green);color:#f4f7ed;border:1px solid #35514a;border-radius:20px;margin-bottom:64px;gap:48px}
+body.service-unified .consult .eyebrow {color:var(--su-lime)}
+body.service-unified .consult h2 {font-size:clamp(28px,3.2vw,44px);font-weight:800;line-height:1.3;letter-spacing:-1.4px}
+body.service-unified .consult p:not(.eyebrow) {color:#b8c9c1;font-size:14px;line-height:1.9}
+body.service-unified .consult .button {background:var(--su-lime);color:var(--su-green)}
+body.service-unified .consult .button:hover {background:#d8ed9c}
+body.service-unified .consult a:focus-visible {outline-color:var(--su-lime)}
+body.service-unified footer {border-top:1px solid var(--su-line);padding-block:28px;color:var(--su-muted);gap:20px}
+/* Download modal keeps the original fields and lead gate. */
+body.service-unified .lead-download-dialog {border-radius:20px;border-color:var(--su-line);background:var(--su-card);color:var(--su-ink)}
+body.service-unified .lead-download-aside {background:var(--su-green)}
+body.service-unified :is(.lead-download-kicker,.lead-download-step) {color:var(--su-lime);letter-spacing:1px}
+body.service-unified .lead-download-heading {font-size:28px;font-weight:800;line-height:1.35;letter-spacing:-1px}
+body.service-unified .lead-download-field input {border-radius:8px;border-color:var(--su-line);font:inherit;font-size:14px}
+body.service-unified .lead-download-field input:focus {border-color:var(--su-teal);box-shadow:0 0 0 3px rgba(28,101,105,.12)}
+body.service-unified .lead-download-field input[readonly] {background:var(--su-soft);color:var(--su-teal)}
+body.service-unified .lead-download-submit {border-radius:8px;background:var(--su-teal);border-color:var(--su-teal)}
+body.service-unified .lead-download-submit:hover {background:#174e51}
+/* Consultation: calm introduction, grouped inputs, explicit selected products. */
+body.service-unified .contact-layout {grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;padding:72px 0 88px}
+body.service-unified .contact-intro {top:32px}
+body.service-unified .contact-steps {display:grid;gap:12px;margin-top:40px;border:0}
+body.service-unified .contact-steps li {grid-template-columns:34px minmax(0,1fr);gap:16px;padding:22px;border:1px solid var(--su-line);border-radius:14px;background:var(--su-card)}
+body.service-unified .contact-steps li>span {display:grid;place-items:center;align-self:start;width:34px;height:34px;background:var(--su-soft);color:var(--su-teal);border-radius:8px;font:700 11px/1 Inter,sans-serif}
+body.service-unified .contact-steps strong {font-size:16px;line-height:1.5;letter-spacing:-.4px}
+body.service-unified .contact-steps p {font-size:13px;line-height:1.8}
+body.service-unified .contact-direct {margin-top:24px;padding:26px 28px;border:1px solid #35514a;border-radius:16px;background:var(--su-green);color:#f4f7ed}
+body.service-unified .contact-direct p {color:#b8c9c1;font-size:11px;letter-spacing:1px}
+body.service-unified .contact-direct a {font-size:15px;line-height:1.8}
+body.service-unified .contact-direct a:hover {color:var(--su-lime);border-color:var(--su-lime)}
+body.service-unified .contact-direct a:focus-visible {outline-color:var(--su-lime)}
+body.service-unified .form-panel {min-width:0;border:1px solid var(--su-line);border-radius:20px;box-shadow:none}
+body.service-unified .form-panel-head {padding:32px 36px;border-radius:19px 19px 0 0;background:var(--su-green);border-color:#35514a;color:#f4f7ed}
+body.service-unified .form-panel-head p {color:var(--su-lime);font-size:11px;letter-spacing:1.2px;margin-bottom:16px}
+body.service-unified .form-panel-head h2 {font-size:29px;font-weight:800;line-height:1.4;letter-spacing:-1px}
+body.service-unified .form-panel-head>span {color:#b8c9c1;font-size:12px;line-height:1.7}
+body.service-unified .form-panel-head b {color:var(--su-lime)}
+body.service-unified #contactForm {--form-gutter:36px;padding-top:32px}
+body.service-unified #contactForm fieldset {min-width:0;padding:0 var(--form-gutter) 32px;margin:0 0 32px;border-color:var(--su-line)}
+body.service-unified #contactForm legend {margin-bottom:4px;font-size:17px;line-height:1.5;letter-spacing:-.4px}
+body.service-unified #contactForm legend>span {border-radius:8px;background:var(--su-soft);color:var(--su-teal);font-size:11px}
+body.service-unified .legend-note {font-size:12px;line-height:1.8}
+body.service-unified .field-grid {gap:22px 18px;margin-top:24px}
+body.service-unified .field {min-width:0}
+body.service-unified .field>span {font-size:13px}
+body.service-unified .field :is(input,select,textarea) {padding:12px 14px;border:1px solid var(--su-line);border-radius:8px;background:var(--su-paper);font-size:14px;line-height:1.6;min-width:0}
+body.service-unified .field :is(input,select,textarea):focus {border-color:var(--su-teal);box-shadow:0 0 0 3px rgba(28,101,105,.12)}
+body.service-unified .field :is(input,textarea)::placeholder {color:#6c767e;opacity:1}
+body.service-unified .product-options {border:0;background:none;gap:12px}
+body.service-unified .product-options label {min-width:0;min-height:94px;background:var(--su-paper);border-radius:12px}
+body.service-unified .product-options label>span {border:1px solid var(--su-line);border-radius:12px;padding:18px;gap:8px;line-height:1.5}
+body.service-unified .product-options b {font-size:14px}
+body.service-unified .product-options small {font-size:12px}
+body.service-unified .product-options label:hover>span {background:var(--su-soft)}
+body.service-unified .product-options input:checked+span {background:var(--su-green);border-color:#35514a;box-shadow:inset 0 -3px var(--su-lime);color:#f4f7ed}
+body.service-unified .product-options input:checked+span small {color:#b8c9c1}
+body.service-unified .privacy-consent {margin:0 var(--form-gutter);gap:12px}
+body.service-unified .privacy-consent b {font-size:13px;line-height:1.7}
+body.service-unified .privacy-consent small {font-size:12px;line-height:1.8}
+body.service-unified .form-status {margin-inline:var(--form-gutter);line-height:1.8}
+body.service-unified .submit-button {width:calc(100% - var(--form-gutter)*2);margin:12px var(--form-gutter) 0;min-height:56px;background:var(--su-teal);font-size:15px}
+body.service-unified .submit-note {margin:12px var(--form-gutter) 32px;font-size:12px;line-height:1.8}
+/* The receipt is part of the same consultation journey. */
+body.service-unified.complete-page {background:var(--su-paper);color:var(--su-ink)}
+body.service-unified.complete-page .contact-header nav {color:var(--su-muted)}
+body.service-unified.complete-page .contact-phone {color:var(--su-ink)!important;border-color:var(--su-line)}
+body.service-unified .complete-layout {min-height:0;margin-block:64px 88px;border:1px solid var(--su-line);border-radius:20px;overflow:hidden;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);background:var(--su-card)}
+body.service-unified .complete-message {padding:56px;background:none;min-width:0}
+body.service-unified .complete-message>p:not(.contact-kicker) {color:var(--su-muted);font-size:14px;line-height:1.9;margin-top:24px}
+body.service-unified .complete-message strong {color:var(--su-teal)}
+body.service-unified .complete-mark {border:0;border-radius:14px;background:var(--su-soft);color:var(--su-teal);margin-bottom:32px}
+body.service-unified .receipt-details {margin-top:40px;border-color:var(--su-line);font-size:14px}
+body.service-unified .receipt-details div {border-color:var(--su-line)}
+body.service-unified .receipt-details dt {color:var(--su-muted)}
+body.service-unified .complete-next {padding:56px 40px;background:var(--su-green);color:#f4f7ed;border-color:#35514a;min-width:0}
+body.service-unified .complete-next-index {color:var(--su-lime);margin-bottom:48px;font-size:11px;letter-spacing:1.8px}
+body.service-unified .complete-next h2 {font-size:30px;font-weight:800;line-height:1.4;letter-spacing:-1px}
+body.service-unified .next-link {border-color:#35514a;padding:24px 0}
+body.service-unified .next-link small {color:#b8c9c1;font-size:12px;line-height:1.8}
+body.service-unified .complete-next a:focus-visible {outline-color:var(--su-lime)}
+@media(max-width:1100px) {
+  body.service-unified :is(.wrap,.contact-layout,.complete-layout) {width:calc(100% - 48px)}
+  body.service-unified :is(header,.contact-header) {padding-inline:24px}
+  body.service-unified :is(.hero-grid,.contact-layout) {gap:36px}
+  body.service-unified .contact-layout {grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+  body.service-unified .contact-intro h1 {font-size:44px}
+  body.service-unified #contactForm {--form-gutter:28px}
+  body.service-unified .form-panel-head {padding:28px}
+  body.service-unified .complete-message {padding:40px}
+}
+@media(max-width:900px) {
+  body.service-unified :is(.hero-grid,.contact-layout,.complete-layout) {grid-template-columns:1fr}
+  body.service-unified .contact-intro {position:static}
+  body.service-unified .contact-intro h1 {font-size:clamp(38px,6vw,52px)}
+  body.service-unified .contact-steps {grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.service-unified .contact-steps li {grid-template-columns:1fr;padding:20px}
+  body.service-unified .hero-grid {gap:40px}
+  body.service-unified .overview {max-width:640px}
+  body.service-unified .complete-next {border-left:0;border-top:1px solid #35514a}
+  body.service-unified .consult {align-items:flex-start;padding:36px;gap:32px}
+}
+@media(max-width:640px) {
+  body.service-unified :is(.wrap,.contact-layout,.complete-layout) {width:calc(100% - 32px)}
+  body.service-unified :is(header,.contact-header) {padding:16px;gap:16px;min-height:80px}
+  body.service-unified header nav {gap:16px;font-size:11px}
+  body.service-unified :is(.hero,.catalogue) {padding-block:56px}
+  body.service-unified :is(.hero h1,.contact-intro h1,.complete-message h1) {font-size:36px;line-height:1.25;letter-spacing:-1.5px}
+  body.service-unified :is(.lede,.contact-lede) {font-size:14px}
+  body.service-unified .section-head h2 {font-size:32px;line-height:1.25;letter-spacing:-1.2px}
+  body.service-unified .section-head {margin-bottom:28px}
+  body.service-unified .cards {grid-template-columns:1fr}
+  body.service-unified :is(.card-copy,.overview>div) {padding:24px}
+  body.service-unified .card-copy h2 {font-size:24px}
+  body.service-unified .card-actions {align-items:stretch;flex-direction:column;gap:20px}
+  body.service-unified .card-actions>a:last-child {text-align:center}
+  body.service-unified .consult {display:block;padding:28px;margin-bottom:48px}
+  body.service-unified .consult h2 {font-size:28px;letter-spacing:-1px}
+  body.service-unified .consult>div:last-child {margin-top:28px}
+  body.service-unified .contact-layout {padding:48px 0 60px;gap:36px}
+  body.service-unified .contact-steps {grid-template-columns:1fr;margin-top:32px}
+  body.service-unified .contact-steps li {grid-template-columns:34px minmax(0,1fr)}
+  body.service-unified .contact-direct {padding:24px}
+  body.service-unified .form-panel {margin:0}
+  body.service-unified .form-panel-head {padding:26px 22px}
+  body.service-unified .form-panel-head h2 {font-size:25px}
+  body.service-unified #contactForm {--form-gutter:22px;padding-top:28px}
+  body.service-unified .two-columns,body.service-unified .product-options {grid-template-columns:1fr}
+  body.service-unified .product-options label {min-height:84px}
+  body.service-unified .complete-layout {margin-block:40px 60px}
+  body.service-unified :is(.complete-message,.complete-next) {padding:32px 24px}
+  body.service-unified .complete-next h2 {font-size:27px}
+  body.service-unified .lead-download-heading {font-size:24px}
+}
+@media(prefers-reduced-motion:reduce) {body.service-unified :is(.button,.submit-button) {transition:none}}
