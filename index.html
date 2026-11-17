@@ -30,8 +30,6 @@
   <meta name="twitter:description" content="제조업 제품개발 데이터를 하나의 PLM 흐름으로 연결합니다.">
   <meta name="twitter:image" content="https://www.papsnet.net/PLM_Dashboard_01.png">
   <link rel="icon" href="papsnet_logo.jpg">
-  <link rel="preload" as="image" href="images/hero-product-data-blueprint.webp" type="image/webp" fetchpriority="high">
-  <link rel="preload" as="image" href="images/hero-ev-parts/ev-parts-residual.webp" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
@@ -77,6 +75,7 @@
   }
   </script>
   <link rel="stylesheet" href="viewer-branding.css">
+<link rel="stylesheet" href="cad-walkthrough.css">
 </head>
 
 <body class="plm-home-v2">
@@ -103,10 +102,10 @@
     </div>
   </div>
 
-  <nav class="nav has-announcement" id="nav">
+  <nav class="nav has-announcement over-studio" id="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo" aria-label="(주)팹스넷 메인 페이지로 이동">
-        <div class="nav-logo-img-wrap"><img class="papsnet-logo-mark" src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
+        <svg class="papsnet-original" width="158" height="45" viewBox="0 0 158 45" role="img" aria-label="Papsnet"><use width="100%" height="100%" href="/brand-family/papsnet-original.svg?v=2#lockup"></use></svg>
       </a>
 
       <div class="nav-center">
@@ -115,21 +114,23 @@
             솔루션 <span class="nav-dropdown-chevron site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></span>
           </button>
           <div class="nav-dropdown-menu">
-            <a href="product-cadwin.html" class="nav-dropdown-item" data-product="cadwin">
+            <a href="product-cadwin.html" class="nav-dropdown-item" data-product="cadwin"><img class="system-mark" src="/brand-family/cadwin.svg" alt="" width="32" height="32">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">AI CADWin</span><span class="nav-dropdown-item-desc">도면 재활용·업무 개선</span></span>
             </a>
-            <a href="product-clippdm.html" class="nav-dropdown-item" data-product="pdm">
+            <a href="product-clippdm.html" class="nav-dropdown-item" data-product="pdm"><img class="system-mark" src="/brand-family/pdm.svg" alt="" width="32" height="32">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip PDM</span><span class="nav-dropdown-item-desc">도면·문서·제품 데이터</span></span>
             </a>
-            <a href="product-clippms.html" class="nav-dropdown-item" data-product="pms">
+            <a href="product-clipddms.html" class="nav-dropdown-item" data-product="dds"><img class="system-mark" src="/brand-family/dds.svg" width="32" height="32" alt=""><span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">CLiP DDMS</span><span class="nav-dropdown-item-desc">협력사 도면 배포</span></span></a>
+            <a href="product-clippms.html" class="nav-dropdown-item" data-product="pms"><img class="system-mark" src="/brand-family/pms.svg" alt="" width="32" height="32">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip PMS</span><span class="nav-dropdown-item-desc">프로젝트·일정 관리</span></span>
             </a>
-            <a href="product-multibom.html" class="nav-dropdown-item" data-product="bom">
+            <a href="product-multibom.html" class="nav-dropdown-item" data-product="bom"><img class="system-mark" src="/brand-family/bom.svg" alt="" width="32" height="32">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Multi-BOM</span><span class="nav-dropdown-item-desc">BOM 구조 비교</span></span>
             </a>
-            <a href="product-clipcms.html" class="nav-dropdown-item" data-product="cms">
+            <a href="product-clipcms.html" class="nav-dropdown-item" data-product="cms"><img class="system-mark" src="/brand-family/cms.svg" alt="" width="32" height="32">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">Clip CMS</span><span class="nav-dropdown-item-desc">사전·사후 원가관리</span></span>
             </a>
+            <a href="product-clip2dviewer.html" class="nav-dropdown-item"><img class="clip-viewer-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="32" height="32"><span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">CLIP 2D Viewer</span><span class="nav-dropdown-item-desc">도면 검색·개정 비교</span></span></a>
             <a href="product-clip3dviewer.html" class="nav-dropdown-item" data-product="viewer3d"><img class="clip-viewer-icon" src="images/viewer-branding/clip-3d-viewer-icon.jpg" alt="" width="36" height="36">
               <span class="nav-dropdown-item-text"><span class="nav-dropdown-item-name">CLIP 3D Viewer</span><span class="nav-dropdown-item-desc">웹 기반 3D CAD 검토</span></span>
             </a>
@@ -166,7 +167,7 @@
     <div class="mobile-menu-inner">
       <div class="mobile-menu-header">
         <a href="/" class="nav-logo" aria-label="(주)팹스넷 메인 페이지로 이동">
-          <div class="nav-logo-img-wrap"><img class="papsnet-logo-mark" src="images/papsnet-logo-transparent.png" alt="Papsnet"></div>
+          <svg class="papsnet-original" width="158" height="45" viewBox="0 0 158 45" role="img" aria-label="Papsnet"><use width="100%" height="100%" href="/brand-family/papsnet-original.svg?v=2#lockup"></use></svg>
         </a>
         <button class="mobile-menu-close" id="mobileMenuClose" aria-label="메뉴 닫기">
           <span class="ui-close-symbol site-vector-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></span>
@@ -175,11 +176,13 @@
       <nav class="mobile-nav">
         <a href="#platform" class="mobile-nav-link">Clip 플랫폼</a>
         <a href="#technology" class="mobile-nav-link">AI·뷰어</a>
-        <a href="product-cadwin.html" class="mobile-nav-link">AI CADWin</a>
-        <a href="product-clippdm.html" class="mobile-nav-link">Clip PDM</a>
-        <a href="product-clippms.html" class="mobile-nav-link">Clip PMS</a>
-        <a href="product-multibom.html" class="mobile-nav-link">Multi-BOM</a>
-        <a href="product-clipcms.html" class="mobile-nav-link">Clip CMS</a>
+        <a href="product-cadwin.html" class="mobile-nav-link"><img class="system-mark" src="/brand-family/cadwin.svg" width="28" height="28" alt="">AI CADWin</a>
+        <a href="product-clippdm.html" class="mobile-nav-link"><img class="system-mark" src="/brand-family/pdm.svg" width="28" height="28" alt="">Clip PDM</a>
+        <a href="product-clipddms.html" class="mobile-nav-link"><img class="system-mark" src="/brand-family/dds.svg" width="28" height="28" alt="">CLiP DDMS</a>
+        <a href="product-clippms.html" class="mobile-nav-link"><img class="system-mark" src="/brand-family/pms.svg" width="28" height="28" alt="">Clip PMS</a>
+        <a href="product-multibom.html" class="mobile-nav-link"><img class="system-mark" src="/brand-family/bom.svg" width="28" height="28" alt="">Multi-BOM</a>
+        <a href="product-clipcms.html" class="mobile-nav-link"><img class="system-mark" src="/brand-family/cms.svg" width="28" height="28" alt="">Clip CMS</a>
+        <a href="product-clip2dviewer.html" class="mobile-nav-link"><img class="clip-viewer-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="28" height="28">CLIP 2D Viewer</a>
         <a href="product-clip3dviewer.html" class="mobile-nav-link"><img class="clip-viewer-icon" src="images/viewer-branding/clip-3d-viewer-icon.jpg" alt="" width="36" height="36">CLIP 3D Viewer</a>
         <a href="#spinfire" class="mobile-nav-link">SpinFire Insight</a>
         <a href="#process" class="mobile-nav-link">도입 흐름</a>
@@ -197,119 +200,177 @@
   <main id="main">
     <section class="am-hero am-hero-editorial" id="hero" data-editorial-hero>
       <div class="am-editorial-stage">
-      <div class="am-editorial-backdrop" aria-hidden="true">
-        <img src="images/hero-product-data-blueprint.webp" alt="" width="1672" height="941" loading="eager" fetchpriority="high" decoding="async">
-      </div>
+      <div class="am-editorial-backdrop" aria-hidden="true"></div>
 
-      <div class="am-editorial-marquee" aria-hidden="true">
-        <div class="am-editorial-marquee-track">
-          <span>DRAWING · REVISION · BOM · PROJECT · AI&nbsp;</span>
-          <span>DRAWING · REVISION · BOM · PROJECT · AI&nbsp;</span>
-        </div>
-      </div>
-
-      <figure class="am-editorial-assembly am-industry-slide is-active" data-hero-industry-slide="0" aria-hidden="true">
-        <div class="am-industry-visual">
-          <div class="am-assembly-stack" data-ev-sequence>
-            <span class="am-assembly-orbit am-orbit-one"></span>
-            <span class="am-assembly-orbit am-orbit-two"></span>
-            <img class="am-ev-poster" src="images/hero-ev-parts/ev-parts-residual.webp" alt="" width="1051" height="1496" loading="eager" fetchpriority="high" decoding="async">
-            <div class="am-ev-parts-canvas" data-ev-parts-canvas aria-hidden="true">
-              <img class="am-ev-parts-residual" src="images/hero-ev-parts/ev-parts-residual.webp" alt="" width="1051" height="1496" loading="eager" fetchpriority="high" decoding="async">
-              <div class="am-ev-parts-layer" data-ev-parts-layer></div>
+      <figure class="am-editorial-assembly am-industry-slide am-industry-automotive is-active" data-hero-industry-slide="0" aria-hidden="true">
+        <div class="am-industry-visual transport-stage" data-transport="ev">
+          <div class="photo-viewport">
+            <div class="photo-plane">
+              <img class="transport-plate" src="/models/orbit/ev-exterior.webp?v=evOrbit240" fetchpriority="high" width="1120" height="840" alt="완성 전기차를 조립 라인에서 바라본 모습">
+              <img class="photo-cutaway" data-cutaway="/models/orbit/ev-section.webp?v=original96b" width="1120" height="840" alt="같은 전기차에서 배터리 팩의 덮개와 셀 모듈, 전방 구동 모터를 드러낸 단면 예시" aria-hidden="true">
+              <div class="photo-pins" role="group" aria-label="사진에서 부품 선택"></div>
+              <button class="scene-pin" type="button" data-load-scene style="left:49.26%;top:52.72%">
+                <span class="scene-pin-label"><strong>셀 모듈 · 우측 2열</strong><span data-turned-label="EV-102-R2 · 단면·BOM 열기 ↗">EV-102-R2 · 분해 영상과 BOM ▶</span></span>
+              </button>
             </div>
-            <span class="am-assembly-callout am-callout-front"><b>FRONT E-AXLE</b><small>Drive · Suspension</small></span>
-            <span class="am-assembly-callout am-callout-core"><b>BATTERY PACK</b><small>Product core</small></span>
-            <span class="am-assembly-callout am-callout-rear"><b>REAR MODULE</b><small>Revision linked</small></span>
-            <span class="am-assembly-counter" aria-hidden="true">
-              <span><b data-ev-part-counter>000</b><small data-ev-part-total>/ 120</small></span>
-              <i></i>
-              <em>PARTS LINKED</em>
-            </span>
           </div>
-          <i class="am-editorial-scan"></i>
+          <div class="hero-film-player" hidden>
+            <video controls playsinline preload="none" tabindex="0" data-film-src="/videos/ev-bom-film.mp4?v=fascia3d60e" aria-label="자동차 셀 모듈 회전·분해 영상"></video>
+            <button type="button" data-film-close>사진으로 돌아가기</button>
+          </div>
+          <span class="scene-load-status" role="status"></span>
+          <template data-scene-viewer><model-viewer class="transport-model" animation-crossfade-duration="0" environment-image="/models/inspection-hangar.hdr" tone-mapping="aces" exposure=".97" shadow-intensity="1.05" shadow-softness=".7" skybox-height="3m" camera-controls disable-pan disable-zoom touch-action="pan-y" interaction-prompt="none"
+            camera-orbit="42deg 78deg 11.6m" camera-target="0m 1.12m 0m" field-of-view="32deg"
+            min-camera-orbit="auto 8deg 3m" max-camera-orbit="auto 88deg 12.8m" alt="전기차 내부 부품 회전 및 분해">
+            <button type="button" class="inspect-pin" slot="hotspot-entry" data-inspect-pin data-position="1.4m 1.23m .16m" data-normal="0 1 0" >셀 모듈 BOM·도면 <span aria-hidden="true">↗</span></button>
+            <span slot="pan-target" aria-hidden="true"></span>
+          </model-viewer></template>
+          <small class="transport-hint">좌우 드래그로 360° 회전</small>
         </div>
-        <figcaption class="am-industry-caption">
-          <span>AUTOMOTIVE · EV PLATFORM</span>
-          <strong>분산된 부품을 하나의 제품 BOM으로 조립</strong>
+        <figcaption class="transport-caption">
+          <div class="transport-title"><span>자동차 모델 시연 · CLIP PDM</span><strong>부품을 선택해 BOM과 도면을 확인하세요.</strong></div>
+          <div class="hero-film-links"><button class="film-play" type="button" data-film-play><span aria-hidden="true">▶</span> 회전·분해 영상 · 9초</button>
+            <button class="inspect-entry" type="button" data-inspect-photo>부품·도면 보기 <span aria-hidden="true">↗</span></button></div>
+          <div class="photo-controls" hidden>
+            <strong data-photo-selection></strong>
+            <button class="film-play" type="button" data-film-play><span aria-hidden="true">▶</span> 영상 보기</button>
+            <button type="button" data-photo-toggle>외관 보기</button>
+            <button type="button" data-photo-3d>내부 부품 3D 조작</button>
+          </div>
+          <div class="transport-actions" hidden><button type="button" data-explode>분해 보기</button><button type="button" data-back-photo>부품·도면 보기</button><button type="button" data-return-exterior>완성차 보기</button></div>
+          <div class="bom-choices" role="group" aria-label="전기차 플랫폼 BOM 부품 선택" hidden></div>
+          <div class="bom-detail"><span aria-live="polite" data-bom-path>자동차의 핀을 누르면 해당 부품의 BOM 행과 연결 도면이 열립니다.</span><a href="images/product-highlights/pdm-bom.webp" data-case-near aria-haspopup="dialog">실제 PDM 화면 · PTC 히터 BOM 보기 ↗</a></div>
         </figcaption>
       </figure>
 
       <figure class="am-editorial-assembly am-industry-slide am-industry-aerospace" data-hero-industry-slide="2" aria-hidden="true">
-        <div class="am-industry-visual">
-          <div class="am-assembly-stack am-aero-assembly-stack" data-aero-sequence>
-            <img class="am-aero-blueprint-ghost" data-src="images/hero-aerospace-blueprint.webp" alt="" width="350" height="623" loading="lazy" fetchpriority="low" decoding="async">
-            <span class="am-assembly-orbit am-orbit-one"></span>
-            <span class="am-assembly-orbit am-orbit-two"></span>
-            <div class="am-aero-parts-canvas" data-aero-parts-canvas aria-hidden="true">
-              <img class="am-aero-parts-residual" data-src="images/hero-aerospace-parts/ev-parts-residual.webp" alt="" width="1024" height="1536" loading="lazy" fetchpriority="low" decoding="async">
-              <div class="am-aero-parts-layer" data-aero-parts-layer></div>
+        <div class="am-industry-visual transport-stage" data-transport="aircraft">
+          <div class="photo-viewport">
+            <div class="photo-plane">
+              <img class="transport-plate" data-src="/models/orbit/aircraft-exterior.webp" width="1120" height="840" alt="동체와 엔진을 조립한 민항기">
+              <img class="photo-cutaway" data-cutaway="/models/orbit/aircraft-section.webp" width="1120" height="840" alt="같은 민항기에서 전방 동체 프레임과 전자장비 트레이를 드러낸 단면 예시" aria-hidden="true">
+              <div class="photo-pins" role="group" aria-label="사진에서 부품 선택"></div>
+              <button class="scene-pin" type="button" data-load-scene style="left:44.32%;top:53.91%">
+                <span class="scene-pin-label"><strong>전자장비 트레이</strong><span data-turned-label="AC-202 · 단면·참고도 열기 ↗">AC-202 · 분해 영상과 참고도 ▶</span></span>
+              </button>
             </div>
-            <span class="am-assembly-callout am-callout-front"><b>FLIGHT CONTROL</b><small>Wing · actuator · revision</small></span>
-            <span class="am-assembly-callout am-callout-core"><b>CENTER FUSELAGE</b><small>Fixed product datum</small></span>
-            <span class="am-assembly-callout am-callout-rear"><b>TWIN ENGINE</b><small>Configuration linked</small></span>
-            <span class="am-assembly-counter am-aero-counter" aria-hidden="true">
-              <span><b data-aero-part-counter>000</b><small data-aero-part-total>/ 054</small></span>
-              <i></i>
-              <em>AIRFRAME RELEASED</em>
-            </span>
           </div>
-          <i class="am-editorial-scan"></i>
+          <div class="hero-film-player" hidden>
+            <video controls playsinline preload="none" tabindex="0" data-film-src="/videos/aircraft-bom-film.mp4" aria-label="항공기 전자장비 트레이 회전·분해 영상"></video>
+            <button type="button" data-film-close>사진으로 돌아가기</button>
+          </div>
+          <span class="scene-load-status" role="status"></span>
+          <template data-scene-viewer><model-viewer class="transport-model" animation-crossfade-duration="0" environment-image="/models/inspection-hangar.hdr" tone-mapping="aces" exposure=".91" shadow-intensity="1.1" shadow-softness=".72" skybox-height="3m" camera-controls disable-pan touch-action="pan-y" interaction-prompt="none"
+            camera-orbit="42deg 75deg 12.7m" camera-target="0m 1.15m 0m" field-of-view="32deg"
+            min-camera-orbit="auto 8deg 3m" max-camera-orbit="auto 88deg 12.8m" alt="민항기 내부 구조 회전 및 부품 탐색">
+            <button type="button" class="inspect-pin" slot="hotspot-entry" data-inspect-pin data-position=".47m 1.34m 1.1m" data-normal="0 1 0" >트레이 검토 항목·참고도 <span aria-hidden="true">↗</span></button>
+            <span slot="pan-target" aria-hidden="true"></span>
+          </model-viewer></template>
+          <small class="transport-hint">좌우 드래그로 360° 회전</small>
         </div>
-        <figcaption class="am-industry-caption">
-          <span>AEROSPACE · CONFIGURATION BOM</span>
-          <strong>기체 구성에서 리비전 영향까지</strong>
+        <figcaption class="transport-caption">
+          <div class="transport-title"><span>항공기 모델 시연 · CLIP PDM</span><strong>부품을 골라 변경 검토 항목과 참고도를 확인하세요.</strong></div>
+          <div class="hero-film-links"><button class="film-play" type="button" data-film-play><span aria-hidden="true">▶</span> 회전·분해 영상 · 9초</button>
+            <button class="inspect-entry" type="button" data-inspect>직접 3D 조작 <span aria-hidden="true">↗</span></button></div>
+          <div class="photo-controls" hidden>
+            <strong data-photo-selection></strong>
+            <button class="film-play" type="button" data-film-play><span aria-hidden="true">▶</span> 영상 보기</button>
+            <button type="button" data-photo-toggle>외관 보기</button>
+            <button type="button" data-photo-3d>3D 회전·분해 <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="transport-actions" hidden><button type="button" data-explode>분해 보기</button><button type="button" data-back-photo>사진 보기</button><button type="button" data-reset-view title="첫 화면 각도로 복귀">완성 기체 보기</button></div>
+          <div class="bom-choices" role="group" aria-label="민항기 내부 구조 BOM 부품 선택" hidden></div>
+          <!-- AIRCRAFT_INSPECTION_LINK -->
+          <div class="bom-detail"><span aria-live="polite" data-bom-path>트레이 핀을 누르면 장착 위치 검토 항목과 참고도 AC-202가 열립니다.</span><a href="images/product-highlights/pdm-eco.webp" data-case-near aria-haspopup="dialog">실제 PDM 화면 · 액추에이터 설계변경 보기 ↗</a></div>
         </figcaption>
       </figure>
 
       <figure class="am-editorial-assembly am-industry-slide am-industry-facility" data-hero-industry-slide="3" aria-hidden="true">
-        <div class="am-industry-visual">
-          <div class="am-assembly-stack am-facility-assembly-stack" data-facility-sequence>
-            <img class="am-facility-blueprint-ghost" data-src="images/hero-equipment-digital-twin.webp" alt="" width="398" height="557" loading="lazy" fetchpriority="low" decoding="async">
-            <span class="am-assembly-orbit am-orbit-one"></span>
-            <span class="am-assembly-orbit am-orbit-two"></span>
-            <div class="am-facility-parts-canvas" data-facility-parts-canvas aria-hidden="true">
-              <img class="am-facility-parts-residual" data-src="images/hero-equipment-digital-twin.webp" alt="" width="398" height="557" loading="lazy" fetchpriority="low" decoding="async">
-              <div class="am-facility-parts-layer" data-facility-parts-layer></div>
+        <div class="am-industry-visual building-stage">
+          <div class="photo-viewport">
+            <div class="photo-plane">
+              <img class="building-poster" data-src="/models/orbit/campus-exterior.webp" alt="유리 커튼월과 상층 테라스를 갖춘 3층 연구동 콘셉트" width="1120" height="840">
+              <button class="scene-pin" type="button" data-load-scene style="left:62.09%;top:51.97%">
+                <span class="scene-pin-label"><strong>2층 업무 공간</strong><span>A-102 · 배포 목록·평면도 열기 ↗</span></span>
+              </button>
             </div>
-            <span class="am-assembly-callout am-callout-front"><b>BUILDING ENVELOPE</b><small>Facade · specification</small></span>
-            <span class="am-assembly-callout am-callout-core"><b>FLOOR SYSTEM</b><small>Level · revision · approval</small></span>
-            <span class="am-assembly-callout am-callout-rear"><b>FOUNDATION</b><small>Site · construction data</small></span>
-            <span class="am-assembly-counter am-facility-counter" aria-hidden="true">
-              <span><b data-facility-part-counter>000</b><small>/ 007</small></span>
-              <i></i>
-              <em>BUILDING SYSTEMS</em>
-            </span>
           </div>
-          <i class="am-editorial-scan"></i>
+          <span class="scene-load-status" role="status"></span>
+          <template data-scene-viewer><model-viewer class="building-model" animation-crossfade-duration="0" alt="회전할 수 있는 팹스넷 건축 모형" camera-controls disable-pan disable-zoom interaction-prompt="none" touch-action="pan-y" camera-orbit="33deg 65deg auto" field-of-view="30deg" shadow-intensity=".45" ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor">
+            <span slot="pan-target" aria-hidden="true"></span>
+            <button type="button" class="building-ar" slot="ar-button">내 공간에 배치 ↗</button>
+          </model-viewer></template>
+          <small class="transport-hint">좌우 드래그로 360° 회전</small>
+          <button type="button" class="building-layers" hidden>층별 분해</button>
         </div>
-        <figcaption class="am-industry-caption">
-          <span>BUILDING · DIGITAL TWIN</span>
-          <strong>층별 구조와 설계 리비전을 연결</strong>
+        <figcaption class="transport-caption building-caption">
+          <div class="floor-choices" role="group" aria-label="연결 도면을 볼 층 선택">
+            <button type="button" data-floor="1" aria-pressed="false">1층</button><button type="button" data-floor="2" aria-pressed="false">2층</button><button type="button" data-floor="3" aria-pressed="false">3층</button>
+          </div>
+          <div class="transport-title"><span>건축 모델 시연 · CLIP DDMS</span><strong>층을 골라 평면도와 수신처를 확인하세요.</strong></div>
+          <div class="bom-detail"><span data-building-context>2층을 누르면 평면도 A-102와 실내 시공팀의 수신 상태가 함께 열립니다.</span><a href="images/product-highlights/dds-distribution.webp" data-case-near aria-haspopup="dialog">실제 DDMS 화면 · 브라켓 배포와 수신확인 보기 ↗</a></div>
         </figcaption>
       </figure>
 
       <div class="am-shell am-editorial-shell">
         <div class="am-editorial-copy">
+          <section class="linked-record" hidden aria-labelledby="record-title">
+            <header><small data-record-product></small><button type="button" data-record-back>전체 보기 ↗</button></header>
+            <h2 id="record-title" aria-live="polite"></h2>
+            <p data-record-path></p>
+            <table class="record-list">
+              <caption><strong data-list-title></strong><small>모델 시연용 데이터</small></caption>
+              <thead><tr data-list-columns></tr></thead><tbody data-list-rows></tbody>
+            </table>
+            <figure class="record-drawing"><figcaption><strong data-drawing-caption></strong><span data-drawing-id></span></figcaption>
+              <a target="_blank" rel="noopener" data-drawing-full aria-label="선택한 모델의 도면 크게 보기"><img data-record-drawing alt=""></a>
+            </figure>
+            <a class="record-screen" target="_blank" rel="noopener" data-screen-full>
+              <img data-record-screen alt=""><span><strong data-record-screen-title></strong><small>제품 원본 캡처 ↗</small></span>
+            </a>
+          </section>
           <div class="am-editorial-overline">
-            <span>(주)팹스넷</span>
-            <span>Clip PLM</span>
+            <span>팹스넷</span>
+            <span>자체 개발 CLIP PLM · CAD 연동</span>
           </div>
           <h1>
-            <span class="am-editorial-line"><span>설계가 바뀌면,</span></span>
-            <span class="am-editorial-line"><span><em>어디까지 달라질까요?</em></span></span>
+            <span class="am-editorial-line"><span>설계는 쓰던 CAD에서.</span></span>
+            <span class="am-editorial-line"><span><em>검토는 CLIP PLM에서.</em></span></span>
           </h1>
-          <p>Clip PLM에서 개정 도면과 연결된 부품표(BOM), 프로젝트 일정, 원가를 확인하세요.</p>
-          <div class="am-hero-actions">
-            <a href="product-clip2dviewer.html#viewer-film" class="btn btn-primary btn-lg"><span aria-hidden="true">▷</span> 도면 비교 시연 <small>17초</small></a>
-            <a href="contact.html?type=diagnosis" class="btn btn-secondary btn-lg">PLM 도입 상담</a>
+          <nav class="hero-cad" aria-label="CAD별 연동 시연과 3D 파일 검토">
+            <div class="hero-cad-films">
+              <a class="cad-solidworks" data-hero-film="solidworks" href="?product=pdm&amp;film=solidworks#pdm-cad-films">
+                <img class="cad-logo" src="images/brand/solidworks.svg" alt="SOLIDWORKS">
+                <span class="cad-task">조립품에서 웹 BOM까지</span>
+                <span class="cad-play">45초 시연 <b aria-hidden="true">▶</b></span>
+              </a>
+              <a class="cad-autocad" data-hero-film="autocad" href="?product=pdm&amp;film=autocad#pdm-cad-films">
+                <img class="cad-logo" src="images/brand/autocad-on-dark.svg" alt="AutoCAD">
+                <span class="cad-task">도면 체크인과 버전</span>
+                <span class="cad-play">도면 관리 시연 <b aria-hidden="true">▶</b></span>
+              </a>
+            </div>
+            <div class="cad-consult-links">
+              <a href="contact.html?type=consult&amp;topic=cad-fit">CATIA · UG NX 적용 상담 <span aria-hidden="true">↗</span></a>
+              <a href="product-clip3dviewer.html#formats">검토 파일 형식</a>
+            </div>
+          </nav>
+          <div class="hero-case" data-hero-case>
+            <a class="hero-case-open" href="images/product-highlights/pdm-bom.webp" data-open-case aria-haspopup="dialog">
+              <img src="images/product-highlights/pdm-bom.webp" width="116" height="76" alt="" data-case-thumb>
+              <span><small data-case-label>CLIP PDM · 제품 구조</small><strong data-case-question>조립품 하나에 어떤 부품이 몇 개 들어갈까요?</strong><span class="case-link" data-case-link>다단계 BOM 실제 화면 보기 ↗</span></span>
+            </a>
           </div>
+          <div class="am-hero-actions">
+            <a href="contact.html?type=diagnosis" class="btn btn-primary btn-lg">PLM 도입 상담 <span aria-hidden="true">↗</span></a>
+          </div>
+          <details class="hero-search"><summary>우리 업무에 맞는 제품 찾기</summary>
           <form class="am-hero-query" data-hero-query>
             <div class="am-query-console">
               <div class="am-query-head">
                 <label for="heroFeatureQuery">
-                  <span>우리 업무에 맞는 제품 찾기</span>
-                  <small>도면 · BOM · 프로젝트 · 원가</small>
+                  <span>찾으려는 업무</span>
+
                 </label>
               </div>
               <div class="am-query-field">
@@ -320,25 +381,26 @@
               <div class="am-query-foot">
                 <div class="am-query-suggestions" aria-label="추천 업무">
                   <button type="button" data-hero-query-example="유사 도면 찾기">유사 도면</button>
-                  <button type="button" data-hero-query-example="다중 BOM 구조 비교">BOM 비교</button>
+                  <button type="button" data-hero-query-example="BOM 비교">BOM 비교</button>
                   <button type="button" data-hero-query-example="지연 프로젝트 확인">지연 확인</button>
                 </div>
                 <p data-hero-query-result aria-live="polite"><i aria-hidden="true"></i>업무를 선택하거나 직접 입력하세요.</p>
               </div>
             </div>
           </form>
+          </details>
 
         </div>
 
         <div class="am-editorial-index" role="tablist" aria-label="산업별 제품 데이터 장면">
           <button type="button" class="is-active" role="tab" aria-selected="true" data-hero-step="1">
-            <b>01</b><span><small>AUTOMOTIVE</small>자동차 제품 BOM</span>
+            <span>자동차 BOM</span>
           </button>
           <button type="button" role="tab" aria-selected="false" data-hero-step="2">
-            <b>02</b><span><small>AEROSPACE</small>항공 구성·리비전</span>
+            <span>항공 설계변경</span>
           </button>
           <button type="button" role="tab" aria-selected="false" data-hero-step="3">
-            <b>03</b><span><small>FACILITY</small>건축 디지털 트윈</span>
+            <span>건축 도면 배포</span>
           </button>
         </div>
 
@@ -363,6 +425,14 @@
       </div>
       </div>
     </section>
+
+    <dialog class="hero-case-dialog" aria-labelledby="case-title" data-case-dialog>
+      <header><div><small data-case-dialog-label></small><h2 id="case-title"></h2></div><form method="dialog"><button autofocus aria-label="실제 화면 닫기">닫기</button></form></header>
+      <p class="case-context" data-case-context></p>
+      <div class="case-switch" role="group" aria-label="업무 화면 선택"></div>
+      <figure><a target="_blank" rel="noopener" aria-label="제품 원본 화면 크게 보기"><img alt=""></a><figcaption></figcaption></figure>
+      <footer><a data-case-product>제품 소개 보기 →</a><a data-case-consult>우리 업무로 시연 문의 ↗</a></footer>
+    </dialog>
 
     <section class="am-section am-news" id="news" aria-labelledby="newsTitle">
       <div class="am-shell">
@@ -392,8 +462,8 @@
     </dialog>
 
 <section class="am-section hp-products" id="products" data-product="2d">
- <div class="am-shell"><div class="hp-heading"><div><span class="hp-kicker">CLiP SOLUTIONS</span><h2>우리 업무에 필요한 기능부터.</h2></div><p>도면 검토부터 제품 데이터·협력사 배포·개발 일정까지.<br>핵심 기능과 실제 화면으로 필요한 솔루션을 확인하세요.</p></div>
- <div class="hp-tabs" role="tablist" aria-label="제품소개"><button type="button" class="hp-tab active" role="tab" id="product-tab-2d" aria-controls="product-summary" aria-selected="true" tabindex="0" data-product-tab="2d"><img class="clip-viewer-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="40" height="40"><span><strong>CLIP 2D Viewer</strong><small>열람·측정·비교</small></span></button><button type="button" class="hp-tab" role="tab" id="product-tab-pdm" aria-controls="product-summary" aria-selected="false" tabindex="-1" data-product-tab="pdm"><img src="images/product-highlights/pdm-art.webp" alt="" width="58" height="70"><span><strong>CLiP PDM</strong><small>도면·BOM·설계변경</small></span></button><button type="button" class="hp-tab" role="tab" id="product-tab-dds" aria-controls="product-summary" aria-selected="false" tabindex="-1" data-product-tab="dds"><img src="images/product-highlights/dds-art.webp" alt="" width="58" height="70"><span><strong>CLiP DDMS</strong><small>배포·수신·회수</small></span></button><button type="button" class="hp-tab" role="tab" id="product-tab-pms" aria-controls="product-summary" aria-selected="false" tabindex="-1" data-product-tab="pms"><img src="images/product-highlights/pms-art.webp" alt="" width="58" height="70"><span><strong>CLiP PMS</strong><small>일정·게이트·산출물</small></span></button></div>
+ <div class="am-shell"><div class="hp-heading"><div><span class="hp-kicker">CLiP SOLUTIONS</span><h2>우리 업무에 필요한 기능부터.</h2></div><p>SOLIDWORKS·AutoCAD 연동은 PDM에서 확인하세요.<br>도면 검토, 협력사 배포, 개발 일정도 업무별로 살펴볼 수 있습니다.</p></div>
+ <div class="hp-tabs" role="tablist" aria-label="제품소개"><button type="button" class="hp-tab active" role="tab" id="product-tab-2d" aria-controls="product-summary" aria-selected="true" tabindex="0" data-product-tab="2d"><img class="clip-viewer-icon" src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="40" height="40"><span><strong>CLIP 2D Viewer</strong><small>열람·측정·비교</small></span></button><button type="button" class="hp-tab" role="tab" id="product-tab-pdm" aria-controls="product-summary" aria-selected="false" tabindex="-1" data-product-tab="pdm"><img src="/brand-family/pdm.svg" alt="" width="58" height="70"><span><strong>CLiP PDM</strong><small>CAD 연동·설계 BOM</small></span></button><button type="button" class="hp-tab" role="tab" id="product-tab-dds" aria-controls="product-summary" aria-selected="false" tabindex="-1" data-product-tab="dds"><img src="/brand-family/dds.svg" alt="" width="58" height="70"><span><strong>CLiP DDMS</strong><small>배포·수신·회수</small></span></button><button type="button" class="hp-tab" role="tab" id="product-tab-pms" aria-controls="product-summary" aria-selected="false" tabindex="-1" data-product-tab="pms"><img src="/brand-family/pms.svg" alt="" width="58" height="70"><span><strong>CLiP PMS</strong><small>일정·게이트·산출물</small></span></button></div>
  <section class="hp-viewer-demo" id="viewer-demo" aria-labelledby="demo-heading">
    <div class="demo-copy">
      <div class="demo-product"><img src="images/viewer-branding/clip-2d-viewer-icon.jpg" width="36" height="36" alt=""><span>CLIP 2D Viewer</span></div>
@@ -403,6 +473,17 @@
    </div>
    <figure><video controls playsinline preload="none" width="1920" height="1080" poster="videos/clip2d-comparison.jpg?v=fullframe2" aria-label="CLIP 2D Viewer 대표 시연 · 유사 도면 검색과 개정 비교" src="videos/clip2d-comparison.mp4?v=fullframe2"><a href="videos/clip2d-comparison.mp4?v=fullframe2">대표 시연 열기</a></video><figcaption><span>대표 시연</span> 유사 도면 검색과 개정 비교</figcaption></figure>
  </section>
+ <section id="pdm-cad-films" class="cad-walkthrough" data-cad-walkthrough aria-label="CAD 연동 시연">
+                <header><h3>SOLIDWORKS·AutoCAD와 Clip PDM 연동 시연</h3>
+                    <div class="cad-film-choices" role="group" aria-label="재생할 시연 선택">
+                        <a href="videos/solidworks-pdm-walkthrough.mp4?v=full-window" data-film="solidworks" data-poster="videos/solidworks-pdm-walkthrough.jpg?v=full-window">SOLIDWORKS <small>45초</small></a>
+                        <a href="videos/autocad-pdm-walkthrough.mp4?v=full-window" data-film="autocad" data-poster="videos/autocad-pdm-walkthrough.jpg?v=full-window">AutoCAD <small>48초</small></a>
+                        <a class="cad-fullscreen" data-cad-fullscreen href="videos/solidworks-pdm-walkthrough.mp4?v=full-window" target="_blank" rel="noopener">전체 화면 보기</a>
+                    </div>
+                </header>
+                <video controls playsinline preload="none" width="1920" height="1030" poster="videos/solidworks-pdm-walkthrough.jpg?v=full-window" src="videos/solidworks-pdm-walkthrough.mp4?v=full-window" aria-label="SOLIDWORKS 연동 시연"></video>
+                <p data-cad-description>SOLIDWORKS에서 신규 품목 11개를 등록한 뒤, 웹 PDM에서 조립품의 L0~L3 구조와 부품 수량을 확인합니다.</p>
+            </section>
  <div class="hp-panel" id="product-summary" role="tabpanel" aria-labelledby="product-tab-2d" tabindex="0">
   <div class="hp-copy"><div class="hp-brand"><img src="images/viewer-branding/clip-2d-viewer-icon.jpg" alt="" width="40" height="40" data-product-art><div><span data-product-tag>VIEW · MEASURE · COMPARE</span><p data-product-name>CLIP 2D Viewer</p></div></div><h3 data-product-title>개정 도면의 차이를 바로 확인하세요.</h3><p class="hp-intro" data-product-copy>CAD 없이 도면을 확인해야 하는 생산·품질·구매 담당자를 위한 Windows·웹 뷰어입니다.</p>
   <ol class="hp-workflow" data-product-workflow hidden></ol>
@@ -894,7 +975,7 @@
     <div class="footer-main">
       <div class="footer-brand">
         <a href="/" class="footer-logo" aria-label="(주)팹스넷 메인 페이지로 이동">
-          <img src="papsnet_logo.jpg" alt="Papsnet" loading="lazy" decoding="async">
+          <svg class="papsnet-original" width="158" height="45" viewBox="0 0 158 45" role="img" aria-label="Papsnet"><use width="100%" height="100%" href="/brand-family/papsnet-original.svg?v=2#lockup"></use></svg>
         </a>
         <p>제조업의 설계, 생산, 원가 데이터를 하나로 연결하는 PLM 솔루션 파트너</p>
         <div class="footer-contact-inline">
@@ -1105,6 +1186,7 @@
   <script type="module" src="app.js?v=20260824-media-feature-1"></script>
   <script type="module" src="home-news.js"></script>
   <script type="module" src="home-spinfire.js"></script>
+<script type="module" src="cad-walkthrough.js"></script>
 </body>
 
 </html>

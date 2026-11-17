@@ -1,3 +1,5 @@
+import { initSceneEntry } from './hero-scene-entry.js';
+import { initHeroCases } from './hero-cases.js';
 import { initProductHighlights } from './home-products.js';
 import './lead-download.js';
 import { createWheelStepGate } from './scroll-gesture.mjs';
@@ -62,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!nav) return;
     const annHeight = announcement ? announcement.offsetHeight : 0;
     nav.classList.toggle('scrolled', window.scrollY > annHeight);
+    if (heroSection) nav.classList.toggle('over-studio', heroSection.getBoundingClientRect().bottom > nav.getBoundingClientRect().bottom);
   }
 
   // Mobile menu toggle
@@ -290,6 +293,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // =============================
   let currentProductKey = '2d';
   const setProductShowcase = initProductHighlights(key => { currentProductKey = key; });
+  for (const link of document.querySelectorAll('[data-hero-film]')) {
+    link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const films = document.getElementById('pdm-cad-films');
+      const choice = films?.querySelector('button[data-film="'+link.dataset.heroFilm+'"]');
+      if (!choice) return;
+      event.preventDefault();
+      setProductShowcase('pdm');
+      choice.click();
+      films.scrollIntoView({block:'start', behavior:'instant'});
+      films.querySelector('video').focus({preventScroll:true});
+    });
+  }
 
   // R1: Let visitors describe a task first, then route them to the matching
   // real product surface instead of making them decode the product names.
@@ -316,7 +332,11 @@ document.addEventListener('DOMContentLoaded', () => {
       let productKey = 'cadwin';
       let result = 'AI CADWin의 도입 효과와 맞춤 시연 상담으로 안내합니다.';
 
-      if (/(3d|catia|3차원|형상)/i.test(query)) {
+      if (/(solid\s?works|auto\s?cad|솔리드\s?[웍워]크?스|오토\s?캐드|cad\s*(직접\s*)?(연동|인티그레이션|integration))/i.test(query)) {
+        setProductShowcase('pdm');
+        target = document.querySelector('#pdm-cad-films');
+        result = 'SOLIDWORKS·AutoCAD와 Clip PDM의 연동 시연으로 안내합니다.';
+      } else if (/(3d|catia|3차원|형상)/i.test(query)) {
         target = document.querySelector('#technology');
         setTechnology('viewer3d');
         result = 'CLIP 3D Viewer의 실제 웹 검토 화면으로 안내합니다.';
@@ -342,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (/(pdm|문서|리비전|개정|승인|체크인)/i.test(query)) {
         productKey = 'pdm';
         result = 'Clip PDM의 도면·문서·리비전 화면으로 안내합니다.';
-      } else if (/(autocad|solidworks|도면|검색|추출|cadwin|ai)/i.test(query)) {
+      } else if (/(도면|검색|추출|cadwin|ai)/i.test(query)) {
         productKey = 'cadwin';
       }
 
@@ -768,18 +788,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroIndustrySlides = Array.from(document.querySelectorAll('[data-hero-industry-slide]'));
   const heroStepButtons = Array.from(document.querySelectorAll('[data-hero-step]'));
   const heroStepStatus = document.querySelector('[data-hero-step-status]');
+  const selectHeroCase = initHeroCases(heroSection);
   let heroIndustryIndex = 0;
   let heroPointerFrame = 0;
-  let heroEvParts = [];
-  let heroEvPartTotal = 0;
-  let heroEvManifest = null;
-  let heroEvSequenceLoading = false;
-  let heroAeroParts = [];
-  let heroAeroPartTotal = 0;
-  let heroAeroManifest = null;
-  let heroAeroSequenceLoading = false;
-  let heroFacilityParts = [];
-  const heroFacilityPartTotal = 7;
+  heroIndustrySlides.forEach(initSceneEntry);
+
   let heroSequenceStep = 0;
   let heroSequenceFrame = 0;
   let heroSequenceAnimating = false;
@@ -794,261 +807,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { industry: 3, ev: 0, aero: 1, facility: 1, explode: 1 },
   ];
 
-  function smoothStep(value) {
-    const clamped = Math.max(0, Math.min(1, value));
-    return clamped * clamped * (3 - (2 * clamped));
-  }
-
-  function setBomPartGeometry(partNode, part, manifest, canvas, profile = {}) {
-    if (!canvas) return;
-
-    const canvasWidth = canvas.clientWidth || 1;
-    const canvasHeight = canvas.clientHeight || 1;
-    const centerX = manifest.sourceWidth / 2;
-    const centerY = manifest.sourceHeight / 2;
-    const compactXRatio = profile.compactX ?? 0.27;
-    const compactYRatio = profile.compactY ?? 0.55;
-    const compactX = centerX + ((part.cx - centerX) * compactXRatio);
-    const compactY = centerY + ((part.cy - centerY) * compactYRatio);
-    const translateX = ((compactX - part.cx) / manifest.sourceWidth) * canvasWidth;
-    const translateY = ((compactY - part.cy) / manifest.sourceHeight) * canvasHeight;
-    const radialX = (part.cx - centerX) / Math.max(centerX, 1);
-    const radialY = (part.cy - centerY) / Math.max(centerY, 1);
-    const depthScale = window.innerWidth <= 760 ? 0.58 : 1;
-    const spreadScale = window.innerWidth <= 760 ? 0.5 : 1;
-    const depthMagnitude = Math.min(
-      profile.maxDepth ?? 560,
-      (profile.baseDepth ?? 70)
-        + (part.distance * (profile.depthRange ?? 230))
-        + ((part.sequence % 6) * 4),
-    );
-    const longitudinalLayer = Math.max(-1, Math.min(1, radialY * 1.18));
-    const sequenceLayer = (((part.sequence % 5) - 2) / 2) * 0.18;
-    const layerPosition = Math.max(-1, Math.min(1, longitudinalLayer + sequenceLayer));
-    const layerStrength = 0.34 + (Math.abs(layerPosition) * 0.66);
-    const depthDirection = layerPosition < 0 ? -1 : 1;
-    const depth = part.anchor
-      ? 0
-      : depthMagnitude * depthDirection * layerStrength * depthScale;
-    const spreadWeight = 0.42 + Math.min(1, part.distance * 2.1);
-    const explodeX = part.anchor
-      ? 0
-      : radialX * (profile.spreadX ?? 92) * spreadWeight * spreadScale;
-    const explodeY = part.anchor
-      ? 0
-      : radialY * (profile.spreadY ?? 72) * spreadWeight * spreadScale;
-    const lightShift = part.anchor ? 0.08 : layerPosition * 0.08;
-
-    partNode.style.setProperty('--part-assemble-x', `${translateX.toFixed(2)}px`);
-    partNode.style.setProperty('--part-assemble-y', `${translateY.toFixed(2)}px`);
-    partNode.style.setProperty('--part-explode-x', `${explodeX.toFixed(2)}px`);
-    partNode.style.setProperty('--part-explode-y', `${explodeY.toFixed(2)}px`);
-    partNode.style.setProperty('--part-rotation', '0deg');
-    partNode.style.setProperty('--part-depth', `${depth.toFixed(2)}px`);
-    partNode.style.setProperty('--part-light-shift', lightShift.toFixed(3));
-    partNode.style.setProperty('--part-rotate-x', '0deg');
-    partNode.style.setProperty('--part-rotate-y', '0deg');
-    partNode.style.setProperty('--part-rotate-z', '0deg');
-    partNode.style.setProperty('--part-turn-y', '0deg');
-  }
-
-  function setEvPartGeometry(partNode, part, manifest) {
-    setBomPartGeometry(
-      partNode,
-      part,
-      manifest,
-      document.querySelector('[data-ev-parts-canvas]'),
-      {
-        compactX: 0.27,
-        compactY: 0.55,
-        baseDepth: 86,
-        depthRange: 760,
-        maxDepth: 560,
-        spreadX: 96,
-        spreadY: 76,
-      },
-    );
-  }
-
-  function setAeroPartGeometry(partNode, part, manifest) {
-    setBomPartGeometry(
-      partNode,
-      part,
-      manifest,
-      document.querySelector('[data-aero-parts-canvas]'),
-      {
-        compactX: 0.20,
-        compactY: 0.34,
-        baseDepth: 96,
-        depthRange: 850,
-        maxDepth: 650,
-        spreadX: 88,
-        spreadY: 88,
-      },
-    );
-  }
-
-  async function initializeEvPartSequence() {
-    const layer = document.querySelector('[data-ev-parts-layer]');
-    if (!layer || heroEvParts.length || heroEvSequenceLoading) return;
-    heroEvSequenceLoading = true;
-
-    try {
-      const response = await fetch('images/hero-ev-parts/manifest.json');
-      if (!response.ok) throw new Error(`EV parts manifest ${response.status}`);
-      const manifest = await response.json();
-      heroEvManifest = manifest;
-      heroEvPartTotal = manifest.parts.length;
-
-      const fragment = document.createDocumentFragment();
-      heroEvParts = manifest.parts.map(part => {
-        const partNode = document.createElement('span');
-        const sprite = document.createElement('img');
-        partNode.className = `am-ev-part${part.anchor ? ' is-datum' : ''}`;
-        partNode.dataset.sequence = String(part.sequence);
-        partNode.style.left = `${((part.x / manifest.sourceWidth) * 100).toFixed(5)}%`;
-        partNode.style.top = `${((part.y / manifest.sourceHeight) * 100).toFixed(5)}%`;
-        partNode.style.width = `${((part.width / manifest.sourceWidth) * 100).toFixed(5)}%`;
-        partNode.style.height = `${((part.height / manifest.sourceHeight) * 100).toFixed(5)}%`;
-        partNode.style.zIndex = String(20 + Math.round(part.distance * 100));
-        partNode.style.setProperty('--part-progress', part.anchor ? '1' : '0');
-        partNode.style.setProperty('--part-assembly', part.anchor ? '0' : '1');
-        partNode.style.setProperty('--part-motion', '0');
-
-        sprite.src = 'images/hero-ev-parts/ev-parts-atlas.webp';
-        sprite.alt = '';
-        sprite.decoding = 'async';
-        sprite.draggable = false;
-        sprite.style.width = `${((manifest.atlasWidth / part.width) * 100).toFixed(5)}%`;
-        sprite.style.height = `${((manifest.atlasHeight / part.height) * 100).toFixed(5)}%`;
-        sprite.style.left = `${((-part.atlasX / part.width) * 100).toFixed(5)}%`;
-        sprite.style.top = `${((-part.atlasY / part.height) * 100).toFixed(5)}%`;
-
-        partNode.appendChild(sprite);
-        fragment.appendChild(partNode);
-        setEvPartGeometry(partNode, part, manifest);
-        return { node: partNode, part };
-      });
-
-      layer.replaceChildren(fragment);
-      const firstSprite = layer.querySelector('img');
-      if (firstSprite?.decode) await firstSprite.decode().catch(() => {});
-      layer.closest('[data-ev-sequence]')?.classList.add('is-parts-ready');
-      const total = document.querySelector('[data-ev-part-total]');
-      if (total) total.textContent = `/ ${String(heroEvPartTotal).padStart(3, '0')}`;
-      updateHeroScrollMotion();
-    } catch (error) {
-      console.warn('EV component sequence could not be initialized.', error);
-    } finally {
-      heroEvSequenceLoading = false;
-    }
-  }
-
-  async function initializeAeroPartSequence() {
-    const layer = document.querySelector('[data-aero-parts-layer]');
-    if (!layer || heroAeroParts.length || heroAeroSequenceLoading) return;
-    heroAeroSequenceLoading = true;
-
-    try {
-      const response = await fetch('images/hero-aerospace-parts/manifest.json');
-      if (!response.ok) throw new Error(`Aerospace parts manifest ${response.status}`);
-      const manifest = await response.json();
-      heroAeroManifest = manifest;
-      heroAeroPartTotal = manifest.parts.length;
-
-      const fragment = document.createDocumentFragment();
-      heroAeroParts = manifest.parts.map(part => {
-        const partNode = document.createElement('span');
-        const sprite = document.createElement('img');
-        partNode.className = `am-bom-part am-aero-part${part.anchor ? ' is-datum' : ''}`;
-        partNode.dataset.sequence = String(part.sequence);
-        partNode.style.left = `${((part.x / manifest.sourceWidth) * 100).toFixed(5)}%`;
-        partNode.style.top = `${((part.y / manifest.sourceHeight) * 100).toFixed(5)}%`;
-        partNode.style.width = `${((part.width / manifest.sourceWidth) * 100).toFixed(5)}%`;
-        partNode.style.height = `${((part.height / manifest.sourceHeight) * 100).toFixed(5)}%`;
-        partNode.style.zIndex = String(20 + Math.round(part.distance * 100));
-        partNode.style.setProperty('--part-progress', part.anchor ? '1' : '0');
-        partNode.style.setProperty('--part-assembly', part.anchor ? '0' : '1');
-        partNode.style.setProperty('--part-motion', '0');
-
-        sprite.src = 'images/hero-aerospace-parts/ev-parts-atlas.webp';
-        sprite.alt = '';
-        sprite.decoding = 'async';
-        sprite.draggable = false;
-        sprite.style.width = `${((manifest.atlasWidth / part.width) * 100).toFixed(5)}%`;
-        sprite.style.height = `${((manifest.atlasHeight / part.height) * 100).toFixed(5)}%`;
-        sprite.style.left = `${((-part.atlasX / part.width) * 100).toFixed(5)}%`;
-        sprite.style.top = `${((-part.atlasY / part.height) * 100).toFixed(5)}%`;
-
-        partNode.appendChild(sprite);
-        fragment.appendChild(partNode);
-        setAeroPartGeometry(partNode, part, manifest);
-        return { node: partNode, part };
-      });
-
-      layer.replaceChildren(fragment);
-      const total = document.querySelector('[data-aero-part-total]');
-      if (total) total.textContent = `/ ${String(heroAeroPartTotal).padStart(3, '0')}`;
-      updateHeroScrollMotion();
-    } catch (error) {
-      console.warn('Aerospace component sequence could not be initialized.', error);
-    } finally {
-      heroAeroSequenceLoading = false;
-    }
-  }
-
-  function initializeFacilityPartSequence() {
-    const layer = document.querySelector('[data-facility-parts-layer]');
-    const canvas = document.querySelector('[data-facility-parts-canvas]');
-    if (!layer || !canvas || heroFacilityParts.length) return;
-
-    const depthScale = window.innerWidth <= 760 ? 0.58 : 1;
-    const spreadScale = window.innerWidth <= 760 ? 0.5 : 1;
-    const bands = [
-      { top: 0, bottom: 18, x: -84, y: 72, z: -520 },
-      { top: 13, bottom: 35, x: 72, y: 48, z: -340 },
-      { top: 29, bottom: 49, x: -64, y: 26, z: -170 },
-      { top: 43, bottom: 61, x: 0, y: 0, z: 0 },
-      { top: 56, bottom: 73, x: 58, y: -28, z: 170 },
-      { top: 68, bottom: 86, x: -68, y: -52, z: 340 },
-      { top: 81, bottom: 100, x: 78, y: -76, z: 520 },
-    ];
-
-    const fragment = document.createDocumentFragment();
-    heroFacilityParts = bands.map((band, index) => {
-      const partNode = document.createElement('span');
-      const image = document.createElement('img');
-      partNode.className = 'am-bom-part am-facility-part';
-      partNode.dataset.sequence = String(index);
-      partNode.style.setProperty('--facility-clip-top', `${band.top}%`);
-      partNode.style.setProperty('--facility-clip-bottom', `${100 - band.bottom}%`);
-      partNode.style.setProperty('--part-assemble-x', `${band.x}px`);
-      partNode.style.setProperty('--part-assemble-y', `${band.y}px`);
-      partNode.style.setProperty('--part-explode-x', `${(band.x * 0.62 * spreadScale).toFixed(2)}px`);
-      partNode.style.setProperty('--part-explode-y', `${(band.y * 0.48 * spreadScale).toFixed(2)}px`);
-      partNode.style.setProperty('--part-depth', `${(band.z * depthScale).toFixed(2)}px`);
-      partNode.style.setProperty('--part-light-shift', ((index - 3) * 0.025).toFixed(3));
-      partNode.style.setProperty('--part-rotate-x', '0deg');
-      partNode.style.setProperty('--part-rotate-y', '0deg');
-      partNode.style.setProperty('--part-rotate-z', '0deg');
-      partNode.style.setProperty('--part-turn-y', '0deg');
-      partNode.style.setProperty('--part-progress', '0');
-      partNode.style.setProperty('--part-assembly', '1');
-      partNode.style.setProperty('--part-motion', '0');
-
-      image.src = 'images/hero-equipment-digital-twin.webp';
-      image.alt = '';
-      image.decoding = 'async';
-      image.draggable = false;
-      partNode.appendChild(image);
-      fragment.appendChild(partNode);
-      return { node: partNode, part: { sequence: index, anchor: false } };
-    });
-
-    layer.replaceChildren(fragment);
-    updateHeroScrollMotion();
-  }
-
   function hydrateHeroSceneImages(industry) {
     const slide = heroIndustrySlides.find(item => Number(item.dataset.heroIndustrySlide || 0) === industry);
     if (!slide) return;
@@ -1059,111 +817,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function ensureHeroSceneAssets(industry) {
-    hydrateHeroSceneImages(industry);
-    if (industry === 0 && heroSequenceStep > 0) initializeEvPartSequence();
-    if (industry === 2) initializeAeroPartSequence();
-    if (industry === 3) initializeFacilityPartSequence();
-  }
-
-  function scheduleInitialHeroDetail() {
-    const queueWarmup = () => window.setTimeout(() => {
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(() => initializeEvPartSequence(), { timeout: 2600 });
-      } else {
-        initializeEvPartSequence();
-      }
-    }, 900);
-
-    if (document.readyState === 'complete') queueWarmup();
-    else window.addEventListener('load', queueWarmup, { once: true });
-  }
-
-  function updateBomPartNodes(parts, total, sequenceProgress) {
-    const sequenceSpan = 0.82;
-    const releaseDuration = 0.045;
-    let released = sequenceProgress > 0.985 ? 1 : 0;
-
-    parts.forEach(({ node, part }, index) => {
-      if (part.anchor) {
-        node.style.setProperty('--part-progress', '1');
-        node.style.setProperty('--part-assembly', '0');
-        node.style.setProperty('--part-motion', Math.sin(sequenceProgress * Math.PI).toFixed(4));
-        node.style.setProperty('--part-turn-y', '0deg');
-        return;
-      }
-
-      const order = total > 2 ? (index - 1) / (total - 2) : 0;
-      const start = order * sequenceSpan;
-      const local = smoothStep((sequenceProgress - start) / releaseDuration);
-      node.style.setProperty('--part-progress', local.toFixed(4));
-      node.style.setProperty('--part-assembly', (1 - local).toFixed(4));
-      node.style.setProperty('--part-motion', Math.sin(local * Math.PI).toFixed(4));
-      node.style.setProperty('--part-turn-y', '0deg');
-      if (local > 0.96) released += 1;
-    });
-
-    return released;
-  }
-
-  function updateEvPartSequence(progress) {
-    const sequenceProgress = Math.max(0, Math.min(1, progress));
-    const released = heroEvParts.length
-      ? updateBomPartNodes(heroEvParts, heroEvPartTotal, sequenceProgress)
-      : 0;
-    const counter = document.querySelector('[data-ev-part-counter]');
-    if (counter && heroEvPartTotal) {
-      counter.textContent = String(Math.max(0, heroEvPartTotal - released)).padStart(3, '0');
-    }
-    heroSection?.style.setProperty('--ev-sequence-progress', sequenceProgress.toFixed(4));
-    heroSection?.style.setProperty('--ev-rotate-x', '0deg');
-    heroSection?.style.setProperty('--ev-rotate-y', `${(sequenceProgress * 360).toFixed(3)}deg`);
-    heroSection?.style.setProperty('--ev-rotate-z', '0deg');
-    heroSection?.style.setProperty('--ev-orbit-x', '0px');
-    heroSection?.style.setProperty('--ev-orbit-y', '0px');
-    heroSection?.style.setProperty('--ev-rotation-scale', '1');
-  }
-
-  function updateAeroPartSequence(progress) {
-    const sequenceProgress = Math.max(0, Math.min(1, progress));
-    const released = heroAeroParts.length
-      ? updateBomPartNodes(heroAeroParts, heroAeroPartTotal, sequenceProgress)
-      : 0;
-    const counter = document.querySelector('[data-aero-part-counter]');
-    if (counter && heroAeroPartTotal) counter.textContent = String(released).padStart(3, '0');
-    heroSection?.style.setProperty('--aero-sequence-progress', sequenceProgress.toFixed(4));
-    heroSection?.style.setProperty('--aero-rotate-x', '0deg');
-    heroSection?.style.setProperty('--aero-rotate-y', `${(sequenceProgress * -360).toFixed(3)}deg`);
-    heroSection?.style.setProperty('--aero-rotate-z', '0deg');
-    heroSection?.style.setProperty('--aero-orbit-x', '0px');
-    heroSection?.style.setProperty('--aero-orbit-y', '0px');
-    heroSection?.style.setProperty('--aero-rotation-scale', '1');
-  }
-
-  function updateFacilityPartSequence(progress) {
-    const sequenceProgress = Math.max(0, Math.min(1, progress));
-    const released = heroFacilityParts.length
-      ? updateBomPartNodes(heroFacilityParts, heroFacilityPartTotal, sequenceProgress)
-      : 0;
-    const counter = document.querySelector('[data-facility-part-counter]');
-    if (counter && heroFacilityParts.length) counter.textContent = String(released).padStart(3, '0');
-    heroSection?.style.setProperty('--facility-sequence-progress', sequenceProgress.toFixed(4));
-    heroSection?.style.setProperty('--facility-rotate-x', '0deg');
-    heroSection?.style.setProperty('--facility-rotate-y', `${(sequenceProgress * 360).toFixed(3)}deg`);
-    heroSection?.style.setProperty('--facility-rotate-z', '0deg');
-    heroSection?.style.setProperty('--facility-orbit-x', '0px');
-    heroSection?.style.setProperty('--facility-orbit-y', '0px');
-    heroSection?.style.setProperty('--facility-rotation-scale', '1');
-  }
-
   function setHeroIndustry(nextIndustry) {
     if (!heroIndustrySlides.length) return;
-    ensureHeroSceneAssets(nextIndustry);
+    hydrateHeroSceneImages(nextIndustry);
 
     heroIndustrySlides.forEach(slide => {
       const slideIndustry = Number(slide.dataset.heroIndustrySlide || 0);
       const isActive = slideIndustry === nextIndustry;
       const wasActive = slide.classList.contains('is-active');
+      if (wasActive && !isActive) slide.dispatchEvent(new Event('hero-scene-leave'));
       slide.classList.toggle('is-active', isActive);
       slide.classList.toggle('is-leaving', wasActive && !isActive);
       slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
@@ -1178,6 +840,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     heroIndustryIndex = nextIndustry;
+    selectHeroCase(nextIndustry);
 
     window.setTimeout(() => {
       heroIndustrySlides.forEach(slide => {
@@ -1201,16 +864,16 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSection.style.setProperty('--hero-scroll', (heroSequenceStep / 3).toFixed(4));
     heroSection.style.setProperty('--hero-explode', activeProgress.toFixed(4));
     heroSection.style.setProperty('--hero-assemble', (1 - activeProgress).toFixed(4));
-    updateEvPartSequence(heroSequenceValues.ev);
-    updateAeroPartSequence(heroSequenceValues.aero);
-    updateFacilityPartSequence(heroSequenceValues.facility);
+    heroSection.style.setProperty('--ev-open', heroSequenceValues.ev.toFixed(3));
+    heroSection.style.setProperty('--aero-open', heroSequenceValues.aero.toFixed(3));
+
 
     if (heroStepStatus) {
       const statusLabels = [
-        'SCROLL · 자동차 BOM 전개',
-        '01 / 03 · 자동차 BOM 조립',
-        '02 / 03 · 항공 구성·리비전',
-        '03 / 03 · 건축 디지털 트윈'
+        '전기차 · 부품 BOM',
+        '01 / 03 · 전기차 부품 구성',
+        '02 / 03 · 항공 설계변경',
+        '03 / 03 · 건축 도면 배포'
       ];
       heroStepStatus.textContent = statusLabels[heroSequenceStep];
     }
@@ -1286,7 +949,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleHeroWheel(event) {
     // Mobile/touch layouts use native page scrolling; the scene buttons remain available.
-    if (window.innerWidth <= 760 || event.ctrlKey || event.target.closest('input, textarea, select, [contenteditable="true"], dialog, .mobile-menu.open')) return;
+    if (window.innerWidth <= 760 || event.ctrlKey || event.target.closest('input, textarea, select, model-viewer, [contenteditable="true"], dialog, .mobile-menu.open')) return;
     // Absorb the remainder of the gesture while landing on news, even after leaving the hero.
     if (heroExitLock) {
       event.preventDefault();
@@ -1304,7 +967,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleHeroKeydown(event) {
-    if (window.innerWidth <= 760 || event.target.closest('input, textarea, select, button, a, [contenteditable="true"], dialog, .mobile-menu.open')) return;
+    if (window.innerWidth <= 760 || event.target.closest('input, textarea, select, button, a, model-viewer, [contenteditable="true"], dialog, .mobile-menu.open')) return;
     if (!heroIsInControlRange()) return;
     const downKeys = ['ArrowDown', 'PageDown', ' '];
     const upKeys = ['ArrowUp', 'PageUp'];
@@ -1316,8 +979,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('wheel', handleHeroWheel, { passive: false });
   window.addEventListener('keydown', handleHeroKeydown);
-  setHeroIndustry(0);
-  setHeroSequenceStep(0, true);
+  const initialScene = new URLSearchParams(location.search).get('scene');
+  const sceneSteps = { building: 3, aircraft: 2, automotive: 0 };
+  setHeroSequenceStep(Object.hasOwn(sceneSteps, initialScene) ? sceneSteps[initialScene] : 0, true);
+  heroSection?.querySelector('.am-industry-slide.is-active')?.dispatchEvent(new Event('hero-linked-entry'));
 
   function updateHeroScrollMotion() {
     if (!heroSection || heroSequenceAnimating) return;
@@ -1351,21 +1016,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   heroSection?.addEventListener('pointermove', updateHeroPointer, { passive: true });
   heroSection?.addEventListener('pointerleave', resetHeroPointer);
-  scheduleInitialHeroDetail();
-
-  window.addEventListener('resize', () => {
-    if (heroEvManifest) {
-      heroEvParts.forEach(({ node, part }) => setEvPartGeometry(node, part, heroEvManifest));
-    }
-    if (heroAeroManifest) {
-      heroAeroParts.forEach(({ node, part }) => setAeroPartGeometry(node, part, heroAeroManifest));
-    }
-    if (heroFacilityParts.length) {
-      heroFacilityParts = [];
-      initializeFacilityPartSequence();
-    }
-  });
-
   // Legacy .reveal support
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

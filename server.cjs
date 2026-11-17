@@ -62,6 +62,8 @@ const mimeTypes = {
   '.txt': 'text/plain; charset=utf-8',
   '.webm': 'video/webm',
   '.webp': 'image/webp',
+  '.glb': 'model/gltf-binary',
+  '.wasm': 'application/wasm',
   '.xml': 'application/xml; charset=utf-8',
 };
 

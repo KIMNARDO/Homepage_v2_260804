@@ -1,0 +1,20 @@
+.cad-walkthrough {
+  margin:0 0 26px;padding:clamp(14px,2.2vw,30px);border:1px solid var(--pd-line,var(--hp-line));
+  border-radius:16px;background:var(--pd-card,var(--hp-surface));color:var(--pd-ink,var(--hp-ink));
+  scroll-margin-top:calc(var(--nav-h,64px) + var(--announcement-h,32px) + 12px);
+}
+#products:not([data-product="pdm"]) #pdm-cad-films {display:none}
+.cad-walkthrough header {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.cad-walkthrough h3 {font-size:clamp(19px,2vw,26px);line-height:1.35;margin:0;word-break:keep-all}
+.cad-film-choices {display:flex;flex-wrap:wrap;gap:8px}
+.cad-film-choices :is(a,button) {
+  font:inherit;font-size:14px;font-weight:700;color:inherit;background:transparent;border:1px solid currentColor;
+  border-radius:7px;padding:8px 12px;cursor:pointer;text-decoration:none;
+}
+.cad-film-choices button[aria-pressed="true"] {background:#195e62;color:white;border-color:#195e62}
+.cad-film-choices small {font-size:12px;margin-left:4px}
+.cad-walkthrough video {display:block;width:100%;height:auto;object-fit:contain;background:#101518}
+.cad-walkthrough p {margin:12px 0 0;font-size:14px;line-height:1.6;word-break:keep-all}
+
+.cad-film-choices .cad-fullscreen {border-color:transparent;text-decoration:underline;text-underline-offset:3px}
+.cad-walkthrough video:fullscreen {width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;background:#000}

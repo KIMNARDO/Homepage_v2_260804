@@ -18,6 +18,17 @@ for (const gallery of document.querySelectorAll('[data-screen-gallery]')) {
     find('points').replaceChildren(...(view.points || []).map(text => {const li = document.createElement('li');li.textContent = text;return li;}));
     buttons.forEach((button,i) => button.setAttribute('aria-pressed',String(i === index)));
   }
-  buttons.forEach((button,index) => button.addEventListener('click',()=>select(index)));
-  select(0);
+  buttons.forEach((button,index) => {
+    button.addEventListener('click', () => {
+      select(index);
+      const id = data.views[index].id;
+      if (id) {
+        const url = new URL(location.href);
+        url.searchParams.set('screen', id);
+        history.replaceState(history.state, '', url);
+      }
+    });
+  });
+  const requested = new URLSearchParams(location.search).get('screen');
+  select(Math.max(0, data.views.findIndex(view => view.id === requested)));
 }

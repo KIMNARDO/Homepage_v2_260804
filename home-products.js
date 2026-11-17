@@ -1,4 +1,4 @@
-import { products } from './home-products-data.js';
+import { products, productScreenHref } from './home-products-data.js';
 
 export function initProductHighlights(onChange = () => {}) {
   const section = document.querySelector('.hp-products');
@@ -16,10 +16,11 @@ export function initProductHighlights(onChange = () => {}) {
       link.setAttribute('aria-label', `${view.caption} 크게 보기`);
     });
   }
-  function select(key) {
+  function select(key, screenId) {
     const data = products[key];
     if (!data) return;
     if (key !== '2d') section.querySelector('#viewer-demo video')?.pause();
+    if (key !== 'pdm') section.querySelector('#pdm-cad-films video')?.pause();
     section.dataset.product = key;
     section.style.setProperty('--hp-accent', data.color);
     find('name').textContent = data.name;
@@ -44,22 +45,27 @@ export function initProductHighlights(onChange = () => {}) {
     views.hidden = !data.views;
     viewCopy.hidden = !data.views;
     viewCopy.textContent = '';
-    showScreen(data, {image: data.image, caption: data.shot});
+    const detail = find('detail');
+    detail.href = data.href;
     if (data.views) {
       const chooseView = (view, selectedButton) => {
         showScreen(data, view);
         viewCopy.textContent = view.copy;
+        detail.href = productScreenHref(data, view);
         [...views.children].forEach(button => button.setAttribute('aria-pressed', String(button === selectedButton)));
       };
-      data.views.forEach((view, i) => {
+      const first = data.views.find(view => view.id === screenId) || data.views[0];
+      data.views.forEach(view => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.textContent = view.label;
+        button.textContent = view.id ? view.caption : view.label;
         button.setAttribute('aria-pressed', 'false');
         button.addEventListener('click', () => chooseView(view, button));
         views.appendChild(button);
-        if (i === 0) chooseView(view, button);
+        if (view === first) chooseView(view, button);
       });
+    } else {
+      showScreen(data, {image: data.image, caption: data.shot});
     }
     section.querySelectorAll('[data-product-feature]').forEach((item, i) => {
       item.querySelector('b').textContent = data.features[i][0];
@@ -67,7 +73,6 @@ export function initProductHighlights(onChange = () => {}) {
     });
     find('consult').href = `contact.html?${new URLSearchParams({type: 'demo', product: data.product})}`;
     find('consult').textContent = data.consultLabel || '맞춤 데모 상담 ↗';
-    find('detail').href = data.href;
     const download = find('download');
     download.hidden = !data.pdf;
     if (data.pdf) {
@@ -100,8 +105,9 @@ export function initProductHighlights(onChange = () => {}) {
     });
   });
   find('title').id = 'product-highlight-title';
-  const requestedProduct = new URL(window.location.href).searchParams.get('product');
-  select(Object.hasOwn(products, requestedProduct) ? requestedProduct : '2d');
+  const params = new URLSearchParams(location.search);
+  const requestedProduct = params.get('product');
+  select(Object.hasOwn(products, requestedProduct) ? requestedProduct : '2d', params.get('screen'));
   return select;
 }
 

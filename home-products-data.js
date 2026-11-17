@@ -1,3 +1,7 @@
+export function productScreenHref(product, view) {
+  return view.id ? product.href + '?screen=' + encodeURIComponent(view.id) + '#features' : product.href;
+}
+
 export const products = {
   "2d": {
     "name": "CLIP 2D Viewer",
@@ -31,72 +35,75 @@ export const products = {
   "pdm": {
     "name": "CLiP PDM",
     "tag": "DRAWING · BOM · CHANGE",
-    "title": "도면과 BOM, 변경 이력을 같은 기준으로.",
-    "copy": "도면의 품번·분류·리비전을 기준으로 제품 구조와 설계변경을 연결합니다. 등록한 자료가 검토·결재·배포 업무로 이어집니다.",
+    "title": "CAD에서 등록한 설계, 웹에서 확인하세요.",
+    "copy": "SOLIDWORKS에서 등록한 조립품은 웹에서 다단계 설계 BOM으로 펼쳐 봅니다. AutoCAD에서는 PLM 탐색기로 도면을 찾아 작업하고, 체크인한 도면을 웹에서 검토합니다.",
     "color": "#772343",
     "features": [
       [
         "도면·리비전 관리",
-        "등록·채번·체크인·체크아웃과 개정 이력을 한곳에서 관리합니다."
+        "조립 도면의 차수와 배포 상태를 확인하고 첨부 PDF를 미리 봅니다."
       ],
       [
         "다단계 BOM",
-        "제품 구조·수량·상태를 함께 보고 엑셀 반입·반출과 역전개를 활용합니다."
+        "조립품의 하위 구조를 펼쳐 각 부품이 몇 개 쓰이는지 확인합니다."
       ],
       [
-        "설계변경·결재",
-        "변경 사유·영향·대상 도면을 승인 및 개정 이력으로 연결합니다."
+        "설계변경 기록",
+        "ECO에서 변경 사유와 도면·BOM의 변경 범위를 확인합니다."
       ]
     ],
     "scope": "CAD 연동과 자료 이관, 결재 규칙은 고객 환경에 맞춰 구성합니다.",
-    "shot": "PDM · 도면 상세와 미리보기",
+    "shot": "PTC 히터 · 도면 상세",
     "href": "product-clippdm.html",
     "image": "images/product-highlights/pdm-screen.webp",
-    "art": "images/product-highlights/pdm-art.webp",
+    "art": "/brand-family/pdm.svg",
     "product": "Clip PDM",
     "pdf": "brochures/Clip_PDM_브로슈어.pdf",
     "views": [
       {
+        "id": "drawing",
         "label": "도면 상세",
         "image": "images/product-highlights/pdm-screen.webp",
-        "caption": "PDM · 도면 상세와 미리보기",
-        "copy": "도면의 기본 정보·리비전·분류와 첨부 파일을 한 화면에서 확인합니다.",
+        "caption": "PTC 히터 · 도면 상세",
+        "copy": "PTC 히터 어셈블리의 차수는 01이고 상태는 ‘배포중’입니다. 오른쪽에 같은 조립품의 PDF 도면이 열려 있습니다.",
         "redacted": true,
         "points": [
-          "품번·분류·리비전으로 도면 식별",
-          "상세 정보와 첨부 미리보기 확인",
-          "개정·결재 이력으로 검토 근거 확인"
+          "조립품 품번 DEMO-A-L01",
+          "분류 ‘조립도’",
+          "첨부 도면 DEMO-A-L01_ASSY_R01.pdf"
         ]
       },
       {
+        "id": "bom",
         "label": "다단계 BOM",
         "image": "images/product-highlights/pdm-bom.webp",
-        "caption": "PDM · 제품 구조와 다단계 BOM",
-        "copy": "조립품에서 부품까지 구조를 펼쳐 수량·리비전·상태를 함께 확인합니다.",
+        "caption": "PTC 히터 · 다단계 BOM",
+        "copy": "PTC 히터 어셈블리의 방열핀 조립 아래에 터미널 2개와 하네스 3개가 표시됩니다. 수량은 상위 조립품 1개 기준입니다.",
         "redacted": true,
         "points": [
-          "제품에서 조립품·부품까지 구조 탐색",
-          "수량·리비전·상태를 행별로 확인",
-          "엑셀 반입·반출로 기존 BOM 연결"
+          "최상위 조립품 DEMO-A-L01",
+          "13개 항목을 5단계로 표시",
+          "방열핀 조립 DEMO-A-L04 아래에서 부품별 수량 확인"
         ]
       },
       {
+        "id": "eco",
         "label": "설계변경",
         "image": "images/product-highlights/pdm-eco.webp",
-        "caption": "PDM · 설계변경 ECO",
-        "copy": "변경 사유·호환성·금형·재고 영향을 기록하고 변경 대상 및 결재 이력으로 연결합니다.",
+        "caption": "액추에이터 · 설계변경",
+        "copy": "액추에이터(ACTUATOR)의 리비전 01 변경 사유는 ‘품질향상’입니다. 변경 내용에는 ‘도면’과 ‘BOM’이 선택돼 있습니다.",
         "redacted": true,
         "points": [
-          "변경 사유·호환성·금형·재고 영향 기록",
-          "변경 대상 도면과 관련 자료 연결",
-          "결재 및 개정 이력 확인"
+          "품목그룹 ACTUATOR",
+          "등록 사유 ‘설계변경’",
+          "호환성과 금형수정 모두 ‘있음’으로 표시"
         ]
       }
     ],
     "workflow": [
-      "도면 등록·개정",
-      "BOM 구조 확인",
-      "설계변경·결재"
+      "도면·개정 확인",
+      "부품 수량 검토",
+      "변경 범위 확인"
     ]
   },
   "dds": {
@@ -107,67 +114,70 @@ export const products = {
     "color": "#205e8a",
     "features": [
       [
-        "사내 사용자 · 배포 관리",
-        "대시보드에서 기한 임박·미열람 현황을 보고 도면·수신처·권한·기한을 설정합니다."
+        "사내 배포 현황",
+        "대시보드에서 기한이 임박한 배포와 아직 도면을 열지 않은 수신자를 확인합니다."
       ],
       [
-        "협력사 사용자 · 전용 포털",
-        "허가된 도면을 수신함에서 확인하고 열람·수신확인 서명·폐기확인을 진행합니다."
+        "배포 건별 수신확인",
+        "사내 배포 목록에서 도면 수와 수신확인 건수를 비교합니다."
       ],
       [
-        "수신부터 회수·재배포까지",
-        "수신확인·배포 이력을 확인하고, 변경된 도면의 회수와 재배포를 후속 관리합니다."
+        "협력사 전용 포털",
+        "협력사는 최근 받은 배포 건과 수신확인·폐기확인 요청을 확인합니다."
       ]
     ],
     "scope": "회수는 시스템 접근 차단과 폐기확인 절차이며, 외부 사본의 삭제를 보장하지 않습니다.",
-    "shot": "사내 사용자 · 도면배포 대시보드",
+    "shot": "사내 배포 대시보드",
     "href": "product-clipddms.html",
     "image": "images/product-highlights/dds-dashboard.webp",
-    "art": "images/product-highlights/dds-art.webp",
+    "art": "/brand-family/dds.svg",
     "product": "CLiP DDMS",
     "pdf": "brochures/CLiP_DDMS_제품소개.pdf",
     "views": [
       {
+        "id": "dashboard",
         "label": "사내 대시보드",
         "image": "images/product-highlights/dds-dashboard.webp",
-        "caption": "사내 사용자 · 도면배포 대시보드",
-        "copy": "배포 중·발송 대기·기한 임박·미열람·미폐기·수신확인율을 한눈에 확인합니다.",
+        "caption": "사내 배포 대시보드",
+        "copy": "캡처 시점에 배포 중인 건은 15건, 기한 임박은 3건입니다. 전체 수신확인율은 67%(서명 16/24)로 표시됩니다.",
         "redacted": true,
         "points": [
-          "배포 중·발송 대기·기한 임박 확인",
-          "미열람·미폐기·수신확인율 점검",
-          "우선 확인할 협력사와 배포 파악"
+          "발송 대기 3건",
+          "아직 도면을 열지 않은 수신자 4명",
+          "미폐기 3건"
         ]
       },
       {
+        "id": "distribution",
         "label": "사내 배포 관리",
         "image": "images/product-highlights/dds-distribution.webp",
-        "caption": "사내 사용자 · 배포 목록",
-        "copy": "배포별 상태·도면 수·수신확인·기한을 확인하고 배포 상세와 발송 관리로 이어갑니다.",
+        "caption": "브라켓 P-3120 · 사내 배포",
+        "copy": "사내 배포 목록의 ‘브라켓 P-3120 신규 배포 (Rev A)’ 행에 도면 1건과 수신확인 2/2가 표시됩니다.",
         "redacted": true,
         "points": [
-          "배포 번호·상태·기한으로 목록 확인",
-          "도면 수와 수신확인 진행 상태 비교",
-          "배포 상세와 회수·재배포 업무 연결"
+          "배포 번호 DEMO-2026-0915-0007",
+          "배포 상태 ‘배포중’",
+          "만든 날 2026-09-15"
         ]
       },
       {
+        "id": "partner",
         "label": "협력사 포털",
         "image": "images/product-highlights/dds-partner.webp",
-        "caption": "협력사 사용자 · 전용 도면배포 포털",
-        "copy": "협력사는 별도 포털에서 수신확인 대기·받은 도면·폐기확인 요청과 문의 답변을 확인합니다.",
+        "caption": "브라켓 P-3120 · 협력사 수신",
+        "copy": "협력사 포털의 ‘최근 수신 배포’에는 같은 브라켓 P-3120 (Rev A)이 ‘수신확인 완료’로 표시됩니다.",
         "redacted": true,
         "points": [
-          "사내 사용자와 구분된 협력사 접속 화면",
-          "받은 도면 열람과 수신확인",
-          "폐기확인 요청과 문의 답변 확인"
+          "배포 번호 DEMO-2026-0915-0007",
+          "파일 1개 · 2026-09-15",
+          "같은 목록의 HVAC 커버 설계변경 반영본은 ‘수신확인 대기’"
         ]
       }
     ],
     "workflow": [
-      "도면·수신자 지정",
-      "수신확인·이력 추적",
-      "회수·재배포 관리"
+      "전체 배포 현황",
+      "사내 배포 목록",
+      "협력사 수신확인"
     ]
   },
   "pms": {
@@ -194,7 +204,7 @@ export const products = {
     "shot": "PMS · 프로젝트 간트 차트",
     "href": "product-clippms.html",
     "image": "images/product-highlights/pms-screen.webp",
-    "art": "images/product-highlights/pms-art.webp",
+    "art": "/brand-family/pms.svg",
     "product": "Clip PMS",
     "pdf": "brochures/Clip_PMS_브로슈어.pdf",
     "views": [
@@ -267,7 +277,7 @@ export const products = {
     "consultLabel": "우리 도면으로 시연 상담 ↗",
     "href": "product-cadwin.html",
     "image": "도면이지CADWin_260203.jpg",
-    "art": null,
+    "art": "/brand-family/cadwin.svg",
     "product": "AI CADWin",
     "pdf": null
   },
@@ -295,7 +305,7 @@ export const products = {
     "shot": "Clip Multi-BOM EPL 다중 제품 구조 관리 화면",
     "href": "product-multibom.html",
     "image": "images/multibom_dashboard_real.webp",
-    "art": null,
+    "art": "/brand-family/bom.svg",
     "product": "Multi-BOM",
     "pdf": null
   },
@@ -323,7 +333,7 @@ export const products = {
     "shot": "Clip CMS 원가 분석 대시보드 화면",
     "href": "product-clipcms.html",
     "image": "images/cms_cost_dashboard.png",
-    "art": null,
+    "art": "/brand-family/cms.svg",
     "product": "Clip CMS",
     "pdf": null
   }

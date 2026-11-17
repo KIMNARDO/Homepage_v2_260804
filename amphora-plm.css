@@ -1603,6 +1603,7 @@ html[data-theme="dark"] .am-kicker {
 }
 
 .plm-home-v2 .mobile-menu {
+  z-index: 1002; /* Show the menu's own logo and close control above the fixed header. */
   background: rgba(16, 16, 16, 0.52);
 }
 

@@ -1,6 +1,6 @@
 const { defineConfig } = require('vite');
 const { resolve } = require('path');
-const { copyFileSync, mkdirSync, readdirSync, statSync, readFileSync } = require('fs');
+const { copyFileSync, mkdirSync, readdirSync, statSync, readFileSync, existsSync } = require('fs');
 
 const approvedPdfFiles = new Set(require('./public-resources.json').map(item => item.file));
 
@@ -107,7 +107,20 @@ function newsContent() {
 
 module.exports = defineConfig({
   base: './',
-  plugins: [copyRuntimeAssets(), newsContent()],
+  plugins: [
+    copyRuntimeAssets(),
+    newsContent(),
+    {
+      name: 'aircraft-inspection-link',
+      transformIndexHtml(html) {
+        const player = resolve(__dirname, 'public/aircraft-inspection');
+        const built = existsSync(resolve(player, 'index.html')) && existsSync(resolve(player, 'Build'))
+          && readdirSync(resolve(player, 'Build')).some(file => file.endsWith('.wasm'));
+        return html.replace('<!-- AIRCRAFT_INSPECTION_LINK -->', built
+          ? '<a class="unity-inspection-link" href="/aircraft-inspection/index.html">Unity로 장비실 상세 체험 ↗</a>' : '');
+      },
+    },
+  ],
   build: {
     copyPublicDir: false,
     rollupOptions: {

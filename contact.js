@@ -52,6 +52,15 @@ if (isSpinFireInquiry) {
   form.querySelector('[name="message"]').placeholder = '사용할 CAD 형식, 필요한 검토 기능과 예상 사용자 수를 알려주세요.';
 }
 
+if (leadType === 'consult' && params.get('topic') === 'cad-fit') {
+  document.title = 'CATIA·UG NX 적용 상담 | 팹스넷';
+  document.querySelector('#contactKicker').textContent = 'CATIA · UG NX';
+  document.querySelector('#contactTitle').textContent = '어떤 CAD 업무를 확인하고 싶으신가요?';
+  document.querySelector('#contactLede').textContent = '사용 중인 CAD와 버전, 확인하고 싶은 업무를 알려주세요. 담당자가 샘플 파일과 시연 범위를 함께 정합니다.';
+  form.querySelector('[name="currentSystems"]').placeholder = '사용 CAD와 버전 (예: CATIA V5)';
+  form.querySelector('[name="message"]').placeholder = '3D 파일 열람, 조립 구조 확인, PLM 등록 등 필요한 작업을 적어 주세요.';
+}
+
 if (requestedProduct) {
   const requested = [...form.querySelectorAll('input[name="products"]')]
     .find(input => input.value.toLowerCase() === requestedProduct.toLowerCase());
