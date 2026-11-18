@@ -913,9 +913,23 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSequenceFrame = window.requestAnimationFrame(animate);
   }
 
-  heroStepButtons.forEach(button => {
+  heroStepButtons.forEach((button, index) => {
     button.addEventListener('click', () => {
       setHeroSequenceStep(Number(button.dataset.heroStep || 1));
+    });
+    button.addEventListener('keydown', event => {
+      const count = heroStepButtons.length;
+      let next;
+      switch (event.key) {
+        case 'ArrowLeft': next = (index + count - 1) % count; break;
+        case 'ArrowRight': next = (index + 1) % count; break;
+        case 'Home': next = 0; break;
+        case 'End': next = count - 1; break;
+        default: return;
+      }
+      event.preventDefault();
+      setHeroSequenceStep(Number(heroStepButtons[next].dataset.heroStep));
+      heroStepButtons[next].focus({ preventScroll: true });
     });
   });
 
